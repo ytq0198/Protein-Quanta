@@ -4,6 +4,11 @@ import argparse
 import json
 from pathlib import Path
 import subprocess
+import sys
+
+REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
+if str(REPOSITORY_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPOSITORY_ROOT))
 
 from protein_quanta.release_audit import audit_release
 

@@ -1,4 +1,6 @@
 import json
+import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -71,6 +73,20 @@ class ReleaseAuditTests(unittest.TestCase):
         self.assertFalse(report["passed"])
         self.assertTrue(any("official score" in value for value in report["errors"]))
         self.assertTrue(any("missing.json" in value for value in report["errors"]))
+
+    def test_cli_runs_from_a_clean_checkout_without_installing_package(self):
+        root = Path(__file__).resolve().parents[1]
+
+        result = subprocess.run(
+            [sys.executable, "scripts/audit_release.py", "--root", str(root)],
+            cwd=root,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        )
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertTrue(json.loads(result.stdout)["passed"])
 
 
 if __name__ == "__main__":
