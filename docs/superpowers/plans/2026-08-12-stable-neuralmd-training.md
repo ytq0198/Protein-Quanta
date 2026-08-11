@@ -2,7 +2,9 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Isolate whether gradient clipping prevents the observed epoch-48 NeuralMD training collapse without changing model architecture, data, ODE settings, loss, or seed.
+**Goal:** Isolate whether gradient clipping prevents the observed epoch-48 NeuralMD collapse in the from-first-frame long-horizon stress configuration without changing model architecture, data, ODE settings, loss, or seed.
+
+> **Post-hoc configuration correction (2026-08-12):** The stress configuration omitted the official `--no_NeuralMD_Binding_start_with_first_frame` flag, so `frame_num=20` was bypassed and horizons reached 99 frames. The experiment remains a valid controlled comparison against its unclipped stress baseline, but it is not the official NeuralMD training configuration. The canonical command now has an automated regression test.
 
 **Architecture:** Add a repository-owned, unit-tested `stable_backward_step` helper and a small upstream patch that calls it. Preserve official training behavior except for norm logging, clipping at 1.0, and skipping only non-finite loss/gradient updates. Run the same 100-epoch seed-42 configuration, evaluate best/final checkpoints with the unified validator, and compare against the unclipped reproduction.
 

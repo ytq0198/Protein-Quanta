@@ -9,9 +9,9 @@
 | 数据 | MISATO-100 已下载并校验；100/100 复合物审计通过 |
 | 统一评估器 | Static、Linear、NeuralMD checkpoint 已接入 |
 | 官方 checkpoint | 测试集 10 个复合物、100 帧完成 |
-| 从头训练 | seed 42、100 epoch 完成；发现训练爆炸 |
-| 创新实验 | C1 Static 锚点残差已通过；E3 单独梯度裁剪 no-go；转入几何/长跨度目标 |
-| 测试 | 本地 45 项通过；服务器 45 项通过（其中 4 项因可选 matplotlib 未安装而跳过） |
+| 从头训练 | 官方配置已纠正；seed 42 best 几乎逐位复现发布 checkpoint |
+| 创新实验 | C1 Static 锚点残差已通过；长跨度裁剪压力实验 no-go；转入 T1/T2/T3 对齐与长程目标 |
+| 测试 | 本地 47 项通过；服务器阶段复核随下一里程碑执行 |
 
 ## 2026-08-10 至 2026-08-11：复现基础设施
 
@@ -48,12 +48,12 @@
 
 ![逐复合物坐标与稳定性](figures/neuralmd_test_per_complex.png)
 
-## 2026-08-11：从头训练复现
+## 2026-08-11：从首帧开始的长跨度压力训练（后验更正）
 
 ### 配置
 
 - seed 42，100 epochs，batch size 8，Adam，学习率 `1e-4`；
-- 随机最长 20 帧训练片段；Euler step 5，scaling 100；
+- 从第 0 帧开始、随机终点 1–99 的可变长训练片段；Euler step 5，scaling 100；
 - 原始位置 MSE，无梯度裁剪，无几何正则。
 
 ### 关键观察
@@ -73,19 +73,20 @@
 - best SHA256：`ef33b335ae1ef8488015f11ceed4af4dca24eb46446a7b5f88f05190d636aa72`
 - final SHA256：`9222dcd8ca33a6a7b6b5985234830324e67ca5c53fef0cc30ea8fc7a9fef08aa`
 
-### 阶段结论
+### 阶段结论与配置更正
 
-原始坐标 MSE 能得到接近发布权重的坐标 RMSE，但不能稳定保持内部几何；单次异常梯度可破坏后续全部训练。下一阶段先做梯度控制，再做几何感知损失。
+原始坐标 MSE 能得到接近发布权重的坐标 RMSE，但不能稳定保持内部几何；单次异常梯度可破坏后续全部训练。2026-08-12 复核官方 `hyperparameter.txt` 后确认，本次命令遗漏了 `--no_NeuralMD_Binding_start_with_first_frame`，导致 `frame_num=20` 未生效。因此本节结果重新定义为**最长 99 帧的压力实验**，不再声称是官方训练配置复现。
 
 ## 创新突破路线与当前假设
 
 详见 `docs/experiment-design-and-research-roadmap.md`。当前按以下顺序推进：
 
 1. C1：Static 锚点残差的验证/测试可行性实验（已通过）；
-2. E3：梯度裁剪 1.0 与完整梯度日志（已完成，no-go）；
-3. E6：成对距离 Smooth-L1 与长跨度采样的受控实验；
-4. E7：速度/Rg 辅助监督；
-5. E8：可学习锚点门控。
+2. R2：纠正官方窗口采样并建立 T1/T2/T3 对齐评估（训练已完成）；
+3. E3-L：长跨度压力训练下的梯度裁剪 1.0（已完成，no-go）；
+4. E6：成对距离 Smooth-L1 与长跨度泛化的受控实验；
+5. E7：速度/Rg 辅助监督；
+6. E8：可学习锚点门控。
 
 每个阶段完成后，本报告追加实验编号、Git commit、配置、数字、图表和 go/no-go 决策。
 
@@ -145,11 +146,11 @@
 - `protein_quanta/anchoring.py`
 - `scripts/evaluate_anchor_residual.py`
 
-## 2026-08-12：E3 NeuralMD 稳定训练（梯度裁剪 1.0）
+## 2026-08-12：E3-L 长跨度压力训练（梯度裁剪 1.0）
 
 ### 受控设计
 
-只增加全局 L2 梯度范数裁剪 `1.0`、裁剪前范数日志和非有限更新保护。数据划分、seed 42、网络、位置 MSE、随机最长 20 帧训练片段、Euler 配置、Adam 与学习率均保持不变。有限但很大的损失仍参与反向传播；只有非有限 loss/gradient 才跳过。
+只增加全局 L2 梯度范数裁剪 `1.0`、裁剪前范数日志和非有限更新保护。数据划分、seed 42、网络、位置 MSE、从第 0 帧开始的随机长跨度、Euler 配置、Adam 与学习率均保持不变。有限但很大的损失仍参与反向传播；只有非有限 loss/gradient 才跳过。该实验与上一节压力配置严格对照，但不是官方 20 帧窗口配置。
 
 1 epoch 预检成功保存 best/final checkpoint，且日志字段完整。随后在 A6000 GPU 0 完成 100 epoch。权重与原始日志保存在服务器 Git 仓库外。
 
@@ -172,7 +173,7 @@
 | 未裁剪 final | 2.6924 | 1.2298 | 52.27 | 1.6365 | 0.3254 | 2.0266 | 0.8794 |
 | 裁剪 final | 2.9152 | 1.4080 | 45.52 | 1.7112 | 0.4141 | 1.5954 | 0.8688 |
 
-相对未裁剪 final，裁剪 final 的 Stability 下降 6.75 个百分点，坐标 RMSE 恶化约 8.3%；相对未裁剪 best，裁剪 best 的 Stability 下降 6.95 个百分点。预注册 go 条件要求 final Stability 至少提高 10 个百分点且 RMSE 恶化不超过 2%，因此 E3 明确 **no-go**，不继续扫描裁剪阈值，也不做三 seed 扩展。
+相对未裁剪 final，裁剪 final 的 Stability 下降 6.75 个百分点，坐标 RMSE 恶化约 8.3%；相对未裁剪 best，裁剪 best 的 Stability 下降 6.95 个百分点。预注册 go 条件失败，因此在该长跨度压力设定下明确 **no-go**，不继续扫描裁剪阈值，也不做三 seed 扩展。此结论不得外推为“官方 20 帧配置下裁剪必然无效”。
 
 ### 决策与下一假设
 
@@ -188,3 +189,31 @@
 - `reports/reproduction/neuralmd_misato100_clip1_final_val.json`
 - `reports/reproduction/neuralmd_misato100_retrained_final_val.json`
 - `reports/reproduction/2026-08-12-neuralmd-stable-training.md`
+
+## 2026-08-12：R2 官方 20 帧窗口训练纠正与精确复现
+
+### 根因与修正
+
+官方 Hugging Face `hyperparameter.txt` 明确包含 `--no_NeuralMD_Binding_start_with_first_frame --NeuralMD_Binding_frame_num=20`。上游代码在该开关为 false 时，才会令 `start=max(0,end-20)`；此前遗漏开关导致窗口长度参数被旁路。现在由 `protein_quanta.neuralmd_training.build_training_command` 显式生成所有布尔参数，并有回归测试防止再次遗漏。
+
+1 epoch 预检触发上游边界缺陷：`print_every_epoch=5` 时没有任何验证记录，却在结束处读取 best 数组而报 `IndexError`。最小有效预检改为 5 epoch 后完成，未修改模型逻辑。
+
+### 复现结果
+
+纠正配置完成 seed 42、100 epoch。上游按验证 coordinate MAE 选择 epoch 15 为 best。统一验证集 100 帧结果如下：
+
+| 权重 | 坐标 RMSE（Å，↓） | Matching（Å，↓） | Stability（%，↑） | 对齐 RMSD（Å，↓） | Rg MAE（Å，↓） | RMSF MAE（Å，↓） | 接触一致率（↑） |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 发布 checkpoint | 2.4804332 | 0.5741583 | 76.3756 | 0.8958692 | 0.1577934 | 2.3248793 | 0.9614264 |
+| 纠正训练 best | 2.4804328 | 0.5741685 | 76.3746 | 0.8958735 | 0.1577995 | 2.3248730 | 0.9614258 |
+| 纠正训练 final | 95106.2867 | 146546.2032 | 25.8781 | 103624.8019 | 103622.7072 | 54972.4733 | 0.7321 |
+
+best 与发布 checkpoint 的坐标 RMSE 差约 `4.2×10^-7 Å`，Stability 只差 `0.00095` 个百分点，可视为精确复现。训练期位置损失始终有限（最大 epoch 均值 20.7566），最大批梯度范数仅 27.01；然而 final 的 100 帧 rollout 灾难性发散。这把根因从“单纯梯度爆炸”推进为更具体的证据：**20 帧局部训练目标不能约束 100 帧闭环外推，模型选择必须显式观察 T1/T2/T3 的不同时间窗。**
+
+### 产物
+
+- best SHA256：`fc9092027d05af9a9a40159177d091a94ebef847f5a4dedd9ed0ef1a80bf92ec`
+- final SHA256：`d7a2ee0bfa12a63b4fca0d462a39ca37f45d4bbc67bc53cfac34235af75c4362`
+- `reports/reproduction/neuralmd_misato100_official_corrected_best_val.json`
+- `reports/reproduction/neuralmd_misato100_official_corrected_final_val.json`
+- `reports/reproduction/2026-08-12-neuralmd-official-corrected.md`

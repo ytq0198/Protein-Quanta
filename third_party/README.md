@@ -30,9 +30,12 @@ and code provenance are complete.
 The checkpoint folder also publishes `hyperparameter.txt`. Architecture and
 rollout settings relevant to reproduction are: 100 radial bases, velocity
 refinement coefficient 0, Euler ODE, step size 5, scaling 100, 20 training
-frames, batch size 8, 100 epochs, and seed 42. These differ from several
-defaults in the current upstream script, so checkpoint configuration must not
-be reconstructed from parser defaults.
+frames, batch size 8, 100 epochs, seed 42, and critically
+`--no_NeuralMD_Binding_start_with_first_frame`. Without that explicit boolean,
+the upstream parser starts every sample at frame 0 and silently bypasses the
+20-frame window. These differ from several defaults in the current upstream
+script, so checkpoint configuration must not be reconstructed from parser
+defaults. The canonical command lives in `protein_quanta/neuralmd_training.py`.
 
 ## PyTorch 2.6 dataset-cache compatibility
 
