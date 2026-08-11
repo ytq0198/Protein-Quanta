@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.venv/
+.env
+.cache/
+
+# Research data and generated artifacts
+data/
+datasets/
+checkpoints/
+runs/
+wandb/
+artifacts/
+*.h5
+*.hdf5
+*.ckpt
+*.pt
+*.pth
+*.npz
+
+# Local external checkouts
+.external/
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

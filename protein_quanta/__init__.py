@@ -1,0 +1,1 @@
+"""Protein-Quanta research package."""

@@ -1,0 +1,12 @@
+# Install only after PyTorch 2.6.0+cu124 is available in the environment.
+--find-links https://data.pyg.org/whl/torch-2.6.0+cu124.html
+h5py==3.14.0
+pandas==2.3.3
+torch-geometric==2.6.1
+torch-scatter==2.1.2
+torch-sparse==0.6.18
+torch-cluster==1.6.3
+
+# NeuralMD requires the author's condition-aware fork, not PyPI torchdiffeq.
+torchdiffeq @ git+https://github.com/chao1224/torchdiffeq.git@3d7c7ec8c534a9b18b8b7c7d1fea0c235e6468d0
+torch-ema==0.3

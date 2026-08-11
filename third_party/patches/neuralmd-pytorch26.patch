@@ -1,0 +1,10 @@
+diff --git a/NeuralMD/datasets/MISATO/dataset_MISATO_semi_flexible.py b/NeuralMD/datasets/MISATO/dataset_MISATO_semi_flexible.py
+--- a/NeuralMD/datasets/MISATO/dataset_MISATO_semi_flexible.py
++++ b/NeuralMD/datasets/MISATO/dataset_MISATO_semi_flexible.py
+@@
+-        self.data, self.slices = torch.load(self.processed_paths[0])
++        # The cache is generated locally from the trusted MISATO HDF5 file and
++        # contains PyG Data objects. PyTorch 2.6 defaults to weights_only=True.
++        self.data, self.slices = torch.load(
++            self.processed_paths[0], weights_only=False
++        )

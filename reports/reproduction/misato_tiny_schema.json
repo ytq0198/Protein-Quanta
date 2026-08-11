@@ -1,0 +1,1532 @@
+{
+  "path": "/mnt/localDisk3/weizian/external/misato-dataset/data/MD/h5_files/tiny_md.hdf5",
+  "complex_count": 20,
+  "audited_complex_count": 20,
+  "valid_complex_count": 20,
+  "invalid_complex_count": 0,
+  "frame_count_distribution": {
+    "100": 20
+  },
+  "samples": [
+    {
+      "sample_id": "10GS",
+      "datasets": {
+        "atoms_element": {
+          "shape": [
+            6593
+          ],
+          "dtype": "int64"
+        },
+        "atoms_number": {
+          "shape": [
+            6593
+          ],
+          "dtype": "int64"
+        },
+        "atoms_residue": {
+          "shape": [
+            6593
+          ],
+          "dtype": "int64"
+        },
+        "atoms_type": {
+          "shape": [
+            6593
+          ],
+          "dtype": "int64"
+        },
+        "frames_bSASA": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_distance": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_interaction_energy": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_rmsd_ligand": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "molecules_begin_atom_index": {
+          "shape": [
+            3
+          ],
+          "dtype": "int64"
+        },
+        "trajectory_coordinates": {
+          "shape": [
+            100,
+            6593,
+            3
+          ],
+          "dtype": "float64"
+        }
+      },
+      "errors": [],
+      "frame_count": 100,
+      "atom_count": 6593,
+      "coordinates_finite": true,
+      "coordinate_min": 11.866060256958008,
+      "coordinate_max": 77.15174102783203,
+      "ligand_begin_index": 6534,
+      "ligand_atom_count": 59,
+      "valid": true
+    },
+    {
+      "sample_id": "11GS",
+      "datasets": {
+        "atoms_element": {
+          "shape": [
+            6600
+          ],
+          "dtype": "int64"
+        },
+        "atoms_number": {
+          "shape": [
+            6600
+          ],
+          "dtype": "int64"
+        },
+        "atoms_residue": {
+          "shape": [
+            6600
+          ],
+          "dtype": "int64"
+        },
+        "atoms_type": {
+          "shape": [
+            6600
+          ],
+          "dtype": "int64"
+        },
+        "frames_bSASA": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_distance": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_interaction_energy": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_rmsd_ligand": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "molecules_begin_atom_index": {
+          "shape": [
+            3
+          ],
+          "dtype": "int64"
+        },
+        "trajectory_coordinates": {
+          "shape": [
+            100,
+            6600,
+            3
+          ],
+          "dtype": "float64"
+        }
+      },
+      "errors": [],
+      "frame_count": 100,
+      "atom_count": 6600,
+      "coordinates_finite": true,
+      "coordinate_min": 9.012397766113281,
+      "coordinate_max": 75.21473693847656,
+      "ligand_begin_index": 6534,
+      "ligand_atom_count": 66,
+      "valid": true
+    },
+    {
+      "sample_id": "13GS",
+      "datasets": {
+        "atoms_element": {
+          "shape": [
+            6606
+          ],
+          "dtype": "int64"
+        },
+        "atoms_number": {
+          "shape": [
+            6606
+          ],
+          "dtype": "int64"
+        },
+        "atoms_residue": {
+          "shape": [
+            6606
+          ],
+          "dtype": "int64"
+        },
+        "atoms_type": {
+          "shape": [
+            6606
+          ],
+          "dtype": "int64"
+        },
+        "frames_bSASA": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_distance": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_interaction_energy": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_rmsd_ligand": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "molecules_begin_atom_index": {
+          "shape": [
+            3
+          ],
+          "dtype": "int64"
+        },
+        "trajectory_coordinates": {
+          "shape": [
+            100,
+            6606,
+            3
+          ],
+          "dtype": "float64"
+        }
+      },
+      "errors": [],
+      "frame_count": 100,
+      "atom_count": 6606,
+      "coordinates_finite": true,
+      "coordinate_min": 9.588175773620605,
+      "coordinate_max": 76.78983306884766,
+      "ligand_begin_index": 6565,
+      "ligand_atom_count": 41,
+      "valid": true
+    },
+    {
+      "sample_id": "16PK",
+      "datasets": {
+        "atoms_element": {
+          "shape": [
+            6435
+          ],
+          "dtype": "int64"
+        },
+        "atoms_number": {
+          "shape": [
+            6435
+          ],
+          "dtype": "int64"
+        },
+        "atoms_residue": {
+          "shape": [
+            6435
+          ],
+          "dtype": "int64"
+        },
+        "atoms_type": {
+          "shape": [
+            6435
+          ],
+          "dtype": "int64"
+        },
+        "frames_bSASA": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_distance": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_interaction_energy": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_rmsd_ligand": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "molecules_begin_atom_index": {
+          "shape": [
+            2
+          ],
+          "dtype": "int64"
+        },
+        "trajectory_coordinates": {
+          "shape": [
+            100,
+            6435,
+            3
+          ],
+          "dtype": "float64"
+        }
+      },
+      "errors": [],
+      "frame_count": 100,
+      "atom_count": 6435,
+      "coordinates_finite": true,
+      "coordinate_min": 9.094109535217285,
+      "coordinate_max": 85.41826629638672,
+      "ligand_begin_index": 6378,
+      "ligand_atom_count": 57,
+      "valid": true
+    },
+    {
+      "sample_id": "184L",
+      "datasets": {
+        "atoms_element": {
+          "shape": [
+            2627
+          ],
+          "dtype": "int64"
+        },
+        "atoms_number": {
+          "shape": [
+            2627
+          ],
+          "dtype": "int64"
+        },
+        "atoms_residue": {
+          "shape": [
+            2627
+          ],
+          "dtype": "int64"
+        },
+        "atoms_type": {
+          "shape": [
+            2627
+          ],
+          "dtype": "int64"
+        },
+        "frames_bSASA": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_distance": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_interaction_energy": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_rmsd_ligand": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "molecules_begin_atom_index": {
+          "shape": [
+            2
+          ],
+          "dtype": "int64"
+        },
+        "trajectory_coordinates": {
+          "shape": [
+            100,
+            2627,
+            3
+          ],
+          "dtype": "float64"
+        }
+      },
+      "errors": [],
+      "frame_count": 100,
+      "atom_count": 2627,
+      "coordinates_finite": true,
+      "coordinate_min": 6.902921199798584,
+      "coordinate_max": 67.61270141601562,
+      "ligand_begin_index": 2603,
+      "ligand_atom_count": 24,
+      "valid": true
+    },
+    {
+      "sample_id": "185L",
+      "datasets": {
+        "atoms_element": {
+          "shape": [
+            2619
+          ],
+          "dtype": "int64"
+        },
+        "atoms_number": {
+          "shape": [
+            2619
+          ],
+          "dtype": "int64"
+        },
+        "atoms_residue": {
+          "shape": [
+            2619
+          ],
+          "dtype": "int64"
+        },
+        "atoms_type": {
+          "shape": [
+            2619
+          ],
+          "dtype": "int64"
+        },
+        "frames_bSASA": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_distance": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_interaction_energy": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_rmsd_ligand": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "molecules_begin_atom_index": {
+          "shape": [
+            2
+          ],
+          "dtype": "int64"
+        },
+        "trajectory_coordinates": {
+          "shape": [
+            100,
+            2619,
+            3
+          ],
+          "dtype": "float64"
+        }
+      },
+      "errors": [],
+      "frame_count": 100,
+      "atom_count": 2619,
+      "coordinates_finite": true,
+      "coordinate_min": 8.897679328918457,
+      "coordinate_max": 67.2679672241211,
+      "ligand_begin_index": 2603,
+      "ligand_atom_count": 16,
+      "valid": true
+    },
+    {
+      "sample_id": "186L",
+      "datasets": {
+        "atoms_element": {
+          "shape": [
+            2627
+          ],
+          "dtype": "int64"
+        },
+        "atoms_number": {
+          "shape": [
+            2627
+          ],
+          "dtype": "int64"
+        },
+        "atoms_residue": {
+          "shape": [
+            2627
+          ],
+          "dtype": "int64"
+        },
+        "atoms_type": {
+          "shape": [
+            2627
+          ],
+          "dtype": "int64"
+        },
+        "frames_bSASA": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_distance": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_interaction_energy": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_rmsd_ligand": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "molecules_begin_atom_index": {
+          "shape": [
+            2
+          ],
+          "dtype": "int64"
+        },
+        "trajectory_coordinates": {
+          "shape": [
+            100,
+            2627,
+            3
+          ],
+          "dtype": "float64"
+        }
+      },
+      "errors": [],
+      "frame_count": 100,
+      "atom_count": 2627,
+      "coordinates_finite": true,
+      "coordinate_min": 9.534046173095703,
+      "coordinate_max": 66.96166229248047,
+      "ligand_begin_index": 2603,
+      "ligand_atom_count": 24,
+      "valid": true
+    },
+    {
+      "sample_id": "187L",
+      "datasets": {
+        "atoms_element": {
+          "shape": [
+            2621
+          ],
+          "dtype": "int64"
+        },
+        "atoms_number": {
+          "shape": [
+            2621
+          ],
+          "dtype": "int64"
+        },
+        "atoms_residue": {
+          "shape": [
+            2621
+          ],
+          "dtype": "int64"
+        },
+        "atoms_type": {
+          "shape": [
+            2621
+          ],
+          "dtype": "int64"
+        },
+        "frames_bSASA": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_distance": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_interaction_energy": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_rmsd_ligand": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "molecules_begin_atom_index": {
+          "shape": [
+            2
+          ],
+          "dtype": "int64"
+        },
+        "trajectory_coordinates": {
+          "shape": [
+            100,
+            2621,
+            3
+          ],
+          "dtype": "float64"
+        }
+      },
+      "errors": [],
+      "frame_count": 100,
+      "atom_count": 2621,
+      "coordinates_finite": true,
+      "coordinate_min": 11.004507064819336,
+      "coordinate_max": 65.6918716430664,
+      "ligand_begin_index": 2603,
+      "ligand_atom_count": 18,
+      "valid": true
+    },
+    {
+      "sample_id": "188L",
+      "datasets": {
+        "atoms_element": {
+          "shape": [
+            2621
+          ],
+          "dtype": "int64"
+        },
+        "atoms_number": {
+          "shape": [
+            2621
+          ],
+          "dtype": "int64"
+        },
+        "atoms_residue": {
+          "shape": [
+            2621
+          ],
+          "dtype": "int64"
+        },
+        "atoms_type": {
+          "shape": [
+            2621
+          ],
+          "dtype": "int64"
+        },
+        "frames_bSASA": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_distance": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_interaction_energy": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_rmsd_ligand": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "molecules_begin_atom_index": {
+          "shape": [
+            2
+          ],
+          "dtype": "int64"
+        },
+        "trajectory_coordinates": {
+          "shape": [
+            100,
+            2621,
+            3
+          ],
+          "dtype": "float64"
+        }
+      },
+      "errors": [],
+      "frame_count": 100,
+      "atom_count": 2621,
+      "coordinates_finite": true,
+      "coordinate_min": 8.698592185974121,
+      "coordinate_max": 66.22626495361328,
+      "ligand_begin_index": 2603,
+      "ligand_atom_count": 18,
+      "valid": true
+    },
+    {
+      "sample_id": "1A07",
+      "datasets": {
+        "atoms_element": {
+          "shape": [
+            3437
+          ],
+          "dtype": "int64"
+        },
+        "atoms_number": {
+          "shape": [
+            3437
+          ],
+          "dtype": "int64"
+        },
+        "atoms_residue": {
+          "shape": [
+            3437
+          ],
+          "dtype": "int64"
+        },
+        "atoms_type": {
+          "shape": [
+            3437
+          ],
+          "dtype": "int64"
+        },
+        "frames_bSASA": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_distance": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_interaction_energy": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_rmsd_ligand": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "molecules_begin_atom_index": {
+          "shape": [
+            3
+          ],
+          "dtype": "int64"
+        },
+        "trajectory_coordinates": {
+          "shape": [
+            100,
+            3437,
+            3
+          ],
+          "dtype": "float64"
+        }
+      },
+      "errors": [],
+      "frame_count": 100,
+      "atom_count": 3437,
+      "coordinates_finite": true,
+      "coordinate_min": -4.026361465454102,
+      "coordinate_max": 81.28074645996094,
+      "ligand_begin_index": 3363,
+      "ligand_atom_count": 74,
+      "valid": true
+    },
+    {
+      "sample_id": "1A08",
+      "datasets": {
+        "atoms_element": {
+          "shape": [
+            1767
+          ],
+          "dtype": "int64"
+        },
+        "atoms_number": {
+          "shape": [
+            1767
+          ],
+          "dtype": "int64"
+        },
+        "atoms_residue": {
+          "shape": [
+            1767
+          ],
+          "dtype": "int64"
+        },
+        "atoms_type": {
+          "shape": [
+            1767
+          ],
+          "dtype": "int64"
+        },
+        "frames_bSASA": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_distance": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_interaction_energy": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_rmsd_ligand": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "molecules_begin_atom_index": {
+          "shape": [
+            2
+          ],
+          "dtype": "int64"
+        },
+        "trajectory_coordinates": {
+          "shape": [
+            100,
+            1767,
+            3
+          ],
+          "dtype": "float64"
+        }
+      },
+      "errors": [],
+      "frame_count": 100,
+      "atom_count": 1767,
+      "coordinates_finite": true,
+      "coordinate_min": 8.783557891845703,
+      "coordinate_max": 58.38567352294922,
+      "ligand_begin_index": 1687,
+      "ligand_atom_count": 80,
+      "valid": true
+    },
+    {
+      "sample_id": "1A09",
+      "datasets": {
+        "atoms_element": {
+          "shape": [
+            3421
+          ],
+          "dtype": "int64"
+        },
+        "atoms_number": {
+          "shape": [
+            3421
+          ],
+          "dtype": "int64"
+        },
+        "atoms_residue": {
+          "shape": [
+            3421
+          ],
+          "dtype": "int64"
+        },
+        "atoms_type": {
+          "shape": [
+            3421
+          ],
+          "dtype": "int64"
+        },
+        "frames_bSASA": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_distance": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_interaction_energy": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_rmsd_ligand": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "molecules_begin_atom_index": {
+          "shape": [
+            3
+          ],
+          "dtype": "int64"
+        },
+        "trajectory_coordinates": {
+          "shape": [
+            100,
+            3421,
+            3
+          ],
+          "dtype": "float64"
+        }
+      },
+      "errors": [],
+      "frame_count": 100,
+      "atom_count": 3421,
+      "coordinates_finite": true,
+      "coordinate_min": 7.694746494293213,
+      "coordinate_max": 74.29513549804688,
+      "ligand_begin_index": 3339,
+      "ligand_atom_count": 82,
+      "valid": true
+    },
+    {
+      "sample_id": "1A0Q",
+      "datasets": {
+        "atoms_element": {
+          "shape": [
+            6410
+          ],
+          "dtype": "int64"
+        },
+        "atoms_number": {
+          "shape": [
+            6410
+          ],
+          "dtype": "int64"
+        },
+        "atoms_residue": {
+          "shape": [
+            6410
+          ],
+          "dtype": "int64"
+        },
+        "atoms_type": {
+          "shape": [
+            6410
+          ],
+          "dtype": "int64"
+        },
+        "frames_bSASA": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_distance": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_interaction_energy": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_rmsd_ligand": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "molecules_begin_atom_index": {
+          "shape": [
+            5
+          ],
+          "dtype": "int64"
+        },
+        "trajectory_coordinates": {
+          "shape": [
+            100,
+            6410,
+            3
+          ],
+          "dtype": "float64"
+        }
+      },
+      "errors": [],
+      "frame_count": 100,
+      "atom_count": 6410,
+      "coordinates_finite": true,
+      "coordinate_min": 9.839912414550781,
+      "coordinate_max": 87.97001647949219,
+      "ligand_begin_index": 6367,
+      "ligand_atom_count": 43,
+      "valid": true
+    },
+    {
+      "sample_id": "1A1B",
+      "datasets": {
+        "atoms_element": {
+          "shape": [
+            3441
+          ],
+          "dtype": "int64"
+        },
+        "atoms_number": {
+          "shape": [
+            3441
+          ],
+          "dtype": "int64"
+        },
+        "atoms_residue": {
+          "shape": [
+            3441
+          ],
+          "dtype": "int64"
+        },
+        "atoms_type": {
+          "shape": [
+            3441
+          ],
+          "dtype": "int64"
+        },
+        "frames_bSASA": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_distance": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_interaction_energy": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_rmsd_ligand": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "molecules_begin_atom_index": {
+          "shape": [
+            3
+          ],
+          "dtype": "int64"
+        },
+        "trajectory_coordinates": {
+          "shape": [
+            100,
+            3441,
+            3
+          ],
+          "dtype": "float64"
+        }
+      },
+      "errors": [],
+      "frame_count": 100,
+      "atom_count": 3441,
+      "coordinates_finite": true,
+      "coordinate_min": 0.7466617822647095,
+      "coordinate_max": 70.99323272705078,
+      "ligand_begin_index": 3363,
+      "ligand_atom_count": 78,
+      "valid": true
+    },
+    {
+      "sample_id": "1A1C",
+      "datasets": {
+        "atoms_element": {
+          "shape": [
+            3436
+          ],
+          "dtype": "int64"
+        },
+        "atoms_number": {
+          "shape": [
+            3436
+          ],
+          "dtype": "int64"
+        },
+        "atoms_residue": {
+          "shape": [
+            3436
+          ],
+          "dtype": "int64"
+        },
+        "atoms_type": {
+          "shape": [
+            3436
+          ],
+          "dtype": "int64"
+        },
+        "frames_bSASA": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_distance": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_interaction_energy": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_rmsd_ligand": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "molecules_begin_atom_index": {
+          "shape": [
+            3
+          ],
+          "dtype": "int64"
+        },
+        "trajectory_coordinates": {
+          "shape": [
+            100,
+            3436,
+            3
+          ],
+          "dtype": "float64"
+        }
+      },
+      "errors": [],
+      "frame_count": 100,
+      "atom_count": 3436,
+      "coordinates_finite": true,
+      "coordinate_min": -7.8761420249938965,
+      "coordinate_max": 74.26710510253906,
+      "ligand_begin_index": 3363,
+      "ligand_atom_count": 73,
+      "valid": true
+    },
+    {
+      "sample_id": "1A1E",
+      "datasets": {
+        "atoms_element": {
+          "shape": [
+            3425
+          ],
+          "dtype": "int64"
+        },
+        "atoms_number": {
+          "shape": [
+            3425
+          ],
+          "dtype": "int64"
+        },
+        "atoms_residue": {
+          "shape": [
+            3425
+          ],
+          "dtype": "int64"
+        },
+        "atoms_type": {
+          "shape": [
+            3425
+          ],
+          "dtype": "int64"
+        },
+        "frames_bSASA": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_distance": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_interaction_energy": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_rmsd_ligand": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "molecules_begin_atom_index": {
+          "shape": [
+            3
+          ],
+          "dtype": "int64"
+        },
+        "trajectory_coordinates": {
+          "shape": [
+            100,
+            3425,
+            3
+          ],
+          "dtype": "float64"
+        }
+      },
+      "errors": [],
+      "frame_count": 100,
+      "atom_count": 3425,
+      "coordinates_finite": true,
+      "coordinate_min": 7.408719539642334,
+      "coordinate_max": 74.62427520751953,
+      "ligand_begin_index": 3352,
+      "ligand_atom_count": 73,
+      "valid": true
+    },
+    {
+      "sample_id": "1A28",
+      "datasets": {
+        "atoms_element": {
+          "shape": [
+            4191
+          ],
+          "dtype": "int64"
+        },
+        "atoms_number": {
+          "shape": [
+            4191
+          ],
+          "dtype": "int64"
+        },
+        "atoms_residue": {
+          "shape": [
+            4191
+          ],
+          "dtype": "int64"
+        },
+        "atoms_type": {
+          "shape": [
+            4191
+          ],
+          "dtype": "int64"
+        },
+        "frames_bSASA": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_distance": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_interaction_energy": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_rmsd_ligand": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "molecules_begin_atom_index": {
+          "shape": [
+            2
+          ],
+          "dtype": "int64"
+        },
+        "trajectory_coordinates": {
+          "shape": [
+            100,
+            4191,
+            3
+          ],
+          "dtype": "float64"
+        }
+      },
+      "errors": [],
+      "frame_count": 100,
+      "atom_count": 4191,
+      "coordinates_finite": true,
+      "coordinate_min": 8.564831733703613,
+      "coordinate_max": 75.1019515991211,
+      "ligand_begin_index": 4138,
+      "ligand_atom_count": 53,
+      "valid": true
+    },
+    {
+      "sample_id": "1A2C",
+      "datasets": {
+        "atoms_element": {
+          "shape": [
+            4713
+          ],
+          "dtype": "int64"
+        },
+        "atoms_number": {
+          "shape": [
+            4713
+          ],
+          "dtype": "int64"
+        },
+        "atoms_residue": {
+          "shape": [
+            4713
+          ],
+          "dtype": "int64"
+        },
+        "atoms_type": {
+          "shape": [
+            4713
+          ],
+          "dtype": "int64"
+        },
+        "frames_bSASA": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_distance": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_interaction_energy": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_rmsd_ligand": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "molecules_begin_atom_index": {
+          "shape": [
+            3
+          ],
+          "dtype": "int64"
+        },
+        "trajectory_coordinates": {
+          "shape": [
+            100,
+            4713,
+            3
+          ],
+          "dtype": "float64"
+        }
+      },
+      "errors": [],
+      "frame_count": 100,
+      "atom_count": 4713,
+      "coordinates_finite": true,
+      "coordinate_min": 4.477882385253906,
+      "coordinate_max": 66.54529571533203,
+      "ligand_begin_index": 4621,
+      "ligand_atom_count": 92,
+      "valid": true
+    },
+    {
+      "sample_id": "1A30",
+      "datasets": {
+        "atoms_element": {
+          "shape": [
+            3187
+          ],
+          "dtype": "int64"
+        },
+        "atoms_number": {
+          "shape": [
+            3187
+          ],
+          "dtype": "int64"
+        },
+        "atoms_residue": {
+          "shape": [
+            3187
+          ],
+          "dtype": "int64"
+        },
+        "atoms_type": {
+          "shape": [
+            3187
+          ],
+          "dtype": "int64"
+        },
+        "frames_bSASA": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_distance": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_interaction_energy": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_rmsd_ligand": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "molecules_begin_atom_index": {
+          "shape": [
+            3
+          ],
+          "dtype": "int64"
+        },
+        "trajectory_coordinates": {
+          "shape": [
+            100,
+            3187,
+            3
+          ],
+          "dtype": "float64"
+        }
+      },
+      "errors": [],
+      "frame_count": 100,
+      "atom_count": 3187,
+      "coordinates_finite": true,
+      "coordinate_min": 16.667098999023438,
+      "coordinate_max": 83.47380065917969,
+      "ligand_begin_index": 3138,
+      "ligand_atom_count": 49,
+      "valid": true
+    },
+    {
+      "sample_id": "1A3E",
+      "datasets": {
+        "atoms_element": {
+          "shape": [
+            4679
+          ],
+          "dtype": "int64"
+        },
+        "atoms_number": {
+          "shape": [
+            4679
+          ],
+          "dtype": "int64"
+        },
+        "atoms_residue": {
+          "shape": [
+            4679
+          ],
+          "dtype": "int64"
+        },
+        "atoms_type": {
+          "shape": [
+            4679
+          ],
+          "dtype": "int64"
+        },
+        "frames_bSASA": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_distance": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_interaction_energy": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "frames_rmsd_ligand": {
+          "shape": [
+            100
+          ],
+          "dtype": "float64"
+        },
+        "molecules_begin_atom_index": {
+          "shape": [
+            3
+          ],
+          "dtype": "int64"
+        },
+        "trajectory_coordinates": {
+          "shape": [
+            100,
+            4679,
+            3
+          ],
+          "dtype": "float64"
+        }
+      },
+      "errors": [],
+      "frame_count": 100,
+      "atom_count": 4679,
+      "coordinates_finite": true,
+      "coordinate_min": 3.766871929168701,
+      "coordinate_max": 67.14672088623047,
+      "ligand_begin_index": 4504,
+      "ligand_atom_count": 175,
+      "valid": true
+    }
+  ]
+}

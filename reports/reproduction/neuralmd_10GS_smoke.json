@@ -1,0 +1,22 @@
+{
+  "sample_id": "10GS",
+  "device": "cuda:0",
+  "gpu": "NVIDIA RTX A6000",
+  "torch": "2.6.0+cu124",
+  "ligand_heavy_atoms": 33,
+  "trajectory_frames": 100,
+  "protein_backbone_atoms": 1245,
+  "preprocessing_max_abs_diff": 4.3108740754860264e-07,
+  "parameter_count": 2198924,
+  "acceleration_shape": [
+    33,
+    3
+  ],
+  "velocity_shape": [
+    33,
+    3
+  ],
+  "outputs_finite": true,
+  "peak_gpu_memory_mib": 48.9033203125,
+  "checkpoint_loaded": false
+}

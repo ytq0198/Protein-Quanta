@@ -1,0 +1,32 @@
+{
+  "sample_id": "10GS",
+  "device": "cuda:0",
+  "gpu": "NVIDIA RTX A6000",
+  "torch": "2.6.0+cu124",
+  "ligand_heavy_atoms": 33,
+  "trajectory_frames": 100,
+  "protein_backbone_atoms": 1245,
+  "preprocessing_max_abs_diff": 4.3108740754860264e-07,
+  "parameter_count": 1193090,
+  "model_architecture": {
+    "frame_net_num_radial": 100,
+    "velocity_refined_value_coefficient": 0
+  },
+  "acceleration_shape": [
+    33,
+    3
+  ],
+  "velocity_shape": [
+    33,
+    3
+  ],
+  "outputs_finite": true,
+  "peak_gpu_memory_mib": 45.0634765625,
+  "checkpoint_loaded": true,
+  "checkpoint": {
+    "path": "/mnt/localDisk3/weizian/checkpoints/protein-quanta/NeuralMD_ODE/MISATO_100_seed_42/model.pth",
+    "sha256": "364404a7ce61ec1180fa3800c0dcbddf377b672d22f915fc6b19d202710a4a5a",
+    "missing_keys": [],
+    "unexpected_keys": []
+  }
+}
