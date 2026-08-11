@@ -1,0 +1,47 @@
+diff --git a/examples/main_MISATO_multi_traj_NeuralMD.py b/examples/main_MISATO_multi_traj_NeuralMD.py
+index a1f9d02..b506b52 100755
+--- a/examples/main_MISATO_multi_traj_NeuralMD.py
++++ b/examples/main_MISATO_multi_traj_NeuralMD.py
+@@ -21,0 +22,2 @@ from torch_ema import ExponentialMovingAverage
++from protein_quanta.training_stability import stable_backward_step
++
+@@ -47,0 +50,2 @@ def train(loader):
++    grad_norm_sum, grad_norm_max = 0, 0
++    grad_norm_count, clipped_count, skipped_nonfinite_count = 0, 0, 0
+@@ -92,3 +96,11 @@ def train(loader):
+-        optimizer.zero_grad()
+-        loss.backward()
+-        optimizer.step()
++        step_result = stable_backward_step(
++            loss, binding_model, optimizer, args.max_grad_norm
++        )
++        if step_result["grad_norm_before_clip"] is not None:
++            grad_norm = step_result["grad_norm_before_clip"]
++            if np.isfinite(grad_norm):
++                grad_norm_sum += grad_norm
++                grad_norm_max = max(grad_norm_max, grad_norm)
++                grad_norm_count += 1
++        clipped_count += int(step_result["clipped"])
++        skipped_nonfinite_count += int(not step_result["applied"])
+@@ -97,3 +109,4 @@ def train(loader):
+-        accum_loss_pos += loss_pos.item()
+-        accum_loss += loss.item()
+-        accum_count += 1
++        if step_result["applied"]:
++            accum_loss_pos += loss_pos.item()
++            accum_loss += loss.item()
++            accum_count += 1
+@@ -100,0 +114,2 @@ def train(loader):
++    if accum_count == 0:
++        raise RuntimeError("all optimizer updates were skipped as non-finite")
+@@ -105,0 +121 @@ def train(loader):
++    mean_grad_norm = grad_norm_sum / max(grad_norm_count, 1)
+@@ -107,0 +124,6 @@ def train(loader):
++    print(
++        "optimizer_stats grad_norm_mean: {:.6f}\tgrad_norm_max: {:.6f}"
++        "\tclipped_batches: {}\tskipped_nonfinite_batches: {}".format(
++            mean_grad_norm, grad_norm_max, clipped_count, skipped_nonfinite_count
++        )
++    )
+@@ -197,0 +220 @@ if __name__ == "__main__":
++    parser.add_argument("--max_grad_norm", type=float, default=0)

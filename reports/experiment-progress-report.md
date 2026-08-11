@@ -10,8 +10,8 @@
 | 统一评估器 | Static、Linear、NeuralMD checkpoint 已接入 |
 | 官方 checkpoint | 测试集 10 个复合物、100 帧完成 |
 | 从头训练 | seed 42、100 epoch 完成；发现训练爆炸 |
-| 创新实验 | Static 锚点残差 C1 已通过；进入训练稳定化与可学习门控 |
-| 测试 | 本地 39 项通过；服务器同步验证待本阶段结束执行 |
+| 创新实验 | C1 Static 锚点残差已通过；E3 单独梯度裁剪 no-go；转入几何/长跨度目标 |
+| 测试 | 本地 45 项通过；服务器 45 项通过（其中 4 项因可选 matplotlib 未安装而跳过） |
 
 ## 2026-08-10 至 2026-08-11：复现基础设施
 
@@ -81,11 +81,11 @@
 
 详见 `docs/experiment-design-and-research-roadmap.md`。当前按以下顺序推进：
 
-1. C1：Static 锚点残差的验证/测试可行性实验；
-2. E3：梯度裁剪 1.0 与完整梯度日志；
-3. E5：稳定训练三随机种子；
-4. E6：成对距离 Smooth-L1；
-5. E7/E8：速度/Rg 辅助监督与可学习锚点门控。
+1. C1：Static 锚点残差的验证/测试可行性实验（已通过）；
+2. E3：梯度裁剪 1.0 与完整梯度日志（已完成，no-go）；
+3. E6：成对距离 Smooth-L1 与长跨度采样的受控实验；
+4. E7：速度/Rg 辅助监督；
+5. E8：可学习锚点门控。
 
 每个阶段完成后，本报告追加实验编号、Git commit、配置、数字、图表和 go/no-go 决策。
 
@@ -144,3 +144,47 @@
 - `reports/figures/anchor_residual_tradeoff.png`
 - `protein_quanta/anchoring.py`
 - `scripts/evaluate_anchor_residual.py`
+
+## 2026-08-12：E3 NeuralMD 稳定训练（梯度裁剪 1.0）
+
+### 受控设计
+
+只增加全局 L2 梯度范数裁剪 `1.0`、裁剪前范数日志和非有限更新保护。数据划分、seed 42、网络、位置 MSE、随机最长 20 帧训练片段、Euler 配置、Adam 与学习率均保持不变。有限但很大的损失仍参与反向传播；只有非有限 loss/gradient 才跳过。
+
+1 epoch 预检成功保存 best/final checkpoint，且日志字段完整。随后在 A6000 GPU 0 完成 100 epoch。权重与原始日志保存在服务器 Git 仓库外。
+
+### 训练现象
+
+- 100 epoch 中有 68 个 epoch 至少发生一次裁剪，共裁剪 408 个 batch；非有限跳过数为 0。
+- 最大单 epoch 平均位置损失为 `3244.37839`（epoch 47）。
+- 最大单 batch 裁剪前梯度范数为 `403,650,528`（epoch 47）；epoch 48 仍达到 `13,917,789`。
+- 梯度裁剪阻止了非有限更新，却没有阻止验证几何质量持续退化。
+- 上游按验证坐标 MAE 保存的 best 位于 epoch 35，而最高验证 Stability 出现在 epoch 5；这进一步证明单一坐标误差不是可靠的模型选择准则。
+
+### 统一 100 帧验证集结果
+
+以下均为同一统一评估器的 10 个验证复合物无权平均；未运行新的统一测试集评估。
+
+| 权重 | 坐标 RMSE（Å，↓） | Matching（Å，↓） | Stability（%，↑） | 对齐 RMSD（Å，↓） | Rg MAE（Å，↓） | RMSF MAE（Å，↓） | 接触一致率（↑） |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 未裁剪 best | 2.4683 | 0.6743 | 66.64 | 0.9669 | 0.2317 | 2.2242 | 0.9407 |
+| 裁剪 best | 2.4714 | 0.7638 | 59.69 | 1.0036 | 0.3079 | 2.1766 | 0.9286 |
+| 未裁剪 final | 2.6924 | 1.2298 | 52.27 | 1.6365 | 0.3254 | 2.0266 | 0.8794 |
+| 裁剪 final | 2.9152 | 1.4080 | 45.52 | 1.7112 | 0.4141 | 1.5954 | 0.8688 |
+
+相对未裁剪 final，裁剪 final 的 Stability 下降 6.75 个百分点，坐标 RMSE 恶化约 8.3%；相对未裁剪 best，裁剪 best 的 Stability 下降 6.95 个百分点。预注册 go 条件要求 final Stability 至少提高 10 个百分点且 RMSE 恶化不超过 2%，因此 E3 明确 **no-go**，不继续扫描裁剪阈值，也不做三 seed 扩展。
+
+### 决策与下一假设
+
+该负结果否定的是“单独梯度裁剪足以恢复长程质量”，不是梯度监控本身。数据表明异常批次会产生极大的梯度，但固定裁剪仍允许模型在高方差随机跨度目标下逐步偏离几何有效区域。下一阶段优先处理目标错配：以成对距离损失直接对准 Matching/Stability，并比较更受控的跨度采样；C1 固定锚点继续作为当前最稳健的初赛候选，不因 E3 失败而撤回。
+
+![裁剪训练的损失、梯度与验证稳定性](figures/neuralmd_clip1_training_comparison.png)
+
+### 产物与权重溯源
+
+- best SHA256：`2f33bb71231b935a427fdd8861ac3baf3d181ff57b0c624f1c25572ed3da83e6`
+- final SHA256：`98b5ea5d004b814543916dc435e53843bcd0206b92f61d932a2263875a43bd28`
+- `reports/reproduction/neuralmd_misato100_clip1_best_val.json`
+- `reports/reproduction/neuralmd_misato100_clip1_final_val.json`
+- `reports/reproduction/neuralmd_misato100_retrained_final_val.json`
+- `reports/reproduction/2026-08-12-neuralmd-stable-training.md`

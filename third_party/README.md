@@ -40,3 +40,21 @@ Apply `patches/neuralmd-pytorch26.patch` to the pinned NeuralMD checkout when
 using PyTorch 2.6+. It only opts the locally generated, trusted PyG dataset
 cache out of PyTorch's weights-only loader. Model checkpoints remain loaded
 with strict weights-only handling in this project.
+
+## Stable-training instrumentation
+
+Apply `patches/neuralmd-stable-training.patch` after the PyTorch 2.6 patch with
+`git apply --unidiff-zero`; the zero-context form keeps the patch artifact free
+of whitespace-only lines inherited from the upstream script.
+The patch makes the pinned MISATO training entry point import
+`protein_quanta.training_stability`, adds `--max_grad_norm` (default `0`,
+disabled), and reports mean/maximum pre-clip gradient norm plus clipped and
+non-finite batch counts for every epoch. Run the upstream script with this
+repository on `PYTHONPATH`; on the school server this is:
+
+```bash
+export PYTHONPATH=/mnt/localDisk3/weizian/Protein-Quanta
+```
+
+E3 uses `--max_grad_norm 1`. Finite loss spikes are still optimized; only
+non-finite loss or gradient updates are skipped and counted.
