@@ -9,7 +9,7 @@
 - 后处理：`β=1`，decay scale 98 frames；
 - 机器可读配置：`configs/frozen_candidate.json`；
 - checkpoint SHA256：`0e7d5150aa5f305499f17663d3a74b1063b0591733f534e676303ce11de50b8c`；
-- checkpoint 不进入 Git，服务器位置记录在 manifest 中。
+- checkpoint 不进入 Git；已从实验运行目录复制到 manifest 所列专用归档目录，源文件与归档文件 SHA256 一致。
 
 ## 与评分维度的证据映射
 

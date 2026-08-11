@@ -5,7 +5,7 @@
     "seed": 42,
     "epoch": 5,
     "sha256": "0e7d5150aa5f305499f17663d3a74b1063b0591733f534e676303ce11de50b8c",
-    "server_path": "/mnt/localDisk3/weizian/runs/protein-quanta/e6/zero-seed42-20ep/model_epoch_005.pth",
+    "server_path": "/mnt/localDisk3/weizian/checkpoints/protein-quanta/frozen_candidate/model_epoch_005.pth",
     "tracked_in_git": false
   },
   "training": {
