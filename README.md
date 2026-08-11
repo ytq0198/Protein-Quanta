@@ -16,6 +16,7 @@ This research branch contains:
 - T1/T2/T3 competition-aligned NeuralMD evaluation and error-growth diagnostics;
 - invariant per-complex pair-distance loss and gradient calibration;
 - scenario-aware checkpoint selection and time-decayed Static anchoring;
+- project-defined intraligand and ligand-protein collision diagnostics;
 - standard-library unit tests (plus `h5py` for MISATO tests).
 
 The official MISATO-100 file has passed schema and finite-coordinate auditing
@@ -43,6 +44,14 @@ code is unavailable. The machine-readable source of truth is
 [`configs/frozen_candidate.json`](configs/frozen_candidate.json); the full
 causal ablation, including the no-go pair-loss experiments, is in
 [`reports/reproduction/2026-08-12-neuralmd-pair-loss-and-earlystop.md`](reports/reproduction/2026-08-12-neuralmd-pair-loss-and-earlystop.md).
+
+The candidate has also passed a preliminary overlap audit. Binding overlap is
+very small and does not increase consistently, but the intraligand proxy rises
+slightly in five of six validation/test scenario comparisons. Because the
+available preprocessing lacks a bond graph, bonded neighbours cannot be
+excluded and this is not a chemically valid clash rate. The result is recorded
+as a Phys gap, not as evidence of an official-score improvement; see
+[`reports/reproduction/2026-08-12-collision-proxy-audit.md`](reports/reproduction/2026-08-12-collision-proxy-audit.md).
 
 ## Run the tests
 
@@ -115,6 +124,22 @@ python -m scripts.evaluate_anchor_scenarios \
   --decay-scale-frames 98 \
   --output /path/outside/git/epoch005_anchor1_val.json
 ```
+
+Audit project-defined collision proxies on the saved trajectories:
+
+```bash
+python -m scripts.evaluate_collision_scenarios \
+  --upstream /path/to/NeuralMD \
+  --h5 /path/to/MISATO_100/raw/MD.hdf5 \
+  --trajectory-dir /path/outside/git/trajectories \
+  --reference-report /path/outside/git/epoch005_val.json \
+  --beta 1 \
+  --decay-scale-frames 98 \
+  --output /path/outside/git/epoch005_anchor1_collision_val.json
+```
+
+This diagnostic does not exclude bonded ligand pairs and is not the official
+Phys metric.
 
 The canonical corrected NeuralMD training command makes the 20-frame sampling
 boolean explicit, disables test evaluation during development, and can retain

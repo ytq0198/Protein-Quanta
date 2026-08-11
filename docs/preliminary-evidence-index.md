@@ -20,6 +20,13 @@
 | 创新（20%） | 把创新从单纯改网络转为“两层风险控制”：多时间尺度 checkpoint selection + Static residual uncertainty decay；验证和冻结测试方向一致 | Pair loss no-go，不能作为成功创新主张；anchor 是后处理而非新主干网络 |
 | 开源（5%） | GitHub 阶段提交、README 最短复现命令、第三方 commit/patch 注册、数据与权重不入库 | NeuralMD 仓库该 commit 缺少独立 license 文件，复用范围需谨慎描述 |
 
+### Phys 证据缺口（必须保留）
+
+- 已完成“距离小于共价半径之和”的项目碰撞代理审计；配体—蛋白重叠比例极低，且锚定前后没有一致升高。
+- 配体内部代理在 6 个 validation/test 场景比较中有 5 个小幅升高（`+0.060` 至 `+0.230` 个百分点；冻结测试 T3 为 `-0.044`）。
+- 当前预处理没有共价键表，正常成键近邻也被计入，因此该指标不是化学有效的 clash rate，更不是官方 Phys 分数。
+- 在补齐键长、键角、立体化学和能量/有效性检查前，不得写“物理合理性得到提升”。碰撞审计见 `reports/reproduction/2026-08-12-collision-proxy-audit.md`。
+
 ## 最重要的数字
 
 以下均相对发布 checkpoint，误差类负值为改善。
@@ -41,6 +48,7 @@
 - 最终组合图：`reports/figures/neuralmd_earlystop_anchor1_tradeoff.png`；
 - E6 失败与早停/组合因果链：`reports/reproduction/2026-08-12-neuralmd-pair-loss-and-earlystop.md`；
 - 最终验证/测试原始报告：`reports/reproduction/neuralmd_earlystop_anchor1_val.json`、`reports/reproduction/neuralmd_earlystop_anchor1_test.json`；
+- Phys 初筛：`reports/reproduction/2026-08-12-collision-proxy-audit.md`、`reports/reproduction/neuralmd_earlystop_anchor1_collision_val.json`、`reports/reproduction/neuralmd_earlystop_anchor1_collision_test.json`；
 - 竞赛场景实现：`protein_quanta/scenarios.py`、`scripts/evaluate_neuralmd_scenarios.py`；
 - 最终后处理：`protein_quanta/anchoring.py`、`scripts/evaluate_anchor_scenarios.py`；
 - 训练复现与补丁：`protein_quanta/neuralmd_training.py`、`third_party/patches/`。

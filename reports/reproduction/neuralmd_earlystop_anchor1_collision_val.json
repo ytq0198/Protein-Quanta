@@ -1,0 +1,675 @@
+{
+  "protocol": {
+    "status": "project collision proxy; not official Phys score",
+    "pair_rule": "distance below sum of covalent radii",
+    "intramolecular_self_and_duplicate_pairs_excluded": true,
+    "covalent_bond_exclusions_available": false,
+    "beta": 1.0,
+    "decay_scale_frames": 98.0,
+    "sample_ids": [
+      "1S38",
+      "6PYS",
+      "4M5L",
+      "1CTR",
+      "4HXS",
+      "6BIB",
+      "4Q93",
+      "1SWG",
+      "3GCP",
+      "2FMB"
+    ],
+    "scenarios": [
+      "T1",
+      "T2",
+      "T3"
+    ]
+  },
+  "summary": {
+    "T1": {
+      "anchored": {
+        "ligand_collision_mean_percent": 4.096643010958089,
+        "binding_collision_mean_percent": 0.0
+      },
+      "neuralmd": {
+        "ligand_collision_mean_percent": 3.909184778091062,
+        "binding_collision_mean_percent": 0.0
+      },
+      "static": {
+        "ligand_collision_mean_percent": 3.432724817134923,
+        "binding_collision_mean_percent": 0.0
+      },
+      "truth": {
+        "ligand_collision_mean_percent": 3.602281107670519,
+        "binding_collision_mean_percent": 0.0035081781889246613
+      }
+    },
+    "T2": {
+      "anchored": {
+        "ligand_collision_mean_percent": 4.579677223851224,
+        "binding_collision_mean_percent": 0.016658841075726273
+      },
+      "neuralmd": {
+        "ligand_collision_mean_percent": 4.349899004205918,
+        "binding_collision_mean_percent": 0.01701311762584678
+      },
+      "static": {
+        "ligand_collision_mean_percent": 3.727816025329088,
+        "binding_collision_mean_percent": 0.01833087313800373
+      },
+      "truth": {
+        "ligand_collision_mean_percent": 3.4593090016512136,
+        "binding_collision_mean_percent": 0.007123907617266249
+      }
+    },
+    "T3": {
+      "anchored": {
+        "ligand_collision_mean_percent": 4.097439493056998,
+        "binding_collision_mean_percent": 0.002723666896718718
+      },
+      "neuralmd": {
+        "ligand_collision_mean_percent": 4.037262280566408,
+        "binding_collision_mean_percent": 0.0015889353981712977
+      },
+      "static": {
+        "ligand_collision_mean_percent": 3.978788363806822,
+        "binding_collision_mean_percent": 0.006100300386070273
+      },
+      "truth": {
+        "ligand_collision_mean_percent": 3.5501784757534964,
+        "binding_collision_mean_percent": 0.00816235000399532
+      }
+    }
+  },
+  "samples": [
+    {
+      "sample_id": "1S38",
+      "scenarios": {
+        "T1": {
+          "anchored": {
+            "ligand_collision_mean_percent": 9.116809116809117,
+            "binding_collision_mean_percent": 0.0
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 9.116809116809117,
+            "binding_collision_mean_percent": 0.0
+          },
+          "static": {
+            "ligand_collision_mean_percent": 8.974358974358974,
+            "binding_collision_mean_percent": 0.0
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 9.045584045584045,
+            "binding_collision_mean_percent": 0.0
+          }
+        },
+        "T2": {
+          "anchored": {
+            "ligand_collision_mean_percent": 8.974358974358974,
+            "binding_collision_mean_percent": 0.0
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 8.974358974358974,
+            "binding_collision_mean_percent": 0.0
+          },
+          "static": {
+            "ligand_collision_mean_percent": 8.974358974358974,
+            "binding_collision_mean_percent": 0.0
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 9.1025641025641,
+            "binding_collision_mean_percent": 0.0
+          }
+        },
+        "T3": {
+          "anchored": {
+            "ligand_collision_mean_percent": 8.798076923076925,
+            "binding_collision_mean_percent": 0.0
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 8.733974358974361,
+            "binding_collision_mean_percent": 0.0
+          },
+          "static": {
+            "ligand_collision_mean_percent": 10.256410256410254,
+            "binding_collision_mean_percent": 0.0
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 8.91025641025641,
+            "binding_collision_mean_percent": 0.0
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "6PYS",
+      "scenarios": {
+        "T1": {
+          "anchored": {
+            "ligand_collision_mean_percent": 3.3868092691622107,
+            "binding_collision_mean_percent": 0.0
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 3.238265002970886,
+            "binding_collision_mean_percent": 0.0
+          },
+          "static": {
+            "ligand_collision_mean_percent": 2.6737967914438503,
+            "binding_collision_mean_percent": 0.0
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 2.8718558130322838,
+            "binding_collision_mean_percent": 0.0
+          }
+        },
+        "T2": {
+          "anchored": {
+            "ligand_collision_mean_percent": 3.1639928698752238,
+            "binding_collision_mean_percent": 0.0
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 2.9500891265597153,
+            "binding_collision_mean_percent": 0.0
+          },
+          "static": {
+            "ligand_collision_mean_percent": 3.386809269162211,
+            "binding_collision_mean_percent": 0.0
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 2.8163992869875223,
+            "binding_collision_mean_percent": 0.0
+          }
+        },
+        "T3": {
+          "anchored": {
+            "ligand_collision_mean_percent": 3.135026737967915,
+            "binding_collision_mean_percent": 0.0
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 3.1729055258467036,
+            "binding_collision_mean_percent": 0.0
+          },
+          "static": {
+            "ligand_collision_mean_percent": 3.0303030303030307,
+            "binding_collision_mean_percent": 0.0
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 2.9144385026737973,
+            "binding_collision_mean_percent": 0.0
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "4M5L",
+      "scenarios": {
+        "T1": {
+          "anchored": {
+            "ligand_collision_mean_percent": 6.204906204906204,
+            "binding_collision_mean_percent": 0.0
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 6.108706108706108,
+            "binding_collision_mean_percent": 0.0
+          },
+          "static": {
+            "ligand_collision_mean_percent": 5.627705627705627,
+            "binding_collision_mean_percent": 0.0
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 5.555555555555555,
+            "binding_collision_mean_percent": 0.013764479173284204
+          }
+        },
+        "T2": {
+          "anchored": {
+            "ligand_collision_mean_percent": 6.818181818181818,
+            "binding_collision_mean_percent": 0.02144082332761578
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 6.7099567099567095,
+            "binding_collision_mean_percent": 0.014770344959024203
+          },
+          "static": {
+            "ligand_collision_mean_percent": 5.194805194805196,
+            "binding_collision_mean_percent": 0.07623403849818944
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 5.000000000000001,
+            "binding_collision_mean_percent": 0.021917286068229465
+          }
+        },
+        "T3": {
+          "anchored": {
+            "ligand_collision_mean_percent": 6.287878787878788,
+            "binding_collision_mean_percent": 0.015127692014484467
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 6.185064935064936,
+            "binding_collision_mean_percent": 0.008695445016199732
+          },
+          "static": {
+            "ligand_collision_mean_percent": 5.194805194805196,
+            "binding_collision_mean_percent": 0.02858776443682104
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 5.194805194805194,
+            "binding_collision_mean_percent": 0.022393748808843147
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "1CTR",
+      "scenarios": {
+        "T1": {
+          "anchored": {
+            "ligand_collision_mean_percent": 3.8506760728982945,
+            "binding_collision_mean_percent": 0.0
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 3.5861258083480303,
+            "binding_collision_mean_percent": 0.0
+          },
+          "static": {
+            "ligand_collision_mean_percent": 1.8518518518518516,
+            "binding_collision_mean_percent": 0.0
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 1.88124632569077,
+            "binding_collision_mean_percent": 0.00046906075274869604
+          }
+        },
+        "T2": {
+          "anchored": {
+            "ligand_collision_mean_percent": 3.544973544973544,
+            "binding_collision_mean_percent": 0.0
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 3.1878306878306875,
+            "binding_collision_mean_percent": 0.0
+          },
+          "static": {
+            "ligand_collision_mean_percent": 1.3227513227513228,
+            "binding_collision_mean_percent": 0.0
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 1.6005291005291007,
+            "binding_collision_mean_percent": 0.0
+          }
+        },
+        "T3": {
+          "anchored": {
+            "ligand_collision_mean_percent": 3.376322751322752,
+            "binding_collision_mean_percent": 0.0
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 3.518518518518518,
+            "binding_collision_mean_percent": 0.0
+          },
+          "static": {
+            "ligand_collision_mean_percent": 2.1164021164021167,
+            "binding_collision_mean_percent": 0.0
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 1.732804232804233,
+            "binding_collision_mean_percent": 0.00021107733873691322
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "4HXS",
+      "scenarios": {
+        "T1": {
+          "anchored": {
+            "ligand_collision_mean_percent": 4.238032498902063,
+            "binding_collision_mean_percent": 0.0
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 3.952569169960474,
+            "binding_collision_mean_percent": 0.0
+          },
+          "static": {
+            "ligand_collision_mean_percent": 3.16205533596838,
+            "binding_collision_mean_percent": 0.0
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 3.6231884057971016,
+            "binding_collision_mean_percent": 0.012986338372032622
+          }
+        },
+        "T2": {
+          "anchored": {
+            "ligand_collision_mean_percent": 6.304347826086958,
+            "binding_collision_mean_percent": 0.08415147265077141
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 5.652173913043479,
+            "binding_collision_mean_percent": 0.09525479195885929
+          },
+          "static": {
+            "ligand_collision_mean_percent": 3.9525691699604737,
+            "binding_collision_mean_percent": 0.046750818139317446
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 4.1304347826086945,
+            "binding_collision_mean_percent": 0.009350163627863489
+          }
+        },
+        "T3": {
+          "anchored": {
+            "ligand_collision_mean_percent": 4.599802371541503,
+            "binding_collision_mean_percent": 0.0
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 4.471343873517787,
+            "binding_collision_mean_percent": 0.0
+          },
+          "static": {
+            "ligand_collision_mean_percent": 4.347826086956522,
+            "binding_collision_mean_percent": 0.0
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 3.8982213438735185,
+            "binding_collision_mean_percent": 0.013148667601683029
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "6BIB",
+      "scenarios": {
+        "T1": {
+          "anchored": {
+            "ligand_collision_mean_percent": 2.1410114433370246,
+            "binding_collision_mean_percent": 0.0
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 1.9441368278577582,
+            "binding_collision_mean_percent": 0.0
+          },
+          "static": {
+            "ligand_collision_mean_percent": 1.6611295681063123,
+            "binding_collision_mean_percent": 0.0
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 1.495016611295681,
+            "binding_collision_mean_percent": 0.0036763933530808176
+          }
+        },
+        "T2": {
+          "anchored": {
+            "ligand_collision_mean_percent": 2.032115171650055,
+            "binding_collision_mean_percent": 0.038287010777084525
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 1.960132890365448,
+            "binding_collision_mean_percent": 0.03615995462280205
+          },
+          "static": {
+            "ligand_collision_mean_percent": 1.2181616832779625,
+            "binding_collision_mean_percent": 0.05199470599357157
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 1.3953488372093024,
+            "binding_collision_mean_percent": 0.03497825675931178
+          }
+        },
+        "T3": {
+          "anchored": {
+            "ligand_collision_mean_percent": 2.0002768549280177,
+            "binding_collision_mean_percent": 0.0072083569672906035
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 2.1276301218161686,
+            "binding_collision_mean_percent": 0.005199470599357156
+          },
+          "static": {
+            "ligand_collision_mean_percent": 1.2181616832779625,
+            "binding_collision_mean_percent": 0.014180374361883154
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 1.454872646733112,
+            "binding_collision_mean_percent": 0.03385564378899603
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "4Q93",
+      "scenarios": {
+        "T1": {
+          "anchored": {
+            "ligand_collision_mean_percent": 4.125816993464053,
+            "binding_collision_mean_percent": 0.0
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 3.9215686274509807,
+            "binding_collision_mean_percent": 0.0
+          },
+          "static": {
+            "ligand_collision_mean_percent": 2.9411764705882346,
+            "binding_collision_mean_percent": 0.0
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 3.8807189542483664,
+            "binding_collision_mean_percent": 0.0
+          }
+        },
+        "T2": {
+          "anchored": {
+            "ligand_collision_mean_percent": 5.294117647058822,
+            "binding_collision_mean_percent": 0.0
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 4.88970588235294,
+            "binding_collision_mean_percent": 0.0
+          },
+          "static": {
+            "ligand_collision_mean_percent": 4.411764705882352,
+            "binding_collision_mean_percent": 0.0
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 3.014705882352941,
+            "binding_collision_mean_percent": 0.0
+          }
+        },
+        "T3": {
+          "anchored": {
+            "ligand_collision_mean_percent": 4.623161764705882,
+            "binding_collision_mean_percent": 0.0
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 3.9981617647058827,
+            "binding_collision_mean_percent": 0.0
+          },
+          "static": {
+            "ligand_collision_mean_percent": 5.88235294117647,
+            "binding_collision_mean_percent": 0.0
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 3.4375,
+            "binding_collision_mean_percent": 0.0
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "1SWG",
+      "scenarios": {
+        "T1": {
+          "anchored": {
+            "ligand_collision_mean_percent": 3.75,
+            "binding_collision_mean_percent": 0.0
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 3.333333333333334,
+            "binding_collision_mean_percent": 0.0
+          },
+          "static": {
+            "ligand_collision_mean_percent": 3.333333333333334,
+            "binding_collision_mean_percent": 0.0
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 4.12037037037037,
+            "binding_collision_mean_percent": 0.002026096117999838
+          }
+        },
+        "T2": {
+          "anchored": {
+            "ligand_collision_mean_percent": 4.625,
+            "binding_collision_mean_percent": 0.0
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 4.25,
+            "binding_collision_mean_percent": 0.0
+          },
+          "static": {
+            "ligand_collision_mean_percent": 5.0,
+            "binding_collision_mean_percent": 0.0
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 3.9583333333333335,
+            "binding_collision_mean_percent": 0.0
+          }
+        },
+        "T3": {
+          "anchored": {
+            "ligand_collision_mean_percent": 4.166666666666665,
+            "binding_collision_mean_percent": 0.004900619985412108
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 4.166666666666665,
+            "binding_collision_mean_percent": 0.00199443836615609
+          },
+          "static": {
+            "ligand_collision_mean_percent": 4.166666666666665,
+            "binding_collision_mean_percent": 0.018234865061998538
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 4.093749999999998,
+            "binding_collision_mean_percent": 0.0025072939460247996
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "3GCP",
+      "scenarios": {
+        "T1": {
+          "anchored": {
+            "ligand_collision_mean_percent": 3.023108578664134,
+            "binding_collision_mean_percent": 0.0
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 2.912314023425134,
+            "binding_collision_mean_percent": 0.0
+          },
+          "static": {
+            "ligand_collision_mean_percent": 3.133903133903134,
+            "binding_collision_mean_percent": 0.0
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 2.6115859449192786,
+            "binding_collision_mean_percent": 0.0
+          }
+        },
+        "T2": {
+          "anchored": {
+            "ligand_collision_mean_percent": 3.817663817663817,
+            "binding_collision_mean_percent": 0.0014697236919459142
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 3.8176638176638185,
+            "binding_collision_mean_percent": 0.0031231628453850676
+          },
+          "static": {
+            "ligand_collision_mean_percent": 2.8490028490028494,
+            "binding_collision_mean_percent": 0.0
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 2.606837606837607,
+            "binding_collision_mean_percent": 0.0005511463844797178
+          }
+        },
+        "T3": {
+          "anchored": {
+            "ligand_collision_mean_percent": 2.8596866096866096,
+            "binding_collision_mean_percent": 0.0
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 2.8133903133903138,
+            "binding_collision_mean_percent": 0.0
+          },
+          "static": {
+            "ligand_collision_mean_percent": 2.8490028490028494,
+            "binding_collision_mean_percent": 0.0
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 2.9380341880341883,
+            "binding_collision_mean_percent": 0.0002755731922398589
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "2FMB",
+      "scenarios": {
+        "T1": {
+          "anchored": {
+            "ligand_collision_mean_percent": 1.1292599314377898,
+            "binding_collision_mean_percent": 0.0
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 0.9780197620488001,
+            "binding_collision_mean_percent": 0.0
+          },
+          "static": {
+            "ligand_collision_mean_percent": 0.9679370840895343,
+            "binding_collision_mean_percent": 0.0
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 0.9376890502117363,
+            "binding_collision_mean_percent": 0.0021594141201004436
+          }
+        },
+        "T2": {
+          "anchored": {
+            "ligand_collision_mean_percent": 1.2220205686630368,
+            "binding_collision_mean_percent": 0.02123938030984508
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 1.1070780399274045,
+            "binding_collision_mean_percent": 0.02082292187239714
+          },
+          "static": {
+            "ligand_collision_mean_percent": 0.9679370840895343,
+            "binding_collision_mean_percent": 0.008329168748958856
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 0.9679370840895339,
+            "binding_collision_mean_percent": 0.0044422233327780555
+          }
+        },
+        "T3": {
+          "anchored": {
+            "ligand_collision_mean_percent": 1.1274954627949185,
+            "binding_collision_mean_percent": 0.0
+          },
+          "neuralmd": {
+            "ligand_collision_mean_percent": 1.1849667271627344,
+            "binding_collision_mean_percent": 0.0
+          },
+          "static": {
+            "ligand_collision_mean_percent": 0.7259528130671508,
+            "binding_collision_mean_percent": 0.0
+          },
+          "truth": {
+            "ligand_collision_mean_percent": 0.927102238354507,
+            "binding_collision_mean_percent": 0.009231495363429397
+          }
+        }
+      }
+    }
+  ]
+}

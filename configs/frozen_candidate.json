@@ -56,12 +56,22 @@
       "T3": {"coordinate_rmse_percent": 0.36, "matching_percent": -4.99, "stability_points": 1.61, "rmsf_percent": -0.36}
     }
   },
+  "physical_diagnostics": {
+    "status": "preliminary project collision proxy; not an official Phys score",
+    "pair_rule": "distance below sum of covalent radii",
+    "bonded_pairs_excluded": false,
+    "interpretation": "binding overlap is very small; ligand proxy increases in five of six anchor comparisons, but absolute rates include normal bonded neighbours",
+    "validation_report": "reports/reproduction/neuralmd_earlystop_anchor1_collision_val.json",
+    "frozen_test_report": "reports/reproduction/neuralmd_earlystop_anchor1_collision_test.json",
+    "official_score_claimed": false
+  },
   "evidence": {
     "project_commit": "2782be4",
     "upstream_neuralmd_commit": "a2ae030838c6ea0251eb6a29bfe99dc9d8ee1cfe",
     "validation_report": "reports/reproduction/neuralmd_earlystop_anchor1_val.json",
     "frozen_test_report": "reports/reproduction/neuralmd_earlystop_anchor1_test.json",
     "experiment_report": "reports/reproduction/2026-08-12-neuralmd-pair-loss-and-earlystop.md",
-    "figure": "reports/figures/neuralmd_earlystop_anchor1_tradeoff.png"
+    "figure": "reports/figures/neuralmd_earlystop_anchor1_tradeoff.png",
+    "collision_audit": "reports/reproduction/2026-08-12-collision-proxy-audit.md"
   }
 }
