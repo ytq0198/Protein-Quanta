@@ -181,6 +181,18 @@ The archived school-server snapshot records Python 3.10.20, PyTorch
 NVIDIA RTX A6000 devices. See
 [`reports/reproduction/server-environment.json`](reports/reproduction/server-environment.json).
 
+Run the read-only public-release audit before a milestone or submission:
+
+```bash
+python -m scripts.audit_release \
+  --output reports/reproduction/release-audit.json
+```
+
+It rejects tracked checkpoints/trajectory data, files over 5 MiB, common token
+prefixes, missing manifest evidence, and any drift toward claiming an official
+competition score. A missing project-level license remains a warning because
+license selection requires a team decision.
+
 ## Reproduction policy
 
 Every reported experiment must record its upstream commit, data version and

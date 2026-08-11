@@ -11,7 +11,7 @@
 | 官方 checkpoint | 测试集 10 个复合物、100 帧完成 |
 | 从头训练 | 官方配置已纠正；seed 42 best 几乎逐位复现发布 checkpoint |
 | 创新实验 | epoch-5 场景早停 + Static anchor `β=1` 通过；E6/E6b Pair no-go |
-| 测试 | 本地与服务器均为 77 项通过；服务器另有 4 项按环境预期跳过 |
+| 测试 | 本地与服务器均为 80 项通过；服务器另有 4 项按环境预期跳过 |
 
 ## 2026-08-10 至 2026-08-11：复现基础设施
 
@@ -318,3 +318,7 @@ best 与发布 checkpoint 的坐标 RMSE 差约 `4.2×10^-7 Å`，Stability 只�
 GOAI 官网 AI for Research 页面公开内容与本地手册一致：8 月 16 日初赛截止；Top 40 由算法赛与开放探索赛各 20 队组成；复赛后 Top 20 由两类各 10 队组成。公开页面仍未给具体截止时刻或算法赛文件格式/大小。官网链接的 Datawhale 方向二 baseline 教程页摘要另确认：每队只能选择一个算法方向；官网作品最多提交 3 次，以最后一次为准。上述公开入口与未确认项已写入 `docs/preliminary-submission-compliance-checklist.md`。
 
 继续读取方向二教程正文及其赛题解读 PDF 后，确认上传流程为“人工完成 Word（手动补第六部分团队介绍）→ 压缩为 ZIP → 官网填写并上传”。Datawhale 截图打卡属于 Token Plan 激励，不等同于赛事提交。发现 7 月解读 PDF 的 Top 50/Top 15 已与当前官网 Top 40/Top 20 冲突；按来源优先级采用当前官网，并在 `reports/reproduction/2026-08-12-official-materials-audit.md` 留存冲突与未决项。
+
+## 2026-08-12：公开发布自动审计
+
+新增只读发布审计器，对 Git 跟踪文件检查 checkpoint/轨迹/HDF5 等禁入后缀、5 MiB 大文件、常见 token 前缀、manifest 证据缺失及“官方得分”误称。首轮审计通过，唯一警告为项目级 LICENSE 尚未由团队选择。新增 3 项回归测试后，本地与服务器均为 80 项通过，服务器 4 项可选绘图测试跳过。
