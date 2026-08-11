@@ -312,3 +312,7 @@ best 与发布 checkpoint 的坐标 RMSE 差约 `4.2×10^-7 Å`，Stability 只�
 ## 2026-08-12：服务器环境证据归档
 
 新增白名单式环境采集器，只记录 Python、操作系统内核/架构、关键 Python 包、PyTorch/CUDA 与 GPU 型号/显存；明确不采集用户名、主机名、路径或环境变量。服务器实测为 Python 3.10.20、PyTorch 2.6.0+cu124、CUDA 12.4、4 张 NVIDIA RTX A6000（每张可见显存 47.402 GiB）。完整包版本见 `reports/reproduction/server-environment.json`。新增 3 项回归测试后，本地和服务器均为 77 项通过，服务器 4 项可选绘图测试跳过。
+
+## 2026-08-12：官网公开信息复核
+
+GOAI 官网 AI for Research 页面公开内容与本地手册一致：8 月 16 日初赛截止；Top 40 由算法赛与开放探索赛各 20 队组成；复赛后 Top 20 由两类各 10 队组成。公开页面仍未给具体截止时刻或算法赛文件格式/大小。官网链接的 Datawhale 方向二 baseline 教程页摘要另确认：每队只能选择一个算法方向；官网作品最多提交 3 次，以最后一次为准。上述公开入口与未确认项已写入 `docs/preliminary-submission-compliance-checklist.md`。
