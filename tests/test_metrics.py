@@ -9,6 +9,7 @@ from protein_quanta.metrics import (
     coordinate_rmse,
     distance_matching,
     distance_stability,
+    error_growth_summary,
     radius_of_gyration_error,
     rmsf_error,
 )
@@ -96,6 +97,21 @@ class ReconstructionMetricTests(unittest.TestCase):
             contact_map_agreement(prediction, truth, cutoff=1.5),
             [0.0],
         )
+
+    def test_error_growth_summary_tracks_windows_and_linear_slope(self):
+        truth = np.zeros((6, 1, 3), dtype=float)
+        frame_errors = np.arange(1.0, 7.0)
+        prediction = np.repeat(frame_errors[:, None, None], 3, axis=2)
+
+        summary = error_growth_summary(prediction, truth)
+
+        np.testing.assert_allclose(
+            summary["coordinate_rmse_by_frame_angstrom"], frame_errors
+        )
+        self.assertAlmostEqual(summary["coordinate_rmse_early_mean_angstrom"], 1.5)
+        self.assertAlmostEqual(summary["coordinate_rmse_middle_mean_angstrom"], 3.5)
+        self.assertAlmostEqual(summary["coordinate_rmse_late_mean_angstrom"], 5.5)
+        self.assertAlmostEqual(summary["coordinate_rmse_slope_angstrom_per_frame"], 1.0)
 
 
 if __name__ == "__main__":

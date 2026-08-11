@@ -60,20 +60,28 @@ def _load_checkpoint(model, path: Path):
     }
 
 
-def _rollout_comparison(prediction, truth, contact_cutoff):
-    """Compare a full predicted trajectory after two observed frames."""
+def _scenario_rollout_comparison(
+    prediction, truth, observed_local_frames, contact_cutoff
+):
+    """Compare a local scenario rollout after its observed prefix."""
     prediction = np.asarray(prediction)
     truth = np.asarray(truth)
     if prediction.shape != truth.shape:
         raise ValueError("prediction and truth must have matching shapes")
-    if truth.ndim != 3 or truth.shape[0] < 3 or truth.shape[-1] != 3:
-        raise ValueError("rollout trajectories need at least three XYZ frames")
-    history = truth[:2]
-    target = truth[2:]
+    if truth.ndim != 3 or truth.shape[-1] != 3:
+        raise ValueError("rollout trajectories must contain XYZ frames")
+    if observed_local_frames < 2:
+        raise ValueError("at least two observed frames are required")
+    if truth.shape[0] <= observed_local_frames:
+        raise ValueError("rollout trajectories must contain target frames")
+    history = truth[:observed_local_frames]
+    target = truth[observed_local_frames:]
     horizon = target.shape[0]
     return {
         "neuralmd": _evaluate(
-            prediction[2:], target, contact_cutoff=contact_cutoff
+            prediction[observed_local_frames:],
+            target,
+            contact_cutoff=contact_cutoff,
         ),
         "static": _evaluate(
             static_rollout(history, horizon),
@@ -86,6 +94,16 @@ def _rollout_comparison(prediction, truth, contact_cutoff):
             contact_cutoff=contact_cutoff,
         ),
     }
+
+
+def _rollout_comparison(prediction, truth, contact_cutoff):
+    """Compare a full predicted trajectory after two observed frames."""
+    return _scenario_rollout_comparison(
+        prediction,
+        truth,
+        observed_local_frames=2,
+        contact_cutoff=contact_cutoff,
+    )
 
 
 def _load_official_sample(upstream: Path, h5_path: Path, sample_id: str):

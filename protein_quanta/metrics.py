@@ -30,6 +30,27 @@ def coordinate_rmse(prediction, truth, atom_mask=None):
     return float(np.sqrt(np.mean(np.square(errors))))
 
 
+def error_growth_summary(prediction, truth, atom_mask=None):
+    """Summarize how coordinate error grows across a forecast horizon."""
+    errors = _coordinate_errors(prediction, truth, atom_mask)
+    per_frame = np.sqrt(np.mean(np.square(errors), axis=(1, 2)))
+    if per_frame.size >= 3:
+        early, middle, late = np.array_split(per_frame, 3)
+    else:
+        early = per_frame[:1]
+        middle = per_frame[(per_frame.size - 1) // 2 : (per_frame.size - 1) // 2 + 1]
+        late = per_frame[-1:]
+    frame_index = np.arange(per_frame.shape[0], dtype=float)
+    slope = np.polyfit(frame_index, per_frame, deg=1)[0] if per_frame.size > 1 else 0.0
+    return {
+        "coordinate_rmse_by_frame_angstrom": per_frame.tolist(),
+        "coordinate_rmse_early_mean_angstrom": float(np.mean(early)),
+        "coordinate_rmse_middle_mean_angstrom": float(np.mean(middle)),
+        "coordinate_rmse_late_mean_angstrom": float(np.mean(late)),
+        "coordinate_rmse_slope_angstrom_per_frame": float(slope),
+    }
+
+
 def distance_matching(prediction, truth, atom_mask=None):
     prediction, truth = _masked_trajectories(prediction, truth, atom_mask)
     distance_gap = _pairwise_distances(prediction) - _pairwise_distances(truth)

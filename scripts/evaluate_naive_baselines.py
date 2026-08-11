@@ -16,6 +16,7 @@ from protein_quanta.metrics import (
     coordinate_rmse,
     distance_matching,
     distance_stability,
+    error_growth_summary,
     radius_of_gyration_error,
     rmsf_error,
 )
@@ -30,7 +31,7 @@ def _evaluate(prediction, truth, contact_cutoff):
     contact_agreement = contact_map_agreement(
         prediction, truth, cutoff=contact_cutoff
     )
-    return {
+    result = {
         "diagnostic_status": "proxy; not official score",
         "coordinate_mae_angstrom": coordinate_mae(prediction, truth),
         "coordinate_rmse_angstrom": coordinate_rmse(prediction, truth),
@@ -46,6 +47,8 @@ def _evaluate(prediction, truth, contact_cutoff):
         "radius_of_gyration_error_by_frame_angstrom": gyration_error.tolist(),
         "contact_map_agreement_by_frame": contact_agreement.tolist(),
     }
+    result.update(error_growth_summary(prediction, truth))
+    return result
 
 
 def main() -> None:

@@ -13,6 +13,7 @@ if TORCH_AVAILABLE:
         _checkpoint_architecture,
         _load_checkpoint,
         _rollout_comparison,
+        _scenario_rollout_comparison,
     )
 
 
@@ -88,6 +89,17 @@ class NeuralMDSmokeHelpersTests(unittest.TestCase):
             comparison["static"]["coordinate_rmse_angstrom"],
             0.0,
         )
+
+    def test_scenario_comparison_rejects_rollout_without_target_frames(self):
+        trajectory = torch.zeros((2, 2, 3)).numpy()
+
+        with self.assertRaisesRegex(ValueError, "target frame"):
+            _scenario_rollout_comparison(
+                trajectory,
+                trajectory,
+                observed_local_frames=2,
+                contact_cutoff=1.5,
+            )
 
 
 if __name__ == "__main__":

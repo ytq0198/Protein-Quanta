@@ -7,17 +7,17 @@
 | 项目 | 当前状态 |
 |---|---|
 | 数据 | MISATO-100 已下载并校验；100/100 复合物审计通过 |
-| 统一评估器 | Static、Linear、NeuralMD checkpoint 已接入 |
+| 统一评估器 | Static、Linear、NeuralMD checkpoint 及 T1/T2/T3 场景评估已接入 |
 | 官方 checkpoint | 测试集 10 个复合物、100 帧完成 |
 | 从头训练 | 官方配置已纠正；seed 42 best 几乎逐位复现发布 checkpoint |
-| 创新实验 | C1 Static 锚点残差已通过；长跨度裁剪压力实验 no-go；转入 T1/T2/T3 对齐与长程目标 |
-| 测试 | 本地 47 项通过；服务器阶段复核随下一里程碑执行 |
+| 创新实验 | C1 Static 锚点残差已通过；长跨度裁剪压力实验 no-go；E6 成对距离损失进入实现与校准 |
+| 测试 | 本地与服务器均为 56 项通过；服务器另有 4 项按环境预期跳过 |
 
 ## 2026-08-10 至 2026-08-11：复现基础设施
 
 ### 关键决策
 
-1. 比赛指导手册没有公开 `Geo/Phys/Dyn/Stab` 权重或 `T1/T2/T3` 定义，因此所有新增指标只标为项目代理诊断。
+1. 比赛指导手册公开了单场景 `Geo/Phys/Dyn/Stab = 40%/25%/25%/10%`，以及总分 `T1/T2/T3 = 50%/30%/20%`；但没有提供可执行的归一化与官方评分代码，因此本地新增指标仍只标为项目代理诊断，不拼接伪“总分”。
 2. 数据和模型权重不进入 Git；所有 checkpoint 记录 SHA256。
 3. 使用 NeuralMD 作者维护的 condition-aware `torchdiffeq` fork，固定 commit `3d7c7ec8c534a9b18b8b7c7d1fea0c235e6468d0`。
 4. 发布权重结构与上游 parser 默认值不同；从 state dict 识别 100 个 radial bases 和关闭 velocity refinement，并执行严格加载。
@@ -217,3 +217,36 @@ best 与发布 checkpoint 的坐标 RMSE 差约 `4.2×10^-7 Å`，Stability 只�
 - `reports/reproduction/neuralmd_misato100_official_corrected_best_val.json`
 - `reports/reproduction/neuralmd_misato100_official_corrected_final_val.json`
 - `reports/reproduction/2026-08-12-neuralmd-official-corrected.md`
+
+## 2026-08-12：T1/T2/T3 竞赛场景验证基准
+
+### 协议冻结
+
+- T1：观测帧 0–1，预测帧 2–19（18 帧）；
+- T2：观测帧 0–79，以帧 78–79 初始化，预测帧 80–99（20 帧）；
+- T3：观测帧 0–19，以帧 18–19 初始化，预测帧 20–99（80 帧）。
+
+每个场景都把最后两个观测帧转换为位置/速度初值，随后使用与论文一致的 Euler 配置独立滚动。表中为 10 个验证复合物的无权平均原始代理指标，不是官方归一化分数。
+
+| 场景 | 方法 | 坐标 RMSE（Å，↓） | Matching（Å，↓） | Stability（%，↑） | RMSF MAE（Å，↓） | RMSE 增长率（Å/帧，↓） |
+|---|---|---:|---:|---:|---:|---:|
+| T1 | NeuralMD | 1.5506 | 0.4855 | 81.90 | 1.5034 | 0.0652 |
+| T1 | Static | **1.5095** | **0.4535** | **83.73** | 1.5585 | 0.0774 |
+| T2 | NeuralMD | 1.3510 | **0.4284** | **83.31** | **1.2887** | **0.0470** |
+| T2 | Static | **1.3455** | 0.4607 | 82.27 | 1.3500 | 0.0479 |
+| T3 | NeuralMD | **2.2139** | 0.4763 | 82.08 | **2.1020** | 0.0150 |
+| T3 | Static | 2.3390 | **0.4590** | **83.54** | 2.4968 | **0.0149** |
+
+发布 checkpoint 与纠正训练的 best checkpoint 在全部场景、全部标量指标上的绝对差均小于 `1e-3`，因此场景评估也复现一致。两份报告 SHA256 分别为 `5fe9ad31d4dc3f25e69647babf90329c31afeed0137978807d06af9637dd71d2` 与 `f5fa89cfff98d972e22a57b9ce2067e8e0334dfd41fa4fa392362534e401ce48`。
+
+### 对创新方向的约束
+
+结果否定了“NeuralMD 在所有时间尺度都自然优于静态基线”的假设。T1 中 Static 同时赢得坐标、Matching 与 Stability；T2 是 NeuralMD 最均衡的窗口；T3 中 NeuralMD 保留更真实的坐标变化和 RMSF，但牺牲了 Matching/Stability。由此冻结 E6 的目标：首先用 `L_pair` 修复 T1/T3 的内部几何，同时用坐标、RMSF 和误差增长率防止模型退化成 Static。若只改善 Stability 而损害 T3 动态性，则判为失败。
+
+![T1/T2/T3 验证基准](figures/neuralmd_scenario_baselines.png)
+
+### 产物
+
+- `reports/reproduction/neuralmd_scenarios_published_val.json`
+- `reports/reproduction/neuralmd_scenarios_corrected_best_val.json`
+- `reports/figures/neuralmd_scenario_baselines.png`

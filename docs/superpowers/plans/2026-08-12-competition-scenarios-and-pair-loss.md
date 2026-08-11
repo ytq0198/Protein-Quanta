@@ -34,10 +34,10 @@
 - Produces: `competition_scenarios(total_frames=100) -> tuple[TrajectoryScenario, ...]`.
 - Produces: `scenario_time_grid(scenario, scaling) -> np.ndarray` including the two initializer frames and all target frames.
 
-- [ ] Write failing tests with literal expected initializer/target indices for T1 `(0,1)->2:19`, T2 `(78,79)->80:99`, and T3 `(18,19)->20:99`; test invalid frame counts and nonpositive scaling.
-- [ ] Run `python -m unittest tests.test_scenarios -v`; require missing-module failure.
-- [ ] Implement a frozen dataclass with validation, `initializer_indices`, `target_indices`, and the exact three-scenario factory.
-- [ ] Run focused and full tests; require all pass.
+- [x] Write failing tests with literal expected initializer/target indices for T1 `(0,1)->2:19`, T2 `(78,79)->80:99`, and T3 `(18,19)->20:99`; test invalid frame counts and nonpositive scaling.
+- [x] Run `python -m unittest tests.test_scenarios -v`; require missing-module failure.
+- [x] Implement a frozen dataclass with validation, `initializer_indices`, `target_indices`, and the exact three-scenario factory.
+- [x] Run focused and full tests; require all pass.
 
 ### Task 2: Arbitrary-frame rollout comparison and stability windows
 
@@ -51,12 +51,12 @@
 - Produces: `_scenario_rollout_comparison(prediction, truth, observed_local_frames, contact_cutoff)` where prediction/truth contain the two initializer frames followed by targets.
 - Produces: `error_growth_summary(prediction, truth) -> dict` with early/middle/late coordinate RMSE and least-squares RMSE growth slope.
 
-- [ ] Add failing tests proving arbitrary-frame comparison excludes both observed frames, Static repeats the last observed frame, and a handcrafted increasing error has exact window means/slope.
-- [ ] Run focused tests and confirm behavior failures.
-- [ ] Refactor the existing two-frame comparison into the generic function while keeping `_rollout_comparison` backward compatible.
-- [ ] Implement three approximately equal contiguous target windows using `np.array_split`; compute per-frame coordinate RMSE and its linear slope against zero-based target time.
-- [ ] Add the growth summary to `_evaluate` output without changing existing metric names.
-- [ ] Run focused and full tests.
+- [x] Add failing tests proving arbitrary-frame comparison excludes both observed frames, Static repeats the last observed frame, and a handcrafted increasing error has exact window means/slope.
+- [x] Run focused tests and confirm behavior failures.
+- [x] Refactor the existing two-frame comparison into the generic function while keeping `_rollout_comparison` backward compatible.
+- [x] Implement three approximately equal contiguous target windows using `np.array_split`; compute per-frame coordinate RMSE and its linear slope against zero-based target time.
+- [x] Add the growth summary to `_evaluate` output without changing existing metric names.
+- [x] Run focused and full tests.
 
 ### Task 3: Scenario evaluator
 
@@ -68,12 +68,12 @@
 - Consumes: strict checkpoint/data helpers from `scripts.evaluate_neuralmd_checkpoint` and scenarios from Task 1.
 - Produces: one JSON report with `protocol.scenarios`, `summary[scenario][model]`, and `samples[*].scenarios`.
 
-- [ ] Write failing helper tests for aggregation by scenario/model, duplicate sample rejection, and report status text `competition-aligned proxy; not official score`.
-- [ ] Run focused tests and confirm missing behavior.
-- [ ] Implement one model/data load per sample, scenario-specific position/velocity initialization, Euler integration over local time, and NeuralMD/Static/Linear comparisons.
-- [ ] Record checkpoint SHA, exact frame indices, upstream path/commit, sample IDs, runtime, peak memory, and per-sample preprocessing agreement.
-- [ ] Run a CPU helper test and local full suite.
-- [ ] Run one-complex server smoke evaluation for all scenarios; require finite outputs and valid JSON.
+- [x] Write failing helper tests for aggregation by scenario/model, duplicate sample rejection, and report status text `competition-aligned proxy; not official score`.
+- [x] Run focused tests and confirm missing behavior.
+- [x] Implement one model/data load per sample, scenario-specific position/velocity initialization, Euler integration over local time, and NeuralMD/Static/Linear comparisons.
+- [x] Record checkpoint SHA, exact frame indices, upstream path/commit, sample IDs, runtime, peak memory, and per-sample preprocessing agreement.
+- [x] Run a CPU helper test and local full suite.
+- [x] Run one-complex server smoke evaluation for all scenarios; require finite outputs and valid JSON.
 
 ### Task 4: Published and corrected baseline scenario table
 
@@ -87,11 +87,11 @@
 **Interfaces:**
 - Produces the frozen validation reference used by E6 gates.
 
-- [ ] Evaluate the published checkpoint and corrected seed-42 best checkpoint on all 10 validation complexes.
-- [ ] Require numerical agreement between their scenario summaries within `1e-3` for scalar metrics; investigate before E6 if this fails.
-- [ ] Plot T1/T2/T3 NeuralMD-vs-Static coordinate RMSE, Matching, Stability, RMSF and error-growth slope; label as proxy.
-- [ ] Record frame definitions, raw values, limitations, hashes and the no-official-normalization rule in both living documents.
-- [ ] Commit and push the scenario-evaluation milestone after local/server tests, JSON validation, secret scan and `git diff --check`.
+- [x] Evaluate the published checkpoint and corrected seed-42 best checkpoint on all 10 validation complexes.
+- [x] Require numerical agreement between their scenario summaries within `1e-3` for scalar metrics; investigate before E6 if this fails.
+- [x] Plot T1/T2/T3 NeuralMD-vs-Static coordinate RMSE, Matching, Stability, RMSF and error-growth slope; label as proxy.
+- [x] Record frame definitions, raw values, limitations, hashes and the no-official-normalization rule in both living documents.
+- [x] Commit and push the scenario-evaluation milestone after local/server tests, JSON validation, secret scan and `git diff --check`.
 
 ### Task 5: Invariant per-complex pair-distance loss
 
