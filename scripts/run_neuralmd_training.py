@@ -15,6 +15,12 @@ def main():
     parser.add_argument("epochs", type=int)
     parser.add_argument("gpu_index", type=int, nargs="?", default=0)
     parser.add_argument("--max-grad-norm", type=float, default=0.0)
+    parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--pair-loss-coefficient", type=float, default=0.0)
+    parser.add_argument("--pair-loss-beta", type=float, default=0.5)
+    parser.add_argument("--save-every-epoch", type=int, default=0)
+    parser.add_argument("--calibration-batches", type=int, default=0)
+    parser.add_argument("--calibration-output", type=Path)
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
 
@@ -28,7 +34,13 @@ def main():
         output_dir=args.output_dir,
         epochs=args.epochs,
         gpu_index=args.gpu_index,
+        seed=args.seed,
         max_grad_norm=args.max_grad_norm,
+        pair_loss_coefficient=args.pair_loss_coefficient,
+        pair_loss_beta=args.pair_loss_beta,
+        save_every_epoch=args.save_every_epoch,
+        calibration_batches=args.calibration_batches,
+        calibration_output=args.calibration_output,
         python_bin=os.environ.get(
             "NEURALMD_PYTHON",
             "/mnt/localDisk3/weizian/conda_envs/protein-quanta-neuralmd/bin/python",

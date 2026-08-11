@@ -103,11 +103,11 @@
 - Produces: `pair_distance_smooth_l1(prediction, truth, atom_batch, beta=0.5) -> torch.Tensor`.
 - Input shape: `(frames, total_atoms, 3)` for coordinates and `(total_atoms,)` for complex membership.
 
-- [ ] Write failing tests for zero-on-truth, rigid translation/rotation invariance, duplicate/diagonal exclusion, unequal-complex balancing, invalid shapes, positive beta, and finite backward gradients.
-- [ ] Run focused tests and confirm missing-module failure.
-- [ ] Implement unique upper-triangle pairs separately for each complex, Smooth-L1 on distance residuals, mean within complex, then mean across nonempty complexes.
-- [ ] Reject complexes with fewer than two atoms rather than silently changing the batch denominator.
-- [ ] Run focused and full tests.
+- [x] Write failing tests for zero-on-truth, rigid translation/rotation invariance, duplicate/diagonal exclusion, unequal-complex balancing, invalid shapes, positive beta, and finite backward gradients.
+- [x] Run focused tests and confirm missing-module failure.
+- [x] Implement unique upper-triangle pairs separately for each complex, Smooth-L1 on distance residuals, mean within complex, then mean across nonempty complexes.
+- [x] Reject complexes with fewer than two atoms rather than silently changing the batch denominator.
+- [x] Run focused and full tests.
 
 ### Task 6: Gradient-scale calibration
 
@@ -118,10 +118,10 @@
 **Interfaces:**
 - Produces: `calibrated_auxiliary_weight(position_grad_norms, pair_grad_norms, target_fraction=0.1, epsilon=1e-12) -> float`.
 
-- [ ] Write failing literal tests for the median ratio, zero pair gradient handling, mismatched/empty sequences, non-finite values and invalid target fraction.
-- [ ] Run focused tests and confirm failures.
-- [ ] Implement the exact preregistered formula `target_fraction * median(pos / max(pair, epsilon))` and strict validation.
-- [ ] Run focused and full tests.
+- [x] Write failing literal tests for the median ratio, zero pair gradient handling, mismatched/empty sequences, non-finite values and invalid target fraction.
+- [x] Run focused tests and confirm failures.
+- [x] Implement the exact preregistered formula `target_fraction * median(pos / max(pair, epsilon))` and strict validation.
+- [x] Run focused and full tests.
 
 ### Task 7: Minimal upstream E6 patch and periodic checkpoints
 
@@ -137,12 +137,12 @@
 - Epoch log adds `loss_pair` and the frozen coefficient.
 - Checkpoints named `model_epoch_005.pth`, `model_epoch_010.pth`, and so on outside Git.
 
-- [ ] Extend command tests first to require the three explicit E6 arguments while defaults preserve the corrected baseline.
-- [ ] Patch the training loop to compute `L_pair` and add it only when coefficient is positive; preserve exact baseline behavior at zero.
-- [ ] Save periodic checkpoints after validation epochs without changing upstream best-coordinate logic.
-- [ ] Create a calibration mode that runs ten deterministic batches, records separate gradient norms, writes a small JSON, and exits before optimization; do not reuse those batches for model selection.
-- [ ] Generate a clean provenance patch and verify it applies to pinned upstream commit with the PyTorch compatibility and stable-training patches in order.
-- [ ] Run zero-coefficient 5-epoch equivalence preflight; require matching metrics/checkpoint tensors relative to the corrected preflight within numerical tolerance.
+- [x] Extend command tests first to require the three explicit E6 arguments while defaults preserve the corrected baseline.
+- [x] Patch the training loop to compute `L_pair` and add it only when coefficient is positive; preserve exact baseline behavior at zero.
+- [x] Save periodic checkpoints after validation epochs without changing upstream best-coordinate logic.
+- [x] Create a calibration mode that runs ten deterministic batches, records separate gradient norms, writes a small JSON, and exits before optimization; do not reuse those batches for model selection.
+- [x] Generate a clean provenance patch and verify it applies to pinned upstream commit with the PyTorch compatibility and stable-training patches in order.
+- [x] Run zero-coefficient 5-epoch equivalence preflight; require matching metrics/checkpoint tensors relative to the corrected preflight within numerical tolerance.
 
 ### Task 8: E6 20-epoch feasibility and decision
 
@@ -155,11 +155,11 @@
 **Interfaces:**
 - Consumes the frozen baseline table from Task 4 and go gate from the design spec.
 
-- [ ] Run ten-batch calibration and freeze `lambda_d`; record all ratios and the selected coefficient.
-- [ ] Run seed 42 for 20 epochs with periodic checkpoints and persistent logs.
-- [ ] Evaluate checkpoints 5/10/15/20 on validation scenarios; select only by the preregistered multi-condition gate.
-- [ ] Advance to 100 epochs only if T1 RMSE ≤102%, T2 Stability ≥baseline−1 point, T2 Matching ≤102%, and T3 improves Stability ≥2 points or Matching ≥5%, with T3 RMSF ≤105% and no material collision regression.
-- [ ] If no checkpoint passes, record no-go and retain C1 as the initial-submission candidate; do not evaluate test or run more seeds.
-- [ ] If a checkpoint passes, run the 100-epoch extension, reapply the gate, then schedule seeds 0 and 123.
-- [ ] Update living reports with config, hashes, per-scenario tables, failures, figures and scientific interpretation.
-- [ ] Verify local/server tests, all JSON, secret patterns, tracked large artifacts and `git diff --check`; commit and push the E6 milestone.
+- [x] Run ten-batch calibration and freeze `lambda_d`; record all ratios and the selected coefficient.
+- [x] Run seed 42 for 20 epochs with periodic checkpoints and persistent logs.
+- [x] Evaluate checkpoints 5/10/15/20 on validation scenarios; select only by the preregistered multi-condition gate.
+- [x] Advance to 100 epochs only if T1 RMSE ≤102%, T2 Stability ≥baseline−1 point, T2 Matching ≤102%, and T3 improves Stability ≥2 points or Matching ≥5%, with T3 RMSF ≤105% and no material collision regression.
+- [x] N/A: checkpoints 5/10 passed the gate, so the no-pass branch was not taken; the later causal ablation nevertheless classified Pair itself as no-go.
+- [x] If a checkpoint passes, run the 100-epoch extension, reapply the gate, then schedule seeds 0 and 123.
+- [x] Update living reports with config, hashes, per-scenario tables, failures, figures and scientific interpretation.
+- [x] Verify local/server tests, all JSON, secret patterns, tracked large artifacts and `git diff --check`; commit and push the E6 milestone.

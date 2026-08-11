@@ -1,0 +1,219 @@
+diff --git a/examples/main_MISATO_multi_traj_NeuralMD.py b/examples/main_MISATO_multi_traj_NeuralMD.py
+index b506b52..0e98b13 100755
+--- a/examples/main_MISATO_multi_traj_NeuralMD.py
++++ b/examples/main_MISATO_multi_traj_NeuralMD.py
+@@ -1,0 +2 @@ import argparse
++import json
+@@ -22,0 +24,4 @@ from protein_quanta.training_stability import stable_backward_step
++from protein_quanta.geometry_loss import (
++    calibrated_auxiliary_weight,
++    pair_distance_smooth_l1,
++)
+@@ -42,0 +48,128 @@ def save_model(save_best):
++def save_periodic_model(epoch):
++    if args.output_model_dir == "":
++        return
++    output_model_path = os.path.join(
++        args.output_model_dir, "model_epoch_{:03d}.pth".format(epoch)
++    )
++    torch.save({"binding_model": binding_model.state_dict()}, output_model_path)
++    print("save periodic model", output_model_path)
++
++
++def _parameter_gradient_norm(loss, retain_graph):
++    gradients = torch.autograd.grad(
++        loss,
++        tuple(binding_model.parameters()),
++        retain_graph=retain_graph,
++        allow_unused=True,
++    )
++    squared_norm = loss.new_zeros(())
++    for gradient in gradients:
++        if gradient is not None:
++            squared_norm = squared_norm + gradient.detach().pow(2).sum()
++    return float(torch.sqrt(squared_norm).cpu().item())
++
++
++def preserve_skipped_loader_rng(loader):
++    """Match DataLoader iterator seeding without reading held-out samples."""
++    torch.empty((), dtype=torch.int64).random_(generator=loader.generator).item()
++
++
++def calibrate_pair_loss(loader):
++    binding_model.train()
++    position_grad_norms, pair_grad_norms = [], []
++    for batch_index, batch in enumerate(loader):
++        if batch_index >= args.calibration_batches:
++            break
++        batch = batch.to(device)
++        end_traj_idx = random.randint(1, 99)
++        if args.NeuralMD_Binding_start_with_first_frame:
++            start_traj_idx = 0
++        else:
++            start_traj_idx = max(
++                0, end_traj_idx - args.NeuralMD_Binding_frame_num
++            )
++        step_size = args.NeuralMD_step_size / args.NeuralMD_scaling
++        traj_idx_tensor = torch.tensor(
++            np.arange(start_traj_idx, end_traj_idx + 1),
++            dtype=torch.float32,
++            device=device,
++        ) / args.NeuralMD_scaling
++        traj_idx_tensor = traj_idx_tensor - traj_idx_tensor[0]
++        ligand_pos_init = batch.ligand_trajectory_pos[:, start_traj_idx, :].clone()
++        velocity_init = (
++            batch.ligand_trajectory_pos[:, start_traj_idx + 1, :]
++            - ligand_pos_init
++        )
++        condition = (
++            batch.ligand_x,
++            batch.batch_ligand,
++            batch.ligand_mass,
++            batch.protein_pos[batch.mask_n],
++            batch.protein_pos[batch.mask_ca],
++            batch.protein_pos[batch.mask_c],
++            batch.protein_backbone_residue,
++            batch.batch_residue,
++        )
++        if args.use_MLP_velocity:
++            _, velocity_init = binding_model.velocity_model(
++                z=condition[0], pos=velocity_init, batch=condition[1]
++            )
++        _, output_pos_pred = odeint(
++            binding_model,
++            (velocity_init, ligand_pos_init),
++            traj_idx_tensor,
++            condition=condition,
++            method=args.ODE_method,
++            options={"step_size": step_size},
++        )
++        target = batch.ligand_trajectory_pos[
++            :, start_traj_idx + 1 : end_traj_idx + 1, :
++        ].transpose(0, 1)
++        prediction = output_pos_pred[1:]
++        loss_pos = criterion(target, prediction)
++        loss_pair = pair_distance_smooth_l1(
++            prediction,
++            target,
++            batch.batch_ligand,
++            beta=args.pair_loss_beta,
++        )
++        position_grad_norms.append(
++            _parameter_gradient_norm(args.loss_pos_coefficient * loss_pos, True)
++        )
++        pair_grad_norms.append(_parameter_gradient_norm(loss_pair, False))
++        print(
++            "calibration batch {} position_grad_norm {:.8g} pair_grad_norm {:.8g}".format(
++                batch_index + 1,
++                position_grad_norms[-1],
++                pair_grad_norms[-1],
++            )
++        )
++    if len(position_grad_norms) != args.calibration_batches:
++        raise RuntimeError("calibration loader ended before the requested batch count")
++    coefficient = calibrated_auxiliary_weight(
++        position_grad_norms,
++        pair_grad_norms,
++        target_fraction=args.calibration_target_fraction,
++    )
++    report = {
++        "status": "training-only gradient calibration; not model selection",
++        "calibration_batches": args.calibration_batches,
++        "target_fraction": args.calibration_target_fraction,
++        "pair_loss_beta": args.pair_loss_beta,
++        "position_grad_norms": position_grad_norms,
++        "pair_grad_norms": pair_grad_norms,
++        "ratios": [
++            position / max(pair, 1e-12)
++            for position, pair in zip(position_grad_norms, pair_grad_norms)
++        ],
++        "pair_loss_coefficient": coefficient,
++    }
++    output_parent = os.path.dirname(args.calibration_output)
++    if output_parent:
++        os.makedirs(output_parent, exist_ok=True)
++    with open(args.calibration_output, "w", encoding="utf-8") as stream:
++        json.dump(report, stream, indent=2)
++    print("calibrated pair loss coefficient", coefficient)
++    return report
++
++
+@@ -49 +182,2 @@ def train(loader):
+-    accum_loss, accum_loss_pos, accum_loss_velocity, accum_count = 0, 0, 0, 0
++    accum_loss, accum_loss_pos, accum_loss_pair = 0, 0, 0
++    accum_loss_velocity, accum_count = 0, 0
+@@ -94 +228,17 @@ def train(loader):
+-        loss = args.loss_pos_coefficient * loss_pos
++        if args.pair_loss_coefficient > 0:
++            target = batch.ligand_trajectory_pos[
++                :, start_traj_idx + 1 : end_traj_idx + 1, :
++            ].transpose(0, 1)
++            loss_pair = pair_distance_smooth_l1(
++                output_pos_pred[1:],
++                target,
++                batch.batch_ligand,
++                beta=args.pair_loss_beta,
++            )
++            loss = (
++                args.loss_pos_coefficient * loss_pos
++                + args.pair_loss_coefficient * loss_pair
++            )
++        else:
++            loss_pair = output_pos_pred.new_zeros(())
++            loss = args.loss_pos_coefficient * loss_pos
+@@ -110,0 +261 @@ def train(loader):
++            accum_loss_pair += loss_pair.item()
+@@ -123,0 +275,5 @@ def train(loader):
++    print(
++        "loss pair: {:.5f}\tpair coefficient: {:.8g}".format(
++            accum_loss_pair / accum_count, args.pair_loss_coefficient
++        )
++    )
+@@ -220,0 +377,6 @@ if __name__ == "__main__":
++    parser.add_argument("--pair_loss_coefficient", type=float, default=0)
++    parser.add_argument("--pair_loss_beta", type=float, default=0.5)
++    parser.add_argument("--save_every_epoch", type=int, default=0)
++    parser.add_argument("--calibration_batches", type=int, default=0)
++    parser.add_argument("--calibration_output", type=str, default="")
++    parser.add_argument("--calibration_target_fraction", type=float, default=0.1)
+@@ -232,0 +395,4 @@ if __name__ == "__main__":
++    parser.add_argument("--eval_test_during_training", dest="eval_test_during_training", action="store_true")
++    parser.add_argument("--no_eval_test_during_training", dest="eval_test_during_training", action="store_false")
++    parser.set_defaults(eval_test_during_training=True)
++
+@@ -269,0 +436,10 @@ if __name__ == "__main__":
++    if args.pair_loss_coefficient < 0:
++        parser.error("pair_loss_coefficient must be non-negative")
++    if args.pair_loss_beta <= 0:
++        parser.error("pair_loss_beta must be positive")
++    if args.save_every_epoch < 0 or args.calibration_batches < 0:
++        parser.error("epoch and calibration intervals must be non-negative")
++    if args.calibration_batches > 0 and args.calibration_output == "":
++        parser.error("calibration_output is required in calibration mode")
++    if not 0 < args.calibration_target_fraction <= 1:
++        parser.error("calibration_target_fraction must lie in (0, 1]")
+@@ -310,0 +487,4 @@ if __name__ == "__main__":
++    if args.calibration_batches > 0:
++        calibrate_pair_loss(train_loader)
++        raise SystemExit(0)
++
+@@ -350 +530,6 @@ if __name__ == "__main__":
+-    test_mae, test_rmse, test_matching, test_stability, test_ligand_collision, test_binding_collision, FPS = evaluate(test_loader)
++    if args.eval_test_during_training:
++        test_mae, test_rmse, test_matching, test_stability, test_ligand_collision, test_binding_collision, FPS = evaluate(test_loader)
++    else:
++        preserve_skipped_loader_rng(test_loader)
++        test_mae, test_rmse, test_matching, test_stability = np.nan, np.nan, np.nan, np.nan
++        test_ligand_collision, test_binding_collision, FPS = np.nan, np.nan, np.nan
+@@ -370 +555,6 @@ if __name__ == "__main__":
+-            test_mae, test_rmse, test_matching, test_stability, test_ligand_collision, test_binding_collision, _ = evaluate(test_loader)
++            if args.eval_test_during_training:
++                test_mae, test_rmse, test_matching, test_stability, test_ligand_collision, test_binding_collision, _ = evaluate(test_loader)
++            else:
++                preserve_skipped_loader_rng(test_loader)
++                test_mae, test_rmse, test_matching, test_stability = np.nan, np.nan, np.nan, np.nan
++                test_ligand_collision, test_binding_collision = np.nan, np.nan
+@@ -395,0 +586,3 @@ if __name__ == "__main__":
++            if args.save_every_epoch > 0 and e % args.save_every_epoch == 0:
++                save_periodic_model(e)
++

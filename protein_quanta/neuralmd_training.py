@@ -8,7 +8,13 @@ def build_training_command(
     output_dir,
     epochs,
     gpu_index=0,
+    seed=42,
     max_grad_norm=0.0,
+    pair_loss_coefficient=0.0,
+    pair_loss_beta=0.5,
+    save_every_epoch=0,
+    calibration_batches=0,
+    calibration_output=None,
     python_bin="/mnt/localDisk3/weizian/conda_envs/protein-quanta-neuralmd/bin/python",
     neuralmd_script="main_MISATO_multi_traj_NeuralMD.py",
     data_root="/mnt/localDisk3/weizian/datasets/misato",
@@ -18,16 +24,28 @@ def build_training_command(
         raise ValueError("epochs must be a positive integer")
     if int(gpu_index) != gpu_index or gpu_index < 0:
         raise ValueError("gpu_index must be a non-negative integer")
+    if int(seed) != seed or seed < 0:
+        raise ValueError("seed must be a non-negative integer")
     if max_grad_norm < 0 or not math.isfinite(float(max_grad_norm)):
         raise ValueError("max_grad_norm must be finite and non-negative")
+    if pair_loss_coefficient < 0 or not math.isfinite(float(pair_loss_coefficient)):
+        raise ValueError("pair_loss_coefficient must be finite and non-negative")
+    if pair_loss_beta <= 0 or not math.isfinite(float(pair_loss_beta)):
+        raise ValueError("pair_loss_beta must be finite and positive")
+    if int(save_every_epoch) != save_every_epoch or save_every_epoch < 0:
+        raise ValueError("save_every_epoch must be a non-negative integer")
+    if int(calibration_batches) != calibration_batches or calibration_batches < 0:
+        raise ValueError("calibration_batches must be a non-negative integer")
+    if calibration_batches > 0 and calibration_output is None:
+        raise ValueError("calibration_output is required in calibration mode")
 
-    return [
+    command = [
         str(python_bin),
         str(neuralmd_script),
         "--device",
         str(int(gpu_index)),
         "--seed",
-        "42",
+        str(int(seed)),
         "--input_data_dir",
         str(data_root),
         "--dataset",
@@ -60,6 +78,20 @@ def build_training_command(
         "--no_MLP_velocity",
         "--max_grad_norm",
         str(float(max_grad_norm)),
+        "--pair_loss_coefficient",
+        str(float(pair_loss_coefficient)),
+        "--pair_loss_beta",
+        str(float(pair_loss_beta)),
+        "--save_every_epoch",
+        str(int(save_every_epoch)),
+        "--calibration_batches",
+        str(int(calibration_batches)),
+        "--no_eval_test_during_training",
         "--output_model_dir",
-        str(Path(output_dir)),
+        Path(output_dir).as_posix(),
     ]
+    if calibration_output is not None:
+        command.extend(
+            ["--calibration_output", Path(calibration_output).as_posix()]
+        )
+    return command

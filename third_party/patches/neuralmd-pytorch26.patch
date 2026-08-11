@@ -1,10 +1,12 @@
 diff --git a/NeuralMD/datasets/MISATO/dataset_MISATO_semi_flexible.py b/NeuralMD/datasets/MISATO/dataset_MISATO_semi_flexible.py
+index 739a117..a9fd9ee 100755
 --- a/NeuralMD/datasets/MISATO/dataset_MISATO_semi_flexible.py
 +++ b/NeuralMD/datasets/MISATO/dataset_MISATO_semi_flexible.py
-@@
+@@ -94 +94,6 @@ class DatasetMISATOSemiFlexibleMultiTrajectory(InMemoryDataset):
 -        self.data, self.slices = torch.load(self.processed_paths[0])
-+        # The cache is generated locally from the trusted MISATO HDF5 file and
-+        # contains PyG Data objects. PyTorch 2.6 defaults to weights_only=True.
++        # This cache is generated locally from the trusted MISATO HDF5 file and
++        # contains PyG Data objects, not a weights-only state dict. PyTorch 2.6
++        # changed torch.load's default to weights_only=True.
 +        self.data, self.slices = torch.load(
 +            self.processed_paths[0], weights_only=False
 +        )

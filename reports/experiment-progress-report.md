@@ -10,8 +10,8 @@
 | 统一评估器 | Static、Linear、NeuralMD checkpoint 及 T1/T2/T3 场景评估已接入 |
 | 官方 checkpoint | 测试集 10 个复合物、100 帧完成 |
 | 从头训练 | 官方配置已纠正；seed 42 best 几乎逐位复现发布 checkpoint |
-| 创新实验 | C1 Static 锚点残差已通过；长跨度裁剪压力实验 no-go；E6 成对距离损失进入实现与校准 |
-| 测试 | 本地与服务器均为 56 项通过；服务器另有 4 项按环境预期跳过 |
+| 创新实验 | C1 Static 锚点残差通过；E6/E6b Pair no-go；竞赛场景感知 epoch-5 早停通过并完成冻结测试 |
+| 测试 | 本地与服务器均为 68 项通过；服务器另有 4 项按环境预期跳过 |
 
 ## 2026-08-10 至 2026-08-11：复现基础设施
 
@@ -250,3 +250,26 @@ best 与发布 checkpoint 的坐标 RMSE 差约 `4.2×10^-7 Å`，Stability 只�
 - `reports/reproduction/neuralmd_scenarios_published_val.json`
 - `reports/reproduction/neuralmd_scenarios_corrected_best_val.json`
 - `reports/figures/neuralmd_scenario_baselines.png`
+
+## 2026-08-12：E6 Pair loss 的 no-go 与场景感知早停突破
+
+### E6/E6b
+
+按 10 个训练批次的梯度尺度把 `L_pair` 初始贡献校准到 10%，冻结 `λ_pair=0.67725090936284`。零权重 5-epoch preflight 与旧官方 preflight 的最大参数差仅 `1.19×10^-7`。完成 seed 42 / 100 epoch 及 seeds 0/123 / 20 epoch，并逐个评估周期 checkpoint。
+
+虽然 Pair 运行的 epoch 5/10 相对发布权重满足 T3 门槛，但同 epoch 的 `λ=0` 因果对照显示差异只有 `10^-6` 量级；早期收益并非 Pair 造成。Pair 到 epoch 20 才相对纯位置训练显著改善 T3 Matching/Stability，但两者都已经差于发布基线。把梯度目标提高到 50% 也只延迟崩坏并导致碰撞率上升。故 E6/E6b 不作为已验证创新，不继续扫参。
+
+### 场景感知早停
+
+真正稳定复现的结果是纯位置训练 epoch 5。验证集 seeds 0/42/123 的变化几乎一致；冻结 seed 42 / epoch 5 后，测试集只评估一次：
+
+| 数据 | T1 坐标/Matching | T2 坐标/Matching | T3 坐标 | T3 Matching | T3 Stability | T3 RMSF |
+|---|---:|---:|---:|---:|---:|---:|
+| Validation | +0.02% / -0.02% | +0.02% / +0.05% | +0.12% | **-6.01%** | **+2.02 点** | +0.84% |
+| Frozen test | +0.02% / -0.11% | +0.01% / -0.01% | +0.09% | **-5.45%** | **+1.53 点** | +0.64% |
+
+这里百分比均相对发布 checkpoint，误差类负值为改善。结果说明官方 coordinate-MAE checkpoint selection 与比赛多场景目标不一致。当前初赛候选升级为“场景感知 epoch-5 checkpoint”，selected checkpoint SHA256：`0e7d5150aa5f305499f17663d3a74b1063b0591733f534e676303ce11de50b8c`。
+
+![场景感知早停的验证与冻结测试结果](figures/neuralmd_earlystop_tradeoff.png)
+
+完整因果消融、E6/E6b 失败数据与限制见 `reports/reproduction/2026-08-12-neuralmd-pair-loss-and-earlystop.md`。

@@ -39,8 +39,8 @@ defaults. The canonical command lives in `protein_quanta/neuralmd_training.py`.
 
 ## PyTorch 2.6 dataset-cache compatibility
 
-Apply `patches/neuralmd-pytorch26.patch` to the pinned NeuralMD checkout when
-using PyTorch 2.6+. It only opts the locally generated, trusted PyG dataset
+Apply `patches/neuralmd-pytorch26.patch` with `git apply --unidiff-zero` to the
+pinned NeuralMD checkout when using PyTorch 2.6+. It only opts the locally generated, trusted PyG dataset
 cache out of PyTorch's weights-only loader. Model checkpoints remain loaded
 with strict weights-only handling in this project.
 
@@ -61,3 +61,22 @@ export PYTHONPATH=/mnt/localDisk3/weizian/Protein-Quanta
 
 E3 uses `--max_grad_norm 1`. Finite loss spikes are still optimized; only
 non-finite loss or gradient updates are skipped and counted.
+
+## E6 pair-distance objective
+
+Apply `patches/neuralmd-pair-loss.patch` with `git apply --unidiff-zero` after
+the PyTorch 2.6 and stable-training patches. It adds a per-complex, unordered heavy-atom
+pair-distance Smooth-L1 objective, deterministic gradient-scale calibration,
+periodic validation checkpoints, and an option to suppress all test-set
+evaluation during development. The project command builder explicitly uses
+`--no_eval_test_during_training`; validation scenarios alone select E6
+checkpoints. A coefficient of zero bypasses pair-loss calculation so the
+corrected official baseline path is preserved for the equivalence preflight.
+
+Calibration is a training-only diagnostic: run with
+`--calibration_batches 10 --calibration_output <path>`, record the ten
+position/pair gradient norms, compute a coefficient targeting a 10% initial
+auxiliary gradient contribution, write JSON, and exit without an optimizer
+step. The selected coefficient is then frozen for the 20-epoch feasibility
+run. Periodic files use `model_epoch_005.pth`, `model_epoch_010.pth`, and so
+on; model weights remain outside Git.
