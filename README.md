@@ -5,7 +5,7 @@ protein–ligand binding trajectory prediction task.
 
 ## Current scope
 
-This bootstrap branch contains:
+This research branch contains:
 
 - a validated trajectory record;
 - static and constant-velocity linear rollout baselines;
@@ -13,6 +13,9 @@ This bootstrap branch contains:
 - NeuralMD-compatible Matching and Stability metrics;
 - MISATO HDF5 schema auditing and ligand preprocessing;
 - server-side Static and Linear baseline evaluation;
+- T1/T2/T3 competition-aligned NeuralMD evaluation and error-growth diagnostics;
+- invariant per-complex pair-distance loss and gradient calibration;
+- scenario-aware checkpoint selection and time-decayed Static anchoring;
 - standard-library unit tests (plus `h5py` for MISATO tests).
 
 The official MISATO-100 file has passed schema and finite-coordinate auditing
@@ -24,6 +27,22 @@ See
 The project also reports Kabsch-aligned RMSD, radius-of-gyration error, RMSF
 error, and intramolecular contact-map agreement. These are explicitly labeled
 as project-defined diagnostic proxies, not official competition scores.
+
+## Frozen internal candidate
+
+The current candidate is NeuralMD seed 42 at epoch 5 followed by a frozen
+time-decayed Static residual anchor (`beta=1`, decay scale 98 frames). The
+checkpoint and anchor were selected on the 10-complex validation split with
+explicit T1/T2/T3 guards. Relative to the published checkpoint, the frozen
+internal test improves Matching by 2.48%/2.27%/4.99% and Stability by
+0.51/0.42/1.61 percentage points on T1/T2/T3. Coordinate RMSE improves on
+T1/T2 and trades off by 0.36% on T3; RMSF improves in all three scenarios.
+
+These values remain local proxy diagnostics because organizer normalization
+code is unavailable. The machine-readable source of truth is
+[`configs/frozen_candidate.json`](configs/frozen_candidate.json); the full
+causal ablation, including the no-go pair-loss experiments, is in
+[`reports/reproduction/2026-08-12-neuralmd-pair-loss-and-earlystop.md`](reports/reproduction/2026-08-12-neuralmd-pair-loss-and-earlystop.md).
 
 ## Run the tests
 
@@ -72,6 +91,41 @@ The evaluator strictly loads the checkpoint, records its SHA256, checks
 preprocessing agreement per complex, and computes unweighted per-complex
 means. Its diagnostics are explicitly not labeled as official scores.
 
+Evaluate all three competition-aligned scenarios and optionally retain local
+trajectories outside Git:
+
+```bash
+python -m scripts.evaluate_neuralmd_scenarios \
+  --upstream /path/to/NeuralMD \
+  --h5 /path/to/MISATO_100/raw/MD.hdf5 \
+  --split /path/to/MISATO_100/raw/val_MD.txt \
+  --checkpoint /path/to/model_epoch_005.pth \
+  --trajectory-dir /path/outside/git/trajectories \
+  --device cuda:0 \
+  --output /path/outside/git/epoch005_val.json
+```
+
+Apply the frozen anchor to those saved trajectories:
+
+```bash
+python -m scripts.evaluate_anchor_scenarios \
+  --trajectory-dir /path/outside/git/trajectories \
+  --reference-report /path/outside/git/epoch005_val.json \
+  --beta 1 \
+  --decay-scale-frames 98 \
+  --output /path/outside/git/epoch005_anchor1_val.json
+```
+
+The canonical corrected NeuralMD training command makes the 20-frame sampling
+boolean explicit, disables test evaluation during development, and can retain
+every fifth validation checkpoint:
+
+```bash
+python -m scripts.run_neuralmd_training /path/outside/git/run 20 0 \
+  --seed 42 \
+  --save-every-epoch 5
+```
+
 ## Data policy
 
 Do not commit MISATO data, competition test trajectories, checkpoints, secrets,
@@ -97,13 +151,11 @@ metrics, deviations from the paper, and failures. See
 
 - Research design: [`docs/experiment-design-and-research-roadmap.md`](docs/experiment-design-and-research-roadmap.md)
 - Living experiment log: [`reports/experiment-progress-report.md`](reports/experiment-progress-report.md)
-- Anchor-residual plan: [`docs/superpowers/plans/2026-08-11-anchor-residual-feasibility.md`](docs/superpowers/plans/2026-08-11-anchor-residual-feasibility.md)
+- Scenario/pair-loss plan: [`docs/superpowers/plans/2026-08-12-competition-scenarios-and-pair-loss.md`](docs/superpowers/plans/2026-08-12-competition-scenarios-and-pair-loss.md)
+- Preliminary evidence index (not submission prose): [`docs/preliminary-evidence-index.md`](docs/preliminary-evidence-index.md)
 
-The first innovation feasibility test applies a validation-selected,
-time-decayed Static anchor to frozen NeuralMD trajectories. Beta 4 improved
-held-out test Matching by about 7.0%, Stability by 3.78 percentage points,
-radius-of-gyration error by about 28.6%, and contact agreement by about 0.9%.
-Coordinate RMSE and RMSF error traded off by about 1.2% and 2.8%. The test
-split was evaluated once with the validation-frozen beta and was not rescanned.
-See
-[`reports/figures/anchor_residual_tradeoff.png`](reports/figures/anchor_residual_tradeoff.png).
+The original full-rollout anchor feasibility experiment passed, while the
+constant-weight pair-distance objective did not survive causal ablation. The
+strongest current result combines scenario-aware epoch-5 selection with a
+weaker beta-1 anchor. See
+[`reports/figures/neuralmd_earlystop_anchor1_tradeoff.png`](reports/figures/neuralmd_earlystop_anchor1_tradeoff.png).

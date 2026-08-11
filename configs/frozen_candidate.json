@@ -1,0 +1,67 @@
+{
+  "status": "frozen internal candidate; proxy metrics only; not an official competition score",
+  "method": "scenario-aware-earlystop-static-anchor",
+  "checkpoint": {
+    "seed": 42,
+    "epoch": 5,
+    "sha256": "0e7d5150aa5f305499f17663d3a74b1063b0591733f534e676303ce11de50b8c",
+    "server_path": "/mnt/localDisk3/weizian/runs/protein-quanta/e6/zero-seed42-20ep/model_epoch_005.pth",
+    "tracked_in_git": false
+  },
+  "training": {
+    "dataset": "MISATO-100",
+    "window_frames": 20,
+    "start_with_first_frame": false,
+    "position_loss": "MSE",
+    "pair_loss_coefficient": 0.0,
+    "optimizer": "Adam",
+    "learning_rate": 0.0001,
+    "batch_size": 8,
+    "ode_method": "euler",
+    "ode_step_size": 5.0,
+    "ode_scaling": 100.0
+  },
+  "postprocessing": {
+    "type": "time-decayed residual toward last observed coordinates",
+    "beta": 1.0,
+    "decay_scale_frames": 98.0,
+    "formula": "anchor + exp(-beta * local_target_step / decay_scale_frames) * (prediction - anchor)"
+  },
+  "scenarios": {
+    "T1": {"observed": [0, 1], "target": [2, 19]},
+    "T2": {"observed": [0, 79], "initializer": [78, 79], "target": [80, 99]},
+    "T3": {"observed": [0, 19], "initializer": [18, 19], "target": [20, 99]}
+  },
+  "competition_weights": {
+    "T1_T2_T3": [0.5, 0.3, 0.2],
+    "Geo_Phys_Dyn_Stab": [0.4, 0.25, 0.25, 0.1],
+    "normalization_available": false
+  },
+  "selection": {
+    "split": "MISATO-100 validation (10 complexes)",
+    "checkpoint_rule": "evaluate T1/T2/T3 every 5 epochs; preserve coordinate and RMSF guards while improving long-horizon geometry",
+    "anchor_rule": "largest evaluated beta among 1, 2, and 4 whose T3 coordinate RMSE is at most 102% of the published checkpoint, with geometry and dynamics improvements",
+    "official_score_claimed": false,
+    "test_used_for_selection": false
+  },
+  "relative_to_published_checkpoint": {
+    "validation": {
+      "T1": {"coordinate_rmse_percent": -0.65, "matching_percent": -1.79, "stability_points": 0.39, "rmsf_percent": -2.68},
+      "T2": {"coordinate_rmse_percent": -0.87, "matching_percent": -1.51, "stability_points": 0.15, "rmsf_percent": -3.34},
+      "T3": {"coordinate_rmse_percent": 1.54, "matching_percent": -7.19, "stability_points": 2.17, "rmsf_percent": -1.17}
+    },
+    "frozen_internal_test": {
+      "T1": {"coordinate_rmse_percent": -0.11, "matching_percent": -2.48, "stability_points": 0.51, "rmsf_percent": -3.51},
+      "T2": {"coordinate_rmse_percent": -0.35, "matching_percent": -2.27, "stability_points": 0.42, "rmsf_percent": -1.60},
+      "T3": {"coordinate_rmse_percent": 0.36, "matching_percent": -4.99, "stability_points": 1.61, "rmsf_percent": -0.36}
+    }
+  },
+  "evidence": {
+    "project_commit": "2782be4",
+    "upstream_neuralmd_commit": "a2ae030838c6ea0251eb6a29bfe99dc9d8ee1cfe",
+    "validation_report": "reports/reproduction/neuralmd_earlystop_anchor1_val.json",
+    "frozen_test_report": "reports/reproduction/neuralmd_earlystop_anchor1_test.json",
+    "experiment_report": "reports/reproduction/2026-08-12-neuralmd-pair-loss-and-earlystop.md",
+    "figure": "reports/figures/neuralmd_earlystop_anchor1_tradeoff.png"
+  }
+}
