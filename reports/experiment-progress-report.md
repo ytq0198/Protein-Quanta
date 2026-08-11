@@ -10,8 +10,8 @@
 | 统一评估器 | Static、Linear、NeuralMD checkpoint 及 T1/T2/T3 场景评估已接入 |
 | 官方 checkpoint | 测试集 10 个复合物、100 帧完成 |
 | 从头训练 | 官方配置已纠正；seed 42 best 几乎逐位复现发布 checkpoint |
-| 创新实验 | C1 Static 锚点残差通过；E6/E6b Pair no-go；竞赛场景感知 epoch-5 早停通过并完成冻结测试 |
-| 测试 | 本地与服务器均为 68 项通过；服务器另有 4 项按环境预期跳过 |
+| 创新实验 | epoch-5 场景早停 + Static anchor `β=1` 通过；E6/E6b Pair no-go |
+| 测试 | 本地与服务器均为 70 项通过；服务器另有 4 项按环境预期跳过 |
 
 ## 2026-08-10 至 2026-08-11：复现基础设施
 
@@ -273,3 +273,15 @@ best 与发布 checkpoint 的坐标 RMSE 差约 `4.2×10^-7 Å`，Stability 只�
 ![场景感知早停的验证与冻结测试结果](figures/neuralmd_earlystop_tradeoff.png)
 
 完整因果消融、E6/E6b 失败数据与限制见 `reports/reproduction/2026-08-12-neuralmd-pair-loss-and-earlystop.md`。
+
+### 初赛首选组合更新
+
+固定 epoch-5 后，在验证集检查 C1 锚点：`β=4/2` 分别因 T3 坐标代价 3.72%/2.54% 失败；`β=1` 把代价控制为 1.54%，同时改善 T1/T2 全部四项指标。冻结组合测试后，相对发布 checkpoint：
+
+- T1：坐标 -0.11%、Matching -2.48%、Stability +0.51 点、RMSF -3.51%；
+- T2：坐标 -0.35%、Matching -2.27%、Stability +0.42 点、RMSF -1.60%；
+- T3：坐标 +0.36%、Matching -4.99%、Stability +1.61 点、RMSF -0.36%。
+
+因此当前首选为 `seed 42 / epoch 5 / anchor β=1`。除 T3 坐标轻微代价外，冻结测试其余 11 项比较全部改善。
+
+![epoch-5 与 β=1 组合的验证和冻结测试](figures/neuralmd_earlystop_anchor1_tradeoff.png)

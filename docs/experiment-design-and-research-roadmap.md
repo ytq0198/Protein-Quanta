@@ -69,7 +69,9 @@ L=L_{pos}+\lambda_dL_{pair}+\lambda_vL_{vel}+\lambda_{rg}L_{rg}
 
 不改变网络和训练目标，每 5 epoch 在验证集运行 T1/T2/T3，并用预注册 guard 选择 checkpoint。seed 42 的 epoch 5 通过，epoch 15–100 失败；seeds 0/123 的 epoch 5 方向一致。冻结测试结果复现 T3 Matching/Stability 改善，同时 T1/T2 基本不变。
 
-该方法的科学主张是：**短窗口 coordinate-MAE 最优 checkpoint 不等于竞赛多时间尺度动力学最优 checkpoint。** 它属于训练/模型选择算法改进，而非新网络。下一步只验证它与 C1 Static 锚点是否互补；若组合没有 Pareto 改善，则保持两个独立候选，不事后使用测试集选择。
+该方法的科学主张是：**短窗口 coordinate-MAE 最优 checkpoint 不等于竞赛多时间尺度动力学最优 checkpoint。** 它属于训练/模型选择算法改进，而非新网络。
+
+**组合结果：go。** 固定 epoch 5 后，仅在验证集检查锚点强度。`β=4/2` 因 T3 坐标代价超过 2% 被拒绝，`β=1` 通过并冻结。组合测试中，T1/T2 的坐标、Matching、Stability、RMSF 全部改善；T3 Matching/Stability/RMSF 分别改善 4.99%/+1.61 点/0.36%，坐标代价仅 0.36%。当前初赛首选为 `epoch 5 + β=1`，它把多时间尺度 checkpoint selection 与随时间衰减的 Static residual 组成一个无需改动主网络的两层风险控制方案。
 
 ### 路线 C：Static 锚点残差动力学（创新突破）
 
@@ -111,7 +113,7 @@ MISATO 当前预处理没有显式键表，因此第一版不声称“严格键�
 | E8 | 可学习锚点门控原型 | 小规模 + 1×100 | val | 优于固定锚点和 E7 |
 | E9 | 场景感知 epoch-5 冻结方案 | 已完成 1 次 test | test | T3 改善在 test 复现 |
 
-当前优先级更新为场景感知 epoch-5（已通过）与 C1（已通过）的验证集组合检查 → 初赛证据整理；E6/E6b 与 E3 的负结果保留为完整消融。E7/E8 转为复赛路线，除非组合检查暴露必须立即解决的新问题。
+当前优先级更新为 `epoch 5 + β=1`（已通过并冻结测试）→ 初赛证据与可运行说明整理；E6/E6b 与 E3 的负结果保留为完整消融。E7/E8 转为复赛路线。
 
 ## 5. 统一评估与防止数据泄漏
 

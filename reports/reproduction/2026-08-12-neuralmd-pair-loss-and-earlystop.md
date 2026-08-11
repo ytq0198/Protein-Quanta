@@ -84,9 +84,24 @@ E6b 同样 no-go，不继续扫描权重。它支持“更强 Pair 会延迟几�
 
 官方按全轨迹 coordinate MAE 选 epoch 15；比赛场景评估显示 epoch 5 对 T3 的内部几何更好，而坐标与动力学代价很小。这说明局部训练目标与竞赛多时间尺度目标之间的错配不仅体现在 loss，也体现在 checkpoint selection。
 
-当前可以可靠主张的是“竞赛多场景验证驱动的模型选择”，不是“Pair loss 已成功”。下一步优先验证 epoch-5 权重与已通过的 Static 锚点残差能否形成互补 Pareto 改善；若不能，则保留 epoch 5 与 C1 为两个独立候选。复赛研究可进一步设计随 rollout 风险自适应的 loss schedule 或门控，而不是继续盲扫常数 `λ_pair`。
+当前可以可靠主张的是“竞赛多场景验证驱动的模型选择”，不是“Pair loss 已成功”。随后只验证 epoch-5 权重与已通过的 Static 锚点残差是否互补，结果见下一节。复赛研究可进一步设计随 rollout 风险自适应的 loss schedule 或门控，而不是继续盲扫常数 `λ_pair`。
 
-## 8. 产物与限制
+## 8. 后续组合：epoch 5 + Static anchor
+
+在不改变 checkpoint 的前提下，把 C1 残差锚点应用到每个竞赛场景。`β=4` 在 T1/T2 四项指标上全部改善，但 T3 坐标相对发布权重恶化 3.72%，未过 2% guard。随后只在验证集补充 `β=1/2`：`β=2` 的 T3 坐标代价为 2.54%，仍失败；`β=1` 为 1.54%，且 T1/T2 坐标、Matching、Stability、RMSF 全部改善，因此冻结 `epoch=5, β=1`。
+
+| 数据 | 场景 | 坐标 RMSE | Matching | Stability | RMSF MAE |
+|---|---|---:|---:|---:|---:|
+| Validation | T1 | **-0.65%** | **-1.79%** | **+0.39 点** | **-2.68%** |
+| Validation | T2 | **-0.87%** | **-1.51%** | **+0.15 点** | **-3.34%** |
+| Validation | T3 | +1.54% | **-7.19%** | **+2.17 点** | **-1.17%** |
+| Frozen test | T1 | **-0.11%** | **-2.48%** | **+0.51 点** | **-3.51%** |
+| Frozen test | T2 | **-0.35%** | **-2.27%** | **+0.42 点** | **-1.60%** |
+| Frozen test | T3 | +0.36% | **-4.99%** | **+1.61 点** | **-0.36%** |
+
+误差类负值表示改善。最终组合测试只运行固定 `β=1`，没有依据组合测试结果再调参。除 T3 坐标轻微代价外，冻结测试的其余 11 个场景×指标比较全部改善；T3 坐标代价从验证的 1.54% 缩小为 0.36%。当前初赛首选因此更新为 `epoch 5 + β=1`。
+
+## 9. 产物与限制
 
 - `reports/reproduction/neuralmd_pair_gradient_calibration.json`
 - `reports/reproduction/neuralmd_pair20_scenarios_val.json`（E6 epoch 20 失败样本）
@@ -94,5 +109,8 @@ E6b 同样 no-go，不继续扫描权重。它支持“更强 Pair 会延迟几�
 - `reports/reproduction/neuralmd_earlystop_epoch005_test.json`
 - `reports/reproduction/neuralmd_scenarios_published_test.json`
 - `reports/figures/neuralmd_earlystop_tradeoff.png`
+- `reports/reproduction/neuralmd_earlystop_anchor1_val.json`
+- `reports/reproduction/neuralmd_earlystop_anchor1_test.json`
+- `reports/figures/neuralmd_earlystop_anchor1_tradeoff.png`
 
 限制：每个 split 只有 10 个复合物；本地没有官方归一化评分代码；epoch 5 的优势主要集中在 T3；Pair 的负结论只覆盖当前网络、窗口、Smooth-L1 与两档梯度占比，不能外推为所有几何正则均无效。

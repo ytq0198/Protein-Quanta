@@ -7,11 +7,17 @@ from pathlib import Path
 import numpy as np
 
 
-def _relative_changes(baseline, candidate, metric, point_change=False):
+def _relative_changes(
+    baseline,
+    candidate,
+    metric,
+    point_change=False,
+    candidate_model="neuralmd",
+):
     changes = []
     for scenario in baseline:
         reference = float(baseline[scenario]["neuralmd"][metric])
-        value = float(candidate[scenario]["neuralmd"][metric])
+        value = float(candidate[scenario][candidate_model][metric])
         changes.append(value - reference if point_change else 100.0 * (value / reference - 1.0))
     return changes
 
@@ -25,6 +31,11 @@ def main():
     parser.add_argument("--published-test", type=Path, required=True)
     parser.add_argument("--earlystop-test", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--candidate-model", default="neuralmd")
+    parser.add_argument(
+        "--title",
+        default="Scenario-aware early stopping: epoch 5 vs published checkpoint",
+    )
     args = parser.parse_args()
 
     def summary(path):
@@ -44,10 +55,18 @@ def main():
     figure, axes = plt.subplots(2, 2, figsize=(11, 7.5), dpi=160)
     for axis, (metric, title, point_change) in zip(axes.flat, panels):
         validation = _relative_changes(
-            baseline_val, earlystop_val, metric, point_change
+            baseline_val,
+            earlystop_val,
+            metric,
+            point_change,
+            candidate_model=args.candidate_model,
         )
         test = _relative_changes(
-            baseline_test, earlystop_test, metric, point_change
+            baseline_test,
+            earlystop_test,
+            metric,
+            point_change,
+            candidate_model=args.candidate_model,
         )
         left = axis.bar(x - width / 2, validation, width, label="Validation", color="#1976A3")
         right = axis.bar(x + width / 2, test, width, label="Frozen test", color="#C58A35")
@@ -68,7 +87,7 @@ def main():
         frameon=False,
     )
     figure.suptitle(
-        "Scenario-aware early stopping: epoch 5 vs published checkpoint",
+        args.title,
         fontsize=14,
         weight="bold",
         y=0.992,

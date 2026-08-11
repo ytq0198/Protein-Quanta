@@ -17,6 +17,21 @@ class EarlyStopPlotTests(unittest.TestCase):
             [2.0],
         )
 
+    def test_supports_an_anchored_candidate(self):
+        baseline = {"T1": {"neuralmd": {"error": 2.0}}}
+        candidate = {"T1": {"anchored": {"error": 1.0}}}
+
+        self.assertEqual(
+            _relative_changes(
+                baseline,
+                candidate,
+                "error",
+                point_change=False,
+                candidate_model="anchored",
+            ),
+            [-50.0],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
