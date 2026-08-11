@@ -178,6 +178,7 @@ metrics, deviations from the paper, and failures. See
 - Living experiment log: [`reports/experiment-progress-report.md`](reports/experiment-progress-report.md)
 - Scenario/pair-loss plan: [`docs/superpowers/plans/2026-08-12-competition-scenarios-and-pair-loss.md`](docs/superpowers/plans/2026-08-12-competition-scenarios-and-pair-loss.md)
 - Preliminary evidence index (not submission prose): [`docs/preliminary-evidence-index.md`](docs/preliminary-evidence-index.md)
+- Preliminary submission compliance checklist (internal, not submission prose): [`docs/preliminary-submission-compliance-checklist.md`](docs/preliminary-submission-compliance-checklist.md)
 
 The original full-rollout anchor feasibility experiment passed, while the
 constant-weight pair-distance objective did not survive causal ablation. The
