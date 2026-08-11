@@ -28,7 +28,7 @@
 | 3.3 数据、依赖与运行 | `README.md`；`requirements*.txt`；`third_party/README.md` | 基本具备 | 人工核对 MISATO 使用条款、NeuralMD 许可状态、外部预训练权重来源与服务器复现路径 |
 | 4.1 阶段性实验/可行性验证 | `reports/experiment-progress-report.md`；各 reproduction 报告 | 已具备 | 选择最短因果链：精确复现 -> 发现 20/100 帧错配 -> Pair no-go -> 场景早停 -> beta 1 anchor -> Phys 初筛 |
 | 4.2 当前结果 | `reports/figures/neuralmd_earlystop_anchor1_tradeoff.png`；冻结 val/test JSON | 已具备 | 明确为 MISATO-100 内部 proxy，样本数每 split 10；不是比赛隐藏测试、不是官方归一化成绩 |
-| 5.1 复现方式 | `README.md`；74 项测试；checkpoint manifest | 已具备 | 人工在干净环境至少复跑测试和一个小型入口，记录时间与硬件 |
+| 5.1 复现方式 | `README.md`；77 项测试；checkpoint manifest；服务器环境快照 | 已具备 | 人工在干净环境至少复跑测试和一个小型入口，记录时间与硬件 |
 | 5.2 开源计划 | 公共 GitHub 仓库，当前默认分支即研究分支 | 部分具备 | 确定许可证；说明数据/checkpoint/轨迹不入库及复赛开放边界 |
 | 5.3 合规披露 | `third_party/README.md`；本清单第 4 节 | **关键缺口** | 明确 MISATO、NeuralMD、torchdiffeq、PyTorch/PyG 许可和版本；未确认项必须如实标注 |
 | 6.1 成员背景 | 魏子安、耿健尧、熊润的已提供背景 | 事实具备，文字待人工 | 人工核对单位/专业/岗位的正式写法与是否允许公开 |
@@ -76,7 +76,7 @@
 ### 熊润（大模型工程师；工作日可参与代码与实验）
 
 - 8/13：独立复核技术链和因果消融，逐项确认“已验证/no-go/设想”标签。
-- 8/14：在干净环境复跑 74 项测试和最小评估入口；核对 checkpoint hash、命令和依赖版本。
+- 8/14：在干净环境复跑 77 项测试和最小评估入口；核对 checkpoint hash、命令和依赖版本。
 - 8/15：技术审稿，重点查数据泄漏、官方分数误称、test 命名和 Phys 过度表述。
 - 8/16：仅处理会导致材料错误或无法打开的 P0 问题。
 
@@ -98,7 +98,6 @@
 - [ ] MISATO 数据、checkpoint、轨迹和秘密未进入 Git。
 - [ ] 第三方来源、固定 commit、许可证状态和未解决风险已披露。
 - [ ] GitHub 链接可匿名访问，README 命令与当前分支一致。
-- [ ] 74 项本地测试通过；服务器 74 项通过、4 项可选绘图测试跳过。
+- [ ] 77 项本地测试通过；服务器 77 项通过、4 项可选绘图测试跳过。
 - [ ] PDF/文档在另一台设备打开检查，无乱码、裁切、缺图、失效链接或批注残留。
 - [ ] 上传后保存成功回执、时间戳和提交文件哈希。
-

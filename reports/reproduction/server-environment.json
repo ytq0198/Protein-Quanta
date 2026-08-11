@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "python": "3.10.20",
+  "platform": {
+    "system": "Linux",
+    "release": "6.8.0-124-generic",
+    "machine": "x86_64"
+  },
+  "packages": {
+    "numpy": "2.2.6",
+    "h5py": "3.14.0",
+    "pandas": "2.3.3",
+    "torch-geometric": "2.6.1",
+    "torch-scatter": "2.1.2+pt26cu124",
+    "torch-sparse": "0.6.18+pt26cu124",
+    "torch-cluster": "1.6.3+pt26cu124",
+    "torchdiffeq": "0.2.3",
+    "torch-ema": "0.3"
+  },
+  "torch": {
+    "version": "2.6.0+cu124",
+    "cuda_runtime": "12.4",
+    "cuda_available": true,
+    "device_count": 4,
+    "devices": [
+      {
+        "index": 0,
+        "name": "NVIDIA RTX A6000",
+        "compute_capability": "8.6",
+        "memory_gib": 47.402
+      },
+      {
+        "index": 1,
+        "name": "NVIDIA RTX A6000",
+        "compute_capability": "8.6",
+        "memory_gib": 47.402
+      },
+      {
+        "index": 2,
+        "name": "NVIDIA RTX A6000",
+        "compute_capability": "8.6",
+        "memory_gib": 47.402
+      },
+      {
+        "index": 3,
+        "name": "NVIDIA RTX A6000",
+        "compute_capability": "8.6",
+        "memory_gib": 47.402
+      }
+    ]
+  }
+}

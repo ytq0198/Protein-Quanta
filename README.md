@@ -17,6 +17,7 @@ This research branch contains:
 - invariant per-complex pair-distance loss and gradient calibration;
 - scenario-aware checkpoint selection and time-decayed Static anchoring;
 - project-defined intraligand and ligand-protein collision diagnostics;
+- privacy-minimized server environment capture for reproducibility;
 - standard-library unit tests (plus `h5py` for MISATO tests).
 
 The official MISATO-100 file has passed schema and finite-coordinate auditing
@@ -164,6 +165,21 @@ or generated runs. On the school server the intended locations are:
 
 The local `Data set.zip` supplied for the virtual-cell direction is not an
 input to this project.
+
+## Environment provenance
+
+Capture the active runtime without writing usernames, hostnames, paths, or
+environment variables:
+
+```bash
+python -m scripts.capture_environment \
+  reports/reproduction/server-environment.json
+```
+
+The archived school-server snapshot records Python 3.10.20, PyTorch
+2.6.0+cu124, CUDA 12.4, the whitelisted scientific package versions, and four
+NVIDIA RTX A6000 devices. See
+[`reports/reproduction/server-environment.json`](reports/reproduction/server-environment.json).
 
 ## Reproduction policy
 
