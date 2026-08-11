@@ -316,3 +316,5 @@ best 与发布 checkpoint 的坐标 RMSE 差约 `4.2×10^-7 Å`，Stability 只�
 ## 2026-08-12：官网公开信息复核
 
 GOAI 官网 AI for Research 页面公开内容与本地手册一致：8 月 16 日初赛截止；Top 40 由算法赛与开放探索赛各 20 队组成；复赛后 Top 20 由两类各 10 队组成。公开页面仍未给具体截止时刻或算法赛文件格式/大小。官网链接的 Datawhale 方向二 baseline 教程页摘要另确认：每队只能选择一个算法方向；官网作品最多提交 3 次，以最后一次为准。上述公开入口与未确认项已写入 `docs/preliminary-submission-compliance-checklist.md`。
+
+继续读取方向二教程正文及其赛题解读 PDF 后，确认上传流程为“人工完成 Word（手动补第六部分团队介绍）→ 压缩为 ZIP → 官网填写并上传”。Datawhale 截图打卡属于 Token Plan 激励，不等同于赛事提交。发现 7 月解读 PDF 的 Top 50/Top 15 已与当前官网 Top 40/Top 20 冲突；按来源优先级采用当前官网，并在 `reports/reproduction/2026-08-12-official-materials-audit.md` 留存冲突与未决项。
