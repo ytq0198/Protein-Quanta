@@ -1,0 +1,41 @@
+{
+  "status": "active safe baseline pending score-facing Phys/Dyn comparison; not an official competition score",
+  "active_for_submission": true,
+  "method": "scenario-aware-checkpoint-selection",
+  "checkpoint": {
+    "seed": 42,
+    "epoch": 5,
+    "sha256": "0e7d5150aa5f305499f17663d3a74b1063b0591733f534e676303ce11de50b8c",
+    "server_path": "/mnt/localDisk3/weizian/checkpoints/protein-quanta/frozen_candidate/model_epoch_005.pth",
+    "tracked_in_git": false
+  },
+  "inference": {
+    "postprocessing": "none",
+    "ode_method": "euler",
+    "ode_step_size": 5.0,
+    "ode_scaling": 100.0
+  },
+  "selection": {
+    "split": "MISATO-100 validation (10 complexes)",
+    "rule": "evaluate T1/T2/T3 every 5 epochs; preserve coordinate and RMSF guards while improving long-horizon geometry",
+    "test_used_for_selection": false,
+    "official_score_claimed": false
+  },
+  "competition_weights": {
+    "T1_T2_T3": [0.5, 0.3, 0.2],
+    "Geo_Phys_Dyn_Stab": [0.4, 0.25, 0.25, 0.1],
+    "normalization_available": false
+  },
+  "promotion_state": {
+    "Geo": "project proxies available",
+    "Phys": "bond-aware validation available on 9/10 complexes; direct comparison to published checkpoint pending",
+    "Dyn": "mean-error proxies available; distribution evaluator pending",
+    "Stab": "project proxy available",
+    "overall": "not yet eligible for a direction-two comprehensive-improvement claim"
+  },
+  "supersedes": "configs/frozen_candidate.json",
+  "evidence": {
+    "scoring_plan": "docs/scoring-aligned-execution-plan.md",
+    "phys_no_go_report": "reports/reproduction/2026-08-13-bond-aware-phys-validation.md"
+  }
+}

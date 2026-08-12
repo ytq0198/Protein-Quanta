@@ -1,9 +1,11 @@
 # Protein-Quanta 实验设计与科研路线
 
-> 版本：v1.5（2026-08-12）
+> 版本：v1.6（2026-08-13）
 > 目标：在 2026-08-16 初赛截止前形成可信、可复现、有定量提升的方案，同时为复赛保留清晰的创新升级路线。
 
 > 评分对齐执行以 `docs/scoring-aligned-execution-plan.md` 为准。该文件把方向二的 `T1/T2/T3` 与 `Geo/Phys/Dyn/Stab` 双层权重转化为 E13-E17 的硬门槛；本路线图中的早期探索顺序若与其冲突，以评分对齐计划为准。
+
+> **最新决策覆盖早期结论：** E13-E15 已恢复可追溯共价拓扑并完成 validation gate。历史候选 `epoch 5 + beta=1` 因 T1/T2 键长 MAE 分别恶化 `8.99%/13.69%` 且新增极端键长事件，被降级为 no-go；当前活动安全基线为未锚定 `epoch 5`。下文关于 anchor 的“go/首选/冻结基线”只记录当时基于 Geo/Dyn/Stab 代理的阶段判断，不再代表当前主方案。
 
 ## 1. 科学问题与当前证据
 
@@ -73,7 +75,7 @@ L=L_{pos}+\lambda_dL_{pair}+\lambda_vL_{vel}+\lambda_{rg}L_{rg}
 
 该方法的科学主张是：**短窗口 coordinate-MAE 最优 checkpoint 不等于竞赛多时间尺度动力学最优 checkpoint。** 它属于训练/模型选择算法改进，而非新网络。
 
-**组合结果：go。** 固定 epoch 5 后，仅在验证集检查锚点强度。`β=4/2` 因 T3 坐标代价超过 2% 被拒绝，`β=1` 通过并冻结。组合测试中，T1/T2 的坐标、Matching、Stability、RMSF 全部改善；T3 Matching/Stability/RMSF 分别改善 4.99%/+1.61 点/0.36%，坐标代价仅 0.36%。当前初赛首选为 `epoch 5 + β=1`，它把多时间尺度 checkpoint selection 与随时间衰减的 Static residual 组成一个无需改动主网络的两层风险控制方案。
+**历史阶段结果：代理 gate 曾判 go，但已被 E15 否决。** 固定 epoch 5 后，仅在验证集检查锚点强度；当时 `β=1` 在 Geo/Dyn/Stab 代理上通过并冻结，frozen internal test 也呈现 Matching/Stability 等改善。然而后续 bond-aware Phys validation 显示 T1/T2 键长 MAE 分别恶化 `8.99%/13.69%`，且出现未锚定模型没有的极端键长事件。依据统一评分门槛，anchor 已降级，不再是初赛首选；该失败说明“向 Static 收缩”不能代替化学有效的局部动力学。
 
 ### 路线 C：Static 锚点残差动力学（创新突破）
 
@@ -87,7 +89,7 @@ NeuralMD 轨迹写成静态参考与动态残差：
 
 其中 `β=0` 等价于 NeuralMD，较大的 β 随时间抑制漂移。先在验证集扫描 β，寻找 NeuralMD 与 Static 之间的 Pareto 改善；冻结 β 后只运行一次测试集。这不是最终模型，而是验证“动态残差需要随不确定性受限”是否成立。
 
-**阶段结果（2026-08-12）：C1 已通过。** 验证集按预注册规则选择 `β=4.0`；冻结后的测试集 Stability 提升 3.78 个百分点、Matching 改善约 7.0%、Rg MAE 改善约 28.6%，坐标 RMSE 和 RMSF 分别付出约 1.2% 和 2.8% 的代价，均在防塌缩容忍范围内。因此进入 C2 可学习门控设计，但固定 β 仍保留为初赛稳健后处理基线。
+**历史阶段结果（2026-08-12）：C1 通过代理 gate；2026-08-13 被 Phys gate 覆盖。** 验证集当时按 Geo/Dyn/Stab 代理选择 `β=4.0`，冻结后的测试集呈现 Stability、Matching 与 Rg 改善，因此曾支持进入 C2。bond-aware Phys 证据现已证明这类 Cartesian 收缩会扭曲共价几何；固定 β 不再作为初赛稳健基线，仅保留为解释“表面稳定与物理合法性可能冲突”的负消融。
 
 #### C2：可学习锚点门控
 
@@ -127,7 +129,7 @@ MISATO 当前预处理没有显式键表，因此第一版不声称“严格键�
 | E16 | Dyn 分布 evaluator | 无训练 | 合成单测 + validation | 能区分真实涨落与 Static/过平滑轨迹 |
 | E17 | T1 优先的局部闭环训练实验 | 小预算同预算对照 | validation | T1 Geo/Phys/Dyn 联合改善，T2/T3 不明显回退 |
 
-当前优先级更新为 E13 化学拓扑审计 → E14/E15 Phys 闭环 → E16 Dyn 分布证据 → E17 T1 优先小预算创新 → 初赛证据冻结。`epoch 5 + β=1` 保持冻结，但在 E15 前只能称为 Geo/Dyn/Stab 代理候选，不能称为方向二整体提升。E3、E6/E6b、E11、E12 的负结果保留为完整消融；初赛截止前不再用现有 validation 调门控。E7/E8 转为复赛路线。
+E13-E15 已完成，`epoch 5 + β=1` 为 Phys no-go。当前优先级更新为 E16 Dyn 分布证据 → 未锚定 epoch-5 与 published NeuralMD 的直接联合比较 → E17 T1 优先小预算创新 → 初赛证据冻结。活动安全基线为未锚定 `seed 42 / epoch 5`；只有 E16 与基础 Phys 都不回退后才能晋升。E3、E6/E6b、E11、E12、E15 的负结果保留为完整消融；初赛截止前不再用现有 validation 调 anchor/门控。E7/E8 转为复赛路线。
 
 
 

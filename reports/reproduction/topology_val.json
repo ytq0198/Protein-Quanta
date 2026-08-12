@@ -1,0 +1,1200 @@
+{
+  "status": "project topology audit; PDB coordinates validate order but never infer bonds",
+  "source": "RCSB PDB atom records and explicit CONECT bonds",
+  "split": "/mnt/localDisk3/weizian/datasets/misato/MISATO_100/raw/val_MD.txt",
+  "sample_count": 10,
+  "matched_sample_count": 9,
+  "coverage_fraction": 0.9,
+  "maximum_pairwise_distance_mae_angstrom": 2.0,
+  "samples": [
+    {
+      "sample_id": "1S38",
+      "status": "matched",
+      "heavy_atom_count": 13,
+      "candidate_count": 2,
+      "equivalent_candidate_count": 2,
+      "bond_count": 14,
+      "bonds": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          12
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          8,
+          10
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          11,
+          12
+        ]
+      ],
+      "mapping": {
+        "source": "hetero",
+        "altloc": "blank",
+        "residues": [
+          {
+            "name": "MAQ",
+            "chain": "A",
+            "number": "900",
+            "insertion": ""
+          }
+        ],
+        "pairwise_distance_mae_angstrom": 0.08237034861284336
+      }
+    },
+    {
+      "sample_id": "6PYS",
+      "status": "matched",
+      "heavy_atom_count": 34,
+      "candidate_count": 2,
+      "equivalent_candidate_count": 2,
+      "bond_count": 39,
+      "bonds": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          19
+        ],
+        [
+          0,
+          30
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          18
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          18
+        ],
+        [
+          3,
+          19
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          21
+        ],
+        [
+          5,
+          20
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          21
+        ],
+        [
+          7,
+          22
+        ],
+        [
+          8,
+          21
+        ],
+        [
+          8,
+          23
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          9,
+          14
+        ],
+        [
+          9,
+          23
+        ],
+        [
+          9,
+          26
+        ],
+        [
+          10,
+          24
+        ],
+        [
+          10,
+          25
+        ],
+        [
+          11,
+          26
+        ],
+        [
+          11,
+          27
+        ],
+        [
+          11,
+          29
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          12,
+          27
+        ],
+        [
+          13,
+          28
+        ],
+        [
+          15,
+          17
+        ],
+        [
+          15,
+          32
+        ],
+        [
+          15,
+          33
+        ],
+        [
+          16,
+          30
+        ],
+        [
+          16,
+          33
+        ],
+        [
+          18,
+          20
+        ],
+        [
+          22,
+          23
+        ],
+        [
+          22,
+          25
+        ],
+        [
+          28,
+          29
+        ],
+        [
+          30,
+          31
+        ],
+        [
+          31,
+          32
+        ]
+      ],
+      "mapping": {
+        "source": "hetero",
+        "altloc": "blank",
+        "residues": [
+          {
+            "name": "P5J",
+            "chain": "A",
+            "number": "1101",
+            "insertion": ""
+          }
+        ],
+        "pairwise_distance_mae_angstrom": 0.1233349937364758
+      }
+    },
+    {
+      "sample_id": "4M5L",
+      "status": "matched",
+      "heavy_atom_count": 22,
+      "candidate_count": 2,
+      "equivalent_candidate_count": 2,
+      "bond_count": 24,
+      "bonds": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          11,
+          21
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          13,
+          14
+        ],
+        [
+          13,
+          20
+        ],
+        [
+          14,
+          15
+        ],
+        [
+          14,
+          16
+        ],
+        [
+          16,
+          17
+        ],
+        [
+          17,
+          18
+        ],
+        [
+          17,
+          19
+        ],
+        [
+          19,
+          20
+        ],
+        [
+          20,
+          21
+        ]
+      ],
+      "mapping": {
+        "source": "hetero",
+        "altloc": "blank",
+        "residues": [
+          {
+            "name": "YH4",
+            "chain": "A",
+            "number": "306",
+            "insertion": ""
+          }
+        ],
+        "pairwise_distance_mae_angstrom": 0.5094342372870687
+      }
+    },
+    {
+      "sample_id": "1CTR",
+      "status": "matched",
+      "heavy_atom_count": 28,
+      "candidate_count": 2,
+      "equivalent_candidate_count": 2,
+      "bond_count": 31,
+      "bonds": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          24
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          13
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          12
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          13,
+          14
+        ],
+        [
+          14,
+          15
+        ],
+        [
+          15,
+          16
+        ],
+        [
+          16,
+          17
+        ],
+        [
+          17,
+          18
+        ],
+        [
+          17,
+          22
+        ],
+        [
+          18,
+          19
+        ],
+        [
+          19,
+          20
+        ],
+        [
+          20,
+          21
+        ],
+        [
+          20,
+          23
+        ],
+        [
+          21,
+          22
+        ],
+        [
+          24,
+          25
+        ],
+        [
+          24,
+          26
+        ],
+        [
+          24,
+          27
+        ]
+      ],
+      "mapping": {
+        "source": "hetero",
+        "altloc": "blank",
+        "residues": [
+          {
+            "name": "TFP",
+            "chain": "A",
+            "number": "153",
+            "insertion": ""
+          }
+        ],
+        "pairwise_distance_mae_angstrom": 0.7622974283473277
+      }
+    },
+    {
+      "sample_id": "4HXS",
+      "status": "matched",
+      "heavy_atom_count": 23,
+      "candidate_count": 2,
+      "equivalent_candidate_count": 2,
+      "bond_count": 25,
+      "bonds": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          11,
+          13
+        ],
+        [
+          12,
+          16
+        ],
+        [
+          13,
+          14
+        ],
+        [
+          14,
+          15
+        ],
+        [
+          15,
+          16
+        ],
+        [
+          16,
+          17
+        ],
+        [
+          17,
+          18
+        ],
+        [
+          17,
+          22
+        ],
+        [
+          18,
+          19
+        ],
+        [
+          19,
+          20
+        ],
+        [
+          20,
+          21
+        ],
+        [
+          20,
+          22
+        ]
+      ],
+      "mapping": {
+        "source": "hetero",
+        "altloc": "blank",
+        "residues": [
+          {
+            "name": "1A3",
+            "chain": "A",
+            "number": "201",
+            "insertion": ""
+          }
+        ],
+        "pairwise_distance_mae_angstrom": 0.5128586834439149
+      }
+    },
+    {
+      "sample_id": "6BIB",
+      "status": "matched",
+      "heavy_atom_count": 43,
+      "candidate_count": 2,
+      "equivalent_candidate_count": 2,
+      "bond_count": 46,
+      "bonds": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          19
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          9
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          10,
+          28
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          13,
+          14
+        ],
+        [
+          14,
+          15
+        ],
+        [
+          14,
+          23
+        ],
+        [
+          15,
+          16
+        ],
+        [
+          16,
+          17
+        ],
+        [
+          16,
+          22
+        ],
+        [
+          17,
+          18
+        ],
+        [
+          18,
+          19
+        ],
+        [
+          18,
+          20
+        ],
+        [
+          20,
+          21
+        ],
+        [
+          20,
+          32
+        ],
+        [
+          22,
+          23
+        ],
+        [
+          24,
+          25
+        ],
+        [
+          24,
+          34
+        ],
+        [
+          25,
+          26
+        ],
+        [
+          25,
+          30
+        ],
+        [
+          26,
+          27
+        ],
+        [
+          27,
+          28
+        ],
+        [
+          28,
+          29
+        ],
+        [
+          30,
+          31
+        ],
+        [
+          32,
+          33
+        ],
+        [
+          33,
+          34
+        ],
+        [
+          33,
+          36
+        ],
+        [
+          34,
+          35
+        ],
+        [
+          36,
+          37
+        ],
+        [
+          37,
+          38
+        ],
+        [
+          37,
+          42
+        ],
+        [
+          38,
+          39
+        ],
+        [
+          39,
+          40
+        ],
+        [
+          40,
+          41
+        ],
+        [
+          41,
+          42
+        ]
+      ],
+      "mapping": {
+        "source": "hetero",
+        "altloc": "blank",
+        "residues": [
+          {
+            "name": "DW7",
+            "chain": "A",
+            "number": "201",
+            "insertion": ""
+          }
+        ],
+        "pairwise_distance_mae_angstrom": 0.521970133139709
+      }
+    },
+    {
+      "sample_id": "4Q93",
+      "status": "matched",
+      "heavy_atom_count": 17,
+      "candidate_count": 2,
+      "equivalent_candidate_count": 2,
+      "bond_count": 18,
+      "bonds": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          16
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          15
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          8,
+          13
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          11,
+          14
+        ],
+        [
+          12,
+          13
+        ]
+      ],
+      "mapping": {
+        "source": "hetero",
+        "altloc": "blank",
+        "residues": [
+          {
+            "name": "STL",
+            "chain": "A",
+            "number": "401",
+            "insertion": ""
+          }
+        ],
+        "pairwise_distance_mae_angstrom": 0.19658148327657782
+      }
+    },
+    {
+      "sample_id": "1SWG",
+      "status": "matched",
+      "heavy_atom_count": 16,
+      "candidate_count": 8,
+      "equivalent_candidate_count": 8,
+      "bond_count": 17,
+      "bonds": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          15
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          10,
+          15
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          12,
+          14
+        ],
+        [
+          14,
+          15
+        ]
+      ],
+      "mapping": {
+        "source": "hetero",
+        "altloc": "blank",
+        "residues": [
+          {
+            "name": "BTN",
+            "chain": "B",
+            "number": "700",
+            "insertion": ""
+          }
+        ],
+        "pairwise_distance_mae_angstrom": 0.16338508767073281
+      }
+    },
+    {
+      "sample_id": "3GCP",
+      "status": "matched",
+      "heavy_atom_count": 27,
+      "candidate_count": 2,
+      "equivalent_candidate_count": 2,
+      "bond_count": 30,
+      "bonds": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          8
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          16
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          9,
+          14
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          12,
+          19
+        ],
+        [
+          13,
+          14
+        ],
+        [
+          15,
+          16
+        ],
+        [
+          15,
+          19
+        ],
+        [
+          16,
+          17
+        ],
+        [
+          17,
+          18
+        ],
+        [
+          18,
+          19
+        ],
+        [
+          18,
+          25
+        ],
+        [
+          20,
+          21
+        ],
+        [
+          20,
+          25
+        ],
+        [
+          21,
+          22
+        ],
+        [
+          22,
+          23
+        ],
+        [
+          22,
+          26
+        ],
+        [
+          23,
+          24
+        ],
+        [
+          24,
+          25
+        ]
+      ],
+      "mapping": {
+        "source": "hetero",
+        "altloc": "blank",
+        "residues": [
+          {
+            "name": "SB2",
+            "chain": "A",
+            "number": "361",
+            "insertion": ""
+          }
+        ],
+        "pairwise_distance_mae_angstrom": 0.1595419029782966
+      }
+    },
+    {
+      "sample_id": "2FMB",
+      "status": "unmatched_or_incomplete",
+      "heavy_atom_count": 58,
+      "candidate_count": 0
+    }
+  ]
+}

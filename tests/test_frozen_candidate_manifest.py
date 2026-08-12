@@ -19,6 +19,8 @@ class FrozenCandidateManifestTests(unittest.TestCase):
         )
         self.assertFalse(manifest["selection"]["official_score_claimed"])
         self.assertEqual(manifest["competition_weights"]["T1_T2_T3"], [0.5, 0.3, 0.2])
+        self.assertFalse(manifest["active_for_submission"])
+        self.assertIn("bond-aware validation", manifest["demotion"]["reason"])
 
 
 if __name__ == "__main__":

@@ -27,14 +27,14 @@
 |---|---|---|---|
 | 1.1 项目名称 | 暂无冻结名称 | **缺口** | 团队人工确定一个不夸大 Phys、不过度声称“物理约束”的名称 |
 | 1.2 参赛方向 | 方向二：小分子-蛋白质结合轨迹预测 | 已具备 | 与报名信息逐字一致 |
-| 1.3 方案概述 | `configs/frozen_candidate.json`；`docs/preliminary-evidence-index.md` | 证据齐，文字待人工 | 只陈述“场景感知 checkpoint selection + 时间衰减 Static residual anchor”；Pair loss 仅作 no-go 消融 |
+| 1.3 方案概述 | `configs/frozen_candidate.json`；`docs/preliminary-evidence-index.md` | 证据齐，文字待人工 | 主线只陈述“多时间尺度场景感知 checkpoint selection”；Static residual anchor 与 Pair loss 均为 no-go 消融 |
 | 2.1 科学问题与研究对象 | 指导手册第 18-21 页；MISATO/NeuralMD 复现报告 | 证据齐，文字待人工 | 说明“未见复合物泛化、长时程稳定、几何/物理/动力学联合评价”，不能把坐标误差等同于完整动力学 |
 | 2.2 科学意义 | 指导手册第 21 页；`docs/experiment-design-and-research-roadmap.md` | 部分具备 | 人工说明对 ML surrogate、结合动力学和药物设计代理量的边界；不得声称亲和力/驻留时间已被验证 |
-| 3.1 技术方案 | `README.md`；`protein_quanta/scenarios.py`；`protein_quanta/anchoring.py` | 已具备 | 图文必须与冻结配置一致：seed 42、epoch 5、beta 1、decay scale 98 |
+| 3.1 技术方案 | `README.md`；`protein_quanta/scenarios.py`；`configs/frozen_candidate.json` | 已具备 | 当前活动安全基线为 seed 42、epoch 5、无 anchor；beta 1 只能出现在明确标注 no-go 的消融中 |
 | 3.2 预期方法路线 | `docs/experiment-design-and-research-roadmap.md` | 已具备 | 区分已验证、no-go 和复赛设想；E7/E8 不得写成已完成成果 |
 | 3.3 数据、依赖与运行 | `README.md`；`requirements*.txt`；`third_party/README.md` | 基本具备 | 人工核对 MISATO 使用条款、NeuralMD 许可状态、外部预训练权重来源与服务器复现路径 |
-| 4.1 阶段性实验/可行性验证 | `reports/experiment-progress-report.md`；各 reproduction 报告 | 已具备 | 选择最短因果链：精确复现 -> 发现 20/100 帧错配 -> Pair no-go -> 场景早停 -> beta 1 anchor -> Phys 初筛 |
-| 4.2 当前结果 | `reports/figures/neuralmd_earlystop_anchor1_tradeoff.png`；冻结 val/test JSON | 已具备 | 明确为 MISATO-100 内部 proxy，样本数每 split 10；不是比赛隐藏测试、不是官方归一化成绩 |
+| 4.1 阶段性实验/可行性验证 | `reports/experiment-progress-report.md`；各 reproduction 报告 | 已具备 | 最短因果链：精确复现 -> 发现 20/100 帧错配 -> Pair no-go -> 场景早停 -> anchor 代理改善 -> bond-aware Phys no-go -> 回到未锚定 epoch 5 |
+| 4.2 当前结果 | 场景早停 JSON；E13-E15 topology/Phys 报告 | 已具备 | 明确为 MISATO-100 内部 proxy；Phys validation 覆盖 9/10；不是比赛隐藏测试、不是官方归一化成绩 |
 | 5.1 复现方式 | `README.md`；80 项双环境测试；checkpoint manifest；服务器环境快照；发布审计器 | 已具备 | 人工在干净环境至少复跑测试和一个小型入口，记录时间与硬件 |
 | 5.2 开源计划 | 公共 GitHub 仓库，当前默认分支即研究分支 | 部分具备 | 确定许可证；说明数据/checkpoint/轨迹不入库及复赛开放边界 |
 | 5.3 合规披露 | `third_party/README.md`；本清单第 4 节 | **关键缺口** | 明确 MISATO、NeuralMD、torchdiffeq、PyTorch/PyG 许可和版本；未确认项必须如实标注 |
@@ -49,11 +49,11 @@
 1. 官方 20 帧训练配置的 seed-42 最优 checkpoint 在统一验证评估上与发布 checkpoint 的全部标量指标绝对差小于 `1e-3`；说明复现链路可靠。
 2. 训练窗口只覆盖最长 20 帧，而比赛包含最长 80 帧的闭环 T3 rollout；训练后期即使局部损失有限，100 帧 rollout 仍会灾难性发散。
 3. Pair-distance Smooth-L1 在严格同 epoch 零权重对照下没有造成早期收益；10% 和 50% 梯度配比均未超过发布基线，因此为 no-go，不能包装成成功创新。
-4. 场景感知早停选择 seed-42 epoch 5；再在验证集冻结 `beta=1` anchor 后，内部测试相对发布 checkpoint：
+4. 场景感知早停选择 seed-42 epoch 5。历史 `beta=1` anchor 在代理指标上的 frozen internal test 数字可作为负消融背景，但不得作为当前方案成绩：
    - T1：coordinate RMSE `-0.11%`、Matching `-2.48%`、Stability `+0.51` 点、RMSF `-3.51%`；
    - T2：`-0.35%`、`-2.27%`、`+0.42` 点、`-1.60%`；
    - T3：`+0.36%`、`-4.99%`、`+1.61` 点、`-0.36%`。
-5. Phys 只做了碰撞代理初筛：配体-蛋白重叠极低且无一致恶化；配体内部代理在 6 个比较中有 5 个小幅升高。因缺少键表，正常共价近邻没有排除，不能声称 Phys 改善。
+5. E13-E15 已从 RCSB PDB `CONECT` 记录保守恢复 validation 9/10 的共价拓扑，并以坐标/元素顺序核验映射。bond-aware validation 显示 `beta=1` 相对未锚定 epoch-5 的 T1/T2 键长 MAE 分别恶化 `8.99%/13.69%` 且新增极端事件，因此按预注册门槛 no-go；没有为此查看新的 Phys test 结果。该诊断不是官方 Phys 分数。
 6. checkpoint SHA256：`0e7d5150aa5f305499f17663d3a74b1063b0591733f534e676303ce11de50b8c`；权重不进入 Git，归档路径见 manifest。
 
 ## 4. 截止日前必须关闭的风险
@@ -64,14 +64,14 @@
 | P0 | 模板禁止 AI 作答 | 模板原文已核验 | 最终答卷由团队成员独立撰写；不复制本仓库中的 AI 生成句段；保留人工审阅与版本记录 |
 | P0 | 仓库没有项目级 LICENSE | GitHub API 返回 `licenseInfo=null` | 团队基于自有代码和第三方义务人工选择许可证，新增 LICENSE；在选择前不擅自代定 |
 | P0 | NeuralMD 固定 commit 无独立 LICENSE 文件 | `setup.py` 声明 MIT，但仓库文件缺失 | 联系/核查上游许可；提交材料如实写“许可待澄清”，不得把其代码并入本仓库 |
-| P0 | Phys 覆盖不足 | 只有无键表碰撞代理 | 初赛正文明确限制；不写“物理合法性提升”。如官方提供 evaluator，优先跑官方实现 |
+| P0 | Phys 覆盖仍不完整 | validation 仅 9/10 样本有可追溯拓扑；无官方 evaluator/能量项 | 明确覆盖率和项目诊断身份；不写“官方 Phys 提升”。如官方提供 evaluator，优先跑官方实现 |
 | P1 | 数据规模与比赛描述不一致 | 当前实验为 MISATO-100（10/10 split），手册方向描述为完整 MISATO | 明确称“可行性验证/小规模复现”；不得暗示已完成 13,066 轨迹全量训练 |
 | P1 | 内部 test 容易被误写成比赛测试 | 当前 test 是公开 MISATO-100 内部分割 | 图题、表题、正文统一写“frozen internal test”；不得写“最终测试集/隐藏测试集” |
 | P1 | 项目名、科学意义与团队成果尚未人工定稿 | 只有事实索引 | 三位成员共同审读并签字确认，无夸大或错误署名 |
 | P1 | 开源仓库公开但默认分支名仍为研究分支 | GitHub 默认分支 `codex/reproduction-bootstrap` | 参赛前人工决定是否改名；链接必须能匿名访问且 README 首页无临时措辞 |
 | P1 | 旧解读 PDF 的晋级人数已过期 | 7 月 PDF 写 Top 50/Top 15；当前 GOAI 在线页面写 Top 40/Top 20 | 一律采用当前官网；不得从旧幻灯片复制人数。对照记录见 `reports/reproduction/2026-08-12-official-materials-audit.md` |
 
-评分对齐的 E13-E17 实验、Phys/Dyn 晋升门槛与 T1 优先顺序见 `docs/scoring-aligned-execution-plan.md`。在 bond-aware Phys gate 完成前，冻结候选的标准身份必须是“Geo/Dyn/Stab 代理改善，Phys 未验证”，不得写成方向二综合性能提升。
+评分对齐的 E13-E17 实验、Phys/Dyn 晋升门槛与 T1 优先顺序见 `docs/scoring-aligned-execution-plan.md`。E15 已判定 `beta=1` anchor 为 Phys no-go，当前活动安全基线是未锚定 epoch 5；在 E16 联合比较完成前不得写成方向二综合性能提升。
 
 ## 5. 8 月 12-16 日冲刺安排
 
@@ -104,8 +104,8 @@
 - [ ] 项目名称、方向、成员身份和获奖信息与报名/证书一致。
 - [ ] 所有实验数字均可在冻结 JSON 找到；表格注明 split、样本数和 proxy 身份。
 - [ ] 没有报告虚构官方总分；没有把内部 test 写成比赛隐藏测试。
-- [ ] Pair loss 明确为 no-go；E7/E8 明确为后续设想；Phys 不声称改善。
-- [ ] 图中 `beta=1`、epoch 5、seed 42、decay scale 98 与 manifest 一致。
+- [ ] Pair loss 与 `beta=1` anchor 均明确为 no-go；E7/E8 明确为后续设想；Phys 不声称官方改善。
+- [ ] 主方案图只展示未锚定 epoch 5；若保留 `beta=1` 图，标题/图注明确写“历史代理候选，E15 Phys no-go”。
 - [ ] MISATO 数据、checkpoint、轨迹和秘密未进入 Git。
 - [ ] 第三方来源、固定 commit、许可证状态和未解决风险已披露。
 - [ ] GitHub 链接可匿名访问，README 命令与当前分支一致。

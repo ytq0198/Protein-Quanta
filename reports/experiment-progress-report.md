@@ -334,3 +334,11 @@ GOAI 官网 AI for Research 页面公开内容与本地手册一致：8 月 16 �
 在不访问 test 的前提下，对 validation 的 10 个复合物×3 场景执行 grouped leave-one-complex-out。固定六维 SE(3) 不变输入、balanced logistic regression、L2=10 和阈值 0.5；标签要求 `beta=8` 相对 `beta=1` 同时通过坐标/RMSF 防线并改善 Matching/Stability。预注册提交为 `a45a7ab`。
 
 OOF 聚合相对 global beta=1 改善 T1/T2 Matching（-2.57%/-1.91%）、Stability（+0.79/+0.55 点）和 RMSF（-6.27%/-5.83%），所有 aggregate guard 通过；但正类召回 0.30、负类召回 0.50、balanced accuracy 仅 0.40，低于 0.60 防线。因此判定 validation **no-go**，不访问内部 test、不修改冻结候选、不在本轮调正则或阈值。完整数据与解释见 `reports/reproduction/2026-08-12-uncertainty-gate-loocv.md`。
+
+## 2026-08-13：评分对齐重排与 bond-aware Phys no-go
+
+按照指导手册 `Geo/Phys/Dyn/Stab=40/25/25/10` 与 `T1/T2/T3=50/30/20` 重排 E13-E17：先补 Phys，再补 Dyn 分布，最后开展 T1 优先的小预算创新。预注册门槛与执行顺序见 `docs/scoring-aligned-execution-plan.md`。
+
+E13 没有按距离猜键，而是从 RCSB PDB 显式 `CONECT` 恢复键图，并要求重原子元素顺序与 MISATO 完全一致、PDB/MISATO frame-0 内部距离 MAE `<=2.0 A`、全部重原子有键覆盖。validation/test 覆盖率为 9/10、8/10；特殊 altloc、共价肽和多残基糖体系被严格拒绝。
+
+E14 在覆盖 validation 子集实现了同帧键长 MAE、20% 违例率、极端键长事件，以及排除图距离 1/2 后的非键碰撞。E15 结果显示 `beta=1` 相对未锚定 epoch-5 的 T1/T2/T3 键长 MAE变化为 `+8.99%/+13.69%/-1.67%`，前两项超过预注册 5% 防线；T1/T2 还新增极少量 extreme event。因此在 validation 即判 **no-go**，不运行新的 bond-aware test、不回调 beta。历史 manifest 已标记 `active_for_submission=false`，当前安全基线回退到未锚定 seed-42 epoch 5，等待相对 published NeuralMD 的直接 Phys/Dyn 对照。完整报告见 `reports/reproduction/2026-08-13-bond-aware-phys-validation.md`。

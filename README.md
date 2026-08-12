@@ -30,9 +30,9 @@ The project also reports Kabsch-aligned RMSD, radius-of-gyration error, RMSF
 error, and intramolecular contact-map agreement. These are explicitly labeled
 as project-defined diagnostic proxies, not official competition scores.
 
-## Frozen internal candidate
+## Historical frozen candidate and active status
 
-The current candidate is NeuralMD seed 42 at epoch 5 followed by a frozen
+The historical candidate was NeuralMD seed 42 at epoch 5 followed by a frozen
 time-decayed Static residual anchor (`beta=1`, decay scale 98 frames). The
 checkpoint and anchor were selected on the 10-complex validation split with
 explicit T1/T2/T3 guards. Relative to the published checkpoint, the frozen
@@ -53,6 +53,19 @@ available preprocessing lacks a bond graph, bonded neighbours cannot be
 excluded and this is not a chemically valid clash rate. The result is recorded
 as a Phys gap, not as evidence of an official-score improvement; see
 [`reports/reproduction/2026-08-12-collision-proxy-audit.md`](reports/reproduction/2026-08-12-collision-proxy-audit.md).
+
+This candidate was **demoted on 2026-08-13** after a stricter bond-aware
+validation. Relative to unanchored epoch-5 NeuralMD, the anchor worsened
+bond-length MAE by 8.99% on T1 and 13.69% on T2, exceeding the pre-registered
+5% guard and adding small extreme-bond event rates. No new bond-aware test
+evaluation was run and beta was not retuned. The active safe baseline is now
+unanchored seed-42 epoch 5 pending a direct score-facing Phys/Dyn comparison
+with published NeuralMD. See
+[`reports/reproduction/2026-08-13-bond-aware-phys-validation.md`](reports/reproduction/2026-08-13-bond-aware-phys-validation.md).
+The machine-readable current state is
+[`configs/active_candidate.json`](configs/active_candidate.json); the old
+anchor remains in [`configs/frozen_candidate.json`](configs/frozen_candidate.json)
+only as a traceable historical no-go.
 
 ## Run the tests
 

@@ -1,5 +1,15 @@
 {
-  "status": "frozen internal candidate; proxy metrics only; not an official competition score",
+  "status": "historical frozen proxy candidate; demoted after bond-aware validation no-go; not an official competition score",
+  "active_for_submission": false,
+  "demotion": {
+    "date": "2026-08-13",
+    "reason": "bond-aware validation failed the pre-registered 5% bond-length guard in T1 and T2",
+    "T1_bond_length_mae_percent": 8.99,
+    "T2_bond_length_mae_percent": 13.69,
+    "T3_bond_length_mae_percent": -1.67,
+    "report": "reports/reproduction/2026-08-13-bond-aware-phys-validation.md",
+    "replacement_status": "unanchored seed-42 epoch-5 safe baseline pending direct score-facing Phys/Dyn comparison"
+  },
   "method": "scenario-aware-earlystop-static-anchor",
   "checkpoint": {
     "seed": 42,

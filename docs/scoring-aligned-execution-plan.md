@@ -1,6 +1,6 @@
 # GOAI 方向二评分对齐执行计划
 
-> 版本：v1.0（2026-08-12，Asia/Shanghai）  
+> 版本：v1.1（2026-08-13，Asia/Shanghai）
 > 依据：`AI for research指导手册.pdf` 第 18-21、25-27 页。  
 > 性质：内部科研与实验执行文件，不是初赛答卷。初赛模板要求团队独立作答，本文件只维护可核查事实、决策门槛和证据入口。
 
@@ -20,9 +20,9 @@
 
 | 场景/模块 | Geo 40% | Phys 25% | Dyn 25% | Stab 10% | 当前结论 |
 |---|---|---|---|---|---|
-| T1 50% | coordinate RMSE、Matching、aligned RMSD | 仅无键表碰撞代理 | RMSF、Rg、接触图代理 | Stability、误差增长 | 方向对齐，但 Phys/Dyn 不完整；最高优先级 |
-| T2 30% | 同上 | 同上 | 同上 | 同上 | 方向对齐，但 Phys/Dyn 不完整 |
-| T3 20% | 同上；冻结候选 coordinate RMSE 有轻微代价 | 同上 | 同上 | 同上 | 长程改善明确，但不得掩盖 Geo 代价 |
+| T1 50% | coordinate RMSE、Matching、aligned RMSD | 已有 9/10 validation 的可追溯键长/非键碰撞诊断 | RMSF、Rg、接触图代理，分布证据待补 | Stability、误差增长 | `beta=1` 在键长 MAE 上恶化 8.99%，已判 no-go；最高优先级 |
+| T2 30% | 同上 | 同上 | 同上 | 同上 | `beta=1` 在键长 MAE 上恶化 13.69%，已判 no-go |
+| T3 20% | 同上 | 同上 | 同上 | 同上 | `beta=1` 键长门槛通过，但不能抵消 T1/T2 失败 |
 
 评分覆盖状态不是得分：`已有代理` 不等于 `官方指标已实现`，也不等于 `官方归一化成绩提高`。
 
@@ -107,17 +107,15 @@ Dyn gate：冻结候选在 T1/T2/T3 中至少两个场景的分布指标整体�
 
 | 顺序 | 实验/任务 | 决策数据 | 交付物 | 完成条件 |
 |---|---|---|---|---|
-| E13 | 化学拓扑可用性审计 | 数据/schema/上游代码 | topology audit Markdown + JSON | 明确每个样本是否有可靠键表及来源 |
-| E14 | bond-aware Phys evaluator | 合成单测 + validation | 实现、测试、validation JSON | 指标定义正确，至少覆盖键长与非键碰撞 |
-| E15 | 冻结候选 Phys gate | validation；test 不调参 | 对照表与决策报告 | 明确 pass/no-go，不声称官方分数 |
+| E13 | 化学拓扑可用性审计 | 数据/schema/上游代码 | topology audit Markdown + JSON | **已完成**：validation 9/10、internal test 8/10 可追溯匹配；特殊配体保守拒绝 |
+| E14 | bond-aware Phys evaluator | 合成单测 + validation | 实现、测试、validation JSON | **已完成**：覆盖键长、极端键长与排除 1/2-hop 的非键碰撞 |
+| E15 | 冻结候选 Phys gate | validation；test 不调参 | 对照表与决策报告 | **no-go**：T1/T2 键长 MAE 分别恶化 8.99%/13.69%；未查看新 Phys test 结果 |
 | E16 | Dyn 分布 evaluator | 合成单测 + validation | 实现、测试、分布指标 JSON | 能区分真实动力学与 Static 塌缩 |
 | E17 | T1 优先小预算创新 | validation | 预注册、同预算对照 | 联合门槛通过才进入 frozen test |
 | M1 | 初赛证据冻结 | 已验证事实 | evidence index、图表、复现命令 | 数字逐项可追溯、合规风险显式披露 |
 
-## 8. 当前冻结状态
+## 8. 当前候选状态（2026-08-13）
 
-在 E13-E16 完成前，当前 `seed 42 / epoch 5 / beta=1 / decay=98` 的身份保持：
+`seed 42 / epoch 5 / beta=1 / decay=98` 只保留为**历史冻结代理候选**。E15 validation 显示其在 T1/T2 的键长 MAE 分别比未锚定 epoch-5 恶化 `8.99%` 和 `13.69%`，并新增极端键长事件，因此已按预注册门槛降级，`active_for_submission=false`。未依据该结果重选 beta，也未运行新的 bond-aware Phys test 对比。
 
-`frozen internal candidate; Geo/Dyn/Stab proxy improvements; Phys not verified; not an official competition score`
-
-不得因计划更新而修改已经冻结的 test 结果，也不得依据后续 test 诊断重新选择 beta。
+当前活动安全基线回到未锚定的 `seed 42 / epoch 5`；它仍需在 E16 中与 published NeuralMD 进行直接 Phys/Dyn 分布比较，不能提前称为方向二综合提升。详细证据见 `reports/reproduction/2026-08-13-bond-aware-phys-validation.md`。
