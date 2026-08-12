@@ -129,7 +129,7 @@ MISATO 当前预处理没有显式键表，因此第一版不声称“严格键�
 | E16 | Dyn 分布 evaluator | 无训练 | 合成单测 + validation | 能区分真实涨落与 Static/过平滑轨迹 |
 | E17 | T1 优先的局部闭环训练实验 | 小预算同预算对照 | validation | T1 Geo/Phys/Dyn 联合改善，T2/T3 不明显回退 |
 
-E13-E17 已完成。`epoch 5 + β=1` 为 Phys no-go；未锚定 epoch-5 的 T3 Rg/原子对距离分布优于 published NeuralMD，但 T1/T2 未整体改善，E16 未通过综合晋升门槛。E17 固定系数位移 Smooth-L1 也未改变约 1% 的动态幅度，validation gate 为 no-go，未访问新 test。当前优先级转为初赛证据冻结、合规与人工答卷核查；不再新增训练或在同一 validation 调参。活动安全基线仍为未锚定 `seed 42 / epoch 5`，只能陈述 checkpoint-selection 可行性和明确局限，不能称为综合提升。全部负结果保留为消融；训练期梯度校准/短 closed-loop exposure 转为复赛新设计。
+E13-E17 已完成。`epoch 5 + β=1` 为 Phys no-go；未锚定 epoch-5 的 E16 与位移 loss E17 也未通过综合晋升。新增的参数受控时序架构筛选表明 Transformer 在 T2/T3 相对 MLP 改善约 8.5%/10.3%，却在权重最高、仅两帧历史的 T1 恶化约 11.4%，因而总体 no-go。当前优先级仍是初赛证据冻结、合规与人工答卷核查；不在同一 validation 事后拼接模型。活动安全基线仍为未锚定 `seed 42 / epoch 5`，只能陈述 checkpoint-selection 可行性和明确局限。复赛可用新划分验证“等变空间编码器 + T1 局部路径 + T2/T3 causal attention”的混合架构，以及训练期梯度校准/短 closed-loop exposure。
 
 
 

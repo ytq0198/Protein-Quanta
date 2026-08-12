@@ -67,6 +67,13 @@ The machine-readable current state is
 anchor remains in [`configs/frozen_candidate.json`](configs/frozen_candidate.json)
 only as a traceable historical no-go.
 
+An invariant, parameter-capped temporal-core screen additionally compares MLP,
+RNN, LSTM, GRU and causal Transformer without accessing the internal test. The
+Transformer improves the long-history/long-horizon T2 and T3 proxies but loses
+on the 50%-weighted two-frame T1 scenario, so no temporal architecture is
+promoted to the active 3D candidate. See
+[`reports/reproduction/2026-08-13-temporal-architecture-screen.md`](reports/reproduction/2026-08-13-temporal-architecture-screen.md).
+
 ## Run the tests
 
 ```bash

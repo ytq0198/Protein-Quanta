@@ -62,6 +62,7 @@
 - E15 bond-aware Phys no-go：`reports/reproduction/2026-08-13-bond-aware-phys-validation.md`；
 - E16 Dyn 分布验证：`reports/reproduction/2026-08-13-dynamics-distribution-validation.md`；
 - E17 位移损失 no-go：`reports/reproduction/2026-08-13-e17-displacement-feasibility.md`、`reports/reproduction/e17_displacement_gate.json`；
+- 长序列架构筛选：`reports/reproduction/2026-08-13-temporal-architecture-screen.md`、`reports/reproduction/temporal_architecture_screen_val.json`、`reports/figures/temporal_architecture_screen.png`；
 - E6 失败与早停/组合因果链：`reports/reproduction/2026-08-12-neuralmd-pair-loss-and-earlystop.md`；
 - 最终验证/测试原始报告：`reports/reproduction/neuralmd_earlystop_anchor1_val.json`、`reports/reproduction/neuralmd_earlystop_anchor1_test.json`；
 - Phys 初筛：`reports/reproduction/2026-08-12-collision-proxy-audit.md`、`reports/reproduction/neuralmd_earlystop_anchor1_collision_val.json`、`reports/reproduction/neuralmd_earlystop_anchor1_collision_test.json`；

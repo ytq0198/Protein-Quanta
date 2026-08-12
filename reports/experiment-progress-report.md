@@ -352,3 +352,7 @@ E14 在覆盖 validation 子集实现了同帧键长 MAE、20% 违例率、极�
 ## 2026-08-13：E17 局部位移损失 feasibility no-go
 
 在 commit `b393d38` 预注册单变量设计后，以 seed 42、官方 20 帧随机窗口训练 5 epoch，只增加 coefficient=1、beta=0.5 的连续位移 Smooth-L1。训练无非有限更新，且 `--no_eval_test_during_training` 使 test 字段保持 `nan`。validation 的 20 项联合 gate 中 19 项安全检查通过；唯一失败项为核心机制目标：T1 step-amplitude ideal-gap ratio 为 `0.9999999998`，要求 `<=0.95`，说明候选与 epoch-5 基线在数值上几乎完全相同。按预注册判 **no-go**，不扫系数、不访问新 internal test、不修改活动候选。完整报告见 `reports/reproduction/2026-08-13-e17-displacement-feasibility.md`。
+
+## 2026-08-13：长序列时序架构 Level-A 筛选
+
+在 commit `7c1ad03` 预注册后，对 12 维刚体运动不变量状态，在同一 80-complex train、10-complex validation、参数量 <10k 和 200 epoch 预算下比较 MLP/RNN/LSTM/GRU/causal Transformer，未访问 internal test。MLP 的方向权重代理 RMSE 最低（`0.38409`），Transformer 为 `0.38453`，整体差 0.11%；但 Transformer 相对 MLP 在 T2/T3 改善约 `8.5%/10.3%`，T1 恶化约 `11.4%`。其余 recurrent core 没有整体优势。五个模型均未通过完整 gate，因此不直接启动 3D 大模型；结果支持一个需要新验证设计的后续假设：T1 使用局部短记忆路径，T2/T3 使用 causal attention，并与等变空间编码器结合。完整报告见 `reports/reproduction/2026-08-13-temporal-architecture-screen.md`。
