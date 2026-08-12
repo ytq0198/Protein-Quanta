@@ -348,3 +348,7 @@ E14 在覆盖 validation 子集实现了同帧键长 MAE、20% 违例率、极�
 重新生成 published checkpoint 的 validation 三场景轨迹后，对它与未锚定 epoch-5 同时计算 RMSF Pearson/Spearman、Rg/原子对/步长 Wasserstein 距离、位移幅度比和速度自相关。epoch-5 在三个场景的 RMSF 形状相关性均提高，T3 的 Rg/原子对分布距离改善 `8.48%/11.93%`；但 T1/T2 分布距离略有回退，未达到“两场景整体改善”的 E16 门槛，因此仍为 **no-go**，不访问新的 internal test 分布结果。
 
 新的机制证据是：epoch-5 和 published NeuralMD 的逐帧位移幅度都只有真值约 `0.9%-1.4%`。这说明模型虽然不是完全 Static，却存在强烈欠动力学；后续 E17 不再泛泛处理长程漂移，而是以训练期局部位移分布/速度动态为直接目标，并以 bond-aware 指标作安全门槛。直接 Phys 对照中，epoch-5 的 T1/T2/T3 平均键长 MAE相对 published 分别改善 `1.69%/2.22%/55.60%`，但 T3 rare extreme event 为 `0.2666%`、高于 published 的 `0.1082%`，所以只保留为安全工作基线，不声称综合 Phys 提升。完整报告见 `reports/reproduction/2026-08-13-dynamics-distribution-validation.md`。
+
+## 2026-08-13：E17 局部位移损失 feasibility no-go
+
+在 commit `b393d38` 预注册单变量设计后，以 seed 42、官方 20 帧随机窗口训练 5 epoch，只增加 coefficient=1、beta=0.5 的连续位移 Smooth-L1。训练无非有限更新，且 `--no_eval_test_during_training` 使 test 字段保持 `nan`。validation 的 20 项联合 gate 中 19 项安全检查通过；唯一失败项为核心机制目标：T1 step-amplitude ideal-gap ratio 为 `0.9999999998`，要求 `<=0.95`，说明候选与 epoch-5 基线在数值上几乎完全相同。按预注册判 **no-go**，不扫系数、不访问新 internal test、不修改活动候选。完整报告见 `reports/reproduction/2026-08-13-e17-displacement-feasibility.md`。

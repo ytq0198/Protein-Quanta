@@ -37,6 +37,7 @@
   "evidence": {
     "scoring_plan": "docs/scoring-aligned-execution-plan.md",
     "phys_no_go_report": "reports/reproduction/2026-08-13-bond-aware-phys-validation.md",
-    "dynamics_report": "reports/reproduction/2026-08-13-dynamics-distribution-validation.md"
+    "dynamics_report": "reports/reproduction/2026-08-13-dynamics-distribution-validation.md",
+    "e17_no_go_report": "reports/reproduction/2026-08-13-e17-displacement-feasibility.md"
   }
 }

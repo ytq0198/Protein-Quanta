@@ -30,7 +30,15 @@
     "T1_step_amplitude_ideal_gap_relative_to_epoch5": "improve by at least 5%",
     "T1_bond_length_mae_relative_to_epoch5": "<= 1.05",
     "all_scenarios_extreme_bond_event_increase_points": "<= 0.10",
-    "T2_T3_coordinate_or_distribution_regression": "no metric designated primary may worsen by >5%"
+    "T2_T3_coordinate_or_distribution_regression": "no primary metric may worsen by >5%",
+    "T2_T3_primary_lower_is_better": [
+      "coordinate_rmse_angstrom",
+      "rmsf_profile_mae_angstrom",
+      "rg_wasserstein_angstrom",
+      "pair_distance_wasserstein_angstrom",
+      "step_displacement_wasserstein_angstrom",
+      "step_amplitude_ideal_gap"
+    ]
   },
   "stop_rule": "any failed mandatory gate is no-go; do not tune the coefficient on the same validation split and do not inspect a new internal-test result",
   "evidence": {

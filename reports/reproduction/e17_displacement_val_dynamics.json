@@ -1,0 +1,1591 @@
+{
+  "status": "project distributional Dyn diagnostics; not official Dyn score",
+  "protocol": {
+    "reference_report": "/mnt/localDisk3/weizian/runs/protein-quanta/early-stop/epoch005_val_with_trajectories.json",
+    "sample_ids": [
+      "1S38",
+      "6PYS",
+      "4M5L",
+      "1CTR",
+      "4HXS",
+      "6BIB",
+      "4Q93",
+      "1SWG",
+      "3GCP",
+      "2FMB"
+    ],
+    "sample_count": 10,
+    "scenarios": [
+      "T1",
+      "T2",
+      "T3"
+    ],
+    "models": {
+      "epoch5": "/mnt/localDisk3/weizian/runs/protein-quanta/early-stop/epoch005-val-trajectories",
+      "candidate": "/mnt/localDisk3/weizian/runs/protein-quanta/e17-displacement-c1-val-trajectories"
+    },
+    "static_and_truth_controls": true,
+    "maximum_velocity_autocorrelation_lag": 10,
+    "aggregation": "unweighted mean of per-complex diagnostics"
+  },
+  "summary": {
+    "T1": {
+      "epoch5": {
+        "rmsf_profile_mae_angstrom": 1.5037546155808006,
+        "rmsf_profile_pearson": 0.2594319054363144,
+        "rmsf_profile_spearman": 0.15870374915506638,
+        "rg_wasserstein_angstrom": 0.12391663288850593,
+        "pair_distance_wasserstein_angstrom": 0.3098023707067369,
+        "step_displacement_wasserstein_angstrom": 1.2059870658399516,
+        "step_amplitude_ratio": 0.009013564766319515,
+        "velocity_autocorrelation_mae": 1.0335663386266447
+      },
+      "candidate": {
+        "rmsf_profile_mae_angstrom": 1.5037546187894897,
+        "rmsf_profile_pearson": 0.2594313756066665,
+        "rmsf_profile_spearman": 0.15870374915506638,
+        "rg_wasserstein_angstrom": 0.12391662512434891,
+        "pair_distance_wasserstein_angstrom": 0.3098023574477704,
+        "step_displacement_wasserstein_angstrom": 1.2059870661491097,
+        "step_amplitude_ratio": 0.009013564979886417,
+        "velocity_autocorrelation_mae": 1.0335663220236213
+      },
+      "static": {
+        "rmsf_profile_mae_angstrom": 1.5585358558132876,
+        "rmsf_profile_pearson": 0.0,
+        "rmsf_profile_spearman": 0.0,
+        "rg_wasserstein_angstrom": 0.12714718746365888,
+        "pair_distance_wasserstein_angstrom": 0.2949205121319337,
+        "step_displacement_wasserstein_angstrom": 1.2165460265331616,
+        "step_amplitude_ratio": 0.0,
+        "velocity_autocorrelation_mae": 0.1359602506246822
+      },
+      "truth": {
+        "rmsf_profile_mae_angstrom": 0.0,
+        "rmsf_profile_pearson": 1.0,
+        "rmsf_profile_spearman": 1.0,
+        "rg_wasserstein_angstrom": 0.0,
+        "pair_distance_wasserstein_angstrom": 0.0,
+        "step_displacement_wasserstein_angstrom": 0.0,
+        "step_amplitude_ratio": 1.0,
+        "velocity_autocorrelation_mae": 0.0
+      }
+    },
+    "T2": {
+      "epoch5": {
+        "rmsf_profile_mae_angstrom": 1.2891645148790731,
+        "rmsf_profile_pearson": 0.6184067899827147,
+        "rmsf_profile_spearman": 0.5287558146316691,
+        "rg_wasserstein_angstrom": 0.09748021573971931,
+        "pair_distance_wasserstein_angstrom": 0.27023607957595586,
+        "step_displacement_wasserstein_angstrom": 1.0852460536652075,
+        "step_amplitude_ratio": 0.009597508293217986,
+        "velocity_autocorrelation_mae": 1.0405665659828105
+      },
+      "candidate": {
+        "rmsf_profile_mae_angstrom": 1.2891645097440456,
+        "rmsf_profile_pearson": 0.6184069260758449,
+        "rmsf_profile_spearman": 0.5287558146316691,
+        "rg_wasserstein_angstrom": 0.09748019103890333,
+        "pair_distance_wasserstein_angstrom": 0.2702360770523666,
+        "step_displacement_wasserstein_angstrom": 1.0852460527862509,
+        "step_amplitude_ratio": 0.009597510418706937,
+        "velocity_autocorrelation_mae": 1.0405666006332144
+      },
+      "static": {
+        "rmsf_profile_mae_angstrom": 1.3500099541501644,
+        "rmsf_profile_pearson": 0.0,
+        "rmsf_profile_spearman": 0.0,
+        "rg_wasserstein_angstrom": 0.11519839545177431,
+        "pair_distance_wasserstein_angstrom": 0.29658161474060685,
+        "step_displacement_wasserstein_angstrom": 1.09579798842784,
+        "step_amplitude_ratio": 0.0,
+        "velocity_autocorrelation_mae": 0.11830262673316339
+      },
+      "truth": {
+        "rmsf_profile_mae_angstrom": 0.0,
+        "rmsf_profile_pearson": 1.0,
+        "rmsf_profile_spearman": 1.0,
+        "rg_wasserstein_angstrom": 0.0,
+        "pair_distance_wasserstein_angstrom": 0.0,
+        "step_displacement_wasserstein_angstrom": 0.0,
+        "step_amplitude_ratio": 1.0,
+        "velocity_autocorrelation_mae": 0.0
+      }
+    },
+    "T3": {
+      "epoch5": {
+        "rmsf_profile_mae_angstrom": 2.1196408233012756,
+        "rmsf_profile_pearson": 0.2710789434006104,
+        "rmsf_profile_spearman": 0.2625864894298019,
+        "rg_wasserstein_angstrom": 0.08553441620020892,
+        "pair_distance_wasserstein_angstrom": 0.24799057707882843,
+        "step_displacement_wasserstein_angstrom": 1.2524926060012995,
+        "step_amplitude_ratio": 0.013171602599775078,
+        "velocity_autocorrelation_mae": 1.0410988395584577
+      },
+      "candidate": {
+        "rmsf_profile_mae_angstrom": 2.119640938403824,
+        "rmsf_profile_pearson": 0.2710843639759534,
+        "rmsf_profile_spearman": 0.2625864894298019,
+        "rg_wasserstein_angstrom": 0.08553417373014308,
+        "pair_distance_wasserstein_angstrom": 0.2479905828402183,
+        "step_displacement_wasserstein_angstrom": 1.2524926112081998,
+        "step_amplitude_ratio": 0.013171598882386587,
+        "velocity_autocorrelation_mae": 1.0410988588774064
+      },
+      "static": {
+        "rmsf_profile_mae_angstrom": 2.49679832287384,
+        "rmsf_profile_pearson": 0.0,
+        "rmsf_profile_spearman": 0.0,
+        "rg_wasserstein_angstrom": 0.11233741324306945,
+        "pair_distance_wasserstein_angstrom": 0.2941015745109212,
+        "step_displacement_wasserstein_angstrom": 1.2688253436454584,
+        "step_amplitude_ratio": 0.0,
+        "velocity_autocorrelation_mae": 0.06950595582403048
+      },
+      "truth": {
+        "rmsf_profile_mae_angstrom": 0.0,
+        "rmsf_profile_pearson": 1.0,
+        "rmsf_profile_spearman": 1.0,
+        "rg_wasserstein_angstrom": 0.0,
+        "pair_distance_wasserstein_angstrom": 0.0,
+        "step_displacement_wasserstein_angstrom": 0.0,
+        "step_amplitude_ratio": 1.0,
+        "velocity_autocorrelation_mae": 0.0
+      }
+    }
+  },
+  "samples": [
+    {
+      "sample_id": "1S38",
+      "scenarios": {
+        "T1": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 0.8899958429834266,
+            "rmsf_profile_pearson": 0.07750068677903105,
+            "rmsf_profile_spearman": 0.005494505494505495,
+            "rg_wasserstein_angstrom": 0.009348445136614862,
+            "pair_distance_wasserstein_angstrom": 0.04942572905337519,
+            "step_displacement_wasserstein_angstrom": 0.7188242683816635,
+            "step_amplitude_ratio": 0.0099425145239196,
+            "velocity_autocorrelation_mae": 1.0269719805064832,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 0.8899958220498092,
+            "rmsf_profile_pearson": 0.07749447570930929,
+            "rmsf_profile_spearman": 0.005494505494505495,
+            "rg_wasserstein_angstrom": 0.009348382025118167,
+            "pair_distance_wasserstein_angstrom": 0.04942569313102743,
+            "step_displacement_wasserstein_angstrom": 0.7188242640097189,
+            "step_amplitude_ratio": 0.0099425205455254,
+            "velocity_autocorrelation_mae": 1.0269719735438239,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 0.9274473410885633,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.01602983394110089,
+            "pair_distance_wasserstein_angstrom": 0.04647689726508977,
+            "step_displacement_wasserstein_angstrom": 0.7260429610670626,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.22956710300952943,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 0.9999999999999998,
+            "rmsf_profile_spearman": 1.0,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        },
+        "T2": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 0.6065585415061113,
+            "rmsf_profile_pearson": 0.953863285829581,
+            "rmsf_profile_spearman": 0.945054945054945,
+            "rg_wasserstein_angstrom": 0.012478401359744606,
+            "pair_distance_wasserstein_angstrom": 0.048818827431833814,
+            "step_displacement_wasserstein_angstrom": 0.6373296968132064,
+            "step_amplitude_ratio": 0.00760340783070272,
+            "velocity_autocorrelation_mae": 1.073412837103453,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 0.606558487731715,
+            "rmsf_profile_pearson": 0.9538624577525431,
+            "rmsf_profile_spearman": 0.945054945054945,
+            "rg_wasserstein_angstrom": 0.012478407231380184,
+            "pair_distance_wasserstein_angstrom": 0.04881883395157094,
+            "step_displacement_wasserstein_angstrom": 0.6373296887139387,
+            "step_amplitude_ratio": 0.0076034204422060206,
+            "velocity_autocorrelation_mae": 1.0734131619886724,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 0.634715373324618,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.01127024304705897,
+            "pair_distance_wasserstein_angstrom": 0.04597819790567789,
+            "step_displacement_wasserstein_angstrom": 0.6422127018998082,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.1458275975555806,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 1.0,
+            "rmsf_profile_spearman": 1.0,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        },
+        "T3": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 1.2387317524735353,
+            "rmsf_profile_pearson": -0.052245801491127015,
+            "rmsf_profile_spearman": -0.1978021978021978,
+            "rg_wasserstein_angstrom": 0.015900550036144434,
+            "pair_distance_wasserstein_angstrom": 0.036522959655419726,
+            "step_displacement_wasserstein_angstrom": 0.7621111702718485,
+            "step_amplitude_ratio": 0.006390272406891617,
+            "velocity_autocorrelation_mae": 1.052714699574953,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 1.2387316626972344,
+            "rmsf_profile_pearson": -0.05224920586968982,
+            "rmsf_profile_spearman": -0.1978021978021978,
+            "rg_wasserstein_angstrom": 0.015900808525619342,
+            "pair_distance_wasserstein_angstrom": 0.03652298344453308,
+            "step_displacement_wasserstein_angstrom": 0.7621111681839631,
+            "step_amplitude_ratio": 0.006390275128992155,
+            "velocity_autocorrelation_mae": 1.052714939828348,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 1.351916299746082,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.014112182315408922,
+            "pair_distance_wasserstein_angstrom": 0.06261231963763254,
+            "step_displacement_wasserstein_angstrom": 0.7670125896592865,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.08558739253307004,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 0.9999999999999999,
+            "rmsf_profile_spearman": 1.0,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "6PYS",
+      "scenarios": {
+        "T1": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 0.9031867075383465,
+            "rmsf_profile_pearson": 0.023003111701407047,
+            "rmsf_profile_spearman": -0.03132161955691368,
+            "rg_wasserstein_angstrom": 0.0339466347636895,
+            "pair_distance_wasserstein_angstrom": 0.20639958858285512,
+            "step_displacement_wasserstein_angstrom": 0.8773960692917728,
+            "step_amplitude_ratio": 0.012329205277298687,
+            "velocity_autocorrelation_mae": 1.0303418799744448,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 0.9031867202944707,
+            "rmsf_profile_pearson": 0.023003217757589803,
+            "rmsf_profile_spearman": -0.03132161955691368,
+            "rg_wasserstein_angstrom": 0.03394660888667958,
+            "pair_distance_wasserstein_angstrom": 0.2063995720407978,
+            "step_displacement_wasserstein_angstrom": 0.8773960712264018,
+            "step_amplitude_ratio": 0.01232920309951761,
+            "velocity_autocorrelation_mae": 1.0303418596664367,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 0.9600104337845522,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.06209363229105954,
+            "pair_distance_wasserstein_angstrom": 0.21945214556677525,
+            "step_displacement_wasserstein_angstrom": 0.8883487028064961,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.15792099294221265,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 1.0,
+            "rmsf_profile_spearman": 1.0,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        },
+        "T2": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 1.6798748483327324,
+            "rmsf_profile_pearson": 0.32616185747689563,
+            "rmsf_profile_spearman": 0.2348357524828113,
+            "rg_wasserstein_angstrom": 0.05341580887263375,
+            "pair_distance_wasserstein_angstrom": 0.34980108514933816,
+            "step_displacement_wasserstein_angstrom": 1.0288938778372647,
+            "step_amplitude_ratio": 0.01028523902739516,
+            "velocity_autocorrelation_mae": 1.0229463298751382,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 1.6798748869127715,
+            "rmsf_profile_pearson": 0.3261640025181308,
+            "rmsf_profile_spearman": 0.2348357524828113,
+            "rg_wasserstein_angstrom": 0.05341576495060489,
+            "pair_distance_wasserstein_angstrom": 0.3498010921459467,
+            "step_displacement_wasserstein_angstrom": 1.0288938832343373,
+            "step_amplitude_ratio": 0.01028523383583718,
+            "velocity_autocorrelation_mae": 1.0229462665119633,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 1.741530155252158,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.09786798900165113,
+            "pair_distance_wasserstein_angstrom": 0.39902863029323,
+            "step_displacement_wasserstein_angstrom": 1.039586271125388,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.07442764647306856,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 1.0000000000000002,
+            "rmsf_profile_spearman": 1.0,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        },
+        "T3": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 1.6278371018623863,
+            "rmsf_profile_pearson": -0.025655838027746646,
+            "rmsf_profile_spearman": -0.33017570664629486,
+            "rg_wasserstein_angstrom": 0.039327359730174136,
+            "pair_distance_wasserstein_angstrom": 0.17163602457665003,
+            "step_displacement_wasserstein_angstrom": 1.1144107538793864,
+            "step_amplitude_ratio": 0.007411643096315434,
+            "velocity_autocorrelation_mae": 1.0420142483420647,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 1.6278371314237938,
+            "rmsf_profile_pearson": -0.02565349112008077,
+            "rmsf_profile_spearman": -0.33017570664629486,
+            "rg_wasserstein_angstrom": 0.03932724387281466,
+            "pair_distance_wasserstein_angstrom": 0.17163592565047944,
+            "step_displacement_wasserstein_angstrom": 1.1144107545004458,
+            "step_amplitude_ratio": 0.007411642543147377,
+            "velocity_autocorrelation_mae": 1.0420140504807411,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 1.8199938031243572,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.045233574047440266,
+            "pair_distance_wasserstein_angstrom": 0.1969509978256456,
+            "step_displacement_wasserstein_angstrom": 1.1227320430754588,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.09544864658349209,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 1.0,
+            "rmsf_profile_spearman": 1.0,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "4M5L",
+      "scenarios": {
+        "T1": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 1.589826595946388,
+            "rmsf_profile_pearson": 0.5231780593043359,
+            "rmsf_profile_spearman": 0.41953698475437606,
+            "rg_wasserstein_angstrom": 0.3754454798165825,
+            "pair_distance_wasserstein_angstrom": 0.5173236250134461,
+            "step_displacement_wasserstein_angstrom": 1.4161749662861272,
+            "step_amplitude_ratio": 0.008730761046446904,
+            "velocity_autocorrelation_mae": 1.0449400921847107,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 1.5898265952630775,
+            "rmsf_profile_pearson": 0.5231781325477017,
+            "rmsf_profile_spearman": 0.41953698475437606,
+            "rg_wasserstein_angstrom": 0.3754454696298599,
+            "pair_distance_wasserstein_angstrom": 0.5173236278631472,
+            "step_displacement_wasserstein_angstrom": 1.4161749670261883,
+            "step_amplitude_ratio": 0.008730760528431889,
+            "velocity_autocorrelation_mae": 1.0449401317707459,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 1.6545390035200833,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.4278540489795182,
+            "pair_distance_wasserstein_angstrom": 0.5866669766473798,
+            "step_displacement_wasserstein_angstrom": 1.4286481519199883,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.09995181782808246,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 0.9999999999999999,
+            "rmsf_profile_spearman": 1.0,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        },
+        "T2": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 1.5939648407280984,
+            "rmsf_profile_pearson": 0.7197505978949661,
+            "rmsf_profile_spearman": 0.7876905702992659,
+            "rg_wasserstein_angstrom": 0.2627983907756629,
+            "pair_distance_wasserstein_angstrom": 0.41028791585221985,
+            "step_displacement_wasserstein_angstrom": 1.4152260071624425,
+            "step_amplitude_ratio": 0.009185386409688693,
+            "velocity_autocorrelation_mae": 1.0361741975274283,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 1.593964834028431,
+            "rmsf_profile_pearson": 0.7197499257731657,
+            "rmsf_profile_spearman": 0.7876905702992659,
+            "rg_wasserstein_angstrom": 0.2627984242392859,
+            "pair_distance_wasserstein_angstrom": 0.4102879339437778,
+            "step_displacement_wasserstein_angstrom": 1.415226005308169,
+            "step_amplitude_ratio": 0.009185387707884992,
+            "velocity_autocorrelation_mae": 1.0361741648909455,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 1.669617997385447,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.25395090587603175,
+            "pair_distance_wasserstein_angstrom": 0.39322970099720017,
+            "step_displacement_wasserstein_angstrom": 1.4283459163306402,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.13047340593747045,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 1.0000000000000002,
+            "rmsf_profile_spearman": 1.0,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        },
+        "T3": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 1.8205499056061414,
+            "rmsf_profile_pearson": 0.7051999403110469,
+            "rmsf_profile_spearman": 0.7854319593450029,
+            "rg_wasserstein_angstrom": 0.30806900817363464,
+            "pair_distance_wasserstein_angstrom": 0.43375826568622666,
+            "step_displacement_wasserstein_angstrom": 1.3298169298723015,
+            "step_amplitude_ratio": 0.014623197318942238,
+            "velocity_autocorrelation_mae": 1.0425310225345572,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 1.8205502905375992,
+            "rmsf_profile_pearson": 0.7052008930926631,
+            "rmsf_profile_spearman": 0.7854319593450029,
+            "rg_wasserstein_angstrom": 0.30806877997948756,
+            "pair_distance_wasserstein_angstrom": 0.43375816691895036,
+            "step_displacement_wasserstein_angstrom": 1.329816946224814,
+            "step_amplitude_ratio": 0.01462318520194615,
+            "velocity_autocorrelation_mae": 1.042531005870575,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 2.276272954873811,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.2947437616875136,
+            "pair_distance_wasserstein_angstrom": 0.4507144092118171,
+            "step_displacement_wasserstein_angstrom": 1.3495516905351084,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.05293523194376619,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 1.0,
+            "rmsf_profile_spearman": 1.0,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "1CTR",
+      "scenarios": {
+        "T1": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 3.8900406658628737,
+            "rmsf_profile_pearson": 0.018043918421148074,
+            "rmsf_profile_spearman": -0.1811713191023536,
+            "rg_wasserstein_angstrom": 0.12810660549437095,
+            "pair_distance_wasserstein_angstrom": 0.4310008536046116,
+            "step_displacement_wasserstein_angstrom": 1.9669165016965373,
+            "step_amplitude_ratio": 0.006613952084705571,
+            "velocity_autocorrelation_mae": 0.9962487660073759,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 3.8900406725068293,
+            "rmsf_profile_pearson": 0.01804356076610006,
+            "rmsf_profile_spearman": -0.1811713191023536,
+            "rg_wasserstein_angstrom": 0.12810660831644288,
+            "pair_distance_wasserstein_angstrom": 0.43100086644919444,
+            "step_displacement_wasserstein_angstrom": 1.9669165031837264,
+            "step_amplitude_ratio": 0.006613951333604555,
+            "velocity_autocorrelation_mae": 0.9962487732878454,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 3.9579828784125537,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.0885909276762602,
+            "pair_distance_wasserstein_angstrom": 0.3929819105808334,
+            "step_displacement_wasserstein_angstrom": 1.9800122075645008,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.09308996572051162,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 1.0,
+            "rmsf_profile_spearman": 1.0000000000000002,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        },
+        "T2": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 1.4863788707827534,
+            "rmsf_profile_pearson": 0.8668330364054156,
+            "rmsf_profile_spearman": 0.5478927203065135,
+            "rg_wasserstein_angstrom": 0.14402410182935843,
+            "pair_distance_wasserstein_angstrom": 0.4518351760996486,
+            "step_displacement_wasserstein_angstrom": 1.338581758773422,
+            "step_amplitude_ratio": 0.011707265073374292,
+            "velocity_autocorrelation_mae": 1.0484830196580142,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 1.4863788628088739,
+            "rmsf_profile_pearson": 0.8668329894389522,
+            "rmsf_profile_spearman": 0.5478927203065135,
+            "rg_wasserstein_angstrom": 0.1440240914924077,
+            "pair_distance_wasserstein_angstrom": 0.4518351782999742,
+            "step_displacement_wasserstein_angstrom": 1.3385817572056191,
+            "step_amplitude_ratio": 0.01170726623090378,
+            "velocity_autocorrelation_mae": 1.0484830084841499,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 1.5778134898937384,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.22158844360941896,
+            "pair_distance_wasserstein_angstrom": 0.4885145410059866,
+            "step_displacement_wasserstein_angstrom": 1.354438529665811,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.12797298496368173,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 0.9999999999999998,
+            "rmsf_profile_spearman": 1.0000000000000002,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        },
+        "T3": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 5.873998753597102,
+            "rmsf_profile_pearson": 0.6601489381531379,
+            "rmsf_profile_spearman": 0.7629994526546252,
+            "rg_wasserstein_angstrom": 0.08464130838991393,
+            "pair_distance_wasserstein_angstrom": 0.46739934522253523,
+            "step_displacement_wasserstein_angstrom": 2.7263847656867,
+            "step_amplitude_ratio": 0.004853675873151157,
+            "velocity_autocorrelation_mae": 1.0495880456611553,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 5.873998821595674,
+            "rmsf_profile_pearson": 0.6601472543286345,
+            "rmsf_profile_spearman": 0.7629994526546252,
+            "rg_wasserstein_angstrom": 0.08464130430367228,
+            "pair_distance_wasserstein_angstrom": 0.4673994165429486,
+            "step_displacement_wasserstein_angstrom": 2.7263847675435082,
+            "step_amplitude_ratio": 0.004853675195405494,
+            "velocity_autocorrelation_mae": 1.0495879888779642,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 6.181067296054853,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.1442789903712553,
+            "pair_distance_wasserstein_angstrom": 0.5287692691283604,
+            "step_displacement_wasserstein_angstrom": 2.739682295544685,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.05949923525435778,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 0.9999999999999999,
+            "rmsf_profile_spearman": 1.0000000000000002,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "4HXS",
+      "scenarios": {
+        "T1": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 1.6458303748129786,
+            "rmsf_profile_pearson": 0.04606612108931557,
+            "rmsf_profile_spearman": 0.20652173913043478,
+            "rg_wasserstein_angstrom": 0.2314733556084279,
+            "pair_distance_wasserstein_angstrom": 0.36950815757994276,
+            "step_displacement_wasserstein_angstrom": 1.338949645147292,
+            "step_amplitude_ratio": 0.010923601097374714,
+            "velocity_autocorrelation_mae": 1.0386139070827265,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 1.6458303594230406,
+            "rmsf_profile_pearson": 0.04606535747847694,
+            "rmsf_profile_spearman": 0.20652173913043478,
+            "rg_wasserstein_angstrom": 0.23147337573798657,
+            "pair_distance_wasserstein_angstrom": 0.36950815946341026,
+            "step_displacement_wasserstein_angstrom": 1.3389496415587903,
+            "step_amplitude_ratio": 0.010923603748185459,
+            "velocity_autocorrelation_mae": 1.0386138935266573,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 1.722550774949938,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.15564359583491288,
+            "pair_distance_wasserstein_angstrom": 0.34298681459637287,
+            "step_displacement_wasserstein_angstrom": 1.353737331749953,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.14789143716282607,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 0.9999999999999999,
+            "rmsf_profile_spearman": 1.0,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        },
+        "T2": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 2.121192466541664,
+            "rmsf_profile_pearson": 0.2814435788386328,
+            "rmsf_profile_spearman": 0.5859683794466403,
+            "rg_wasserstein_angstrom": 0.09583966962470347,
+            "pair_distance_wasserstein_angstrom": 0.21220140774414384,
+            "step_displacement_wasserstein_angstrom": 1.2758367195380758,
+            "step_amplitude_ratio": 0.009590018880804895,
+            "velocity_autocorrelation_mae": 1.000679378701744,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 2.1211925031708994,
+            "rmsf_profile_pearson": 0.2814431125534298,
+            "rmsf_profile_spearman": 0.5859683794466403,
+            "rg_wasserstein_angstrom": 0.0958396356060562,
+            "pair_distance_wasserstein_angstrom": 0.21220137407674008,
+            "step_displacement_wasserstein_angstrom": 1.2758367260045522,
+            "step_amplitude_ratio": 0.009590013860991084,
+            "velocity_autocorrelation_mae": 1.000679328519785,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 2.19242782991373,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.1917831823020792,
+            "pair_distance_wasserstein_angstrom": 0.3738231038686678,
+            "step_displacement_wasserstein_angstrom": 1.2881904906656325,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.11489580798037005,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 1.0000000000000002,
+            "rmsf_profile_spearman": 1.0,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        },
+        "T3": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 2.7177036503288137,
+            "rmsf_profile_pearson": 0.20497704763251123,
+            "rmsf_profile_spearman": 0.30434782608695654,
+            "rg_wasserstein_angstrom": 0.1524381082727681,
+            "pair_distance_wasserstein_angstrom": 0.3459898970101304,
+            "step_displacement_wasserstein_angstrom": 1.3626907914206197,
+            "step_amplitude_ratio": 0.009658442468447192,
+            "velocity_autocorrelation_mae": 1.0193772143075346,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 2.7177036453483905,
+            "rmsf_profile_pearson": 0.20498222812792657,
+            "rmsf_profile_spearman": 0.30434782608695654,
+            "rg_wasserstein_angstrom": 0.15243802688913619,
+            "pair_distance_wasserstein_angstrom": 0.3459898141176133,
+            "step_displacement_wasserstein_angstrom": 1.3626907915923738,
+            "step_amplitude_ratio": 0.009658442343624136,
+            "velocity_autocorrelation_mae": 1.0193772214226478,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 3.0245931319332335,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.2322000157222785,
+            "pair_distance_wasserstein_angstrom": 0.4134909936178028,
+            "step_displacement_wasserstein_angstrom": 1.3759806210870875,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.06029478401879472,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 1.0,
+            "rmsf_profile_spearman": 1.0,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "6BIB",
+      "scenarios": {
+        "T1": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 1.3770107544854517,
+            "rmsf_profile_pearson": 0.1542898680817414,
+            "rmsf_profile_spearman": 0.015403201449713078,
+            "rg_wasserstein_angstrom": 0.07298609493570105,
+            "pair_distance_wasserstein_angstrom": 0.5140944703666656,
+            "step_displacement_wasserstein_angstrom": 1.4010198905987559,
+            "step_amplitude_ratio": 0.010921880584559182,
+            "velocity_autocorrelation_mae": 1.0538653948698984,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 1.3770108131983025,
+            "rmsf_profile_pearson": 0.154289527257791,
+            "rmsf_profile_spearman": 0.015403201449713078,
+            "rg_wasserstein_angstrom": 0.07298612623299958,
+            "pair_distance_wasserstein_angstrom": 0.5140944740244422,
+            "step_displacement_wasserstein_angstrom": 1.4010199017561928,
+            "step_amplitude_ratio": 0.010921872707742584,
+            "velocity_autocorrelation_mae": 1.0538653950993468,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 1.4572750334792228,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.12567497980925355,
+            "pair_distance_wasserstein_angstrom": 0.4319582370805645,
+            "step_displacement_wasserstein_angstrom": 1.4164906321320487,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.10516757821202605,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 1.0,
+            "rmsf_profile_spearman": 1.0,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        },
+        "T2": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 1.2622261098674896,
+            "rmsf_profile_pearson": 0.608156748339221,
+            "rmsf_profile_spearman": 0.2823920265780731,
+            "rg_wasserstein_angstrom": 0.06790935471322186,
+            "pair_distance_wasserstein_angstrom": 0.3542383861089314,
+            "step_displacement_wasserstein_angstrom": 1.2269280610029762,
+            "step_amplitude_ratio": 0.006671226592248908,
+            "velocity_autocorrelation_mae": 1.064391335321869,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 1.2622261675592397,
+            "rmsf_profile_pearson": 0.6081564980135512,
+            "rmsf_profile_spearman": 0.2823920265780731,
+            "rg_wasserstein_angstrom": 0.06790936362703497,
+            "pair_distance_wasserstein_angstrom": 0.35423842259749827,
+            "step_displacement_wasserstein_angstrom": 1.2269280720840618,
+            "step_amplitude_ratio": 0.006671217620931449,
+            "velocity_autocorrelation_mae": 1.064391380783727,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 1.309740818433151,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.0637465799346029,
+            "pair_distance_wasserstein_angstrom": 0.4113922785784715,
+            "step_displacement_wasserstein_angstrom": 1.2351681475951115,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.12326264940865231,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 1.0,
+            "rmsf_profile_spearman": 1.0,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        },
+        "T3": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 2.9065428715595742,
+            "rmsf_profile_pearson": 0.08909696489049568,
+            "rmsf_profile_spearman": 0.10646330413772274,
+            "rg_wasserstein_angstrom": 0.07240344341506402,
+            "pair_distance_wasserstein_angstrom": 0.39545735811203503,
+            "step_displacement_wasserstein_angstrom": 1.2772082988582145,
+            "step_amplitude_ratio": 0.013580144962063742,
+            "velocity_autocorrelation_mae": 1.0296767185345443,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 2.90654351417264,
+            "rmsf_profile_pearson": 0.08910752687439287,
+            "rmsf_profile_spearman": 0.10646330413772274,
+            "rg_wasserstein_angstrom": 0.0724028206586073,
+            "pair_distance_wasserstein_angstrom": 0.3954575552358134,
+            "step_displacement_wasserstein_angstrom": 1.2772083263045297,
+            "step_amplitude_ratio": 0.013580123764589246,
+            "velocity_autocorrelation_mae": 1.0296767106639184,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 3.3125803035208765,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.09975553552961167,
+            "pair_distance_wasserstein_angstrom": 0.44155339145706035,
+            "step_displacement_wasserstein_angstrom": 1.2947917586361792,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.046699925528805135,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 1.0,
+            "rmsf_profile_spearman": 1.0,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "4Q93",
+      "scenarios": {
+        "T1": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 0.7196961386238145,
+            "rmsf_profile_pearson": 0.41602101508377726,
+            "rmsf_profile_spearman": 0.2769607843137255,
+            "rg_wasserstein_angstrom": 0.03857369996153643,
+            "pair_distance_wasserstein_angstrom": 0.12144724203993951,
+            "step_displacement_wasserstein_angstrom": 0.9018362588236642,
+            "step_amplitude_ratio": 0.007076883982400639,
+            "velocity_autocorrelation_mae": 1.0312622085030374,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 0.719696103337317,
+            "rmsf_profile_pearson": 0.41602254860973914,
+            "rmsf_profile_spearman": 0.2769607843137255,
+            "rg_wasserstein_angstrom": 0.03857363129548568,
+            "pair_distance_wasserstein_angstrom": 0.12144717512520205,
+            "step_displacement_wasserstein_angstrom": 0.9018362514685045,
+            "step_amplitude_ratio": 0.0070768920804427805,
+            "velocity_autocorrelation_mae": 1.031262106607366,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 0.7530436650426713,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.0412942391042084,
+            "pair_distance_wasserstein_angstrom": 0.09847992189864374,
+            "step_displacement_wasserstein_angstrom": 0.9082639373335724,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.1518568067882997,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 0.9999999999999999,
+            "rmsf_profile_spearman": 1.0000000000000002,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        },
+        "T2": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 0.7866071227370399,
+            "rmsf_profile_pearson": 0.6924131083110796,
+            "rmsf_profile_spearman": 0.5000000000000001,
+            "rg_wasserstein_angstrom": 0.029172954078784417,
+            "pair_distance_wasserstein_angstrom": 0.11604525490079876,
+            "step_displacement_wasserstein_angstrom": 0.786645355333639,
+            "step_amplitude_ratio": 0.006681760136408232,
+            "velocity_autocorrelation_mae": 1.0534455539215666,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 0.7866070116517768,
+            "rmsf_profile_pearson": 0.6924141173696148,
+            "rmsf_profile_spearman": 0.5000000000000001,
+            "rg_wasserstein_angstrom": 0.029172806883614698,
+            "pair_distance_wasserstein_angstrom": 0.11604524233766422,
+            "step_displacement_wasserstein_angstrom": 0.7866453383248737,
+            "step_amplitude_ratio": 0.0066817816138335035,
+            "velocity_autocorrelation_mae": 1.0534458675324738,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 0.8171194039714983,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.0303769587809267,
+            "pair_distance_wasserstein_angstrom": 0.11468666908980771,
+            "step_displacement_wasserstein_angstrom": 0.7919368876601578,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.15215593502571584,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 1.0,
+            "rmsf_profile_spearman": 1.0000000000000002,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        },
+        "T3": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 1.0736451850616693,
+            "rmsf_profile_pearson": 0.8050876591960444,
+            "rmsf_profile_spearman": 0.8382352941176472,
+            "rg_wasserstein_angstrom": 0.02701562110067507,
+            "pair_distance_wasserstein_angstrom": 0.08267757320849842,
+            "step_displacement_wasserstein_angstrom": 0.8602118569148895,
+            "step_amplitude_ratio": 0.008542554321014558,
+            "velocity_autocorrelation_mae": 1.0533100761873453,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 1.0736451970144325,
+            "rmsf_profile_pearson": 0.8050903746995621,
+            "rmsf_profile_spearman": 0.8382352941176472,
+            "rg_wasserstein_angstrom": 0.0270147379995614,
+            "pair_distance_wasserstein_angstrom": 0.08267733442347787,
+            "step_displacement_wasserstein_angstrom": 0.8602118589879981,
+            "step_amplitude_ratio": 0.008542551931604171,
+            "velocity_autocorrelation_mae": 1.0533102302548873,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 1.2447960584390827,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.042347024490834224,
+            "pair_distance_wasserstein_angstrom": 0.10987320407792767,
+            "step_displacement_wasserstein_angstrom": 0.8676235784641121,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.10226752927455145,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 1.0000000000000002,
+            "rmsf_profile_spearman": 1.0000000000000002,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "1SWG",
+      "scenarios": {
+        "T1": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 1.8985315990737057,
+            "rmsf_profile_pearson": 0.700787056265959,
+            "rmsf_profile_spearman": 0.4264705882352941,
+            "rg_wasserstein_angstrom": 0.10343248160434526,
+            "pair_distance_wasserstein_angstrom": 0.24105228988988575,
+            "step_displacement_wasserstein_angstrom": 1.4562309929298909,
+            "step_amplitude_ratio": 0.0049432708565822995,
+            "velocity_autocorrelation_mae": 1.0339599681280345,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 1.8985316167454331,
+            "rmsf_profile_pearson": 0.7007879049947033,
+            "rmsf_profile_spearman": 0.4264705882352941,
+            "rg_wasserstein_angstrom": 0.1034325268874653,
+            "pair_distance_wasserstein_angstrom": 0.2410522986729247,
+            "step_displacement_wasserstein_angstrom": 1.4562309952028727,
+            "step_amplitude_ratio": 0.0049432693034318674,
+            "velocity_autocorrelation_mae": 1.0339599262372317,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 1.9360640666874342,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.11071384305489516,
+            "pair_distance_wasserstein_angstrom": 0.1907678913641853,
+            "step_displacement_wasserstein_angstrom": 1.4634652982885399,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.09330323907137404,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 1.0000000000000002,
+            "rmsf_profile_spearman": 1.0,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        },
+        "T2": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 1.409261342951568,
+            "rmsf_profile_pearson": 0.7912190088781695,
+            "rmsf_profile_spearman": 0.6147058823529412,
+            "rg_wasserstein_angstrom": 0.09079208697036925,
+            "pair_distance_wasserstein_angstrom": 0.20655250039096257,
+            "step_displacement_wasserstein_angstrom": 1.106855381000873,
+            "step_amplitude_ratio": 0.00902904265268687,
+            "velocity_autocorrelation_mae": 1.0222640017265034,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 1.409261285191116,
+            "rmsf_profile_pearson": 0.7912195724533801,
+            "rmsf_profile_spearman": 0.6147058823529412,
+            "rg_wasserstein_angstrom": 0.09079214582627242,
+            "pair_distance_wasserstein_angstrom": 0.20655253895287068,
+            "step_displacement_wasserstein_angstrom": 1.1068553703061363,
+            "step_amplitude_ratio": 0.009029052227716702,
+            "velocity_autocorrelation_mae": 1.0222639359263224,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 1.4674137698429734,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.10176460251341735,
+            "pair_distance_wasserstein_angstrom": 0.20746868128060905,
+            "step_displacement_wasserstein_angstrom": 1.116940282451633,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.1100099466664372,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 1.0,
+            "rmsf_profile_spearman": 1.0,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        },
+        "T3": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 1.198661973824993,
+            "rmsf_profile_pearson": 0.05478283468367765,
+            "rmsf_profile_spearman": 0.12352941176470589,
+            "rg_wasserstein_angstrom": 0.04618620161156749,
+            "pair_distance_wasserstein_angstrom": 0.15040886288158928,
+            "step_displacement_wasserstein_angstrom": 1.1894444926245487,
+            "step_amplitude_ratio": 0.04930042704383108,
+            "velocity_autocorrelation_mae": 1.033981021563093,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 1.198662650331133,
+            "rmsf_profile_pearson": 0.05479120164283516,
+            "rmsf_profile_spearman": 0.12352941176470589,
+            "rg_wasserstein_angstrom": 0.04618751988231914,
+            "pair_distance_wasserstein_angstrom": 0.15041010956302878,
+            "step_displacement_wasserstein_angstrom": 1.1894445218415175,
+            "step_amplitude_ratio": 0.04930040369128276,
+            "velocity_autocorrelation_mae": 1.0339810067587494,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 2.6230064608587753,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.131082545070206,
+            "pair_distance_wasserstein_angstrom": 0.2190419274731091,
+            "step_displacement_wasserstein_angstrom": 1.2511255147890834,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.048671334225403574,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 1.0000000000000002,
+            "rmsf_profile_spearman": 1.0,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "3GCP",
+      "scenarios": {
+        "T1": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 0.8459545530413026,
+            "rmsf_profile_pearson": 0.5683095344674955,
+            "rmsf_profile_spearman": 0.4853479853479854,
+            "rg_wasserstein_angstrom": 0.06035368787657561,
+            "pair_distance_wasserstein_angstrom": 0.13803567462639416,
+            "step_displacement_wasserstein_angstrom": 0.772622930103695,
+            "step_amplitude_ratio": 0.010990607416915321,
+            "velocity_autocorrelation_mae": 1.0316124629301928,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 0.8459545669068818,
+            "rmsf_profile_pearson": 0.5683106231862708,
+            "rmsf_profile_spearman": 0.4853479853479854,
+            "rg_wasserstein_angstrom": 0.060353735652197434,
+            "pair_distance_wasserstein_angstrom": 0.13803568646074404,
+            "step_displacement_wasserstein_angstrom": 0.7726229324729101,
+            "step_amplitude_ratio": 0.010990604384160161,
+            "velocity_autocorrelation_mae": 1.0316124461848095,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 0.8904996350322114,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.05159076471381027,
+            "pair_distance_wasserstein_angstrom": 0.14558954283178674,
+            "step_displacement_wasserstein_angstrom": 0.7812088903278926,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.16175984712411434,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 1.0,
+            "rmsf_profile_spearman": 1.0000000000000002,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        },
+        "T2": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 0.6861023341303425,
+            "rmsf_profile_pearson": 0.8645573552744056,
+            "rmsf_profile_spearman": 0.7203907203907205,
+            "rg_wasserstein_angstrom": 0.02030299375518534,
+            "pair_distance_wasserstein_angstrom": 0.09975845149969133,
+            "step_displacement_wasserstein_angstrom": 0.8413497598047497,
+            "step_amplitude_ratio": 0.015439963098081351,
+            "velocity_autocorrelation_mae": 1.0474892072433037,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 0.686102329436774,
+            "rmsf_profile_pearson": 0.8645571318034598,
+            "rmsf_profile_spearman": 0.7203907203907205,
+            "rg_wasserstein_angstrom": 0.02030292402313023,
+            "pair_distance_wasserstein_angstrom": 0.09975841462710686,
+            "step_displacement_wasserstein_angstrom": 0.841349758264657,
+            "step_amplitude_ratio": 0.01543996490032086,
+            "velocity_autocorrelation_mae": 1.0474891509064508,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 0.7621834391358362,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.0473810364358247,
+            "pair_distance_wasserstein_angstrom": 0.13922953720149248,
+            "step_displacement_wasserstein_angstrom": 0.8545438858682461,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.09971405737301524,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 1.0,
+            "rmsf_profile_spearman": 1.0000000000000002,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        },
+        "T3": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 1.1303546809159764,
+            "rmsf_profile_pearson": 0.01628067879485331,
+            "rmsf_profile_spearman": -0.05677655677655678,
+            "rg_wasserstein_angstrom": 0.026494040036333266,
+            "pair_distance_wasserstein_angstrom": 0.0759000180383277,
+            "step_displacement_wasserstein_angstrom": 0.8550658226985582,
+            "step_amplitude_ratio": 0.006426416542602487,
+            "velocity_autocorrelation_mae": 1.0493217721859855,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 1.1303548717946863,
+            "rmsf_profile_pearson": 0.016298723738327556,
+            "rmsf_profile_spearman": -0.05677655677655678,
+            "rg_wasserstein_angstrom": 0.026494139910922355,
+            "pair_distance_wasserstein_angstrom": 0.07590019666165634,
+            "step_displacement_wasserstein_angstrom": 0.8550658307245148,
+            "step_amplitude_ratio": 0.006426407216562043,
+            "velocity_autocorrelation_mae": 1.0493218105954036,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 1.2580667795459206,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.026624831688975635,
+            "pair_distance_wasserstein_angstrom": 0.11134828633543187,
+            "step_displacement_wasserstein_angstrom": 0.8605963734695264,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.06985668885840607,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 0.9999999999999999,
+            "rmsf_profile_spearman": 1.0000000000000002,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "2FMB",
+      "scenarios": {
+        "T1": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 1.2774729234397166,
+            "rmsf_profile_pearson": 0.06711968316893306,
+            "rmsf_profile_spearman": -0.036205358516103237,
+            "rg_wasserstein_angstrom": 0.18549984368721548,
+            "pair_distance_wasserstein_angstrom": 0.5097360763102532,
+            "step_displacement_wasserstein_angstrom": 1.2098991351401156,
+            "step_amplitude_ratio": 0.007662970792992231,
+            "velocity_autocorrelation_mae": 1.0478467260795432,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 1.2774729181697362,
+            "rmsf_profile_pearson": 0.06711840775898262,
+            "rmsf_profile_spearman": -0.036205358516103237,
+            "rg_wasserstein_angstrom": 0.185499786579254,
+            "pair_distance_wasserstein_angstrom": 0.5097360212468136,
+            "step_displacement_wasserstein_angstrom": 1.2098991335857898,
+            "step_amplitude_ratio": 0.0076629720678218615,
+            "velocity_autocorrelation_mae": 1.0478467143119525,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 1.325945726135645,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.19198600923156972,
+            "pair_distance_wasserstein_angstrom": 0.4938447834877054,
+            "step_displacement_wasserstein_angstrom": 1.2192421521415617,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.11909371838784544,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 1.0,
+            "rmsf_profile_spearman": 1.0000000000000002,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        },
+        "T2": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 1.2594786712129307,
+            "rmsf_profile_pearson": 0.07966932257877937,
+            "rmsf_profile_spearman": 0.06862714940478022,
+            "rg_wasserstein_angstrom": 0.1980683954175292,
+            "pair_distance_wasserstein_angstrom": 0.45282179058199024,
+            "step_displacement_wasserstein_angstrom": 1.1948139193854261,
+            "step_amplitude_ratio": 0.00978177323078874,
+            "velocity_autocorrelation_mae": 1.0363797987490835,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 1.2594787289488583,
+            "rmsf_profile_pearson": 0.07966945308222151,
+            "rmsf_profile_spearman": 0.06862714940478022,
+            "rg_wasserstein_angstrom": 0.19806834650924615,
+            "pair_distance_wasserstein_angstrom": 0.4528217395905163,
+            "step_displacement_wasserstein_angstrom": 1.1948139284161623,
+            "step_amplitude_ratio": 0.00978176574644382,
+            "velocity_autocorrelation_mae": 1.0363797407876534,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 1.327537264348492,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.13225401301673134,
+            "pair_distance_wasserstein_angstrom": 0.39246480718492543,
+            "step_displacement_wasserstein_angstrom": 1.2066167710159708,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.10428623594764205,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 0.9999999999999998,
+            "rmsf_profile_spearman": 1.0000000000000002,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        },
+        "T3": {
+          "epoch5": {
+            "rmsf_profile_mae_angstrom": 1.6083823577825627,
+            "rmsf_profile_pearson": 0.2531170098632104,
+            "rmsf_profile_spearman": 0.2896121074164078,
+            "rg_wasserstein_angstrom": 0.08286852123581413,
+            "pair_distance_wasserstein_angstrom": 0.32015546639687203,
+            "step_displacement_wasserstein_angstrom": 1.0475811777859285,
+            "step_amplitude_ratio": 0.010929251964491288,
+            "velocity_autocorrelation_mae": 1.038473576693344,
+            "velocity_autocorrelation_lags": 10
+          },
+          "candidate": {
+            "rmsf_profile_mae_angstrom": 1.6083815991226555,
+            "rmsf_profile_pearson": 0.2531281342449629,
+            "rmsf_profile_spearman": 0.2896121074164078,
+            "rg_wasserstein_angstrom": 0.08286635527929069,
+            "pair_distance_wasserstein_angstrom": 0.320154325843682,
+            "step_displacement_wasserstein_angstrom": 1.047581146178332,
+            "step_amplitude_ratio": 0.010929281806712335,
+            "velocity_autocorrelation_mae": 1.038473624020829,
+            "velocity_autocorrelation_lags": 10
+          },
+          "static": {
+            "rmsf_profile_mae_angstrom": 1.8756901406414082,
+            "rmsf_profile_pearson": 0.0,
+            "rmsf_profile_spearman": 0.0,
+            "rg_wasserstein_angstrom": 0.09299567150717036,
+            "pair_distance_wasserstein_angstrom": 0.4066609463444245,
+            "step_displacement_wasserstein_angstrom": 1.0591569711940556,
+            "step_amplitude_ratio": 0.0,
+            "velocity_autocorrelation_mae": 0.07379879001965775,
+            "velocity_autocorrelation_lags": 10
+          },
+          "truth": {
+            "rmsf_profile_mae_angstrom": 0.0,
+            "rmsf_profile_pearson": 1.0,
+            "rmsf_profile_spearman": 1.0000000000000002,
+            "rg_wasserstein_angstrom": 0.0,
+            "pair_distance_wasserstein_angstrom": 0.0,
+            "step_displacement_wasserstein_angstrom": 0.0,
+            "step_amplitude_ratio": 1.0,
+            "velocity_autocorrelation_mae": 0.0,
+            "velocity_autocorrelation_lags": 10
+          }
+        }
+      }
+    }
+  ]
+}

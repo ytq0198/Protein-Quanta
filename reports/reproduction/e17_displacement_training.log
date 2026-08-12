@@ -1,0 +1,61 @@
+/mnt/localDisk3/weizian/conda_envs/protein-quanta-neuralmd/lib/python3.10/site-packages/torch_geometric/nn/conv/message_passing.py:1032: UserWarning: 'EquiMessagePassing.jittable' is deprecated and a no-op. Please remove its usage.
+  warnings.warn(f"'{self.__class__.__name__}.jittable' is deprecated "
+/mnt/localDisk3/weizian/external/NeuralMD/NeuralMD/models/FrameNetLigand_01.py:365: UserWarning: Using torch.cross without specifying the dim arg is deprecated.
+Please either pass the dim explicitly or simply use torch.linalg.cross.
+The default value of dim will change to agree with that of linalg.cross in a future release. (Triggered internally at /pytorch/aten/src/ATen/native/Cross.cpp:62.)
+  edge_cross = torch.cross(pos[i], pos[j])
+args Namespace(seed=42, device=1, batch_size=8, num_workers=0, loss='MSE', epochs=5, optimizer='Adam', lr=0.0001, max_grad_norm=0.0, pair_loss_coefficient=0.0, pair_loss_beta=0.5, displacement_loss_coefficient=1.0, displacement_loss_beta=0.5, save_every_epoch=5, calibration_batches=0, calibration_output='', calibration_target_fraction=0.1, lr_scheduler='None', decay=0, print_every_epoch=5, output_model_dir='/mnt/localDisk3/weizian/runs/protein-quanta/e17-displacement-c1', input_data_dir='/mnt/localDisk3/weizian/datasets/misato', dataset='MISATO_100', eval_train=False, eval_test_during_training=False, verbose=False, NeuralMD_Binding_start_with_first_frame=False, NeuralMD_Binding_frame_num=20, NeuralMD_step_size=5.0, NeuralMD_scaling=100.0, NeuralMD_velocity_refined_value_coefficient=0.0, NeuralMD_binding_model='NeuralMD_Binding01', ODE_method='euler', use_MLP_velocity=False, model_3d_ligand='FrameNet01', model_3d_protein='FrameNetProtein03', loss_pos_coefficient=1, emb_dim=128, FrameNet_cutoff=5, FrameNet_num_layers=4, FrameNet_complex_layer=1, FrameNet_num_radial=100, FrameNet_rbf_type='RBF_repredding_01', FrameNet_gamma=None, FrameNet_readout='mean')
+len of train 80
+len of val 10
+len of test 10
+Initial
+MAE val: 5.86991		test: nan
+RMSE val: 3.87292		test: nan
+hr MAE val: 0.52136		test: nan
+Stability val: 81.09502		test: nan
+Ligand collision val: 8.23803		test: nan
+Binding collision val: 0.00650		test: nan
+FPS: nan
+
+epoch 1
+loss pos: 3.49990	loss velocity: 0.00000	5.192s
+loss pair: 0.00000	pair coefficient: 0
+loss displacement: 0.42358	displacement coefficient: 1
+optimizer_stats grad_norm_mean: 0.000184	grad_norm_max: 0.000432	clipped_batches: 0	skipped_nonfinite_batches: 0
+epoch 2
+loss pos: 14.64146	loss velocity: 0.00000	1.876s
+loss pair: 0.00000	pair coefficient: 0
+loss displacement: 0.56953	displacement coefficient: 1
+optimizer_stats grad_norm_mean: 0.000318	grad_norm_max: 0.001218	clipped_batches: 0	skipped_nonfinite_batches: 0
+epoch 3
+loss pos: 7.89033	loss velocity: 0.00000	1.587s
+loss pair: 0.00000	pair coefficient: 0
+loss displacement: 0.49559	displacement coefficient: 1
+optimizer_stats grad_norm_mean: 0.000191	grad_norm_max: 0.000464	clipped_batches: 0	skipped_nonfinite_batches: 0
+epoch 4
+loss pos: 4.69846	loss velocity: 0.00000	2.046s
+loss pair: 0.00000	pair coefficient: 0
+loss displacement: 0.51320	displacement coefficient: 1
+optimizer_stats grad_norm_mean: 0.000193	grad_norm_max: 0.000361	clipped_batches: 0	skipped_nonfinite_batches: 0
+epoch 5
+loss pos: 14.66789	loss velocity: 0.00000	2.101s
+loss pair: 0.00000	pair coefficient: 0
+loss displacement: 0.56142	displacement coefficient: 1
+optimizer_stats grad_norm_mean: 0.000219	grad_norm_max: 0.000346	clipped_batches: 0	skipped_nonfinite_batches: 0
+save model with optimal loss
+save periodic model /mnt/localDisk3/weizian/runs/protein-quanta/e17-displacement-c1/model_epoch_005.pth
+MAE train: 0.00000		val: 5.87011		test: nan
+RMSE train: 0.00000		val: 3.87303		test: nan
+hr MAE train: 0.00000		val: 0.52132		test: nan
+Stability train:0.00000		val: 81.09717		test: nan
+Ligand collision train:0.00000		val: 8.24547		test: nan
+Binding collision train:0.00000		val: 0.00651		test: nan
+
+best MAE train: 0.000000	val: 5.870109	test: nan
+best RMSE train: 0.000000	val: 3.873028	test: nan
+best hr MAE train: 0.000000	val: 0.521319	test: nan
+best Stability train: 0.000000	val: 81.097165	test: nan
+best Ligand collision train: 0.000000	val: 8.245471	test: nan
+best Binding collision train: 0.000000	val: 0.006508	test: nan
+FPS: nan
+save model in the last epoch

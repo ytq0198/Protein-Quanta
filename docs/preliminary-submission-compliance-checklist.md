@@ -71,7 +71,7 @@
 | P1 | 开源仓库公开但默认分支名仍为研究分支 | GitHub 默认分支 `codex/reproduction-bootstrap` | 参赛前人工决定是否改名；链接必须能匿名访问且 README 首页无临时措辞 |
 | P1 | 旧解读 PDF 的晋级人数已过期 | 7 月 PDF 写 Top 50/Top 15；当前 GOAI 在线页面写 Top 40/Top 20 | 一律采用当前官网；不得从旧幻灯片复制人数。对照记录见 `reports/reproduction/2026-08-12-official-materials-audit.md` |
 
-评分对齐的 E13-E17 实验、Phys/Dyn 晋升门槛与 T1 优先顺序见 `docs/scoring-aligned-execution-plan.md`。E15 已判定 `beta=1` anchor 为 Phys no-go；E16 显示未锚定 epoch 5 仅在 T3 结构分布和部分 Phys 均值上占优，未通过两场景 Dyn 晋升门槛。当前活动安全基线仍是未锚定 epoch 5，但不得写成方向二综合性能提升。
+评分对齐的 E13-E17 实验、Phys/Dyn 晋升门槛与 T1 优先顺序见 `docs/scoring-aligned-execution-plan.md`。E15 已判定 `beta=1` anchor 为 Phys no-go；E16 显示未锚定 epoch 5 仅在 T3 结构分布和部分 Phys 均值上占优，未通过两场景 Dyn 晋升门槛；E17 位移损失也未改善动态幅度。当前活动安全基线仍是未锚定 epoch 5，但不得写成方向二综合性能提升。
 
 ## 5. 8 月 12-16 日冲刺安排
 
@@ -104,7 +104,7 @@
 - [ ] 项目名称、方向、成员身份和获奖信息与报名/证书一致。
 - [ ] 所有实验数字均可在冻结 JSON 找到；表格注明 split、样本数和 proxy 身份。
 - [ ] 没有报告虚构官方总分；没有把内部 test 写成比赛隐藏测试。
-- [ ] Pair loss 与 `beta=1` anchor 均明确为 no-go；E7/E8 明确为后续设想；Phys 不声称官方改善。
+- [ ] Pair loss、`beta=1` anchor、低容量门控和 E17 位移 loss 均明确为 no-go；后续设想不写成已完成成果；Phys/Dyn 不声称官方改善。
 - [ ] 主方案图只展示未锚定 epoch 5；若保留 `beta=1` 图，标题/图注明确写“历史代理候选，E15 Phys no-go”。
 - [ ] MISATO 数据、checkpoint、轨迹和秘密未进入 Git。
 - [ ] 第三方来源、固定 commit、许可证状态和未解决风险已披露。

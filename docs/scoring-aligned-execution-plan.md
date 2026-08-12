@@ -111,11 +111,11 @@ Dyn gate：冻结候选在 T1/T2/T3 中至少两个场景的分布指标整体�
 | E14 | bond-aware Phys evaluator | 合成单测 + validation | 实现、测试、validation JSON | **已完成**：覆盖键长、极端键长与排除 1/2-hop 的非键碰撞 |
 | E15 | 冻结候选 Phys gate | validation；test 不调参 | 对照表与决策报告 | **no-go**：T1/T2 键长 MAE 分别恶化 8.99%/13.69%；未查看新 Phys test 结果 |
 | E16 | Dyn 分布 evaluator | 合成单测 + validation | 实现、测试、分布指标 JSON | **已完成；晋升 no-go**：T3 结构分布改善，但 T1/T2 未整体改善；发现模型步幅仅为真值约 1% |
-| E17 | T1 优先小预算创新 | validation | 预注册、同预算对照 | 联合门槛通过才进入 frozen test |
+| E17 | T1 优先小预算创新 | validation | 预注册、同预算对照 | **已完成；no-go**：19/20 安全门槛通过，但核心 T1 动态幅度改善门槛失败；未访问新 test |
 | M1 | 初赛证据冻结 | 已验证事实 | evidence index、图表、复现命令 | 数字逐项可追溯、合规风险显式披露 |
 
 ## 8. 当前候选状态（2026-08-13）
 
 `seed 42 / epoch 5 / beta=1 / decay=98` 只保留为**历史冻结代理候选**。E15 validation 显示其在 T1/T2 的键长 MAE 分别比未锚定 epoch-5 恶化 `8.99%` 和 `13.69%`，并新增极端键长事件，因此已按预注册门槛降级，`active_for_submission=false`。未依据该结果重选 beta，也未运行新的 bond-aware Phys test 对比。
 
-当前活动安全基线为未锚定的 `seed 42 / epoch 5`。E16 已显示其 T3 Rg/原子对距离分布改善约 `8.48%/11.93%`，但 T1/T2 未整体改善，且 epoch-5 与 published NeuralMD 的逐帧位移幅度都只有真值约 `1%`，因此仍不能称为方向二综合提升。E17 直接针对训练期动态幅度/短程闭环错配。详细证据见 `reports/reproduction/2026-08-13-bond-aware-phys-validation.md` 与 `reports/reproduction/2026-08-13-dynamics-distribution-validation.md`。
+当前活动安全基线为未锚定的 `seed 42 / epoch 5`。E16 已显示其 T3 Rg/原子对距离分布改善约 `8.48%/11.93%`，但 T1/T2 未整体改善，且 epoch-5 与 published NeuralMD 的逐帧位移幅度都只有真值约 `1%`。E17 的固定系数位移损失在 19/20 安全检查上通过，却未让 T1 动态幅度理想差距改善 5%，实际几乎完全等同基线，故判 no-go 且不访问新 test。初赛不得称为方向二综合提升；详细证据见三份 2026-08-13 E15/E16/E17 报告。

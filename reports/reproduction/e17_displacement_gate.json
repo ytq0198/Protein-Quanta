@@ -1,0 +1,169 @@
+{
+  "status": "E17 validation-only project gate; not official competition score",
+  "passed": false,
+  "failed_checks": [
+    "step_amplitude_ideal_gap_ratio:T1"
+  ],
+  "checks": [
+    {
+      "name": "coordinate_rmse_ratio",
+      "scenario": "T1",
+      "module": "Geo",
+      "value": 0.9999999961567841,
+      "threshold": "<=1.02",
+      "passed": true
+    },
+    {
+      "name": "matching_ratio",
+      "scenario": "T1",
+      "module": "Geo",
+      "value": 0.9999999570208336,
+      "threshold": "<=1.00",
+      "passed": true
+    },
+    {
+      "name": "stability_point_change",
+      "scenario": "T1",
+      "module": "Stab",
+      "value": 0.0,
+      "threshold": ">=0.00",
+      "passed": true
+    },
+    {
+      "name": "step_amplitude_ideal_gap_ratio",
+      "scenario": "T1",
+      "module": "Dyn",
+      "value": 0.9999999997844906,
+      "threshold": "<=0.95",
+      "passed": false
+    },
+    {
+      "name": "bond_length_mae_ratio",
+      "scenario": "T1",
+      "module": "Phys",
+      "value": 1.0000000473099155,
+      "threshold": "<=1.05",
+      "passed": true
+    },
+    {
+      "name": "extreme_bond_event_point_change",
+      "scenario": "T1",
+      "module": "Phys",
+      "value": 0.0,
+      "threshold": "<=0.10",
+      "passed": true
+    },
+    {
+      "name": "extreme_bond_event_point_change",
+      "scenario": "T2",
+      "module": "Phys",
+      "value": 0.0,
+      "threshold": "<=0.10",
+      "passed": true
+    },
+    {
+      "name": "extreme_bond_event_point_change",
+      "scenario": "T3",
+      "module": "Phys",
+      "value": 0.0,
+      "threshold": "<=0.10",
+      "passed": true
+    },
+    {
+      "name": "coordinate_rmse_safety_ratio",
+      "scenario": "T2",
+      "module": "Geo",
+      "value": 0.9999999867669124,
+      "threshold": "<=1.05",
+      "passed": true
+    },
+    {
+      "name": "rmsf_profile_mae_angstrom_safety_ratio",
+      "scenario": "T2",
+      "module": "Dyn",
+      "value": 0.9999999960167787,
+      "threshold": "<=1.05",
+      "passed": true
+    },
+    {
+      "name": "rg_wasserstein_angstrom_safety_ratio",
+      "scenario": "T2",
+      "module": "Dyn",
+      "value": 0.9999997466068803,
+      "threshold": "<=1.05",
+      "passed": true
+    },
+    {
+      "name": "pair_distance_wasserstein_angstrom_safety_ratio",
+      "scenario": "T2",
+      "module": "Dyn",
+      "value": 0.9999999906615383,
+      "threshold": "<=1.05",
+      "passed": true
+    },
+    {
+      "name": "step_displacement_wasserstein_angstrom_safety_ratio",
+      "scenario": "T2",
+      "module": "Dyn",
+      "value": 0.9999999991900853,
+      "threshold": "<=1.05",
+      "passed": true
+    },
+    {
+      "name": "step_amplitude_ideal_gap_safety_ratio",
+      "scenario": "T2",
+      "module": "Dyn",
+      "value": 0.999999997853914,
+      "threshold": "<=1.05",
+      "passed": true
+    },
+    {
+      "name": "coordinate_rmse_safety_ratio",
+      "scenario": "T3",
+      "module": "Geo",
+      "value": 0.9999999838650745,
+      "threshold": "<=1.05",
+      "passed": true
+    },
+    {
+      "name": "rmsf_profile_mae_angstrom_safety_ratio",
+      "scenario": "T3",
+      "module": "Dyn",
+      "value": 1.000000054302855,
+      "threshold": "<=1.05",
+      "passed": true
+    },
+    {
+      "name": "rg_wasserstein_angstrom_safety_ratio",
+      "scenario": "T3",
+      "module": "Dyn",
+      "value": 0.9999971652338717,
+      "threshold": "<=1.05",
+      "passed": true
+    },
+    {
+      "name": "pair_distance_wasserstein_angstrom_safety_ratio",
+      "scenario": "T3",
+      "module": "Dyn",
+      "value": 1.0000000232322934,
+      "threshold": "<=1.05",
+      "passed": true
+    },
+    {
+      "name": "step_displacement_wasserstein_angstrom_safety_ratio",
+      "scenario": "T3",
+      "module": "Dyn",
+      "value": 1.0000000041572303,
+      "threshold": "<=1.05",
+      "passed": true
+    },
+    {
+      "name": "step_amplitude_ideal_gap_safety_ratio",
+      "scenario": "T3",
+      "module": "Dyn",
+      "value": 1.000000003767006,
+      "threshold": "<=1.05",
+      "passed": true
+    }
+  ]
+}
