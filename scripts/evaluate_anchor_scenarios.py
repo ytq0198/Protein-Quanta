@@ -7,7 +7,10 @@ from pathlib import Path
 
 import numpy as np
 
-from protein_quanta.anchoring import anchored_residual_rollout
+from protein_quanta.anchoring import (
+    anchored_residual_rollout,
+    validate_scenario_betas,
+)
 from scripts.evaluate_naive_baselines import _evaluate
 from scripts.evaluate_neuralmd_scenarios import _aggregate_scenarios
 from scripts.smoke_neuralmd import _scenario_rollout_comparison
@@ -59,20 +62,63 @@ def _sha256(path):
     return digest.hexdigest()
 
 
+def _parse_scenario_betas(values):
+    beta_by_scenario = {}
+    for token in values or []:
+        if "=" not in token:
+            raise ValueError("scenario beta must use SCENARIO=BETA syntax")
+        scenario, raw_beta = token.split("=", 1)
+        if not scenario or not raw_beta:
+            raise ValueError("scenario name and beta must be non-empty")
+        if scenario in beta_by_scenario:
+            raise ValueError(f"duplicate scenario beta: {scenario}")
+        try:
+            beta_by_scenario[scenario] = float(raw_beta)
+        except ValueError as error:
+            raise ValueError(f"invalid beta for {scenario}: {raw_beta}") from error
+    return beta_by_scenario
+
+
+def _resolve_anchor_policy(scenario_names, beta, scenario_beta_tokens):
+    if beta is not None and scenario_beta_tokens:
+        raise ValueError("--beta and --scenario-betas are mutually exclusive")
+    if scenario_beta_tokens:
+        beta_by_scenario = validate_scenario_betas(
+            _parse_scenario_betas(scenario_beta_tokens), scenario_names
+        )
+        policy_type = "scenario-conditioned"
+    else:
+        scalar_beta = 4.0 if beta is None else float(beta)
+        beta_by_scenario = validate_scenario_betas(
+            {name: scalar_beta for name in scenario_names}, scenario_names
+        )
+        policy_type = "scalar"
+    return {"type": policy_type, "beta_by_scenario": beta_by_scenario}
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--trajectory-dir", type=Path, required=True)
     parser.add_argument("--reference-report", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--beta", type=float, default=4.0)
+    parser.add_argument("--beta", type=float)
+    parser.add_argument("--scenario-betas", nargs="+")
     parser.add_argument("--decay-scale-frames", type=float, default=98.0)
     parser.add_argument("--contact-cutoff", type=float, default=4.5)
+    parser.add_argument("--split-label", default="validation")
+    parser.add_argument("--selection-allowed", action="store_true")
+    parser.add_argument("--policy-source", default="unspecified")
     args = parser.parse_args()
 
     reference = json.loads(args.reference_report.read_text(encoding="utf-8"))
     sample_ids = reference["protocol"]["sample_ids"]
     scenario_records = reference["protocol"]["scenarios"]
     scenario_names = [record["name"] for record in scenario_records]
+    anchor_policy = _resolve_anchor_policy(
+        scenario_names,
+        beta=args.beta,
+        scenario_beta_tokens=args.scenario_betas,
+    )
     samples = []
     for sample_id in sample_ids:
         scenarios = {}
@@ -83,7 +129,7 @@ def main():
                 "comparison": _anchored_scenario_comparison(
                     prediction,
                     truth,
-                    beta=args.beta,
+                    beta=anchor_policy["beta_by_scenario"][scenario_name],
                     decay_scale_frames=args.decay_scale_frames,
                     contact_cutoff=args.contact_cutoff,
                 )
@@ -92,10 +138,11 @@ def main():
 
     report = {
         "protocol": {
-            "status": "validation-only combination proxy; not official score",
-            "selection_allowed": False,
-            "beta": args.beta,
-            "beta_source": "frozen C1 validation selection on published checkpoint",
+            "status": "internal combination proxy; not official score",
+            "split_label": args.split_label,
+            "selection_allowed": args.selection_allowed,
+            "anchor_policy": anchor_policy,
+            "policy_source": args.policy_source,
             "decay_scale_frames": args.decay_scale_frames,
             "contact_cutoff_angstrom": args.contact_cutoff,
             "sample_ids": sample_ids,
