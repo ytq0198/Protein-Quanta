@@ -1,0 +1,40 @@
+{
+  "status": "pre-registered validation-only small-budget experiment; not an official competition score",
+  "date": "2026-08-13",
+  "hypothesis": "matching consecutive displacement vectors during the official 20-frame rollout reduces the measured local dynamics amplitude collapse without sacrificing T1 geometry or bond validity",
+  "causal_change": "add displacement Smooth-L1 only; architecture, data order, seed, optimizer, position loss and ODE solver remain fixed",
+  "training": {
+    "dataset": "MISATO-100",
+    "seed": 42,
+    "epochs": 5,
+    "batch_size": 8,
+    "learning_rate": 0.0001,
+    "window_frames": 20,
+    "start_with_first_frame": false,
+    "position_loss": "MSE",
+    "pair_loss_coefficient": 0.0,
+    "displacement_loss": "Smooth-L1 on consecutive predicted and target displacement vectors",
+    "displacement_loss_beta": 0.5,
+    "displacement_loss_coefficient": 1.0,
+    "coefficient_policy": "single uncalibrated feasibility value; no sweep before deadline",
+    "ode_method": "euler",
+    "ode_step_size": 5.0,
+    "ode_scaling": 100.0
+  },
+  "decision_split": "MISATO-100 validation only",
+  "test_access": "prohibited unless every validation gate passes",
+  "gates": {
+    "T1_coordinate_rmse_relative_to_epoch5": "<= 1.02",
+    "T1_matching_relative_to_epoch5": "<= 1.00",
+    "T1_stability_points_relative_to_epoch5": ">= 0.00",
+    "T1_step_amplitude_ideal_gap_relative_to_epoch5": "improve by at least 5%",
+    "T1_bond_length_mae_relative_to_epoch5": "<= 1.05",
+    "all_scenarios_extreme_bond_event_increase_points": "<= 0.10",
+    "T2_T3_coordinate_or_distribution_regression": "no metric designated primary may worsen by >5%"
+  },
+  "stop_rule": "any failed mandatory gate is no-go; do not tune the coefficient on the same validation split and do not inspect a new internal-test result",
+  "evidence": {
+    "mechanism_report": "reports/reproduction/2026-08-13-dynamics-distribution-validation.md",
+    "active_baseline": "configs/active_candidate.json"
+  }
+}

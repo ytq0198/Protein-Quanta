@@ -21,6 +21,9 @@ class NeuralMDTrainingCommandTests(unittest.TestCase):
         self.assertEqual(command[command.index("--max_grad_norm") + 1], "0.0")
         self.assertEqual(command[command.index("--pair_loss_coefficient") + 1], "0.0")
         self.assertEqual(command[command.index("--pair_loss_beta") + 1], "0.5")
+        self.assertEqual(
+            command[command.index("--displacement_loss_coefficient") + 1], "0.0"
+        )
         self.assertEqual(command[command.index("--save_every_epoch") + 1], "0")
         self.assertEqual(command[command.index("--calibration_batches") + 1], "0")
         self.assertIn("--no_eval_test_during_training", command)
@@ -56,6 +59,10 @@ class NeuralMDTrainingCommandTests(unittest.TestCase):
             build_training_command(Path("/runs/x"), epochs=1, pair_loss_coefficient=-1)
         with self.assertRaises(ValueError):
             build_training_command(Path("/runs/x"), epochs=1, pair_loss_beta=0)
+        with self.assertRaises(ValueError):
+            build_training_command(
+                Path("/runs/x"), epochs=1, displacement_loss_coefficient=-1
+            )
         with self.assertRaises(ValueError):
             build_training_command(Path("/runs/x"), epochs=1, save_every_epoch=-1)
         with self.assertRaises(ValueError):

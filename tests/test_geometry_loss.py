@@ -3,9 +3,34 @@ import unittest
 import torch
 
 from protein_quanta.geometry_loss import (
+    displacement_smooth_l1,
     calibrated_auxiliary_weight,
     pair_distance_smooth_l1,
 )
+
+
+class DisplacementLossTests(unittest.TestCase):
+    def test_zero_on_truth_and_translation_invariant(self):
+        truth = torch.tensor(
+            [[[0.0, 0.0, 0.0]], [[1.0, 0.0, 0.0]], [[3.0, 0.0, 0.0]]]
+        )
+        self.assertEqual(float(displacement_smooth_l1(truth, truth)), 0.0)
+        shifted = truth + torch.tensor([[[4.0, -2.0, 1.0]]])
+        self.assertEqual(float(displacement_smooth_l1(shifted, truth)), 0.0)
+
+    def test_detects_wrong_local_velocity_and_backpropagates(self):
+        truth = torch.tensor(
+            [[[0.0, 0.0, 0.0]], [[1.0, 0.0, 0.0]], [[3.0, 0.0, 0.0]]]
+        )
+        prediction = torch.zeros_like(truth, requires_grad=True)
+        loss = displacement_smooth_l1(prediction, truth)
+        loss.backward()
+        self.assertGreater(float(loss.detach()), 0.0)
+        self.assertTrue(torch.isfinite(prediction.grad).all())
+
+    def test_rejects_invalid_inputs(self):
+        with self.assertRaises(ValueError):
+            displacement_smooth_l1(torch.zeros(1, 2, 3), torch.zeros(1, 2, 3))
 
 
 class PairDistanceLossTests(unittest.TestCase):

@@ -18,6 +18,8 @@ def main():
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--pair-loss-coefficient", type=float, default=0.0)
     parser.add_argument("--pair-loss-beta", type=float, default=0.5)
+    parser.add_argument("--displacement-loss-coefficient", type=float, default=0.0)
+    parser.add_argument("--displacement-loss-beta", type=float, default=0.5)
     parser.add_argument("--save-every-epoch", type=int, default=0)
     parser.add_argument("--calibration-batches", type=int, default=0)
     parser.add_argument("--calibration-output", type=Path)
@@ -38,6 +40,8 @@ def main():
         max_grad_norm=args.max_grad_norm,
         pair_loss_coefficient=args.pair_loss_coefficient,
         pair_loss_beta=args.pair_loss_beta,
+        displacement_loss_coefficient=args.displacement_loss_coefficient,
+        displacement_loss_beta=args.displacement_loss_beta,
         save_every_epoch=args.save_every_epoch,
         calibration_batches=args.calibration_batches,
         calibration_output=args.calibration_output,

@@ -342,3 +342,9 @@ OOF 聚合相对 global beta=1 改善 T1/T2 Matching（-2.57%/-1.91%）、Stabil
 E13 没有按距离猜键，而是从 RCSB PDB 显式 `CONECT` 恢复键图，并要求重原子元素顺序与 MISATO 完全一致、PDB/MISATO frame-0 内部距离 MAE `<=2.0 A`、全部重原子有键覆盖。validation/test 覆盖率为 9/10、8/10；特殊 altloc、共价肽和多残基糖体系被严格拒绝。
 
 E14 在覆盖 validation 子集实现了同帧键长 MAE、20% 违例率、极端键长事件，以及排除图距离 1/2 后的非键碰撞。E15 结果显示 `beta=1` 相对未锚定 epoch-5 的 T1/T2/T3 键长 MAE变化为 `+8.99%/+13.69%/-1.67%`，前两项超过预注册 5% 防线；T1/T2 还新增极少量 extreme event。因此在 validation 即判 **no-go**，不运行新的 bond-aware test、不回调 beta。历史 manifest 已标记 `active_for_submission=false`，当前安全基线回退到未锚定 seed-42 epoch 5，等待相对 published NeuralMD 的直接 Phys/Dyn 对照。完整报告见 `reports/reproduction/2026-08-13-bond-aware-phys-validation.md`。
+
+## 2026-08-13：E16 动态分布验证与创新问题收敛
+
+重新生成 published checkpoint 的 validation 三场景轨迹后，对它与未锚定 epoch-5 同时计算 RMSF Pearson/Spearman、Rg/原子对/步长 Wasserstein 距离、位移幅度比和速度自相关。epoch-5 在三个场景的 RMSF 形状相关性均提高，T3 的 Rg/原子对分布距离改善 `8.48%/11.93%`；但 T1/T2 分布距离略有回退，未达到“两场景整体改善”的 E16 门槛，因此仍为 **no-go**，不访问新的 internal test 分布结果。
+
+新的机制证据是：epoch-5 和 published NeuralMD 的逐帧位移幅度都只有真值约 `0.9%-1.4%`。这说明模型虽然不是完全 Static，却存在强烈欠动力学；后续 E17 不再泛泛处理长程漂移，而是以训练期局部位移分布/速度动态为直接目标，并以 bond-aware 指标作安全门槛。直接 Phys 对照中，epoch-5 的 T1/T2/T3 平均键长 MAE相对 published 分别改善 `1.69%/2.22%/55.60%`，但 T3 rare extreme event 为 `0.2666%`、高于 published 的 `0.1082%`，所以只保留为安全工作基线，不声称综合 Phys 提升。完整报告见 `reports/reproduction/2026-08-13-dynamics-distribution-validation.md`。

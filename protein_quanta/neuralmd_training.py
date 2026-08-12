@@ -12,6 +12,8 @@ def build_training_command(
     max_grad_norm=0.0,
     pair_loss_coefficient=0.0,
     pair_loss_beta=0.5,
+    displacement_loss_coefficient=0.0,
+    displacement_loss_beta=0.5,
     save_every_epoch=0,
     calibration_batches=0,
     calibration_output=None,
@@ -32,6 +34,12 @@ def build_training_command(
         raise ValueError("pair_loss_coefficient must be finite and non-negative")
     if pair_loss_beta <= 0 or not math.isfinite(float(pair_loss_beta)):
         raise ValueError("pair_loss_beta must be finite and positive")
+    if displacement_loss_coefficient < 0 or not math.isfinite(
+        float(displacement_loss_coefficient)
+    ):
+        raise ValueError("displacement_loss_coefficient must be finite and non-negative")
+    if displacement_loss_beta <= 0 or not math.isfinite(float(displacement_loss_beta)):
+        raise ValueError("displacement_loss_beta must be finite and positive")
     if int(save_every_epoch) != save_every_epoch or save_every_epoch < 0:
         raise ValueError("save_every_epoch must be a non-negative integer")
     if int(calibration_batches) != calibration_batches or calibration_batches < 0:
@@ -82,6 +90,10 @@ def build_training_command(
         str(float(pair_loss_coefficient)),
         "--pair_loss_beta",
         str(float(pair_loss_beta)),
+        "--displacement_loss_coefficient",
+        str(float(displacement_loss_coefficient)),
+        "--displacement_loss_beta",
+        str(float(displacement_loss_beta)),
         "--save_every_epoch",
         str(int(save_every_epoch)),
         "--calibration_batches",

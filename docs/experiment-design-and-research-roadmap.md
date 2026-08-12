@@ -129,7 +129,7 @@ MISATO 当前预处理没有显式键表，因此第一版不声称“严格键�
 | E16 | Dyn 分布 evaluator | 无训练 | 合成单测 + validation | 能区分真实涨落与 Static/过平滑轨迹 |
 | E17 | T1 优先的局部闭环训练实验 | 小预算同预算对照 | validation | T1 Geo/Phys/Dyn 联合改善，T2/T3 不明显回退 |
 
-E13-E15 已完成，`epoch 5 + β=1` 为 Phys no-go。当前优先级更新为 E16 Dyn 分布证据 → 未锚定 epoch-5 与 published NeuralMD 的直接联合比较 → E17 T1 优先小预算创新 → 初赛证据冻结。活动安全基线为未锚定 `seed 42 / epoch 5`；只有 E16 与基础 Phys 都不回退后才能晋升。E3、E6/E6b、E11、E12、E15 的负结果保留为完整消融；初赛截止前不再用现有 validation 调 anchor/门控。E7/E8 转为复赛路线。
+E13-E16 已完成。`epoch 5 + β=1` 为 Phys no-go；未锚定 epoch-5 的 T3 Rg/原子对距离分布优于 published NeuralMD，但 T1/T2 未整体改善，E16 同样未通过综合晋升门槛。更关键的是，两者的逐帧位移幅度仅为真值约 1%，把创新问题收敛为“短窗口位置训练造成局部动力学欠幅，闭环又累积结构误差”。当前优先级为 E17 T1 优先的小预算动态暴露/位移约束实验 → 初赛证据冻结。活动安全基线仍为未锚定 `seed 42 / epoch 5`，但不得称为综合提升。E3、E6/E6b、E11、E12、E15、E16 的负结果保留为完整消融；初赛截止前不再用现有 validation 调 anchor/门控。E7/E8 转为复赛路线。
 
 
 

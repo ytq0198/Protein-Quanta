@@ -71,7 +71,7 @@
 | P1 | 开源仓库公开但默认分支名仍为研究分支 | GitHub 默认分支 `codex/reproduction-bootstrap` | 参赛前人工决定是否改名；链接必须能匿名访问且 README 首页无临时措辞 |
 | P1 | 旧解读 PDF 的晋级人数已过期 | 7 月 PDF 写 Top 50/Top 15；当前 GOAI 在线页面写 Top 40/Top 20 | 一律采用当前官网；不得从旧幻灯片复制人数。对照记录见 `reports/reproduction/2026-08-12-official-materials-audit.md` |
 
-评分对齐的 E13-E17 实验、Phys/Dyn 晋升门槛与 T1 优先顺序见 `docs/scoring-aligned-execution-plan.md`。E15 已判定 `beta=1` anchor 为 Phys no-go，当前活动安全基线是未锚定 epoch 5；在 E16 联合比较完成前不得写成方向二综合性能提升。
+评分对齐的 E13-E17 实验、Phys/Dyn 晋升门槛与 T1 优先顺序见 `docs/scoring-aligned-execution-plan.md`。E15 已判定 `beta=1` anchor 为 Phys no-go；E16 显示未锚定 epoch 5 仅在 T3 结构分布和部分 Phys 均值上占优，未通过两场景 Dyn 晋升门槛。当前活动安全基线仍是未锚定 epoch 5，但不得写成方向二综合性能提升。
 
 ## 5. 8 月 12-16 日冲刺安排
 

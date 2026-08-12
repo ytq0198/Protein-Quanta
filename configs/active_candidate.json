@@ -1,5 +1,5 @@
 {
-  "status": "active safe baseline pending score-facing Phys/Dyn comparison; not an official competition score",
+  "status": "active safe baseline after score-facing Phys/Dyn validation; not promoted as comprehensive improvement; not an official competition score",
   "active_for_submission": true,
   "method": "scenario-aware-checkpoint-selection",
   "checkpoint": {
@@ -28,14 +28,15 @@
   },
   "promotion_state": {
     "Geo": "project proxies available",
-    "Phys": "bond-aware validation available on 9/10 complexes; direct comparison to published checkpoint pending",
-    "Dyn": "mean-error proxies available; distribution evaluator pending",
+    "Phys": "bond-aware validation on 9/10 complexes improves mean bond error but has a T3 rare-extreme-event caveat",
+    "Dyn": "distribution validation improves T3 structural distributions but fails the two-scenario aggregate promotion gate",
     "Stab": "project proxy available",
     "overall": "not yet eligible for a direction-two comprehensive-improvement claim"
   },
   "supersedes": "configs/frozen_candidate.json",
   "evidence": {
     "scoring_plan": "docs/scoring-aligned-execution-plan.md",
-    "phys_no_go_report": "reports/reproduction/2026-08-13-bond-aware-phys-validation.md"
+    "phys_no_go_report": "reports/reproduction/2026-08-13-bond-aware-phys-validation.md",
+    "dynamics_report": "reports/reproduction/2026-08-13-dynamics-distribution-validation.md"
   }
 }

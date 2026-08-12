@@ -57,6 +57,23 @@ def pair_distance_smooth_l1(prediction, truth, atom_batch, beta=0.5):
     return torch.stack(complex_losses).mean()
 
 
+def displacement_smooth_l1(prediction, truth, beta=0.5):
+    """Match consecutive displacement vectors in an SE(3)-equivariant way."""
+    if prediction.shape != truth.shape:
+        raise ValueError("prediction and truth must have identical shapes")
+    if prediction.ndim != 3 or prediction.shape[0] < 2 or prediction.shape[-1] != 3:
+        raise ValueError("trajectories must have shape (frames>=2, atoms, 3)")
+    if beta <= 0:
+        raise ValueError("beta must be positive")
+    predicted_displacement = prediction[1:] - prediction[:-1]
+    true_displacement = truth[1:] - truth[:-1]
+    return functional.smooth_l1_loss(
+        predicted_displacement,
+        true_displacement,
+        beta=beta,
+    )
+
+
 def calibrated_auxiliary_weight(
     position_grad_norms,
     pair_grad_norms,

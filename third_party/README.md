@@ -80,3 +80,12 @@ auxiliary gradient contribution, write JSON, and exit without an optimizer
 step. The selected coefficient is then frozen for the 20-epoch feasibility
 run. Periodic files use `model_epoch_005.pth`, `model_epoch_010.pth`, and so
 on; model weights remain outside Git.
+
+## E17 local-displacement objective
+
+Apply `patches/neuralmd-displacement-loss.patch` after the E6 patch. It adds an
+SE(3)-equivariant consecutive-displacement Smooth-L1 term. The zero coefficient
+is an exact bypass; E17 uses a single preregistered coefficient for a small
+five-epoch validation-only causal comparison. This is motivated by E16's
+measured under-dynamic rollout amplitude and is not claimed as effective until
+the joint Geo/Phys/Dyn validation gate passes.
