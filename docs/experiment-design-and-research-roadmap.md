@@ -1,7 +1,9 @@
 # Protein-Quanta 实验设计与科研路线
 
-> 版本：v1.4（2026-08-12）
+> 版本：v1.5（2026-08-12）
 > 目标：在 2026-08-16 初赛截止前形成可信、可复现、有定量提升的方案，同时为复赛保留清晰的创新升级路线。
+
+> 评分对齐执行以 `docs/scoring-aligned-execution-plan.md` 为准。该文件把方向二的 `T1/T2/T3` 与 `Geo/Phys/Dyn/Stab` 双层权重转化为 E13-E17 的硬门槛；本路线图中的早期探索顺序若与其冲突，以评分对齐计划为准。
 
 ## 1. 科学问题与当前证据
 
@@ -119,8 +121,13 @@ MISATO 当前预处理没有显式键表，因此第一版不声称“严格键�
 | E10 | 冻结候选的碰撞代理审计 | 已完成 val + 1 次 frozen test | 不选参 | 配体—蛋白无一致恶化；配体内部信号需键表复核 |
 | E11 | 场景条件锚点 `T1/T2/T3=8/8/1` | 已完成 val + 1 次 frozen test；no-go | val 冻结映射，test 不回调 | T1 坐标 +2.295% 超过 2% 防线 |
 | E12 | 六维不确定性门控 grouped LOOCV | 已完成 validation OOF；no-go | 10-fold group by complex；未访问 test | balanced accuracy 0.40，低于 0.60 防线 |
+| E13 | 化学拓扑可用性审计 | 无训练 | 数据/schema/上游来源 | 可靠键表及来源可追溯，否则保持 Phys 未验证 |
+| E14 | bond-aware Phys evaluator | 无训练 | 合成单测 + validation | 覆盖非键碰撞、键长误差和极端事件 |
+| E15 | 冻结候选 Phys gate | 无训练 | validation；test 不回调 | 三场景通过预注册 Phys 防线 |
+| E16 | Dyn 分布 evaluator | 无训练 | 合成单测 + validation | 能区分真实涨落与 Static/过平滑轨迹 |
+| E17 | T1 优先的局部闭环训练实验 | 小预算同预算对照 | validation | T1 Geo/Phys/Dyn 联合改善，T2/T3 不明显回退 |
 
-当前优先级保持为 `epoch 5 + β=1`（已通过并冻结测试）→ 初赛证据整理；E3、E6/E6b、E11、E12 的负结果保留为完整消融。初赛截止前不再用现有 validation 调门控。E7/E8 转为复赛路线：先扩充独立复合物，再研究风险/收益双输出和保守拒绝机制。
+当前优先级更新为 E13 化学拓扑审计 → E14/E15 Phys 闭环 → E16 Dyn 分布证据 → E17 T1 优先小预算创新 → 初赛证据冻结。`epoch 5 + β=1` 保持冻结，但在 E15 前只能称为 Geo/Dyn/Stab 代理候选，不能称为方向二整体提升。E3、E6/E6b、E11、E12 的负结果保留为完整消融；初赛截止前不再用现有 validation 调门控。E7/E8 转为复赛路线。
 
 
 

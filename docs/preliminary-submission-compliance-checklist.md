@@ -71,6 +71,8 @@
 | P1 | 开源仓库公开但默认分支名仍为研究分支 | GitHub 默认分支 `codex/reproduction-bootstrap` | 参赛前人工决定是否改名；链接必须能匿名访问且 README 首页无临时措辞 |
 | P1 | 旧解读 PDF 的晋级人数已过期 | 7 月 PDF 写 Top 50/Top 15；当前 GOAI 在线页面写 Top 40/Top 20 | 一律采用当前官网；不得从旧幻灯片复制人数。对照记录见 `reports/reproduction/2026-08-12-official-materials-audit.md` |
 
+评分对齐的 E13-E17 实验、Phys/Dyn 晋升门槛与 T1 优先顺序见 `docs/scoring-aligned-execution-plan.md`。在 bond-aware Phys gate 完成前，冻结候选的标准身份必须是“Geo/Dyn/Stab 代理改善，Phys 未验证”，不得写成方向二综合性能提升。
+
 ## 5. 8 月 12-16 日冲刺安排
 
 ### 魏子安（组长；工作日可参与代码与实验）

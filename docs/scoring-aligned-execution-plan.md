@@ -1,0 +1,123 @@
+# GOAI 方向二评分对齐执行计划
+
+> 版本：v1.0（2026-08-12，Asia/Shanghai）  
+> 依据：`AI for research指导手册.pdf` 第 18-21、25-27 页。  
+> 性质：内部科研与实验执行文件，不是初赛答卷。初赛模板要求团队独立作答，本文件只维护可核查事实、决策门槛和证据入口。
+
+## 1. 唯一目标函数：双层评分同时对齐
+
+方向二技术性能先按每个场景
+
+`Score_t = 0.40 Geo_t + 0.25 Phys_t + 0.25 Dyn_t + 0.10 Stab_t`
+
+计算，再按
+
+`Final = 0.50 Score_T1 + 0.30 Score_T2 + 0.20 Score_T3`
+
+进入方向内排名；算法赛跨方向统一评审为技术性能 45%、科学意义 30%、方法创新性 20%、开源贡献 5%。官方归一化代码尚不可用，因此本项目只报告原始指标和相对基线变化，不自行生成“比赛总分”。
+
+## 2. 当前证据覆盖矩阵
+
+| 场景/模块 | Geo 40% | Phys 25% | Dyn 25% | Stab 10% | 当前结论 |
+|---|---|---|---|---|---|
+| T1 50% | coordinate RMSE、Matching、aligned RMSD | 仅无键表碰撞代理 | RMSF、Rg、接触图代理 | Stability、误差增长 | 方向对齐，但 Phys/Dyn 不完整；最高优先级 |
+| T2 30% | 同上 | 同上 | 同上 | 同上 | 方向对齐，但 Phys/Dyn 不完整 |
+| T3 20% | 同上；冻结候选 coordinate RMSE 有轻微代价 | 同上 | 同上 | 同上 | 长程改善明确，但不得掩盖 Geo 代价 |
+
+评分覆盖状态不是得分：`已有代理` 不等于 `官方指标已实现`，也不等于 `官方归一化成绩提高`。
+
+## 3. 截止日前 P0：关闭最低评分与合规缺口
+
+### P0-A：可追溯的 bond-aware Phys 评估
+
+先审计 MISATO HDF5、官方预处理缓存、PDBbind/MISATO 结构文件与 NeuralMD 上游代码。键拓扑只接受以下来源，按优先级排序：
+
+1. 数据集随附的显式键表/拓扑；
+2. 与样本 ID 一一对应、来源可追溯的原始配体结构文件；
+3. 由 RDKit 从明确键级的结构文件读取的拓扑。
+
+禁止仅按距离阈值“猜键”后称为化学合法性。若没有可靠拓扑，本阶段结论必须保持为 `Phys not verified`。
+
+最低指标：
+
+- 非键配体内部碰撞比例；
+- 配体-蛋白原子重叠比例；
+- 相对真实轨迹的键长分布误差与键长违例比例；
+- 若键级/邻接足够可靠，再增加键角分布误差；
+- 能量、立体化学只在存在可靠实现时报告，不用任意代理冒充。
+
+### P0-B：冻结候选 Phys 晋升门槛
+
+比较 published NeuralMD、epoch-5、epoch-5 + `beta=1`、Static 和真值；validation 先运行，当前 frozen internal test 不因 Phys 结果调参。
+
+冻结候选只有同时满足以下条件，才允许在内部材料中称为“通过基础 Phys gate”：
+
+1. T1/T2/T3 的非键碰撞率均不比 published NeuralMD 恶化超过 `0.10` 个百分点；
+2. 各场景键长误差均不恶化超过 `5%`；
+3. 无断键/极端键长事件的新增；
+4. 仍不得称为官方 Phys 改善，除非使用了组委会官方 evaluator。
+
+任一条件失败：保留方法作为 Geo/Dyn/Stab 候选，但不能作为“多模块整体提升”主张；优先研究受约束的弱锚定或键空间投影，而不是继续增强 Static 收缩。
+
+### P0-C：开源与合规
+
+- 团队人工选择项目级 LICENSE；
+- 核查 NeuralMD 固定 commit 的许可状态，不把许可不明的上游源码直接并入仓库；
+- 固定 MISATO、外部 checkpoint、torchdiffeq fork、PyTorch/PyG 的来源、版本与用途；
+- 人工确认 8 月 16 日具体截止时刻、ZIP 命名/大小、上传字段和回执；
+- 最终模板由团队成员独立撰写，内部证据文件不能直接作为答案提交。
+
+## 4. P1：补足 Dyn 分布证据，防止 Static 塌缩刷分
+
+在不增加训练的情况下，先实现与手册直接对应、可由现有轨迹计算的分布指标：
+
+- RMSF 谱：除 MAE 外增加 Pearson/Spearman 相关性；
+- 回转半径分布：Wasserstein 距离；
+- 配体内部距离分布：按原子对聚合的 Wasserstein/分位数误差；
+- 时间相关性：速度自相关或坐标/距离增量自相关；
+- 接触分布：若蛋白口袋坐标和原子映射可靠，评估关键接触占有率差异。
+
+Dyn gate：冻结候选在 T1/T2/T3 中至少两个场景的分布指标整体优于 published NeuralMD，且没有任一场景出现 `>5%` 的综合恶化；Static 必须作为防塌缩参照。若 anchor 只改善均值误差而使分布相关性接近 Static，则判定 no-go。
+
+## 5. P2：T1 优先的创新实验
+
+由于 T1 占方向内总分 50%，后续创新不再以 T3 单项提升作为首要目标。下一项训练创新必须同时满足：
+
+1. 直接作用于短程局部动力学，而不是更强静态收缩；
+2. 保留 SE(3) 性质；
+3. validation 上先通过 T1 Geo + Phys + Dyn 联合门槛；
+4. T2/T3 作为安全约束，不能出现明显回退；
+5. 只有 validation 预注册门槛通过才允许一次 frozen test。
+
+首选科研假设：**训练期局部 rollout exposure 与多时间尺度 checkpoint selection 联合，能减少短窗口 teacher-forcing 和闭环预测的状态分布错配；bond-aware validity 只作为安全约束，不以 Static 收缩换取表面稳定。**
+
+第一轮只进行小预算因果实验：同 seed、同 epoch、同数据顺序，对照官方训练，单独加入预测状态扰动或短程 closed-loop consistency。先检查 T1，再检查 T2/T3；不同时改网络、损失和采样。
+
+## 6. 科研意义线与竞赛得分线的共同晋升规则
+
+一个方法只有满足下面三层证据，才进入主方案：
+
+1. **竞赛层**：T1 优先的 Geo/Phys/Dyn/Stab 联合改善，不靠单一指标；
+2. **科研层**：能回答明确机制问题，并有同预算因果对照与失败解释；
+3. **复现层**：固定数据划分、随机种子、checkpoint、命令、环境、原始 JSON 与测试。
+
+仅有均值改善但缺乏物理合法性，或仅有新颖构思但没有验证，一律不晋升。失败实验写入消融与研究边界，不包装成成功创新。
+
+## 7. 执行顺序与交付物
+
+| 顺序 | 实验/任务 | 决策数据 | 交付物 | 完成条件 |
+|---|---|---|---|---|
+| E13 | 化学拓扑可用性审计 | 数据/schema/上游代码 | topology audit Markdown + JSON | 明确每个样本是否有可靠键表及来源 |
+| E14 | bond-aware Phys evaluator | 合成单测 + validation | 实现、测试、validation JSON | 指标定义正确，至少覆盖键长与非键碰撞 |
+| E15 | 冻结候选 Phys gate | validation；test 不调参 | 对照表与决策报告 | 明确 pass/no-go，不声称官方分数 |
+| E16 | Dyn 分布 evaluator | 合成单测 + validation | 实现、测试、分布指标 JSON | 能区分真实动力学与 Static 塌缩 |
+| E17 | T1 优先小预算创新 | validation | 预注册、同预算对照 | 联合门槛通过才进入 frozen test |
+| M1 | 初赛证据冻结 | 已验证事实 | evidence index、图表、复现命令 | 数字逐项可追溯、合规风险显式披露 |
+
+## 8. 当前冻结状态
+
+在 E13-E16 完成前，当前 `seed 42 / epoch 5 / beta=1 / decay=98` 的身份保持：
+
+`frozen internal candidate; Geo/Dyn/Stab proxy improvements; Phys not verified; not an official competition score`
+
+不得因计划更新而修改已经冻结的 test 结果，也不得依据后续 test 诊断重新选择 beta。
