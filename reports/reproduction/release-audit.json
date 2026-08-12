@@ -2,7 +2,7 @@
   "schema_version": 1,
   "status": "read-only project release audit; not a competition score",
   "passed": true,
-  "tracked_file_count": 138,
+  "tracked_file_count": 145,
   "errors": [],
   "warnings": [
     "project-level LICENSE is missing; team decision required"

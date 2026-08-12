@@ -322,3 +322,9 @@ GOAI 官网 AI for Research 页面公开内容与本地手册一致：8 月 16 �
 ## 2026-08-12：公开发布自动审计
 
 新增只读发布审计器，对 Git 跟踪文件检查 checkpoint/轨迹/HDF5 等禁入后缀、5 MiB 大文件、常见 token 前缀、manifest 证据缺失及“官方得分”误称。首轮审计通过，唯一警告为项目级 LICENSE 尚未由团队选择。新增 3 项回归测试后，本地与服务器均为 80 项通过，服务器 4 项可选绘图测试跳过。
+
+## 2026-08-12：场景条件锚定 no-go
+
+在查看本实验 frozen-test 前提交预注册设计 `e5dba58`：由 validation 固定 `T1=8, T2=8, T3=1`，并以当前 `global beta=1` 为比较对象。validation 上 T1/T2 四项指标全部改善，T3 保持 beta=1；完整性与 T3 坐标防线通过后，执行一次 frozen-test。
+
+冻结结果中，T1 Matching/Stability/RMSF 分别改善 3.98%/+1.17 点/12.03%，T2 分别改善 4.24%/+0.70 点/5.01%，但 T1 coordinate RMSE 恶化 2.295%，超过预注册的 2% 上限。因此该策略判定 **no-go**，不修改 `configs/frozen_candidate.json`，也不依据 test 回调 beta。结果说明场景 ID 本身不足以决定锚定强度；后续 C2 必须加入样本/状态不确定性并在 leave-one-complex-out 验证中显式保护坐标误差。完整报告见 `reports/reproduction/2026-08-12-scenario-conditioned-anchor.md`。

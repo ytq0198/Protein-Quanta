@@ -1,0 +1,45 @@
+{
+  "status": "preregistered internal proxy decision; not an official competition score",
+  "experiment": "scenario-conditioned Static-residual anchor",
+  "policy": {
+    "T1": 8.0,
+    "T2": 8.0,
+    "T3": 1.0,
+    "decay_scale_frames": 98.0
+  },
+  "baseline": "seed 42 epoch 5 with global beta=1",
+  "selection_split": "MISATO-100 validation (10 complexes)",
+  "frozen_evaluation_split": "MISATO-100 internal test (10 complexes)",
+  "test_used_for_selection": false,
+  "relative_to_global_beta1": {
+    "validation": {
+      "T1": {"coordinate_rmse_percent": -1.584375, "matching_percent": -4.746086, "stability_points": 1.297449, "rmsf_percent": -9.106724},
+      "T2": {"coordinate_rmse_percent": -1.347920, "matching_percent": -1.039169, "stability_points": 0.329802, "rmsf_percent": -10.607965},
+      "T3": {"coordinate_rmse_percent": 0.0, "matching_percent": 0.0, "stability_points": 0.0, "rmsf_percent": 0.0}
+    },
+    "frozen_internal_test": {
+      "T1": {"coordinate_rmse_percent": 2.295335, "matching_percent": -3.979597, "stability_points": 1.165874, "rmsf_percent": -12.034350},
+      "T2": {"coordinate_rmse_percent": -0.334303, "matching_percent": -4.241728, "stability_points": 0.702336, "rmsf_percent": -5.011491},
+      "T3": {"coordinate_rmse_percent": 0.0, "matching_percent": 0.0, "stability_points": 0.0, "rmsf_percent": 0.0}
+    }
+  },
+  "promotion_gates": {
+    "T1_matching_and_stability_improve": true,
+    "T2_matching_and_stability_improve": true,
+    "all_coordinate_rmse_changes_at_most_2_percent": false,
+    "all_rmsf_changes_at_most_5_percent": true
+  },
+  "failed_gate_evidence": "frozen-test T1 coordinate RMSE increased 2.295335% relative to global beta=1",
+  "promoted": false,
+  "frozen_candidate_changed": false,
+  "interpretation": "scenario identity alone is too coarse for stronger anchoring; future gating must use sample/state uncertainty and explicitly protect coordinate error",
+  "official_score_claimed": false,
+  "artifacts": {
+    "validation_report": "reports/reproduction/neuralmd_scenario_anchor881_val.json",
+    "validation_sha256": "7b0e01e20bb612880354c12ea258d242a26abd7f999a68b60af6839e8c30dc67",
+    "frozen_test_report": "reports/reproduction/neuralmd_scenario_anchor881_test.json",
+    "frozen_test_sha256": "32bdea911b4d4e5bf24969f1b6affde70f6a9d99cd4ddea67b5c5d9c401da3d5",
+    "figure": "reports/figures/neuralmd_scenario_anchor881_tradeoff.png",
+    "preregistration": "docs/superpowers/specs/2026-08-12-scenario-conditioned-anchor-design.md"
+  }
+}

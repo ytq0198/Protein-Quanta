@@ -12,14 +12,24 @@ def _relative_changes(
     candidate,
     metric,
     point_change=False,
+    baseline_model="neuralmd",
     candidate_model="neuralmd",
 ):
     changes = []
     for scenario in baseline:
-        reference = float(baseline[scenario]["neuralmd"][metric])
+        reference = float(baseline[scenario][baseline_model][metric])
         value = float(candidate[scenario][candidate_model][metric])
         changes.append(value - reference if point_change else 100.0 * (value / reference - 1.0))
     return changes
+
+
+def _panel_limits(values):
+    values = np.asarray(values, dtype=float)
+    low = min(float(values.min()), 0.0)
+    high = max(float(values.max()), 0.0)
+    span = high - low
+    padding = max(0.08 * span, 0.08)
+    return low - padding, high + padding
 
 
 def main():
@@ -32,6 +42,7 @@ def main():
     parser.add_argument("--earlystop-test", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--candidate-model", default="neuralmd")
+    parser.add_argument("--baseline-model", default="neuralmd")
     parser.add_argument(
         "--title",
         default="Scenario-aware early stopping: epoch 5 vs published checkpoint",
@@ -59,6 +70,7 @@ def main():
             earlystop_val,
             metric,
             point_change,
+            baseline_model=args.baseline_model,
             candidate_model=args.candidate_model,
         )
         test = _relative_changes(
@@ -66,6 +78,7 @@ def main():
             earlystop_test,
             metric,
             point_change,
+            baseline_model=args.baseline_model,
             candidate_model=args.candidate_model,
         )
         left = axis.bar(x - width / 2, validation, width, label="Validation", color="#1976A3")
@@ -73,6 +86,7 @@ def main():
         axis.bar_label(left, fmt="%.2f", padding=2, fontsize=8)
         axis.bar_label(right, fmt="%.2f", padding=2, fontsize=8)
         axis.axhline(0, color="#333333", linewidth=0.8)
+        axis.set_ylim(*_panel_limits(validation + test))
         axis.set_xticks(x, scenarios)
         axis.set_title(title, fontsize=11, weight="semibold")
         axis.grid(axis="y", alpha=0.2)
