@@ -93,6 +93,8 @@ NeuralMD 轨迹写成静态参考与动态残差：
 
 **场景条件中间实验（2026-08-12）：no-go。** 在 frozen-test 前预注册 `T1=8, T2=8, T3=1`。它在 validation 上改善 T1/T2 全部四项代理指标，在 frozen-test 上也改善 T1/T2 的 Matching、Stability 和 RMSF；但 T1 coordinate RMSE 相对 global beta=1 恶化 2.295%，超过 2% 晋升防线。因此场景 ID 不能替代可学习不确定性门控，冻结方案仍为 global beta=1。C2 的下一版必须使用推理时可观测、SE(3) 不变的样本/状态特征，采用 leave-one-complex-out 验证，并把坐标风险写入门控目标或硬约束；在交叉验证通过前不再使用 test。
 
+**低容量不确定性门控（2026-08-12）：validation no-go。** 六维 SE(3) 不变输入配合固定 L2=10 的 balanced logistic regression，在 grouped LOOCV 的 aggregate T1/T2 指标上优于 global beta=1，坐标/RMSF 防线也通过；但对“`beta=8` 安全且有益”标签的 balanced accuracy 仅 0.40（要求 `>=0.60`）。因此没有访问 test，也没有继续调特征、阈值或正则。该结果说明当前 10 个独立复合物不足以支持可靠的个体风险门控；复赛若继续，需扩充独立训练复合物，并把二分类改为风险/收益双输出加保守拒绝，而非在同一 validation 上继续搜参。
+
 #### C3：可微几何校正
 
 MISATO 当前预处理没有显式键表，因此第一版不声称“严格键约束”。可先使用重原子成对距离与回转半径构造一个小步、可微的坐标校正；若后续可靠恢复化学键，再只对共价键施加更强投影。该模块必须比较校正前后坐标误差、Matching、Stability、RMSF 与接触图，防止把轨迹压成静态构象。
@@ -116,8 +118,10 @@ MISATO 当前预处理没有显式键表，因此第一版不声称“严格键�
 | E9 | 场景感知 epoch-5 冻结方案 | 已完成 1 次 test | test | T3 改善在 test 复现 |
 | E10 | 冻结候选的碰撞代理审计 | 已完成 val + 1 次 frozen test | 不选参 | 配体—蛋白无一致恶化；配体内部信号需键表复核 |
 | E11 | 场景条件锚点 `T1/T2/T3=8/8/1` | 已完成 val + 1 次 frozen test；no-go | val 冻结映射，test 不回调 | T1 坐标 +2.295% 超过 2% 防线 |
+| E12 | 六维不确定性门控 grouped LOOCV | 已完成 validation OOF；no-go | 10-fold group by complex；未访问 test | balanced accuracy 0.40，低于 0.60 防线 |
 
-当前优先级保持为 `epoch 5 + β=1`（已通过并冻结测试）→ 初赛证据整理；E3、E6/E6b、E11 的负结果保留为完整消融。E7/E8 转为复赛路线，其中 E8 先做低容量、leave-one-complex-out 的不确定性门控，不再把场景 ID 直接等同于锚定强度。
+当前优先级保持为 `epoch 5 + β=1`（已通过并冻结测试）→ 初赛证据整理；E3、E6/E6b、E11、E12 的负结果保留为完整消融。初赛截止前不再用现有 validation 调门控。E7/E8 转为复赛路线：先扩充独立复合物，再研究风险/收益双输出和保守拒绝机制。
+
 
 
 ## 5. 统一评估与防止数据泄漏

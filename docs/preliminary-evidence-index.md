@@ -44,6 +44,10 @@
 
 `T1=8, T2=8, T3=1` 在 validation 改善 T1/T2 全部四项指标；冻结测试也改善 T1/T2 的 Matching、Stability 和 RMSF，但 T1 坐标 RMSE 相对 global `β=1` 上升 2.295%，超过预注册的 2% 防线。因此它是有方向信号但未通过晋升门槛的 no-go，当前冻结方案不变。不得只引用其几何改善而省略坐标失败。
 
+### 未晋升的不确定性门控
+
+按复合物 LOOCV 的六维 SE(3) 不变逻辑门控在 aggregate T1/T2 指标上有改善，但 safe/useful 标签 balanced accuracy 只有 0.40，未达到预注册的 0.60；因此没有访问 test。若人工材料提到该实验，必须同时披露分类失败，不能只引用聚合改善。
+
 ## 推荐引用的仓库产物
 
 - 总实验账：`reports/experiment-progress-report.md`；
@@ -51,6 +55,7 @@
 - 场景基准图：`reports/figures/neuralmd_scenario_baselines.png`；
 - 最终组合图：`reports/figures/neuralmd_earlystop_anchor1_tradeoff.png`；
 - 场景条件锚定 no-go：`reports/reproduction/2026-08-12-scenario-conditioned-anchor.md`、`reports/reproduction/scenario_anchor881_decision.json`、`reports/figures/neuralmd_scenario_anchor881_tradeoff.png`；
+- 不确定性门控 LOOCV no-go：`reports/reproduction/2026-08-12-uncertainty-gate-loocv.md`、`reports/reproduction/uncertainty_gate_loocv_val.json`、`reports/figures/uncertainty_gate_loocv.png`；
 - E6 失败与早停/组合因果链：`reports/reproduction/2026-08-12-neuralmd-pair-loss-and-earlystop.md`；
 - 最终验证/测试原始报告：`reports/reproduction/neuralmd_earlystop_anchor1_val.json`、`reports/reproduction/neuralmd_earlystop_anchor1_test.json`；
 - Phys 初筛：`reports/reproduction/2026-08-12-collision-proxy-audit.md`、`reports/reproduction/neuralmd_earlystop_anchor1_collision_val.json`、`reports/reproduction/neuralmd_earlystop_anchor1_collision_test.json`；
