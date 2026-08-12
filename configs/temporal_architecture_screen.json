@@ -1,0 +1,40 @@
+{
+  "status": "pre-registered invariant temporal architecture screen; not an official competition score",
+  "date": "2026-08-13",
+  "purpose": "test whether long-memory temporal cores learn MISATO dynamics before investing in full equivariant 3D architectures",
+  "architectures": {
+    "mlp": {"hidden_dim": 64, "layers": 1},
+    "rnn": {"hidden_dim": 48, "layers": 1},
+    "lstm": {"hidden_dim": 24, "layers": 1},
+    "gru": {"hidden_dim": 28, "layers": 1},
+    "transformer": {"hidden_dim": 16, "layers": 2, "heads": 4}
+  },
+  "representation": "12-dimensional per-frame rigid-motion-invariant ligand state: Rg, pair-distance statistics and step-magnitude statistics",
+  "training": {
+    "split": "MISATO-100 train only",
+    "objective": "standardized one-step feature MSE with teacher forcing",
+    "epochs": 200,
+    "batch_size": 16,
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "seed": 42,
+    "parameter_policy": "all models below 10k trainable parameters; exact counts must be reported",
+    "same_updates": true
+  },
+  "selection": {
+    "split": "MISATO-100 validation only",
+    "scenarios": ["T1", "T2", "T3"],
+    "scenario_weights": [0.5, 0.3, 0.2],
+    "primary": "weighted standardized rollout RMSE",
+    "controls": ["last-observation Static", "order-1 MLP"],
+    "evaluation_interval_epochs": 10
+  },
+  "promotion": {
+    "memory_signal": "architecture must beat MLP on weighted rollout RMSE and beat Static in at least two scenarios",
+    "long_history_signal": "must improve T2 or T3 over MLP by at least 5%",
+    "robustness": "all rollout values finite and no scenario RMSE >10 standardized units",
+    "3d_next_stage": "only the best passing recurrent core and Transformer enter an equivariant 3D pilot",
+    "test_access": "prohibited during this screen"
+  },
+  "limitations": "screen predicts invariant summaries, not atomic coordinates; it is architecture evidence and cannot be reported as Geo/Phys/Dyn/Stab competition performance"
+}
