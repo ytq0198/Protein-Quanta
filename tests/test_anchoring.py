@@ -2,7 +2,10 @@ import unittest
 
 import numpy as np
 
-from protein_quanta.anchoring import anchored_residual_rollout
+from protein_quanta.anchoring import (
+    anchored_residual_rollout,
+    validate_scenario_betas,
+)
 
 
 class AnchoredResidualTests(unittest.TestCase):
@@ -56,6 +59,42 @@ class AnchoredResidualTests(unittest.TestCase):
                 self.prediction,
                 self.history[:, :1],
                 beta=1,
+            )
+
+
+class ScenarioBetaPolicyTests(unittest.TestCase):
+    def test_complete_policy_is_normalized_to_floats(self):
+        policy = validate_scenario_betas(
+            {"T1": 8, "T2": 8, "T3": 1},
+            ["T1", "T2", "T3"],
+        )
+
+        self.assertEqual(policy, {"T1": 8.0, "T2": 8.0, "T3": 1.0})
+
+    def test_missing_or_unknown_scenarios_are_rejected(self):
+        with self.assertRaisesRegex(ValueError, "missing.*T3"):
+            validate_scenario_betas(
+                {"T1": 8, "T2": 8}, ["T1", "T2", "T3"]
+            )
+        with self.assertRaisesRegex(ValueError, "unknown.*T4"):
+            validate_scenario_betas(
+                {"T1": 8, "T2": 8, "T3": 1, "T4": 2},
+                ["T1", "T2", "T3"],
+            )
+
+    def test_invalid_beta_values_are_rejected(self):
+        for invalid in (-1, np.nan):
+            with self.subTest(invalid=invalid):
+                with self.assertRaisesRegex(ValueError, "finite and non-negative"):
+                    validate_scenario_betas(
+                        {"T1": invalid, "T2": 8, "T3": 1},
+                        ["T1", "T2", "T3"],
+                    )
+
+    def test_duplicate_expected_scenarios_are_rejected(self):
+        with self.assertRaisesRegex(ValueError, "expected_scenarios.*unique"):
+            validate_scenario_betas(
+                {"T1": 8, "T2": 8}, ["T1", "T1", "T2"]
             )
 
 

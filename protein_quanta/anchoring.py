@@ -3,6 +3,30 @@
 import numpy as np
 
 
+def validate_scenario_betas(beta_by_scenario, expected_scenarios):
+    """Validate and normalize a complete scenario-to-beta mapping."""
+    expected = list(expected_scenarios)
+    if len(expected) != len(set(expected)):
+        raise ValueError("expected_scenarios must contain unique names")
+
+    provided = set(beta_by_scenario)
+    expected_set = set(expected)
+    missing = sorted(expected_set - provided)
+    unknown = sorted(provided - expected_set)
+    if missing:
+        raise ValueError(f"scenario beta policy is missing: {', '.join(missing)}")
+    if unknown:
+        raise ValueError(f"scenario beta policy contains unknown: {', '.join(unknown)}")
+
+    normalized = {}
+    for scenario in expected:
+        beta = float(beta_by_scenario[scenario])
+        if not np.isfinite(beta) or beta < 0:
+            raise ValueError("scenario beta values must be finite and non-negative")
+        normalized[scenario] = beta
+    return normalized
+
+
 def anchored_residual_rollout(
     prediction,
     history,
