@@ -1,0 +1,43 @@
+{
+  "status": "pre-registered before paired development-only training",
+  "date": "2026-08-14",
+  "data": {
+    "source": "MISATO-100 official train; frozen 64-complex development split only",
+    "salt": "protein-quanta-frame-time-v1",
+    "train_ids": ["3NCG", "3SV2", "4QO4", "5JXN", "5I8B", "4DRU", "2W4X", "5KBQ", "6B8J", "2C1B", "1P19", "6AJR", "1Q6M", "1C5F", "1ZSH", "6CZE", "5UVC", "1W5X", "4RXD", "4D2T", "2H2G", "5ADR", "5F41", "5U0F", "2OPY", "6EQM", "5K0C", "3H22", "3HXF", "6PG3", "4OHO", "6JAW", "1HMR", "6F86", "1V2S", "6F3B", "1B6H", "3VVY", "5JSS", "3MP6", "2R59", "3BUG", "5X27", "3V0L", "3SNC", "2QRL", "4QME", "4DV9"],
+    "diagnostic_ids": ["5M6U", "5D1R", "3BX5", "4UMJ", "1QY1", "5MW6", "3ZM6", "2RC9", "5IIS", "2P7G", "4QDK", "2YWP", "3MG7", "4QSU", "2V12", "1F74"],
+    "old_16_complex_holdout_reused": false,
+    "official_validation_accessed": false,
+    "official_test_accessed": false
+  },
+  "protocols": {
+    "upstream_scaled_time": {
+      "scaling": 100.0,
+      "initial_velocity_scale": 1.0,
+      "euler_step_size": 0.025
+    },
+    "frame_time": {
+      "scaling": 1.0,
+      "initial_velocity_scale": 1.0,
+      "euler_step_size": 1.0
+    }
+  },
+  "training": {
+    "seed": 42,
+    "epochs": 5,
+    "learning_rate": 0.0001,
+    "gradient_clip_norm": 1.0,
+    "local_max_horizon": 20,
+    "multiscale_horizons": [5, 10, 20, 40],
+    "multiscale_coefficient": 0.25,
+    "same_initialization_order_and_windows": true,
+    "checkpoint_policy": "final epoch only; diagnostic targets are not used for selection"
+  },
+  "gate": {
+    "all_updates_finite": true,
+    "frame_time_T3_rmse_improvement_from_initial_min_fraction": 0.1,
+    "frame_time_T3_step_amplitude_ratio_min": 0.2,
+    "frame_time_T3_step_amplitude_ratio_max": 2.0,
+    "interpretation": "Pass establishes learnability only. It does not require beating the low-motion upstream protocol and does not authorize official validation/test."
+  }
+}
