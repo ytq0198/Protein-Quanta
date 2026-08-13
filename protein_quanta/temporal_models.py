@@ -4,9 +4,90 @@ import math
 
 import torch
 from torch import nn
+from torch.nn import functional as F
 
 
-ARCHITECTURES = ("mlp", "rnn", "lstm", "gru", "transformer")
+ARCHITECTURES = (
+    "mlp",
+    "rnn",
+    "lstm",
+    "gru",
+    "transformer",
+    "transformer_rope",
+)
+
+
+def _rotate_half(values):
+    even = values[..., 0::2]
+    odd = values[..., 1::2]
+    return torch.stack((-odd, even), dim=-1).flatten(-2)
+
+
+def apply_rotary_position(values, positions=None):
+    """Apply norm-preserving RoPE to tensors shaped (batch, heads, time, dim)."""
+    if values.ndim != 4 or values.shape[-1] % 2:
+        raise ValueError("RoPE requires shape (batch, heads, time, even_dim)")
+    length = values.shape[-2]
+    if positions is None:
+        positions = torch.arange(length, device=values.device, dtype=torch.float32)
+    positions = torch.as_tensor(positions, device=values.device, dtype=torch.float32)
+    if positions.ndim != 1 or positions.numel() != length:
+        raise ValueError("positions must contain one value per time step")
+    inverse_frequency = 1.0 / (
+        10000.0
+        ** (
+            torch.arange(0, values.shape[-1], 2, device=values.device).float()
+            / values.shape[-1]
+        )
+    )
+    angles = torch.outer(positions, inverse_frequency).repeat_interleave(2, dim=-1)
+    cosine = angles.cos().to(dtype=values.dtype)[None, None]
+    sine = angles.sin().to(dtype=values.dtype)[None, None]
+    return values * cosine + _rotate_half(values) * sine
+
+
+class _RotaryCausalAttention(nn.Module):
+    def __init__(self, hidden_dim, heads):
+        super().__init__()
+        if hidden_dim % heads:
+            raise ValueError("hidden_dim must be divisible by transformer_heads")
+        if (hidden_dim // heads) % 2:
+            raise ValueError("RoPE requires an even attention head dimension")
+        self.heads = heads
+        self.head_dim = hidden_dim // heads
+        self.qkv = nn.Linear(hidden_dim, 3 * hidden_dim)
+        self.output = nn.Linear(hidden_dim, hidden_dim)
+
+    def forward(self, values):
+        batch, length, hidden_dim = values.shape
+        qkv = self.qkv(values).reshape(
+            batch, length, 3, self.heads, self.head_dim
+        )
+        query, key, value = qkv.permute(2, 0, 3, 1, 4).unbind(0)
+        query = apply_rotary_position(query)
+        key = apply_rotary_position(key)
+        attended = F.scaled_dot_product_attention(
+            query, key, value, dropout_p=0.0, is_causal=True
+        )
+        attended = attended.transpose(1, 2).reshape(batch, length, hidden_dim)
+        return self.output(attended)
+
+
+class _RotaryTransformerBlock(nn.Module):
+    def __init__(self, hidden_dim, heads):
+        super().__init__()
+        self.attention_norm = nn.LayerNorm(hidden_dim)
+        self.attention = _RotaryCausalAttention(hidden_dim, heads)
+        self.feedforward_norm = nn.LayerNorm(hidden_dim)
+        self.feedforward = nn.Sequential(
+            nn.Linear(hidden_dim, 2 * hidden_dim),
+            nn.GELU(),
+            nn.Linear(2 * hidden_dim, hidden_dim),
+        )
+
+    def forward(self, values):
+        values = values + self.attention(self.attention_norm(values))
+        return values + self.feedforward(self.feedforward_norm(values))
 
 
 class TemporalFeatureForecaster(nn.Module):
@@ -41,7 +122,7 @@ class TemporalFeatureForecaster(nn.Module):
                 num_layers=layers,
                 batch_first=True,
             )
-        else:
+        elif architecture == "transformer":
             if hidden_dim % transformer_heads:
                 raise ValueError("hidden_dim must be divisible by transformer_heads")
             block = nn.TransformerEncoderLayer(
@@ -53,7 +134,9 @@ class TemporalFeatureForecaster(nn.Module):
                 batch_first=True,
                 norm_first=True,
             )
-            self.core = nn.TransformerEncoder(block, num_layers=layers)
+            self.core = nn.TransformerEncoder(
+                block, num_layers=layers, enable_nested_tensor=False
+            )
             position = torch.arange(maximum_length, dtype=torch.float32)[:, None]
             frequency = torch.exp(
                 torch.arange(0, hidden_dim, 2, dtype=torch.float32)
@@ -63,6 +146,13 @@ class TemporalFeatureForecaster(nn.Module):
             encoding[:, 0::2] = torch.sin(position * frequency)
             encoding[:, 1::2] = torch.cos(position * frequency[: encoding[:, 1::2].shape[1]])
             self.register_buffer("position_encoding", encoding, persistent=False)
+        else:
+            self.core = nn.Sequential(
+                *[
+                    _RotaryTransformerBlock(hidden_dim, transformer_heads)
+                    for _ in range(layers)
+                ]
+            )
         self.output_projection = nn.Linear(hidden_dim, feature_dim)
 
     def forward(self, sequence, state=None):
@@ -76,12 +166,15 @@ class TemporalFeatureForecaster(nn.Module):
             next_state = None
         elif self.architecture in ("rnn", "lstm", "gru"):
             hidden, next_state = self.core(encoded, state)
-        else:
+        elif self.architecture == "transformer":
             encoded = encoded + self.position_encoding[: encoded.shape[1]]
             mask = nn.Transformer.generate_square_subsequent_mask(
                 encoded.shape[1], device=encoded.device
             )
             hidden = self.core(encoded, mask=mask, is_causal=True)
+            next_state = None
+        else:
+            hidden = self.core(encoded)
             next_state = None
         return self.output_projection(hidden), next_state
 

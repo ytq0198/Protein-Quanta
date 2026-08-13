@@ -42,7 +42,7 @@ def _normalization(train):
     return mean, scale
 
 
-def _scenario_metrics(model, normalized, device):
+def _scenario_metrics(model, normalized, device, static_step_values):
     model.eval()
     summary = {}
     with torch.no_grad():
@@ -52,7 +52,10 @@ def _scenario_metrics(model, normalized, device):
             truth = values[:, scenario.target_start : scenario.target_end + 1]
             prediction = model.rollout(observed, truth.shape[1])
             error = prediction - truth
-            static = observed[:, -1:, :].expand_as(truth)
+            static = observed[:, -1:, :].expand_as(truth).clone()
+            static[..., 8:] = torch.as_tensor(
+                static_step_values, dtype=static.dtype, device=device
+            )
             static_error = static - truth
             summary[scenario.name] = {
                 "standardized_rmse": float(torch.sqrt(torch.mean(error.square())).cpu()),
@@ -86,7 +89,11 @@ def train_architecture(
     evaluation_interval,
     seed,
     device,
+    static_step_values,
+    checkpoint_policy="best_validation",
 ):
+    if checkpoint_policy not in ("best_validation", "final_epoch"):
+        raise ValueError("unknown checkpoint policy")
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
@@ -125,7 +132,9 @@ def train_architecture(
             optimizer.step()
             losses.append(float(loss.detach().cpu()))
         if epoch % evaluation_interval == 0 or epoch == epochs:
-            summary = _scenario_metrics(model, validation, device)
+            summary = _scenario_metrics(
+                model, validation, device, static_step_values
+            )
             weighted = _weighted_rmse(summary)
             record = {
                 "epoch": epoch,
@@ -141,12 +150,20 @@ def train_architecture(
                     for name, value in model.state_dict().items()
                 }
             print(architecture, json.dumps(record), flush=True)
-    model.load_state_dict(best_state)
+    exploratory_best = best
+    if checkpoint_policy == "best_validation":
+        model.load_state_dict(best_state)
+        selected = exploratory_best
+    else:
+        selected = history[-1]
     return {
         "architecture": architecture,
+        "seed": seed,
         "parameter_count": count,
         "model_config": model_config,
-        "best": best,
+        "checkpoint_policy": checkpoint_policy,
+        "best": selected,
+        "exploratory_best": exploratory_best,
         "history": history,
     }
 
@@ -205,6 +222,7 @@ def main():
     mean, scale = _normalization(train)
     train = (train - mean) / scale
     validation = (validation - mean) / scale
+    static_step_values = -mean[8:] / scale[8:]
     device = torch.device(args.device if torch.cuda.is_available() else "cpu")
     settings = config["training"]
     results = [
@@ -219,6 +237,7 @@ def main():
             evaluation_interval=config["selection"]["evaluation_interval_epochs"],
             seed=settings["seed"],
             device=device,
+            static_step_values=static_step_values,
         )
         for architecture in config["architectures"]
     ]
