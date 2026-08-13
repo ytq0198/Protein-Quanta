@@ -42,7 +42,7 @@
 | 4.2 当前结果 | 场景早停 JSON；E13-E15 topology/Phys 报告 | 已具备 | 明确为 MISATO-100 内部 proxy；Phys validation 覆盖 9/10；不是比赛隐藏测试、不是官方归一化成绩 |
 | 5.1 复现方式 | `README.md`；80 项双环境测试；checkpoint manifest；服务器环境快照；发布审计器 | 已具备 | 人工在干净环境至少复跑测试和一个小型入口，记录时间与硬件 |
 | 5.2 开源计划 | 公共 GitHub 仓库，当前默认分支即研究分支 | 部分具备 | 确定许可证；说明数据/checkpoint/轨迹不入库及复赛开放边界 |
-| 5.3 合规披露 | `third_party/README.md`；本清单第 4 节 | **关键缺口** | 明确 MISATO、NeuralMD、torchdiffeq、PyTorch/PyG 许可和版本；未确认项必须如实标注 |
+| 5.3 合规披露 | `third_party/README.md`；外部模型 governance manifest；本清单第 4 节 | 外部模型边界已固化，项目许可仍缺 | PVB/EPT/DPLM/ProTDyn/ESTAG 未过审计者默认阻塞；继续明确 MISATO、NeuralMD、torchdiffeq、PyTorch/PyG 许可和版本 |
 | 6.1 成员背景 | 魏子安、耿健尧、熊润的已提供背景 | 事实具备，文字待人工 | 人工核对单位/专业/岗位的正式写法与是否允许公开 |
 | 6.2 团队分工 | 第 5 节冲刺分工 | 已规划 | 最终表述需与实际 Git/实验记录一致 |
 | 6.3 团队成果 | 世界科学智能大赛古文字识别赛道三等奖奖杯图片 | 证据在本机，未入库 | 人工核对比赛正式名称、届次、奖项名称和公开链接；不只放图片而无可验证说明 |

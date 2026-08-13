@@ -1,0 +1,86 @@
+{
+  "status": "external model governance manifest for updated direction-two rules",
+  "date": "2026-08-13",
+  "policy": {
+    "formal_candidate_requires": [
+      "license permits intended use",
+      "exact training complex IDs are available",
+      "no competition test complex appears in pretraining or fine-tuning",
+      "near-homolog protein and ligand-similarity audit passes",
+      "source, revision, weights, data and role are disclosed"
+    ],
+    "default_on_unknown": "blocked from formal candidate; architecture study only"
+  },
+  "resources": [
+    {
+      "name": "PVB",
+      "repository": "https://github.com/yaledeus/PVB",
+      "revision": "c08e5e3cd49d45c6d748387e78224843bd356f50",
+      "license": "MIT",
+      "license_file_sha256": "efafd15f6418f7bff71eea9ca5f8b39180bc86e4e3beea32679544849ee264d3",
+      "training_id_manifest_available": false,
+      "formal_candidate_status": "blocked",
+      "reason": "published raw training IDs are unavailable; MISATO/PDBBind checkpoints can overlap competition splits",
+      "allowed_use": "study architecture and interfaces; use weights only after split/homology audit"
+    },
+    {
+      "name": "EPT",
+      "repository": "https://github.com/jiaor17/EPT",
+      "revision": "481a55016c777d19ae06587813f0569b360abe0b",
+      "license": "not found in audited checkout",
+      "training_id_manifest_available": false,
+      "formal_candidate_status": "blocked",
+      "reason": "license unresolved and pretraining includes PDB/PDBBind without an auditable per-complex exclusion manifest",
+      "allowed_use": "paper-level block-denoising and E(3) architecture reference only"
+    },
+    {
+      "name": "dynamics-aware DPLM",
+      "repository": "https://github.com/yuexujiang/DPLM_release",
+      "revision": "f3e5c3b89e826334fd5fdff78a90bbeeeb09f7de",
+      "license": "MIT",
+      "license_file_sha256": "29cf673c5b56f829eff5c20f6520aaee428e4d6264bc9a1d01620dc67189da5",
+      "training_id_manifest_available": false,
+      "formal_candidate_status": "blocked_pending_data_audit",
+      "reason": "protein-sequence conditioning is compatible but exact dynamics training systems must be checked against competition test homologs",
+      "allowed_use": "prospective frozen conditioning experiment after full split and homology audit"
+    },
+    {
+      "name": "ProTDyn",
+      "repository": "https://github.com/Harrydirk41/ProTDyn",
+      "revision": "94efb78cbee85f99d6dd8f96811ca8e90e460ff2",
+      "license": "MIT",
+      "license_file_sha256": "4c69ad65f395d4ffdeefbdf92797f4fb7c338c8d4d367b161e2a544362bb486e",
+      "training_id_manifest_available": false,
+      "formal_candidate_status": "deferred",
+      "reason": "1.4B protein-only model, gated ESM3 dependency and task/timescale mismatch make pre-final transfer disproportionate",
+      "allowed_use": "multi-timescale and inpainting design reference"
+    },
+    {
+      "name": "ESTAG",
+      "repository": "https://github.com/GLAD-RUC/ESTAG",
+      "revision": "adb5af86bce40dd87521964751cfe288f1d55d58",
+      "license": "not found in audited checkout",
+      "training_id_manifest_available": null,
+      "formal_candidate_status": "blocked",
+      "reason": "license unresolved",
+      "allowed_use": "paper-level equivariant spatiotemporal architecture reference only"
+    }
+  ],
+  "downloaded_weight_evidence": {
+    "policy": "weights are stored outside Git and do not imply permission for formal use",
+    "PVB_pvb_misato_ckpt": {
+      "bytes": 39966100,
+      "sha256": "9450e404f3f350792de3c13fad3ae3d354912bcbd9d3c249823936dc0c7a25f1",
+      "formal_use": "prohibited until overlap audit"
+    },
+    "PVB_pvb_pdbbind_ckpt": {
+      "bytes": 79929578,
+      "sha256": "700eac31265590a52ca759fbc62d8e9ca42128e198ec5bd50f3f166ad58c3281",
+      "formal_use": "prohibited until overlap audit"
+    },
+    "PVB_pretrain": {
+      "download_complete": false,
+      "formal_use": "prohibited; incomplete file and training IDs unavailable"
+    }
+  }
+}
