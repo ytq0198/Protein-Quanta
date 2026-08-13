@@ -13,6 +13,8 @@
     "seeds": [0, 42, 123],
     "control": "local ODE MSE only",
     "candidate": "local ODE MSE plus 0.25 multiscale Smooth-L1",
+    "control_multiscale_coefficient": 0.0,
+    "candidate_multiscale_coefficient": 0.25,
     "same_initialization_batch_order_and_windows": true,
     "epochs": 50,
     "learning_rate": 0.0001,
