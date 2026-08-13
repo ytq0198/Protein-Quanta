@@ -1,5 +1,5 @@
 {
-  "status": "historical frozen proxy candidate; demoted after bond-aware validation no-go; not an official competition score",
+  "status": "historical frozen proxy candidate under superseded T1 2-to-18 protocol; demoted after bond-aware validation no-go; not an official competition score",
   "active_for_submission": false,
   "demotion": {
     "date": "2026-08-13",
@@ -38,11 +38,12 @@
     "formula": "anchor + exp(-beta * local_target_step / decay_scale_frames) * (prediction - anchor)"
   },
   "scenarios": {
+    "protocol_status": "historical; T1 below is superseded by updated-guide 10-to-10",
     "T1": {"observed": [0, 1], "target": [2, 19]},
     "T2": {"observed": [0, 79], "initializer": [78, 79], "target": [80, 99]},
     "T3": {"observed": [0, 19], "initializer": [18, 19], "target": [20, 99]}
   },
-  "competition_weights": {
+  "historical_unofficial_weights": {
     "T1_T2_T3": [0.5, 0.3, 0.2],
     "Geo_Phys_Dyn_Stab": [0.4, 0.25, 0.25, 0.1],
     "normalization_available": false

@@ -1,6 +1,6 @@
 {
-  "status": "active safe baseline after score-facing Phys/Dyn validation; not promoted as comprehensive improvement; not an official competition score",
-  "active_for_submission": true,
+  "status": "temporarily demoted working checkpoint: prior T1 selection used superseded 2-to-18 window; updated-guide 10-to-10 reevaluation required; not an official competition score",
+  "active_for_submission": false,
   "method": "scenario-aware-checkpoint-selection",
   "checkpoint": {
     "seed": 42,
@@ -17,21 +17,22 @@
   },
   "selection": {
     "split": "MISATO-100 validation (10 complexes)",
-    "rule": "evaluate T1/T2/T3 every 5 epochs; preserve coordinate and RMSF guards while improving long-horizon geometry",
+    "rule": "historical selection used T1 2-to-18, T2 80-to-20 and T3 20-to-80; T1 is superseded by updated-guide 10-to-10 and all score-facing selection must be rerun",
     "test_used_for_selection": false,
     "official_score_claimed": false
   },
-  "competition_weights": {
-    "T1_T2_T3": [0.5, 0.3, 0.2],
-    "Geo_Phys_Dyn_Stab": [0.4, 0.25, 0.25, 0.1],
-    "normalization_available": false
+  "updated_guide_protocol": {
+    "T1": {"observed": [0, 9], "initializer": [8, 9], "target": [10, 19]},
+    "T2": {"observed": [0, 79], "initializer": [78, 79], "target": [80, 99]},
+    "T3": {"observed": [0, 19], "initializer": [18, 19], "target": [20, 99]},
+    "weights_published": false
   },
   "promotion_state": {
     "Geo": "project proxies available",
     "Phys": "bond-aware validation on 9/10 complexes improves mean bond error but has a T3 rare-extreme-event caveat",
     "Dyn": "distribution validation improves T3 structural distributions but fails the two-scenario aggregate promotion gate",
     "Stab": "project proxy available",
-    "overall": "not yet eligible for a direction-two comprehensive-improvement claim"
+    "overall": "not eligible for submission until updated-guide T1 validation is rerun"
   },
   "supersedes": "configs/frozen_candidate.json",
   "evidence": {

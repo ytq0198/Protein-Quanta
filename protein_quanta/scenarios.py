@@ -35,11 +35,11 @@ class TrajectoryScenario:
 
 
 def competition_scenarios(total_frames=100):
-    """Return the fixed project proxies for competition T1, T2 and T3."""
+    """Return the updated-guide T1, T2 and T3 observation windows."""
     if total_frames != 100:
         raise ValueError("competition scenario proxies require exactly 100 frames")
     return (
-        TrajectoryScenario("T1", 0, 1, 2, 19),
+        TrajectoryScenario("T1", 0, 9, 10, 19),
         TrajectoryScenario("T2", 0, 79, 80, 99),
         TrajectoryScenario("T3", 0, 19, 20, 99),
     )

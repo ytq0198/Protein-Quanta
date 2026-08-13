@@ -9,8 +9,8 @@ class CompetitionScenarioTests(unittest.TestCase):
     def test_scenarios_have_exact_observation_and_target_frames(self):
         scenarios = {scenario.name: scenario for scenario in competition_scenarios()}
 
-        self.assertEqual(scenarios["T1"].initializer_indices, (0, 1))
-        self.assertEqual(scenarios["T1"].target_indices, tuple(range(2, 20)))
+        self.assertEqual(scenarios["T1"].initializer_indices, (8, 9))
+        self.assertEqual(scenarios["T1"].target_indices, tuple(range(10, 20)))
         self.assertEqual(scenarios["T2"].initializer_indices, (78, 79))
         self.assertEqual(scenarios["T2"].target_indices, tuple(range(80, 100)))
         self.assertEqual(scenarios["T3"].initializer_indices, (18, 19))

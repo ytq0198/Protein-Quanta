@@ -18,9 +18,10 @@ class FrozenCandidateManifestTests(unittest.TestCase):
             "MISATO-100 validation (10 complexes)",
         )
         self.assertFalse(manifest["selection"]["official_score_claimed"])
-        self.assertEqual(manifest["competition_weights"]["T1_T2_T3"], [0.5, 0.3, 0.2])
+        self.assertEqual(manifest["historical_unofficial_weights"]["T1_T2_T3"], [0.5, 0.3, 0.2])
         self.assertFalse(manifest["active_for_submission"])
         self.assertIn("bond-aware validation", manifest["demotion"]["reason"])
+        self.assertIn("superseded", manifest["scenarios"]["protocol_status"])
 
 
 if __name__ == "__main__":
