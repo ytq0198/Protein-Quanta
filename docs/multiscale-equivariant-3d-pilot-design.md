@@ -21,18 +21,18 @@
 - 空间编码沿用已精确复现的 NeuralMD BindingNet/ODE 路线，保留蛋白—配体、多粒度和 E(3) 等变性；不直接把展平坐标送入普通 Transformer。
 - 蛋白在输入与所有预测帧中固定，只更新配体重原子位置，严格符合新版 semi-flexible 设定。
 - 第一版不引入未经数据/许可证审计的 PVB/EPT/DPLM 权重，避免把机制因果证据与预训练收益混在一起。
-- 时间创新只改变训练 rollout：相同空间网络分别进行一步 teacher-forced 对照与多时间尺度闭环候选，参数、数据和训练预算配对。
+- 时间创新只改变训练 rollout：复现审计确认 NeuralMD 基线本身已用 ODE 对随机局部片段进行连续可微训练，并非普通的一步 teacher forcing。公平对照 B 保留原始随机 1–20 帧位置损失；候选 C 在同一空间网络上额外加入等概率 `[5,10,20,40]` 时间跨度的 ODE rollout 损失，其他参数、数据和训练预算配对。
 
 ### 2.2 可微闭环
 
-对每个 batch 从 `H={5,10,20,40}` 均匀抽取 horizon `h`，在合法范围内抽取 prefix。由观测状态积分得到第一步配体坐标和速度，再把预测状态作为下一步输入，连续滚动 `h` 步且不对中间状态 `detach`。采用梯度 checkpointing 控制显存，但不得截断跨步梯度。
+对每个候选 batch 从 `H={5,10,20,40}` 均匀抽取 horizon `h`，再在合法范围内均匀抽取 prefix。由观测位置与相邻帧速度初始化二阶 ODE，并连续积分 `h` 步；ODE 状态天然使用自身预测连续演化，中间状态不得 `detach`。这不是在既有 NeuralMD 外再套一层虚假的自回归，而是把原先最多 20 帧的局部时间覆盖扩展到 40 帧。采用梯度 checkpointing 控制显存时不得截断跨步梯度。
 
 冻结总损失：
 
-`L = L_one-step + 0.25 * L_closed-loop + λ_bond * L_bond + λ_clash * L_clash`
+`L = L_local-ODE + 0.25 * L_multiscale-ODE + λ_bond * L_bond + λ_clash * L_clash`
 
-- `L_one-step`：与复现基线一致的配体坐标位置损失；
-- `L_closed-loop`：四种 horizon 均按原子、时间步平均的坐标 Smooth-L1，避免长 horizon 仅因项数多而获得更高权重；
+- `L_local-ODE`：与精确复现基线一致的随机 1–20 帧配体坐标 MSE；
+- `L_multiscale-ODE`：四种 horizon 均按原子、时间步和 xyz 维平均的坐标 Smooth-L1，避免长 horizon 仅因项数多而获得更高权重；
 - `L_bond`：只使用可追溯的显式共价图，不按距离猜键；以相对 frame-0 键长变化的 Smooth-L1 约束闭环帧；
 - `L_clash`：排除共价图 1-hop/2-hop 后的非键软排斥，加上配体—固定蛋白的软排斥；
 - `λ_bond/λ_clash` 不在 E18 主实验前随意指定。先在 train-only 的 8-complex calibration 子集上，以各损失对共享层梯度范数达到位置损失 `5%/2%` 为确定性标定目标，然后冻结；该标定不访问 16-complex holdout 或官方 validation。
@@ -42,11 +42,11 @@
 创新变量具有明确的反事实对照：
 
 - A：published NeuralMD checkpoint；
-- B：相同代码从头训练的一步位置损失；
-- C：B + `[5,10,20,40]` 可微闭环；
+- B：相同代码从头训练的原始随机 1–20 帧 ODE 位置损失；
+- C：B + `[5,10,20,40]` 多时间跨度可微 ODE；
 - D：C + 显式 bond/clash safety loss。
 
-只有 `B→C` 能检验多时间尺度 exposure 的因果收益；`C→D` 检验物理门槛是否减少极端事件，而不是把所有变化归因于 Transformer、预训练或更多参数。初赛阶段可以展示 A/B 与低维机制证据，不能把尚未运行的 C/D 写成结果。
+只有 `B→C` 能检验扩大时间跨度 exposure 的因果收益；`C→D` 检验物理门槛是否减少极端事件，而不是把所有变化归因于 Transformer、预训练或更多参数。初赛阶段可以展示 A/B 与低维机制证据，不能把尚未运行的 C/D 写成结果。早期文档中“NeuralMD 是一步 teacher forcing”的表述已被源码审计否定，禁止继续使用该因果叙述。
 
 ## 3. 数据与访问协议
 
@@ -76,6 +76,8 @@
 - 中间预测没有 detach，首步状态能接收来自末步误差的非零梯度。
 
 任一失败则停止训练，先修实现。
+
+**2026-08-14 源码审计修订：** 上述 `horizon=1` 检查保留为组合损失的零权重单元测试，但真实基线一致性必须以“候选权重为 0 时不额外采样随机数、训练入口和原随机 1–20 帧 ODE 路径完全相同”为准。原因是 NeuralMD 原训练目标已经是局部多步 ODE，而非一步模型。真实 E18a 使用发布权重和一个 train 复合物，对 5/10/20/40 帧分别执行前向、参数反向、末帧到初始位置反向、固定蛋白与共同刚体变换检查。
 
 ### E18b：10-complex preflight
 

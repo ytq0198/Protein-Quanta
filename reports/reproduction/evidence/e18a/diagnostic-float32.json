@@ -1,0 +1,22 @@
+{
+  "status": "diagnostic only; no training",
+  "horizon_5_parameter_gradients_by_euler_step": {
+    "0.05": {
+      "finite": true,
+      "norm": 0.0
+    },
+    "0.025": {
+      "finite": true,
+      "norm": 1.3302246770763304e-05
+    },
+    "0.01": {
+      "finite": true,
+      "norm": 2.4118988221744075e-05
+    }
+  },
+  "rotation_max_error_angstrom": 0.000644683837890625,
+  "translation_max_error_angstrom": 3.0517578125e-05,
+  "rigid_max_error_angstrom": 0.0006208419799804688,
+  "reference_max_abs_coordinate_angstrom": 27.552303314208984,
+  "rigid_relative_to_coordinate_scale": 2.2533215205289013e-05
+}

@@ -14,6 +14,9 @@ def build_training_command(
     pair_loss_beta=0.5,
     displacement_loss_coefficient=0.0,
     displacement_loss_beta=0.5,
+    multiscale_rollout_coefficient=0.0,
+    multiscale_rollout_beta=0.5,
+    multiscale_rollout_horizons=(5, 10, 20, 40),
     save_every_epoch=0,
     calibration_batches=0,
     calibration_output=None,
@@ -40,6 +43,17 @@ def build_training_command(
         raise ValueError("displacement_loss_coefficient must be finite and non-negative")
     if displacement_loss_beta <= 0 or not math.isfinite(float(displacement_loss_beta)):
         raise ValueError("displacement_loss_beta must be finite and positive")
+    if multiscale_rollout_coefficient < 0 or not math.isfinite(
+        float(multiscale_rollout_coefficient)
+    ):
+        raise ValueError("multiscale_rollout_coefficient must be finite and non-negative")
+    if multiscale_rollout_beta <= 0 or not math.isfinite(
+        float(multiscale_rollout_beta)
+    ):
+        raise ValueError("multiscale_rollout_beta must be finite and positive")
+    from protein_quanta.rollout_loss import validate_horizons
+
+    horizons = validate_horizons(multiscale_rollout_horizons, frame_count=100)
     if int(save_every_epoch) != save_every_epoch or save_every_epoch < 0:
         raise ValueError("save_every_epoch must be a non-negative integer")
     if int(calibration_batches) != calibration_batches or calibration_batches < 0:
@@ -94,6 +108,12 @@ def build_training_command(
         str(float(displacement_loss_coefficient)),
         "--displacement_loss_beta",
         str(float(displacement_loss_beta)),
+        "--multiscale_rollout_coefficient",
+        str(float(multiscale_rollout_coefficient)),
+        "--multiscale_rollout_beta",
+        str(float(multiscale_rollout_beta)),
+        "--multiscale_rollout_horizons",
+        ",".join(str(value) for value in horizons),
         "--save_every_epoch",
         str(int(save_every_epoch)),
         "--calibration_batches",

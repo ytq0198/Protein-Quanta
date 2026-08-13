@@ -1,0 +1,13 @@
+{
+  "status": "diagnostic only; no training",
+  "single_derivative_rotation_errors": {
+    "acceleration": 0.009123295545578003,
+    "position_derivative": 2.0712614059448242e-06
+  },
+  "rollout_rotation_max_error_angstrom": {
+    "5": 3.814697265625e-06,
+    "10": 2.2172927856445312e-05,
+    "20": 0.0001354217529296875,
+    "40": 0.000644683837890625
+  }
+}

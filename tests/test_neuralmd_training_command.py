@@ -25,6 +25,13 @@ class NeuralMDTrainingCommandTests(unittest.TestCase):
             command[command.index("--displacement_loss_coefficient") + 1], "0.0"
         )
         self.assertEqual(command[command.index("--save_every_epoch") + 1], "0")
+        self.assertEqual(
+            command[command.index("--multiscale_rollout_coefficient") + 1], "0.0"
+        )
+        self.assertEqual(
+            command[command.index("--multiscale_rollout_horizons") + 1],
+            "5,10,20,40",
+        )
         self.assertEqual(command[command.index("--calibration_batches") + 1], "0")
         self.assertIn("--no_eval_test_during_training", command)
 
@@ -69,6 +76,14 @@ class NeuralMDTrainingCommandTests(unittest.TestCase):
             build_training_command(Path("/runs/x"), epochs=1, calibration_batches=1)
         with self.assertRaises(ValueError):
             build_training_command(Path("/runs/x"), epochs=1, seed=-1)
+        with self.assertRaises(ValueError):
+            build_training_command(
+                Path("/runs/x"), epochs=1, multiscale_rollout_coefficient=-1
+            )
+        with self.assertRaises(ValueError):
+            build_training_command(
+                Path("/runs/x"), epochs=1, multiscale_rollout_horizons=(5, 100)
+            )
 
 
 if __name__ == "__main__":

@@ -1,0 +1,7 @@
+{
+  "status": "diagnostic only; no training",
+  "ligand_vector_rotation_max_error": 5.054473876953125e-05,
+  "ligand_scalar_repr_invariance_max_error": 7.033348083496094e-06,
+  "protein_residue_repr_invariance_max_error": 0.02372923493385315,
+  "complex_vector_rotation_max_error": 0.10992193222045898
+}

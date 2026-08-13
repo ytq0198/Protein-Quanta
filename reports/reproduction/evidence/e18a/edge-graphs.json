@@ -1,0 +1,22 @@
+{
+  "status": "diagnostic only; no training",
+  "ligand_radius_graph": {
+    "original_edges": 512,
+    "rotated_edges": 512,
+    "symmetric_difference": 0,
+    "max_incoming_neighbors": 20,
+    "nodes_at_default_32_neighbor_cap": 0
+  },
+  "protein_radius_graph": {
+    "original_edges": 21144,
+    "rotated_edges": 21144,
+    "symmetric_difference": 0,
+    "max_incoming_neighbors": 22,
+    "nodes_at_default_32_neighbor_cap": 0
+  },
+  "complex_radius_edges": {
+    "original_edges": 51,
+    "rotated_edges": 51,
+    "symmetric_difference": 0
+  }
+}
