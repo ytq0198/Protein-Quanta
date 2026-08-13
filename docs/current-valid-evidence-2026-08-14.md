@@ -12,6 +12,7 @@
 - **单位一致性 gate**：64 个 development 复合物的零加速度解析对照已通过。`initial_velocity_scale=100` 将第二观测帧 RMSE 降至 `3.6–5.6×10⁻⁸ Å`，三场景步幅比恢复到 `0.916–1.028`；但恒速 T3 RMSE 达 `33.88 Å`，所以这只是数值正确性证据，不是性能提升。
 - **帧时间 learnability gate**：48/16 development-only 配对预实验 **fail**。帧时间候选保持步幅 `0.944` 且有限，但 5 epoch 后 T3 仅由 `34.1267` 降至 `33.9024 Å`（改善 `0.6575%`，门槛 10%）；240 次更新中 124 次裁剪。当前位置-only 径向场不能晋升。
 - **速度感知正确性 gate**：10,243 参数速度感知 E(3) 场在一个真实 train 复合物上 7/7 通过；旋转/反射误差 `3.81×10⁻⁵/3.05×10⁻⁵ Å`，速度敏感度范数 `0.568`。这只授权新的 development-only 可学习性实验，不是成绩证据。
+- **速度感知效果 gate**：36/12 新 development 内部划分上，候选将 T1/T2/T3 RMSE 相对位置-only 降低 `33.1%/45.9%/80.5%`，是首个强效果信号；但 T3 步幅仅 `0.1135`、裁剪率 `98.3%`，综合 gate **fail**。必须做有界阻尼和数值归一化，不能以低 RMSE 掩盖过度刹车。
 
 ## 可引用证据与边界
 
@@ -26,6 +27,7 @@
 | 说明近静态机制与单位修正 | `reports/reproduction/2026-08-14-velocity-time-consistency-audit.md` | 零加速度解析控制；恢复步幅但长程误差恶化，不是学习模型成绩 |
 | 说明单位一致模型可学习性 | `reports/reproduction/2026-08-14-frame-time-learnability-preflight.md` | 48/16 development-only；gate fail，不访问旧 holdout/官方 validation |
 | 说明速度感知严格等变实现 | `reports/reproduction/2026-08-14-velocity-equivariant-correctness.md` | 单真实 train 复合物、随机初始化；correctness 通过不等于效果提升 |
+| 说明速度感知初期效果 | `reports/reproduction/2026-08-14-velocity-equivariant-effect-preflight.md` | RMSE 大幅改善但幅度/裁剪 gate 失败；不是可晋升候选 |
 | 说明原始数字 | `reports/reproduction/evidence/dense-equivariant-effect-summary.json` | 内部项目代理，不是官方分数 |
 
 ## 不再用于主论证的历史结果
@@ -38,6 +40,6 @@
 ## 下一执行 gate
 
 1. 完整 MISATO 文件达到 `132,841,014,019` 字节且 `.aria2` 消失后，核对官方 MD5 `9bc6446922cd80e0f2f3f69349bf88ed`；再做 HDF5、去多肽 split 和有限坐标审计。
-2. 速度感知严格等变 correctness 已通过；下一实验在上一阶段 48 个训练复合物内部重新冻结 36/12 划分，配对测试其制动/转向可学习性，不复用现有 diagnostic 或旧 holdout。
+2. 速度感知效果已有强信号但综合 gate 失败；先实现有界阻尼、速度不变量归一化与耗散功率诊断的 correctness/stability 测试。现有 64 development 已多次拆分，不再继续用其 diagnostic 调参；等待完整 MISATO 后建立按同源/scaffold 分组的新 split。
 3. 模型升级优先显式速度/时间、局部多层高阶几何与合规结构预训练；不在已解封 64/16 holdout 上扫损失系数。
 4. 团队人工确认官网具体截止时刻、ZIP 命名/大小和上传字段；团队自行完成模板文字、真实性核验与签字。

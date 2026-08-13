@@ -1,0 +1,169 @@
+{
+  "status": "velocity_effect_gate_fail",
+  "scope": "36 train / 12 unseen diagnostic inside prior training set; all previous diagnostics/holdouts and official validation/test untouched",
+  "parameter_count": {
+    "control": 8930,
+    "candidate": 10243
+  },
+  "initial_metrics": {
+    "control": {
+      "T1": {
+        "coordinate_rmse_angstrom": 4.742030084133148,
+        "step_amplitude_ratio": 1.175102507074674,
+        "nonfinite_frame_fraction": 0.0
+      },
+      "T2": {
+        "coordinate_rmse_angstrom": 8.6124320824941,
+        "step_amplitude_ratio": 0.9672010764479637,
+        "nonfinite_frame_fraction": 0.0
+      },
+      "T3": {
+        "coordinate_rmse_angstrom": 32.94737593332926,
+        "step_amplitude_ratio": 1.0554616476098697,
+        "nonfinite_frame_fraction": 0.0
+      }
+    },
+    "candidate": {
+      "T1": {
+        "coordinate_rmse_angstrom": 3.536259631315867,
+        "step_amplitude_ratio": 0.7543919607996941,
+        "nonfinite_frame_fraction": 0.0
+      },
+      "T2": {
+        "coordinate_rmse_angstrom": 5.388022800286611,
+        "step_amplitude_ratio": 0.46209421878059703,
+        "nonfinite_frame_fraction": 0.0
+      },
+      "T3": {
+        "coordinate_rmse_angstrom": 8.398005664348602,
+        "step_amplitude_ratio": 0.16811060284574827,
+        "nonfinite_frame_fraction": 0.0
+      }
+    }
+  },
+  "training": {
+    "control": {
+      "epochs": [
+        {
+          "epoch": 1,
+          "loss_mean": 95.80867196122806,
+          "gradient_norm_mean": 4.417296372509251,
+          "gradient_norm_max": 17.315872192382812
+        },
+        {
+          "epoch": 2,
+          "loss_mean": 89.32716597451105,
+          "gradient_norm_mean": 2.531228229817417,
+          "gradient_norm_max": 7.710243225097656
+        },
+        {
+          "epoch": 3,
+          "loss_mean": 59.01406466960907,
+          "gradient_norm_mean": 1.6234336864306695,
+          "gradient_norm_max": 4.436651706695557
+        },
+        {
+          "epoch": 4,
+          "loss_mean": 54.203018599086334,
+          "gradient_norm_mean": 1.0474612860836916,
+          "gradient_norm_max": 3.6074042320251465
+        },
+        {
+          "epoch": 5,
+          "loss_mean": 70.42073316375415,
+          "gradient_norm_mean": 0.7928421655152407,
+          "gradient_norm_max": 3.726201057434082
+        }
+      ],
+      "updates": 180,
+      "clipped": 108,
+      "nonfinite": 0
+    },
+    "candidate": {
+      "epochs": [
+        {
+          "epoch": 1,
+          "loss_mean": 49.552465779913796,
+          "gradient_norm_mean": 124.74512647754617,
+          "gradient_norm_max": 3567.552734375
+        },
+        {
+          "epoch": 2,
+          "loss_mean": 41.02739340729184,
+          "gradient_norm_mean": 50.92682984140184,
+          "gradient_norm_max": 610.2318725585938
+        },
+        {
+          "epoch": 3,
+          "loss_mean": 20.43943523698383,
+          "gradient_norm_mean": 27.679508755604427,
+          "gradient_norm_max": 125.13255310058594
+        },
+        {
+          "epoch": 4,
+          "loss_mean": 19.024235139290493,
+          "gradient_norm_mean": 26.156289226479,
+          "gradient_norm_max": 225.86924743652344
+        },
+        {
+          "epoch": 5,
+          "loss_mean": 21.860915968815487,
+          "gradient_norm_mean": 46.134636091689266,
+          "gradient_norm_max": 334.2774658203125
+        }
+      ],
+      "updates": 180,
+      "clipped": 177,
+      "nonfinite": 0
+    }
+  },
+  "final_metrics": {
+    "control": {
+      "T1": {
+        "coordinate_rmse_angstrom": 4.735885600248973,
+        "step_amplitude_ratio": 1.1735804279645283,
+        "nonfinite_frame_fraction": 0.0
+      },
+      "T2": {
+        "coordinate_rmse_angstrom": 8.584970474243164,
+        "step_amplitude_ratio": 0.9629974390069643,
+        "nonfinite_frame_fraction": 0.0
+      },
+      "T3": {
+        "coordinate_rmse_angstrom": 32.75498048464457,
+        "step_amplitude_ratio": 1.049665282169978,
+        "nonfinite_frame_fraction": 0.0
+      }
+    },
+    "candidate": {
+      "T1": {
+        "coordinate_rmse_angstrom": 3.1664954920609794,
+        "step_amplitude_ratio": 0.6327029168605804,
+        "nonfinite_frame_fraction": 0.0
+      },
+      "T2": {
+        "coordinate_rmse_angstrom": 4.648142655690511,
+        "step_amplitude_ratio": 0.35599651994804543,
+        "nonfinite_frame_fraction": 0.0
+      },
+      "T3": {
+        "coordinate_rmse_angstrom": 6.378847459952037,
+        "step_amplitude_ratio": 0.11349740779648225,
+        "nonfinite_frame_fraction": 0.0
+      }
+    }
+  },
+  "candidate_clipping_rate": 0.9833333333333333,
+  "checks": {
+    "all_updates_and_rollouts_finite": true,
+    "candidate_T3_rmse_improves": true,
+    "candidate_T1_worsening_bounded": true,
+    "candidate_T3_amplitude_in_range": false,
+    "candidate_clipping_rate_bounded": false
+  },
+  "checkpoint_sha256": {
+    "control": "7ea5bf9ad1ce05bb8022052487c3bac45cc0529e8d978326b0065f19b9b5ada6",
+    "candidate": "307ef985ce72a2e8deea6964749b365f80aceee9529e2f83b6576e276c5c2857"
+  },
+  "decision": "Pass is initial development-only feasibility evidence, not permission to access old holdout or official validation/test; a multiseed grouped split remains required."
+}
