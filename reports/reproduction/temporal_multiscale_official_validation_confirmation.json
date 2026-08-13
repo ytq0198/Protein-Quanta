@@ -1,0 +1,399 @@
+{
+  "status": "one-time frozen official-validation mechanism confirmation; not official competition scores",
+  "protocol": {
+    "development_ids": [
+      "3SNC",
+      "5KBQ",
+      "5X27",
+      "4DRU",
+      "6JAW",
+      "6F3B",
+      "3MP6",
+      "1W5X",
+      "1ZSH",
+      "1V2S",
+      "3V0L",
+      "2H2G",
+      "4D2T",
+      "5ADR",
+      "3H22",
+      "4QSU",
+      "5U0F",
+      "5MW6",
+      "1HMR",
+      "6F86",
+      "4QO4",
+      "6CZE",
+      "1F74",
+      "3VVY",
+      "3MG7",
+      "4QDK",
+      "2W4X",
+      "2OPY",
+      "5I8B",
+      "2YWP",
+      "3HXF",
+      "5UVC",
+      "4UMJ",
+      "5JSS",
+      "2QRL",
+      "5K0C",
+      "3NCG",
+      "3BX5",
+      "2R59",
+      "6EQM",
+      "1Q6M",
+      "4QME",
+      "2C1B",
+      "1C5F",
+      "4DV9",
+      "6PG3",
+      "3BUG",
+      "1P19",
+      "4RXD",
+      "4OHO",
+      "5JXN",
+      "3SV2",
+      "6B8J",
+      "2P7G",
+      "1B6H",
+      "5D1R",
+      "5M6U",
+      "2RC9",
+      "5IIS",
+      "5F41",
+      "6AJR",
+      "3ZM6",
+      "1QY1",
+      "2V12"
+    ],
+    "official_validation_ids": [
+      "1S38",
+      "6PYS",
+      "4M5L",
+      "1CTR",
+      "4HXS",
+      "6BIB",
+      "4Q93",
+      "1SWG",
+      "3GCP",
+      "2FMB"
+    ],
+    "official_validation_access_count": 1,
+    "official_test_accessed": false,
+    "normalization_source": "64-complex development split only",
+    "training_preregistration": {
+      "status": "pre-registered before creating or observing the train-only holdout results",
+      "date": "2026-08-13",
+      "hypothesis": "sampling closed-loop horizons across local, medium and long ranges preserves the T1/T2 gains of 10-step training while directly constraining T3-like long rollout",
+      "evidence_boundary": "MISATO-100 train-only 12D invariant-feature mechanism proxy; not atomic Geo/Phys/Dyn/Stab and not an official score",
+      "split": {
+        "source": "MISATO-100 official training subset only (80 complexes)",
+        "development_count": 64,
+        "holdout_count": 16,
+        "method": "salted SHA256 deterministic sample-disjoint split",
+        "salt": "protein-quanta-temporal-v1",
+        "limitation": "not yet protein-homology or ligand-scaffold grouped",
+        "official_validation_access": "prohibited for training, selection and tuning",
+        "official_test_access": "prohibited"
+      },
+      "architecture": "transformer",
+      "training": {
+        "seeds": [
+          0,
+          42,
+          123
+        ],
+        "epochs": 200,
+        "checkpoint_policy": "final epoch; no holdout epoch selection",
+        "batch_size": 16,
+        "optimizer": "Adam",
+        "learning_rate": 0.001,
+        "gradient_clip_norm": 1.0,
+        "one_step_loss_weight": 1.0,
+        "closed_loop_loss_weight": 0.25,
+        "closed_loop_horizons": [
+          5,
+          10,
+          20,
+          40
+        ],
+        "horizon_sampling": "one horizon uniformly sampled per batch update",
+        "prefix_length_sampling": "uniform valid integer conditional on sampled horizon",
+        "input_noise_std": 0.0
+      },
+      "comparison": "paired one-step Transformer trained from scratch on the same 64/16 split with identical architecture, budget, seeds and final-epoch policy",
+      "promotion": {
+        "primary": "mean equal-macro T1/T2/T3 RMSE below paired one-step reference",
+        "seed_consistency": "beat paired reference in at least 2 of 3 seeds",
+        "T1_guard": "mean T1 RMSE must not worsen by more than 2 percent",
+        "T3_mechanism": "mean T3 RMSE must improve by at least 5 percent",
+        "finite": "all metrics finite"
+      },
+      "next_access_rule": "only a complete pass permits one frozen evaluation on the official validation; a failure remains train-only and is not tuned on official validation"
+    },
+    "confirmation_preregistration": {
+      "status": "pre-registered after train-only gate pass and before observing confirmation results",
+      "date": "2026-08-13",
+      "eligibility_evidence": "reports/reproduction/temporal_multiscale_train_only_val.json promotion.passed=true",
+      "purpose": "one-time confirmation that the frozen multi-scale mechanism direction transfers from the train-only 64/16 split to official MISATO-100 validation",
+      "training": {
+        "data": "same frozen 64-complex development split; do not add the 16 holdout or official validation",
+        "seeds": [
+          0,
+          42,
+          123
+        ],
+        "epochs": 200,
+        "checkpoint_policy": "final epoch",
+        "architecture_and_objective": "exactly configs/temporal_multiscale_closed_loop_preregistration.json",
+        "determinism": "retrain exact frozen configuration and save final state for audit"
+      },
+      "evaluation": {
+        "split": "MISATO-100 official validation (10 complexes)",
+        "access_count": "one frozen evaluation after all three final checkpoints exist",
+        "official_test_access": "prohibited",
+        "metrics": "T1/T2/T3 standardized RMSE and equal macro; not official scores"
+      },
+      "confirmation_rule": {
+        "primary": "mean equal-macro RMSE below the already recorded paired one-step reference",
+        "seed_consistency": "at least 2 of 3 paired seed wins",
+        "T1_guard": "mean T1 does not worsen by more than 2 percent",
+        "T3_direction": "mean T3 improves; the 5 percent threshold remains a stronger success marker but is not required to preserve a research direction",
+        "finite": "all values finite"
+      },
+      "no_adaptation": "do not tune horizons, loss weight, epoch, architecture or normalization using this confirmation result"
+    },
+    "device": "cuda:0"
+  },
+  "baseline_results": [
+    {
+      "seed": 0,
+      "checkpoint": "/mnt/localDisk3/weizian/checkpoints/protein-quanta/multiscale-confirmation/baseline_seed_0.pth",
+      "final_train_loss": 0.17562003433704376,
+      "macro_scenario_rmse": 0.4067746301492055,
+      "scenarios": {
+        "T1": {
+          "standardized_rmse": 0.4096192717552185,
+          "structure_rmse": 0.2345360964536667,
+          "step_rmse": 0.6271757483482361,
+          "static_standardized_rmse": 0.730929970741272,
+          "finite": true
+        },
+        "T2": {
+          "standardized_rmse": 0.30938252806663513,
+          "structure_rmse": 0.16670864820480347,
+          "step_rmse": 0.48121628165245056,
+          "static_standardized_rmse": 0.6308473348617554,
+          "finite": true
+        },
+        "T3": {
+          "standardized_rmse": 0.5013220906257629,
+          "structure_rmse": 0.2662791907787323,
+          "step_rmse": 0.7824078798294067,
+          "static_standardized_rmse": 0.7365557551383972,
+          "finite": true
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "checkpoint": "/mnt/localDisk3/weizian/checkpoints/protein-quanta/multiscale-confirmation/baseline_seed_42.pth",
+      "final_train_loss": 0.1770309954881668,
+      "macro_scenario_rmse": 0.41479139526685077,
+      "scenarios": {
+        "T1": {
+          "standardized_rmse": 0.4082435667514801,
+          "structure_rmse": 0.2316616326570511,
+          "step_rmse": 0.6266212463378906,
+          "static_standardized_rmse": 0.730929970741272,
+          "finite": true
+        },
+        "T2": {
+          "standardized_rmse": 0.31138187646865845,
+          "structure_rmse": 0.17804935574531555,
+          "step_rmse": 0.4769411087036133,
+          "static_standardized_rmse": 0.6308473348617554,
+          "finite": true
+        },
+        "T3": {
+          "standardized_rmse": 0.5247487425804138,
+          "structure_rmse": 0.30073824524879456,
+          "step_rmse": 0.8032414317131042,
+          "static_standardized_rmse": 0.7365557551383972,
+          "finite": true
+        }
+      }
+    },
+    {
+      "seed": 123,
+      "checkpoint": "/mnt/localDisk3/weizian/checkpoints/protein-quanta/multiscale-confirmation/baseline_seed_123.pth",
+      "final_train_loss": 0.24635584466159344,
+      "macro_scenario_rmse": 0.40305644273757935,
+      "scenarios": {
+        "T1": {
+          "standardized_rmse": 0.4129982590675354,
+          "structure_rmse": 0.25013458728790283,
+          "step_rmse": 0.6217458844184875,
+          "static_standardized_rmse": 0.730929970741272,
+          "finite": true
+        },
+        "T2": {
+          "standardized_rmse": 0.3060426712036133,
+          "structure_rmse": 0.15054592490196228,
+          "step_rmse": 0.48544636368751526,
+          "static_standardized_rmse": 0.6308473348617554,
+          "finite": true
+        },
+        "T3": {
+          "standardized_rmse": 0.49012839794158936,
+          "structure_rmse": 0.22355368733406067,
+          "step_rmse": 0.7878611087799072,
+          "static_standardized_rmse": 0.7365557551383972,
+          "finite": true
+        }
+      }
+    }
+  ],
+  "candidate_results": [
+    {
+      "seed": 0,
+      "checkpoint": "/mnt/localDisk3/weizian/checkpoints/protein-quanta/multiscale-confirmation/multiscale_seed_0.pth",
+      "final_train_loss": 0.3060418013483286,
+      "macro_scenario_rmse": 0.38989171385765076,
+      "scenarios": {
+        "T1": {
+          "standardized_rmse": 0.3983064293861389,
+          "structure_rmse": 0.20979633927345276,
+          "step_rmse": 0.6228281855583191,
+          "static_standardized_rmse": 0.730929970741272,
+          "finite": true
+        },
+        "T2": {
+          "standardized_rmse": 0.2988980710506439,
+          "structure_rmse": 0.14301587641239166,
+          "step_rmse": 0.47656381130218506,
+          "static_standardized_rmse": 0.6308473348617554,
+          "finite": true
+        },
+        "T3": {
+          "standardized_rmse": 0.47247064113616943,
+          "structure_rmse": 0.1855442076921463,
+          "step_rmse": 0.7751336693763733,
+          "static_standardized_rmse": 0.7365557551383972,
+          "finite": true
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "checkpoint": "/mnt/localDisk3/weizian/checkpoints/protein-quanta/multiscale-confirmation/multiscale_seed_42.pth",
+      "final_train_loss": 0.29835284128785133,
+      "macro_scenario_rmse": 0.3938460449377696,
+      "scenarios": {
+        "T1": {
+          "standardized_rmse": 0.39336296916007996,
+          "structure_rmse": 0.21486826241016388,
+          "step_rmse": 0.609808623790741,
+          "static_standardized_rmse": 0.730929970741272,
+          "finite": true
+        },
+        "T2": {
+          "standardized_rmse": 0.31355714797973633,
+          "structure_rmse": 0.14690493047237396,
+          "step_rmse": 0.5017889142036438,
+          "static_standardized_rmse": 0.6308473348617554,
+          "finite": true
+        },
+        "T3": {
+          "standardized_rmse": 0.47461801767349243,
+          "structure_rmse": 0.17582088708877563,
+          "step_rmse": 0.7835564613342285,
+          "static_standardized_rmse": 0.7365557551383972,
+          "finite": true
+        }
+      }
+    },
+    {
+      "seed": 123,
+      "checkpoint": "/mnt/localDisk3/weizian/checkpoints/protein-quanta/multiscale-confirmation/multiscale_seed_123.pth",
+      "final_train_loss": 0.32148969173431396,
+      "macro_scenario_rmse": 0.4045313100020091,
+      "scenarios": {
+        "T1": {
+          "standardized_rmse": 0.4156171679496765,
+          "structure_rmse": 0.2660619020462036,
+          "step_rmse": 0.6137059330940247,
+          "static_standardized_rmse": 0.730929970741272,
+          "finite": true
+        },
+        "T2": {
+          "standardized_rmse": 0.31357869505882263,
+          "structure_rmse": 0.14715585112571716,
+          "step_rmse": 0.5016822814941406,
+          "static_standardized_rmse": 0.6308473348617554,
+          "finite": true
+        },
+        "T3": {
+          "standardized_rmse": 0.4843980669975281,
+          "structure_rmse": 0.20150126516819,
+          "step_rmse": 0.789125382900238,
+          "static_standardized_rmse": 0.7365557551383972,
+          "finite": true
+        }
+      }
+    }
+  ],
+  "aggregate": {
+    "candidate_macro_mean": 0.3960896895991432,
+    "baseline_macro_mean": 0.40820748938454515,
+    "candidate_macro_sample_std": 0.007573301779432826,
+    "baseline_macro_sample_std": 0.00599725703195112,
+    "paired_macro_differences": [
+      -0.01688291629155475,
+      -0.02094535032908118,
+      0.0014748672644297467
+    ],
+    "scenarios": {
+      "T1": {
+        "candidate_mean": 0.4024288554986318,
+        "baseline_mean": 0.4102870325247447,
+        "relative_mean_change": -0.019152876896344484,
+        "paired_differences": [
+          -0.01131284236907959,
+          -0.014880597591400146,
+          0.0026189088821411133
+        ]
+      },
+      "T2": {
+        "candidate_mean": 0.3086779713630676,
+        "baseline_mean": 0.30893569191296893,
+        "relative_mean_change": -0.0008342207023910309,
+        "paired_differences": [
+          -0.010484457015991211,
+          0.002175271511077881,
+          0.007536023855209351
+        ]
+      },
+      "T3": {
+        "candidate_mean": 0.47716224193573,
+        "baseline_mean": 0.505399743715922,
+        "relative_mean_change": -0.05587161871626101,
+        "paired_differences": [
+          -0.028851449489593506,
+          -0.05013072490692139,
+          -0.005730330944061279
+        ]
+      }
+    }
+  },
+  "confirmation": {
+    "beats_reference_mean": true,
+    "beats_reference_seed_count": 2,
+    "T1_guard_passed": true,
+    "T3_direction_passed": true,
+    "T3_strong_marker_passed": true,
+    "finite": true,
+    "passed": true
+  }
+}

@@ -59,6 +59,8 @@
 - 科研设计：`docs/experiment-design-and-research-roadmap.md`；
 - 新版长序列机制证据链：`reports/reproduction/2026-08-13-temporal-updated-guide.md`、`reports/reproduction/2026-08-13-temporal-noise-updated-guide.md`、`reports/reproduction/2026-08-13-proar-antidrift-updated-guide.md`、`reports/reproduction/2026-08-13-temporal-closed-loop-updated-guide.md`；
 - 新版机制对比图：`reports/figures/temporal_mechanism_chain_updated_guide.png`；
+- train-only 多时间尺度闭环：`reports/reproduction/2026-08-13-temporal-multiscale-train-only.md`；
+- 一次性 validation 确认：`reports/reproduction/2026-08-13-temporal-multiscale-official-validation-confirmation.md`；
 - 场景基准图：`reports/figures/neuralmd_scenario_baselines.png`；
 - 最终组合图：`reports/figures/neuralmd_earlystop_anchor1_tradeoff.png`；
 - 场景条件锚定 no-go：`reports/reproduction/2026-08-12-scenario-conditioned-anchor.md`、`reports/reproduction/scenario_anchor881_decision.json`、`reports/figures/neuralmd_scenario_anchor881_tradeoff.png`；

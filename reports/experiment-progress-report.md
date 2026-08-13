@@ -411,3 +411,9 @@ E14 在覆盖 validation 子集实现了同帧键长 MAE、20% 违例率、极�
 为避免继续适应官方 validation，从 MISATO-100 的 80 个官方训练样本用 salted SHA256 确定性划出 64/16 development/holdout；官方 validation/test 未读取。在相同三 seed、200 epoch、final epoch 对照下，多时间尺度 `[5,10,20,40]` 闭环把等权宏平均从 `0.60415±0.00777` 改善到 `0.57935±0.02971`（`4.10%`），2/3 seed 胜出。T1/T2/T3 分别改善 `1.41%/1.34%/8.42%`；T3 三个 seed 的配对改善都在约 `0.056-0.061`，完整预注册 gate 通过。
 
 该结果支持“训练 horizon 覆盖决定长期误差控制”的机制假设，但仍只是 12 维 proxy。按预注册访问规则，现允许一次冻结的官方 validation 确认；确认前不改 horizons、权重或 epoch，确认后也不据结果回调。完整报告见 `reports/reproduction/2026-08-13-temporal-multiscale-train-only.md`。
+
+## 2026-08-13：多时间尺度闭环一次性 validation 确认通过
+
+严格按“训练并保存全部 6 份 final checkpoint 后统一读取 validation 一次”的代码路径执行。候选与一步训练对照都只使用同一 64-complex development split，不加入 train-holdout 或 validation，未访问 internal test。多时间尺度候选的宏平均为 `0.39609±0.00757`，一步对照为 `0.40821±0.00600`，改善 `2.97%`，2/3 seed 胜出；T1/T2/T3 分别改善 `1.92%/0.08%/5.59%`，T3 三 seed 全部同向改善，确认 gate 通过。
+
+这使 `[5,10,20,40]` 多时间尺度可微闭环成为当前最强的创新机制证据：train-only T3 改善 `8.42%`，一次 validation 确认为 `5.59%`。但它仍是 12 维 proxy，不是原子轨迹模型或官方成绩；当前主基线仍是 published NeuralMD。下一阶段是设计 E(3) 等变原子坐标迁移与 Geo/Phys/Dyn/Stab 联合门槛，不因本次 validation 结果调整现有 horizons/权重。完整报告见 `reports/reproduction/2026-08-13-temporal-multiscale-official-validation-confirmation.md`。
