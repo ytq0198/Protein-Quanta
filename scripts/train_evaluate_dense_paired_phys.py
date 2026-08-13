@@ -50,6 +50,18 @@ def make_schedule(sample_count, epochs, seed):
     return schedule
 
 
+def prepare_single_complex(sample, device):
+    """Add the batch vectors normally created by DataLoaderMISATO."""
+    sample = sample.to(device)
+    sample.batch_ligand = torch.zeros(
+        sample.ligand_x.shape[0], dtype=torch.long, device=device
+    )
+    sample.batch_residue = torch.zeros(
+        sample.protein_backbone_residue.shape[0], dtype=torch.long, device=device
+    )
+    return sample
+
+
 def train_one(model, samples, schedule, coefficient, learning_rate, clip):
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
     rows = []; clipped = nonfinite = 0
@@ -104,7 +116,10 @@ def main():
     index = {identifier: position for position, identifier in enumerate(train_ids)}
     device = torch.device(args.device)
     dataset = DatasetMISATOSemiFlexibleMultiTrajectory(str(args.data_root), mode="train")
-    samples = [dataset[index[identifier]].to(device) for identifier in ids]
+    samples = [
+        prepare_single_complex(dataset[index[identifier]], device)
+        for identifier in ids
+    ]
     seed = config["pairing"]["seed"]
     torch.manual_seed(seed); np.random.seed(seed); random.seed(seed)
     initial = DenseEquivariantAcceleration(hidden_dim=32).to(device)
