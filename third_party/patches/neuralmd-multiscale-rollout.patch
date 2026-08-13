@@ -1,4 +1,4 @@
---- a/examples/main_MISATO_multi_traj_NeuralMD.py
+﻿--- a/examples/main_MISATO_multi_traj_NeuralMD.py
 +++ b/examples/main_MISATO_multi_traj_NeuralMD.py
 @@ -23,9 +23,11 @@
  from protein_quanta.training_stability import stable_backward_step
@@ -10,13 +10,13 @@
  )
 +from protein_quanta.neuralmd_multiscale import sampled_multiscale_neuralmd_loss
 +from protein_quanta.rollout_loss import combined_rollout_loss, validate_horizons
- 
- 
+
+
  def save_model(save_best):
 @@ -180,7 +182,8 @@
      else:
          L = loader
- 
+
 -    accum_loss, accum_loss_pos, accum_loss_pair, accum_loss_displacement = 0, 0, 0, 0
 +    accum_loss, accum_loss_pos, accum_loss_pair, accum_loss_displacement = 0, 0, 0, 0
 +    accum_loss_multiscale = 0
@@ -52,7 +52,7 @@
 +        loss = combined_rollout_loss(
 +            loss, loss_multiscale, args.multiscale_rollout_coefficient
 +        )
-         
+
          step_result = stable_backward_step(
              loss, binding_model, optimizer, args.max_grad_norm
 @@ -272,7 +296,8 @@
@@ -64,7 +64,7 @@
 +            accum_loss_multiscale += loss_multiscale.item()
              accum_loss += loss.item()
              accum_count += 1
-     
+
 @@ -291,12 +316,18 @@
              accum_loss_pair / accum_count, args.pair_loss_coefficient
          )
