@@ -9,6 +9,7 @@ from scripts.train_temporal_architecture_screen import (
     _weighted_rmse,
 )
 from scripts.train_temporal_multiseed_rope import aggregate_results
+from scripts.train_temporal_noise_augmentation import aggregate_noise_pilot
 
 
 def _scenarios(value, static=2.0):
@@ -77,6 +78,23 @@ class TemporalArchitectureScreenTests(unittest.TestCase):
         aggregate, decision = aggregate_results(results)
         self.assertEqual(aggregate["gru"]["beats_mlp_seed_count"], 2)
         self.assertTrue(decision["gru"]["passed"])
+
+    def test_noise_pilot_requires_T1_guard_and_paired_seed_wins(self):
+        reference_results = []
+        noise_results = []
+        for seed, old, new in ((0, 1.0, 0.9), (42, 1.1, 1.0), (123, 0.9, 0.95)):
+            reference_results.append(
+                {"architecture": "transformer", "seed": seed, "best": {"weighted_validation_rmse": old, "scenarios": _scenarios(old)}}
+            )
+            noise_results.append(
+                {"architecture": "transformer", "seed": seed, "best": {"weighted_validation_rmse": new, "scenarios": _scenarios(new)}}
+            )
+        aggregate, decision = aggregate_noise_pilot(
+            noise_results, {"results": reference_results}
+        )
+        self.assertEqual(decision["beats_reference_seed_count"], 2)
+        self.assertTrue(decision["passed"])
+        self.assertLess(aggregate["paired_weighted_difference"]["mean"], 0)
 
 
 if __name__ == "__main__":

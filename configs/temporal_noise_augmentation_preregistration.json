@@ -1,0 +1,30 @@
+{
+  "status": "pre-registered before observing any noise-augmentation result",
+  "date": "2026-08-13",
+  "purpose": "test whether small train-only state corruption improves causal Transformer rollout robustness",
+  "evidence_boundary": "MISATO-100 12D invariant-feature feasibility proxy; not atomic trajectory performance or an official score",
+  "architecture": "transformer",
+  "architecture_config": {"hidden_dim": 16, "layers": 2, "heads": 4},
+  "training": {
+    "split": "MISATO-100 train only (80 complexes)",
+    "validation": "MISATO-100 validation only (10 complexes)",
+    "test_access": "prohibited",
+    "seeds": [0, 42, 123],
+    "epochs": 200,
+    "checkpoint_policy": "final epoch; no validation epoch selection",
+    "batch_size": 16,
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "input_noise_std": 0.02,
+    "noise_space": "standardized invariant input features only",
+    "target": "clean next-step features",
+    "comparison": "paired seed result from the already pre-registered no-noise Transformer run"
+  },
+  "promotion": {
+    "primary": "mean historical weighted-proxy RMSE below paired no-noise Transformer",
+    "seed_consistency": "beat paired no-noise Transformer in at least 2 of 3 seeds",
+    "T1_guard": "mean T1 RMSE must not worsen by more than 2 percent",
+    "finite": "all metrics finite"
+  },
+  "interpretation": "A pass supports exposure-bias mitigation on invariant states only; coordinate-space noise remains a separate 3D experiment. A failure freezes sigma=0.02 as a no-go without post-hoc tuning."
+}

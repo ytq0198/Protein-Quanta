@@ -91,6 +91,7 @@ def train_architecture(
     device,
     static_step_values,
     checkpoint_policy="best_validation",
+    input_noise_std=0.0,
 ):
     if checkpoint_policy not in ("best_validation", "final_epoch"):
         raise ValueError("unknown checkpoint policy")
@@ -114,6 +115,7 @@ def train_architecture(
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
     criterion = nn.MSELoss()
     generator = torch.Generator().manual_seed(seed)
+    noise_generator = torch.Generator().manual_seed(seed + 1_000_003)
     train_tensor = torch.as_tensor(train, dtype=torch.float32)
     history = []
     best = None
@@ -124,7 +126,15 @@ def train_architecture(
         losses = []
         for start in range(0, permutation.numel(), batch_size):
             batch = train_tensor[permutation[start : start + batch_size]].to(device)
-            prediction, _ = model(batch[:, :-1])
+            model_input = batch[:, :-1]
+            if input_noise_std > 0:
+                noise = torch.randn(
+                    model_input.shape,
+                    generator=noise_generator,
+                    dtype=model_input.dtype,
+                ).to(device)
+                model_input = model_input + input_noise_std * noise
+            prediction, _ = model(model_input)
             loss = criterion(prediction, batch[:, 1:])
             optimizer.zero_grad()
             loss.backward()
@@ -162,6 +172,7 @@ def train_architecture(
         "parameter_count": count,
         "model_config": model_config,
         "checkpoint_policy": checkpoint_policy,
+        "input_noise_std": float(input_noise_std),
         "best": selected,
         "exploratory_best": exploratory_best,
         "history": history,
