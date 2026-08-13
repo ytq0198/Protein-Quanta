@@ -11,7 +11,7 @@ from torchdiffeq import odeint
 from NeuralMD.datasets.MISATO import DatasetMISATOSemiFlexibleMultiTrajectory
 from protein_quanta.collision import bond_length_diagnostics
 from protein_quanta.dense_equivariant_dynamics import DenseEquivariantAcceleration
-from protein_quanta.dense_effect_gate import evaluate_gate
+from protein_quanta.dense_effect_gate import evaluate_gate, json_default
 from protein_quanta.effect_gate_barrier import verify_training_artifacts
 from protein_quanta.metrics import (
     contact_map_agreement,
@@ -181,8 +181,14 @@ def main():
         "seeds": seed_results,
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(report, indent=2), encoding="utf-8")
-    print(json.dumps({"status": report["status"], "gate": gate}, indent=2))
+    args.output.write_text(
+        json.dumps(report, indent=2, default=json_default), encoding="utf-8"
+    )
+    print(json.dumps(
+        {"status": report["status"], "gate": gate},
+        indent=2,
+        default=json_default,
+    ))
 
 
 if __name__ == "__main__":

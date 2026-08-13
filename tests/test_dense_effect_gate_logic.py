@@ -1,6 +1,7 @@
 import copy
+import json
 
-from protein_quanta.dense_effect_gate import evaluate_gate
+from protein_quanta.dense_effect_gate import evaluate_gate, json_default
 
 
 CONFIG = {
@@ -66,3 +67,11 @@ def test_equal_candidate_fails_effect_checks_without_failing_safety():
     assert not result["checks"]["T3_coordinate_rmse_min_improvement_fraction"]
     assert result["checks"]["bond_length_mae_max_worsening_fraction"]
     assert result["checks"]["all_rollouts_finite"]
+
+
+def test_gate_result_is_json_serializable_with_numpy_scalar_adapter():
+    result = evaluate_gate(CONFIG, [passing_seed(seed) for seed in (0, 42, 123)])
+
+    rendered = json.dumps(result, default=json_default)
+
+    assert json.loads(rendered)["passed"] is True

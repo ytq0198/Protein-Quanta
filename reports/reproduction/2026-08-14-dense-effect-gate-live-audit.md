@@ -48,3 +48,7 @@ An obsolete combined train/evaluate script had previously been terminated after 
 2. Confirm evaluation begins only after all six hashes pass.
 3. Independently recompute the gate with the pure aggregation module and require exact agreement with the frozen server evaluator.
 4. Archive the raw report, decision table, paired-seed/scenario figure, and a Chinese technical report with limitations adjacent to every claim.
+
+## First evaluation serialization failure
+
+All three manifests and all six checkpoints existed before evaluation began at `2026-08-13T18:29:58Z`. The evaluator completed model rollout and gate aggregation, then failed while serializing the in-memory report because Python's standard JSON encoder does not accept a NumPy Boolean scalar. No report was written and no threshold, checkpoint, model, split, or metric was changed. Because holdout targets had already been read, the only permitted recovery is a serialization-only adapter followed by an identical re-evaluation of the same six final checkpoints. The hotfix converts NumPy scalar values with `.item()` and raises on every other unknown type; a regression test requires the complete synthetic gate result to round-trip through JSON.

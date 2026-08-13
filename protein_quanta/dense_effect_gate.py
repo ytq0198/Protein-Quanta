@@ -3,6 +3,13 @@
 import numpy as np
 
 
+def json_default(value):
+    """Convert NumPy scalar diagnostics without changing their values."""
+    if isinstance(value, np.generic):
+        return value.item()
+    raise TypeError(f"Object of type {type(value).__name__} is not JSON serializable")
+
+
 def mean_summaries(seed_results, arm):
     result = {}
     for scenario in ("T1", "T2", "T3"):
