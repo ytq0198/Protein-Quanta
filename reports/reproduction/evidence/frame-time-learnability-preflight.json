@@ -1,0 +1,175 @@
+{
+  "status": "learnability_gate_fail",
+  "scope": "48 train / 16 diagnostic inside frozen development; old holdout and official validation/test untouched",
+  "protocols": {
+    "upstream_scaled_time": {
+      "scaling": 100.0,
+      "initial_velocity_scale": 1.0,
+      "euler_step_size": 0.025
+    },
+    "frame_time": {
+      "scaling": 1.0,
+      "initial_velocity_scale": 1.0,
+      "euler_step_size": 1.0
+    }
+  },
+  "initial_metrics": {
+    "upstream_scaled_time": {
+      "T1": {
+        "coordinate_rmse_angstrom": 1.6304563619196415,
+        "step_amplitude_ratio": 0.010299143061274663,
+        "nonfinite_frame_fraction": 0.0
+      },
+      "T2": {
+        "coordinate_rmse_angstrom": 2.354646757245064,
+        "step_amplitude_ratio": 0.009463129274081439,
+        "nonfinite_frame_fraction": 0.0
+      },
+      "T3": {
+        "coordinate_rmse_angstrom": 2.5899622440338135,
+        "step_amplitude_ratio": 0.009584466984961182,
+        "nonfinite_frame_fraction": 0.0
+      }
+    },
+    "frame_time": {
+      "T1": {
+        "coordinate_rmse_angstrom": 5.385392114520073,
+        "step_amplitude_ratio": 1.0286381784826517,
+        "nonfinite_frame_fraction": 0.0
+      },
+      "T2": {
+        "coordinate_rmse_angstrom": 8.689939707517624,
+        "step_amplitude_ratio": 0.9444377701729536,
+        "nonfinite_frame_fraction": 0.0
+      },
+      "T3": {
+        "coordinate_rmse_angstrom": 34.126742362976074,
+        "step_amplitude_ratio": 0.9512401036918163,
+        "nonfinite_frame_fraction": 0.0
+      }
+    }
+  },
+  "training": {
+    "upstream_scaled_time": {
+      "epochs": [
+        {
+          "epoch": 1,
+          "loss_mean": 7.533937337187429,
+          "gradient_norm_mean": 7.482285591464688e-05,
+          "gradient_norm_max": 0.0007240094128064811
+        },
+        {
+          "epoch": 2,
+          "loss_mean": 12.175032074252764,
+          "gradient_norm_mean": 4.3646943410635686e-05,
+          "gradient_norm_max": 0.00032779196044430137
+        },
+        {
+          "epoch": 3,
+          "loss_mean": 4.996060641482472,
+          "gradient_norm_mean": 3.060238525491125e-05,
+          "gradient_norm_max": 0.00011064302088925615
+        },
+        {
+          "epoch": 4,
+          "loss_mean": 3.064978811579446,
+          "gradient_norm_mean": 3.372461998611224e-05,
+          "gradient_norm_max": 0.00018950836965814233
+        },
+        {
+          "epoch": 5,
+          "loss_mean": 15.058758608996868,
+          "gradient_norm_mean": 3.0405789757770307e-05,
+          "gradient_norm_max": 0.00027227666578255594
+        }
+      ],
+      "updates": 240,
+      "clipped": 0,
+      "nonfinite": 0
+    },
+    "frame_time": {
+      "epochs": [
+        {
+          "epoch": 1,
+          "loss_mean": 59.73533262312412,
+          "gradient_norm_mean": 4.006834005413111,
+          "gradient_norm_max": 13.922148704528809
+        },
+        {
+          "epoch": 2,
+          "loss_mean": 316.5302946468194,
+          "gradient_norm_mean": 2.3196099807197847,
+          "gradient_norm_max": 6.567168235778809
+        },
+        {
+          "epoch": 3,
+          "loss_mean": 633.6242009277145,
+          "gradient_norm_mean": 1.2526538926176727,
+          "gradient_norm_max": 6.10736608505249
+        },
+        {
+          "epoch": 4,
+          "loss_mean": 71.04063366850217,
+          "gradient_norm_mean": 0.8211028657193916,
+          "gradient_norm_max": 3.605752468109131
+        },
+        {
+          "epoch": 5,
+          "loss_mean": 505.3293888475746,
+          "gradient_norm_mean": 0.6101075915691277,
+          "gradient_norm_max": 2.415469169616699
+        }
+      ],
+      "updates": 240,
+      "clipped": 124,
+      "nonfinite": 0
+    }
+  },
+  "final_metrics": {
+    "upstream_scaled_time": {
+      "T1": {
+        "coordinate_rmse_angstrom": 1.6304560443386436,
+        "step_amplitude_ratio": 0.010299312270944938,
+        "nonfinite_frame_fraction": 0.0
+      },
+      "T2": {
+        "coordinate_rmse_angstrom": 2.3546453714370728,
+        "step_amplitude_ratio": 0.009463311711442657,
+        "nonfinite_frame_fraction": 0.0
+      },
+      "T3": {
+        "coordinate_rmse_angstrom": 2.5899387635290623,
+        "step_amplitude_ratio": 0.009584782164893113,
+        "nonfinite_frame_fraction": 0.0
+      }
+    },
+    "frame_time": {
+      "T1": {
+        "coordinate_rmse_angstrom": 5.377651393413544,
+        "step_amplitude_ratio": 1.0261766966432333,
+        "nonfinite_frame_fraction": 0.0
+      },
+      "T2": {
+        "coordinate_rmse_angstrom": 8.662743613123894,
+        "step_amplitude_ratio": 0.9402981605380774,
+        "nonfinite_frame_fraction": 0.0
+      },
+      "T3": {
+        "coordinate_rmse_angstrom": 33.90235114097595,
+        "step_amplitude_ratio": 0.944341336376965,
+        "nonfinite_frame_fraction": 0.0
+      }
+    }
+  },
+  "checks": {
+    "all_updates_finite": true,
+    "frame_time_T3_rmse_improves": false,
+    "frame_time_T3_amplitude_in_range": true,
+    "all_diagnostic_rollouts_finite": true
+  },
+  "checkpoint_sha256": {
+    "upstream_scaled_time": "43d957399f120fa9b38d2b13818e240c1cb3f5d5476f34d44b8df7e138b0b1b7",
+    "frame_time": "24836f2443be6d81f1e548a83ce4d05904f0ca67f23d1b4e92f4b7078d9f046d"
+  },
+  "interpretation": "Pass establishes learnability only. It does not require beating the low-motion upstream protocol and does not authorize official validation/test."
+}
