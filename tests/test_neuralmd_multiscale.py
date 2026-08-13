@@ -22,6 +22,12 @@ class _ConstantAcceleration(torch.nn.Module):
         return self.scale * (protein_centroid - position), velocity
 
 
+class _ZeroAcceleration(torch.nn.Module):
+    def forward(self, time, state, condition):
+        velocity, position = state
+        return torch.zeros_like(velocity), velocity
+
+
 def _euler_odeint(model, state, times, condition, method, options):
     velocity, position = state
     velocities = [velocity]
@@ -90,6 +96,43 @@ class NeuralMDMultiscaleTests(unittest.TestCase):
         gradient = torch.autograd.grad(terminal_loss, initial)[0]
         self.assertTrue(torch.isfinite(gradient).all())
         self.assertGreater(torch.linalg.vector_norm(gradient).item(), 0)
+
+    def test_unit_consistent_velocity_recovers_linear_frame_displacement(self):
+        frames = torch.arange(50, dtype=torch.float32).view(1, 50, 1)
+        self.batch.ligand_trajectory_pos = frames.repeat(3, 1, 3)
+        _, upstream_positions = neuralmd_ode_rollout(
+            _ZeroAcceleration(),
+            _euler_odeint,
+            self.batch,
+            start=0,
+            horizon=4,
+            scaling=100,
+            initial_velocity_scale=1,
+        )
+        _, consistent_positions = neuralmd_ode_rollout(
+            _ZeroAcceleration(),
+            _euler_odeint,
+            self.batch,
+            start=0,
+            horizon=4,
+            scaling=100,
+            initial_velocity_scale=100,
+        )
+
+        truth = self.batch.ligand_trajectory_pos[:, :5, :].transpose(0, 1)
+        self.assertTrue(torch.allclose(upstream_positions[1], truth[1] / 100))
+        self.assertTrue(torch.allclose(consistent_positions, truth))
+
+    def test_velocity_scale_must_be_positive(self):
+        with self.assertRaises(ValueError):
+            neuralmd_ode_rollout(
+                self.model,
+                _euler_odeint,
+                self.batch,
+                start=0,
+                horizon=4,
+                initial_velocity_scale=0,
+            )
 
 
 if __name__ == "__main__":

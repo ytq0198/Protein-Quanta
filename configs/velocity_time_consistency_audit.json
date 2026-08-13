@@ -1,0 +1,29 @@
+{
+  "status": "pre-registered before development-only unit audit",
+  "date": "2026-08-14",
+  "scope": {
+    "split": "64 frozen development complexes only",
+    "official_validation_accessed": false,
+    "official_test_accessed": false,
+    "frozen_train_holdout_reused": false
+  },
+  "protocols": {
+    "upstream_convention": {
+      "ode_time_scaling": 100.0,
+      "initial_velocity_scale": 1.0
+    },
+    "unit_consistent": {
+      "ode_time_scaling": 100.0,
+      "initial_velocity_scale": 100.0
+    }
+  },
+  "model": "zero acceleration analytic control",
+  "scenarios": ["T1", "T2", "T3"],
+  "pass_gate": {
+    "unit_consistent_initializer_rmse_max_angstrom": 0.00001,
+    "unit_consistent_step_amplitude_ratio_min": 0.25,
+    "unit_consistent_step_amplitude_ratio_max": 4.0,
+    "upstream_initializer_rmse_must_exceed_unit_consistent": true
+  },
+  "decision_rule": "Passing only authorizes a new development-only paired training preflight. It does not validate a learned model or authorize official validation/test access."
+}
