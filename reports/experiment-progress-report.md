@@ -441,3 +441,15 @@ E14 在覆盖 validation 子集实现了同帧键长 MAE、20% 违例率、极�
 冻结 development 前 10 个 train 复合物上，候选 5 epoch 的 50 个更新全部有限、无梯度裁剪、蛋白固定，峰值 CUDA 分配约 334 MiB。RCSB `CONECT` 严格拓扑审计覆盖 8/10；`3SNC/3MP6` 因映射/覆盖不完整被拒绝，不按距离猜键。
 
 随后对 8 个覆盖样本从相同初始化、相同 batch/窗口计划配对训练控制与候选，各 40 更新均稳定。40 帧 final 推演的 extreme bond event 都为 `0%`，候选增量 `0.0` pp，通过 `<=0.1` pp 防线；但 coordinate RMSE 只从 `1.854857929` 变为 `1.854857840`，差异约 `9e-8`，完全不足以证明多尺度有效。结论是“安全可运行、效果未知”，只允许进入冻结 64/16 三 seed gate，不据此调权。完整报告见 `reports/reproduction/2026-08-14-dense-equivariant-preflight.md`。
+
+## 2026-08-14：速度—时间单位审计纠正近静态解释
+
+冻结 64/16 三 seed 效应实验后，约 `0.009` 的 step-amplitude ratio 触发数值单位审计。NeuralMD 上游多轨迹约定把 ODE 时间除以 100，却以未缩放相邻帧差初始化速度；零加速度解析条件下，第一步位移因此只剩观测位移的 `1/100`。64 个 development 复合物上，原约定三场景步幅比为 `0.0092–0.0103`；将初速度按 ODE 时间换算后恢复到 `0.916–1.028`，第二观测帧误差降至 `10⁻⁸ Å` 量级。但恒速 T3 RMSE 达 `33.8846 Å`，说明单位正确不等于预测有效。
+
+据此，原三种子 no-go 保留但结论边界收窄为“旧缩放协议下多尺度损失无效”，不再一般性否定多尺度三维动力学，也不把近静态唯一归因于模型容量。随后在新的 48/16 development 内部划分比较原缩放和帧时间位置-only 场；帧时间 5 epoch 后 T3 只改善 `0.6575%`，未达 10% learnability gate，且裁剪率 `51.67%`，因此位置-only 帧时间模型 no-go。专项报告见 `reports/reproduction/2026-08-14-velocity-time-consistency-audit.md` 与 `reports/reproduction/2026-08-14-frame-time-learnability-preflight.md`。
+
+## 2026-08-14：速度感知等变场产生强信号但综合 gate 未通过
+
+针对位置-only 场无法依据运动方向制动/转向的问题，实现 10,243 参数 velocity-aware E(3) 场：只以 `|v|²`、`v·r` 等不变量调制沿相对位移的力，并加入沿速度方向的非负阻尼。合成测试 8 项通过；一个真实 MISATO-100 train 复合物的 5/10/20/40 帧前向、反向均有限，旋转/反射误差为 `3.81×10⁻⁵/3.05×10⁻⁵ Å`，真实 correctness gate 7/7 通过。
+
+随后只从上一轮 48 个训练复合物重新冻结 36/12 新划分，未复用已查看的 diagnostics/holdout。相对 position-only，velocity-aware 候选把 T1/T2/T3 RMSE 分别降低 `33.1%/45.9%/80.5%`，首次产生强三维效果信号；但 T3 步幅比仅 `0.1135`，180 次更新有 177 次裁剪，综合 gate 失败。研究判断不是放宽阈值，而是无界 `softplus` 阻尼造成过度刹车、速度不变量尺度造成梯度失衡。现已实现可选的有界阻尼与饱和归一化，保持旧默认路径可复现；阻尼范围、耗散功率、旋转/反射与全量回归均通过，共 `180 passed + 33 subtests`。完整报告见 `reports/reproduction/2026-08-14-velocity-equivariant-correctness.md` 与 `reports/reproduction/2026-08-14-velocity-equivariant-effect-preflight.md`。
