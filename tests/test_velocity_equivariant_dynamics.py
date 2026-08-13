@@ -91,6 +91,44 @@ class VelocityEquivariantDynamicsTests(unittest.TestCase):
         self.assertGreater(parameter_norm.item(), 0)
         self.assertGreater(torch.linalg.vector_norm(gradients[-1]).item(), 0)
 
+    def test_bounded_damping_is_small_bounded_and_dissipative(self):
+        model = VelocityEquivariantAcceleration(
+            hidden_dim=8,
+            bounded_damping_max=0.05,
+            normalize_velocity_invariants=True,
+            initial_damping_fraction=0.05,
+        )
+        feature = model.ligand_embedding(self.condition[0])
+        speed_squared = self.velocity.square().sum(dim=-1, keepdim=True)
+        coefficient = model.damping_coefficient(feature, speed_squared)
+        damping_acceleration = -model.scale * coefficient * self.velocity
+        damping_power = (damping_acceleration * self.velocity).sum(dim=-1)
+        self.assertTrue((coefficient >= 0).all())
+        self.assertTrue((coefficient <= 0.05).all())
+        self.assertTrue((damping_power <= 0).all())
+        self.assertTrue(torch.allclose(
+            coefficient,
+            torch.full_like(coefficient, 0.0025),
+            atol=1e-7,
+        ))
+
+    def test_bounded_normalized_variant_remains_equivariant(self):
+        self.model = VelocityEquivariantAcceleration(
+            hidden_dim=8,
+            bounded_damping_max=0.05,
+            normalize_velocity_invariants=True,
+        )
+        self._assert_equivariant(self._orthogonal(reflection=False))
+        self._assert_equivariant(self._orthogonal(reflection=True))
+
+    def test_invalid_bounded_configuration_is_rejected(self):
+        with self.assertRaises(ValueError):
+            VelocityEquivariantAcceleration(bounded_damping_max=0)
+        with self.assertRaises(ValueError):
+            VelocityEquivariantAcceleration(speed_squared_scale=0)
+        with self.assertRaises(ValueError):
+            VelocityEquivariantAcceleration(initial_damping_fraction=1)
+
 
 if __name__ == "__main__":
     unittest.main()

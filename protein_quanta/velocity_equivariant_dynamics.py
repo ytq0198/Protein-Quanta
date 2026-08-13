@@ -14,9 +14,32 @@ class VelocityEquivariantAcceleration(nn.Module):
     the field while translations cancel from every learned input.
     """
 
-    def __init__(self, hidden_dim=32, ligand_classes=119, residue_classes=26, scale=0.1):
+    def __init__(
+        self,
+        hidden_dim=32,
+        ligand_classes=119,
+        residue_classes=26,
+        scale=0.1,
+        bounded_damping_max=None,
+        normalize_velocity_invariants=False,
+        speed_squared_scale=1.0,
+        projection_scale=5.0,
+        initial_damping_fraction=0.05,
+    ):
         super().__init__()
         self.scale = float(scale)
+        self.bounded_damping_max = (
+            None if bounded_damping_max is None else float(bounded_damping_max)
+        )
+        self.normalize_velocity_invariants = bool(normalize_velocity_invariants)
+        self.speed_squared_scale = float(speed_squared_scale)
+        self.projection_scale = float(projection_scale)
+        if self.bounded_damping_max is not None and self.bounded_damping_max <= 0:
+            raise ValueError("bounded_damping_max must be positive")
+        if self.speed_squared_scale <= 0 or self.projection_scale <= 0:
+            raise ValueError("velocity invariant scales must be positive")
+        if not 0 < initial_damping_fraction < 1:
+            raise ValueError("initial_damping_fraction must lie strictly between 0 and 1")
         self.ligand_embedding = nn.Embedding(ligand_classes, hidden_dim)
         self.residue_embedding = nn.Embedding(residue_classes, hidden_dim)
         self.ligand_pair = nn.Sequential(
@@ -36,10 +59,35 @@ class VelocityEquivariantAcceleration(nn.Module):
             nn.SiLU(),
             nn.Linear(hidden_dim, 1),
         )
+        if self.bounded_damping_max is not None:
+            output = self.damping[-1]
+            nn.init.zeros_(output.weight)
+            initial_logit = torch.logit(torch.tensor(float(initial_damping_fraction)))
+            nn.init.constant_(output.bias, float(initial_logit))
 
     @staticmethod
     def _radial_envelope(squared_distance):
         return torch.exp(-squared_distance / 25.0)
+
+    def _velocity_invariants(self, speed_squared, projection):
+        if not self.normalize_velocity_invariants:
+            return speed_squared, projection
+        normalized_speed = torch.log1p(
+            speed_squared / self.speed_squared_scale
+        )
+        normalized_projection = torch.tanh(
+            projection / self.projection_scale
+        )
+        return normalized_speed, normalized_projection
+
+    def damping_coefficient(self, ligand_feature, speed_squared):
+        damping_input_speed, _ = self._velocity_invariants(
+            speed_squared, torch.zeros_like(speed_squared)
+        )
+        raw = self.damping(torch.cat((ligand_feature, damping_input_speed), dim=-1))
+        if self.bounded_damping_max is None:
+            return functional.softplus(raw)
+        return self.bounded_damping_max * torch.sigmoid(raw)
 
     def forward(self, time, state, condition):
         velocity, ligand_position = state
@@ -62,8 +110,11 @@ class VelocityEquivariantAcceleration(nn.Module):
         ligand_j = ligand_feature.unsqueeze(0).expand(
             ligand_feature.shape[0], -1, -1
         )
-        speed_i = speed_squared.unsqueeze(1).expand(-1, velocity.shape[0], -1)
-        speed_j = speed_squared.unsqueeze(0).expand(velocity.shape[0], -1, -1)
+        speed_invariant, _ = self._velocity_invariants(
+            speed_squared, torch.zeros_like(speed_squared)
+        )
+        speed_i = speed_invariant.unsqueeze(1).expand(-1, velocity.shape[0], -1)
+        speed_j = speed_invariant.unsqueeze(0).expand(velocity.shape[0], -1, -1)
         velocity_i = velocity.unsqueeze(1)
         velocity_j = velocity.unsqueeze(0)
         projection_i = (velocity_i * ligand_displacement).sum(
@@ -72,6 +123,8 @@ class VelocityEquivariantAcceleration(nn.Module):
         projection_j = (velocity_j * ligand_displacement).sum(
             dim=-1, keepdim=True
         )
+        _, projection_i = self._velocity_invariants(speed_i, projection_i)
+        _, projection_j = self._velocity_invariants(speed_j, projection_j)
         ligand_weight = self.ligand_pair(torch.cat(
             (
                 ligand_i,
@@ -111,12 +164,15 @@ class VelocityEquivariantAcceleration(nn.Module):
         protein_context = protein_feature.unsqueeze(0).expand(
             ligand_feature.shape[0], -1, -1
         )
-        protein_speed = speed_squared.unsqueeze(1).expand(
+        protein_speed = speed_invariant.unsqueeze(1).expand(
             -1, protein_feature.shape[0], -1
         )
         protein_projection = (
             velocity.unsqueeze(1) * protein_displacement
         ).sum(dim=-1, keepdim=True)
+        _, protein_projection = self._velocity_invariants(
+            protein_speed, protein_projection
+        )
         protein_weight = self.protein_pair(torch.cat(
             (
                 ligand_context,
@@ -137,8 +193,8 @@ class VelocityEquivariantAcceleration(nn.Module):
         protein_count = protein_mask.sum(dim=1, keepdim=True).clamp_min(1)
         protein_force = protein_force / protein_count
 
-        damping_coefficient = functional.softplus(
-            self.damping(torch.cat((ligand_feature, speed_squared), dim=-1))
+        damping_coefficient = self.damping_coefficient(
+            ligand_feature, speed_squared
         )
         force_acceleration = (
             ligand_force + protein_force
