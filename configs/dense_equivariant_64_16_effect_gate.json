@@ -1,0 +1,60 @@
+{
+  "status": "pre-registered before 64/16 paired effect training",
+  "date": "2026-08-14",
+  "data": {
+    "development_count": 64,
+    "holdout_count": 16,
+    "split_manifest": "reports/reproduction/temporal_train_only_split_manifest.json",
+    "official_validation_accessed": false,
+    "official_test_accessed": false,
+    "normalization": "none; raw centered Angstrom coordinates"
+  },
+  "pairing": {
+    "seeds": [0, 42, 123],
+    "control": "local ODE MSE only",
+    "candidate": "local ODE MSE plus 0.25 multiscale Smooth-L1",
+    "same_initialization_batch_order_and_windows": true,
+    "epochs": 50,
+    "learning_rate": 0.0001,
+    "euler_step_size": 0.025,
+    "gradient_clip_norm": 1.0,
+    "checkpoint_policy": "final epoch only; holdout is never used for checkpoint selection"
+  },
+  "evaluation": {
+    "scenarios": {
+      "T1": "observe 0-9, predict 10-19",
+      "T2": "observe 0-79, predict 80-99",
+      "T3": "observe 0-19, predict 20-99"
+    },
+    "initializer": "last two observed frames only; no future-target velocity leakage",
+    "aggregation": "equal macro mean across T1/T2/T3 because official weights remain unpublished",
+    "metrics": [
+      "coordinate_rmse",
+      "rmse_time_slope",
+      "rmsf_mae_angstrom",
+      "radius_of_gyration_mae_angstrom",
+      "contact_map_agreement_mean",
+      "bond_length_mae_on_explicit_topology_subset",
+      "extreme_bond_event_percent",
+      "nonfinite_frame_fraction"
+    ]
+  },
+  "pass_gate": {
+    "macro_coordinate_rmse_improves": true,
+    "paired_seed_wins_at_least": 2,
+    "T1_coordinate_rmse_max_worsening_fraction": 0.02,
+    "T3_coordinate_rmse_min_improvement_fraction": 0.03,
+    "T3_rmse_slope_min_improvement_fraction": 0.05,
+    "T3_dynamic_metrics_improved_at_least": 2,
+    "bond_length_mae_max_worsening_fraction": 0.05,
+    "extreme_bond_event_max_increase_percentage_points": 0.05,
+    "all_rollouts_finite": true
+  },
+  "anti_overclaim": {
+    "report_checkpoint_parameter_l2_displacement": true,
+    "report_raw_paired_differences_and_seed_sd": true,
+    "differences_below_1e-6_relative_are_numerically_negligible": true,
+    "no_hyperparameter_change_after_holdout": true,
+    "effect_gate_pass_is_required_before_any_official_validation_confirmation": true
+  }
+}
