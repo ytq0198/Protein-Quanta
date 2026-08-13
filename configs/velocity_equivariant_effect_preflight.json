@@ -1,0 +1,42 @@
+{
+  "status": "pre-registered before velocity-aware effect training",
+  "date": "2026-08-14",
+  "data": {
+    "parent": "36/12 split drawn only from the previously used 48 training complexes",
+    "salt": "protein-quanta-velocity-effect-v1",
+    "train_ids": ["5JSS", "2R59", "4QME", "1P19", "3MP6", "5UVC", "1HMR", "4DV9", "1ZSH", "2W4X", "4QO4", "3BUG", "5X27", "3HXF", "6F3B", "6JAW", "4RXD", "3SV2", "4D2T", "5U0F", "5ADR", "3NCG", "3H22", "5KBQ", "2QRL", "3SNC", "4OHO", "5K0C", "5F41", "3V0L", "2OPY", "6AJR", "2H2G", "6PG3", "1C5F", "6CZE"],
+    "diagnostic_ids": ["1Q6M", "5I8B", "6F86", "1B6H", "2C1B", "3VVY", "6EQM", "1V2S", "5JXN", "6B8J", "4DRU", "1W5X"],
+    "previous_diagnostic_or_holdout_reused": false,
+    "official_validation_accessed": false,
+    "official_test_accessed": false
+  },
+  "protocol": {
+    "scaling": 1.0,
+    "initial_velocity_scale": 1.0,
+    "euler_step_size": 1.0
+  },
+  "models": {
+    "control": "DenseEquivariantAcceleration: position-only, 8,930 parameters",
+    "candidate": "VelocityEquivariantAcceleration: invariant velocity contractions plus non-negative damping, 10,243 parameters"
+  },
+  "training": {
+    "seed": 42,
+    "epochs": 5,
+    "learning_rate": 0.0001,
+    "gradient_clip_norm": 1.0,
+    "local_max_horizon": 20,
+    "multiscale_horizons": [5, 10, 20, 40],
+    "multiscale_coefficient": 0.25,
+    "same_sample_order_and_windows": true,
+    "checkpoint_policy": "final epoch only; diagnostic targets are not used for selection"
+  },
+  "gate": {
+    "all_updates_and_rollouts_finite": true,
+    "candidate_T3_rmse_min_improvement_over_control_fraction": 0.05,
+    "candidate_T1_rmse_max_worsening_fraction": 0.1,
+    "candidate_T3_step_amplitude_ratio_min": 0.2,
+    "candidate_T3_step_amplitude_ratio_max": 2.0,
+    "candidate_clipping_rate_max": 0.75,
+    "decision": "Pass is initial development-only feasibility evidence, not permission to access old holdout or official validation/test; a multiseed grouped split remains required."
+  }
+}
