@@ -370,3 +370,13 @@ E14 在覆盖 validation 子集实现了同帧键长 MAE、20% 违例率、极�
 ## 2026-08-13：长序列时序架构 Level-A 筛选
 
 在 commit `7c1ad03` 预注册后，对 12 维刚体运动不变量状态，在同一 80-complex train、10-complex validation、参数量 <10k 和 200 epoch 预算下比较 MLP/RNN/LSTM/GRU/causal Transformer，未访问 internal test。MLP 的方向权重代理 RMSE 最低（`0.38409`），Transformer 为 `0.38453`，整体差 0.11%；但 Transformer 相对 MLP 在 T2/T3 改善约 `8.5%/10.3%`，T1 恶化约 `11.4%`。其余 recurrent core 没有整体优势。五个模型均未通过完整 gate，因此不直接启动 3D 大模型；结果支持一个需要新验证设计的后续假设：T1 使用局部短记忆路径，T2/T3 使用 causal attention，并与等变空间编码器结合。完整报告见 `reports/reproduction/2026-08-13-temporal-architecture-screen.md`。
+
+## 2026-08-13：新版 MISATO 划分审计通过
+
+对 MISATO 官方公开 train/validation/test ID 和 NeuralMD `peptides.txt` 逐 ID 审计。原始 `13,765/1,595/1,612` 分别排除 `699/238/255` 个多肽后，精确得到新版手册要求的 `13,066/1,357/1,357`；所有源文件无重复行，三个划分无交集。审计保存源文件及过滤集合 SHA256，不复制数据 ID。完整报告见 `reports/reproduction/2026-08-13-updated-misato-split-audit.md`。
+
+## 2026-08-13：ProAR 式交替抗漂移 proxy no-go
+
+在 commit `4556a31` 预注册后，按 ProAR 的双阶段训练和交替采样思想构造 12 维确定性最小机制实验。一次端点预测和交替修正共享相同的插值器/预测器权重，只改变推理调用顺序；seeds `0/42/123`、最终 epoch、validation-only，不访问 internal test。
+
+一次预测与交替修正的 T1/T2/T3 宏平均 RMSE 分别为 `0.41027` 与 `0.42621`；交替策略逐种子胜出 `0/3`，T1 恶化 `6.25%`，T3 仅改善 `0.34%`，远低于 5% 门槛。按预注册判 **no-go**，不移植到三维模型、不围绕块长调参。结果说明仅改变调用顺序不足以复现 ProAR 的抗漂移收益，完整方法中的预测分布训练、结构化概率性、等变局部条件和松弛可能是必要组成。完整报告见 `reports/reproduction/2026-08-13-proar-antidrift-proxy.md`。
