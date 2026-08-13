@@ -78,16 +78,19 @@ def aggregate(samples):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-root", type=Path, required=True)
-    parser.add_argument("--development-ids", type=Path, required=True)
+    parser.add_argument("--split-manifest", type=Path, required=True)
     parser.add_argument("--config", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--device", default="cuda:3")
     args = parser.parse_args()
 
     config = json.loads(args.config.read_text(encoding="utf-8"))
-    ids = read_ids(args.development_ids)
+    split_manifest = json.loads(args.split_manifest.read_text(encoding="utf-8"))
+    ids = [identifier.upper() for identifier in split_manifest["development_ids"]]
     if len(ids) != 64:
         raise ValueError("unit audit requires the frozen 64-complex development split")
+    if split_manifest.get("holdout_count") != 16:
+        raise ValueError("unexpected frozen split manifest")
     train_ids = read_ids(args.data_root / "raw" / "train_MD.txt")
     index = {identifier: position for position, identifier in enumerate(train_ids)}
     if any(identifier not in index for identifier in ids):
