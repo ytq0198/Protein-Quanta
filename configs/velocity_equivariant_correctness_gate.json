@@ -1,0 +1,21 @@
+{
+  "status": "pre-registered before real-complex correctness audit",
+  "date": "2026-08-14",
+  "scope": "first MISATO-100 official train complex only; random initialization",
+  "protocol": {
+    "time_scaling": 1.0,
+    "initial_velocity_scale": 1.0,
+    "euler_step_size": 1.0,
+    "horizons": [5, 10, 20, 40]
+  },
+  "gates": {
+    "finite_forward_backward_all_horizons": true,
+    "nonzero_parameter_gradient_all_horizons": true,
+    "protein_bitwise_unchanged": true,
+    "terminal_to_initial_gradient_finite_nonzero": true,
+    "proper_rigid_equivariance_max_error_angstrom": 0.0001,
+    "reflection_equivariance_max_error_angstrom": 0.0001,
+    "velocity_perturbation_changes_acceleration": true
+  },
+  "decision": "Correctness pass authorizes only a separately pre-registered development-only learnability experiment."
+}
