@@ -1,0 +1,1362 @@
+{
+  "status": "pre-registered train-state noise feasibility; not official competition scores",
+  "protocol": {
+    "train_ids": [
+      "3SNC",
+      "5KBQ",
+      "5X27",
+      "4DRU",
+      "6JAW",
+      "6F3B",
+      "3MP6",
+      "1W5X",
+      "1ZSH",
+      "6C2R",
+      "1V2S",
+      "3V0L",
+      "2H2G",
+      "4D2T",
+      "5ADR",
+      "3H22",
+      "6CJS",
+      "4QSU",
+      "5U0F",
+      "5Y12",
+      "1XM4",
+      "5MW6",
+      "1HMR",
+      "6F86",
+      "4I6Q",
+      "4QO4",
+      "6CZE",
+      "1F74",
+      "3VVY",
+      "3MG7",
+      "4QDK",
+      "2W4X",
+      "2OPY",
+      "5I8B",
+      "2YWP",
+      "3HXF",
+      "5UVC",
+      "4UMJ",
+      "5JSS",
+      "2QRL",
+      "5K0C",
+      "3NCG",
+      "3BX5",
+      "2R59",
+      "6EQM",
+      "1Q6M",
+      "4QME",
+      "2C1B",
+      "1C5F",
+      "4DV9",
+      "4M5K",
+      "6PG3",
+      "5VD3",
+      "3BUG",
+      "3IMC",
+      "2OJJ",
+      "1P19",
+      "4RXD",
+      "4OHO",
+      "5JXN",
+      "4CFV",
+      "5LVQ",
+      "3U78",
+      "3SV2",
+      "6B8J",
+      "2P7G",
+      "1B6H",
+      "5D1R",
+      "5M6U",
+      "2RC9",
+      "5IIS",
+      "5F41",
+      "6AJR",
+      "2CC7",
+      "3ZM6",
+      "5LZJ",
+      "1QY1",
+      "2FDA",
+      "5ZHN",
+      "2V12"
+    ],
+    "validation_ids": [
+      "1S38",
+      "6PYS",
+      "4M5L",
+      "1CTR",
+      "4HXS",
+      "6BIB",
+      "4Q93",
+      "1SWG",
+      "3GCP",
+      "2FMB"
+    ],
+    "test_accessed": false,
+    "feature_names": [
+      "radius_of_gyration",
+      "pair_distance_q10",
+      "pair_distance_q25",
+      "pair_distance_q50",
+      "pair_distance_q75",
+      "pair_distance_q90",
+      "pair_distance_mean",
+      "pair_distance_std",
+      "step_magnitude_mean",
+      "step_magnitude_std",
+      "step_magnitude_q50",
+      "step_magnitude_q90"
+    ],
+    "normalization_mean": [
+      4.190251087828428,
+      2.179750613245667,
+      3.312727976632397,
+      5.188658028811946,
+      7.298527812465609,
+      9.144948779818543,
+      5.438361017572343,
+      2.629610247833186,
+      1.347966392412727,
+      0.45497225871254826,
+      1.2535690341386425,
+      1.9375072749188178
+    ],
+    "normalization_scale": [
+      1.1617508015847768,
+      0.4659649842436853,
+      0.8166329488630168,
+      1.345599501814115,
+      1.9848453960483183,
+      2.6383337766948167,
+      1.4053605062487524,
+      0.8558175568242657,
+      2.4225577064759967,
+      0.3134338515497646,
+      2.4281915669520178,
+      2.518761808369133
+    ],
+    "device": "cuda:0",
+    "preregistration": {
+      "status": "pre-registered before observing any updated-guide noise-augmentation result",
+      "date": "2026-08-13",
+      "purpose": "test whether fixed train-only state corruption improves causal Transformer rollout robustness under corrected T1",
+      "evidence_boundary": "MISATO-100 12D invariant-feature feasibility proxy; not atomic trajectory performance or an official score",
+      "architecture": "transformer",
+      "architecture_config": {
+        "hidden_dim": 16,
+        "layers": 2,
+        "heads": 4
+      },
+      "training": {
+        "split": "MISATO-100 train only (80 complexes)",
+        "validation": "MISATO-100 validation only (10 complexes)",
+        "test_access": "prohibited",
+        "seeds": [
+          0,
+          42,
+          123
+        ],
+        "epochs": 200,
+        "checkpoint_policy": "final epoch; no validation epoch selection",
+        "batch_size": 16,
+        "optimizer": "Adam",
+        "learning_rate": 0.001,
+        "input_noise_std": 0.02,
+        "noise_space": "standardized invariant input features only",
+        "target": "clean next-step features",
+        "comparison": "paired seed result from corrected-T1 no-noise Transformer run"
+      },
+      "promotion": {
+        "primary": "mean equal-macro T1/T2/T3 RMSE below paired no-noise Transformer",
+        "seed_consistency": "beat paired no-noise Transformer in at least 2 of 3 seeds",
+        "T1_guard": "mean T1 RMSE must not worsen by more than 2 percent",
+        "finite": "all metrics finite"
+      },
+      "interpretation": "A pass supports exposure-bias mitigation on invariant states only. The fixed sigma is inherited from the earlier preregistration and is not tuned after seeing corrected-protocol results."
+    }
+  },
+  "results": [
+    {
+      "architecture": "transformer",
+      "seed": 0,
+      "parameter_count": 4860,
+      "model_config": {
+        "hidden_dim": 16,
+        "layers": 2,
+        "heads": 4
+      },
+      "checkpoint_policy": "final_epoch",
+      "input_noise_std": 0.02,
+      "best": {
+        "epoch": 200,
+        "train_mse": 0.17192476317286493,
+        "macro_scenario_rmse": 0.41257062554359436,
+        "scenarios": {
+          "T1": {
+            "standardized_rmse": 0.4069488048553467,
+            "structure_rmse": 0.22662481665611267,
+            "step_rmse": 0.6277772784233093,
+            "static_standardized_rmse": 0.7140482664108276,
+            "finite": true
+          },
+          "T2": {
+            "standardized_rmse": 0.3158087432384491,
+            "structure_rmse": 0.1797441691160202,
+            "step_rmse": 0.4843444228172302,
+            "static_standardized_rmse": 0.6134498715400696,
+            "finite": true
+          },
+          "T3": {
+            "standardized_rmse": 0.5149543285369873,
+            "structure_rmse": 0.3223988711833954,
+            "step_rmse": 0.7665843963623047,
+            "static_standardized_rmse": 0.7192466259002686,
+            "finite": true
+          }
+        }
+      },
+      "exploratory_best": {
+        "epoch": 140,
+        "train_mse": 0.2562826797366142,
+        "macro_scenario_rmse": 0.3947753310203552,
+        "scenarios": {
+          "T1": {
+            "standardized_rmse": 0.41099879145622253,
+            "structure_rmse": 0.23328980803489685,
+            "step_rmse": 0.6308023929595947,
+            "static_standardized_rmse": 0.7140482664108276,
+            "finite": true
+          },
+          "T2": {
+            "standardized_rmse": 0.3061392307281494,
+            "structure_rmse": 0.1506165713071823,
+            "step_rmse": 0.48558521270751953,
+            "static_standardized_rmse": 0.6134498715400696,
+            "finite": true
+          },
+          "T3": {
+            "standardized_rmse": 0.4671879708766937,
+            "structure_rmse": 0.20799504220485687,
+            "step_rmse": 0.7538367509841919,
+            "static_standardized_rmse": 0.7192466259002686,
+            "finite": true
+          }
+        }
+      },
+      "history": [
+        {
+          "epoch": 20,
+          "train_mse": 0.3443239599466324,
+          "macro_scenario_rmse": 0.46930086612701416,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.47685495018959045,
+              "structure_rmse": 0.39695650339126587,
+              "step_rmse": 0.6058241724967957,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.3822489082813263,
+              "structure_rmse": 0.31400591135025024,
+              "step_rmse": 0.4910633862018585,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.5487987399101257,
+              "structure_rmse": 0.37200433015823364,
+              "step_rmse": 0.7916853427886963,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        },
+        {
+          "epoch": 40,
+          "train_mse": 0.30065569579601287,
+          "macro_scenario_rmse": 0.4206278125445048,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.4244217872619629,
+              "structure_rmse": 0.30468156933784485,
+              "step_rmse": 0.5956003665924072,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.33281242847442627,
+              "structure_rmse": 0.23917976021766663,
+              "step_rmse": 0.46677446365356445,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.5046492218971252,
+              "structure_rmse": 0.3001832365989685,
+              "step_rmse": 0.7640632390975952,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        },
+        {
+          "epoch": 60,
+          "train_mse": 0.28504402935504913,
+          "macro_scenario_rmse": 0.40665289759635925,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.4177452027797699,
+              "structure_rmse": 0.27802106738090515,
+              "step_rmse": 0.6074057221412659,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.31120386719703674,
+              "structure_rmse": 0.19289810955524445,
+              "step_rmse": 0.46489155292510986,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.4910096228122711,
+              "structure_rmse": 0.2720291018486023,
+              "step_rmse": 0.7584666609764099,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        },
+        {
+          "epoch": 80,
+          "train_mse": 0.2763761878013611,
+          "macro_scenario_rmse": 0.3991827964782715,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.42021387815475464,
+              "structure_rmse": 0.26130956411361694,
+              "step_rmse": 0.6270356178283691,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.30033695697784424,
+              "structure_rmse": 0.17017628252506256,
+              "step_rmse": 0.4611799716949463,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.4769975543022156,
+              "structure_rmse": 0.24163207411766052,
+              "step_rmse": 0.7522019743919373,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        },
+        {
+          "epoch": 100,
+          "train_mse": 0.27076288461685183,
+          "macro_scenario_rmse": 0.4165072540442149,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.4458582103252411,
+              "structure_rmse": 0.2956239879131317,
+              "step_rmse": 0.6492931246757507,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.30296945571899414,
+              "structure_rmse": 0.17302334308624268,
+              "step_rmse": 0.4642168879508972,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.5006940960884094,
+              "structure_rmse": 0.2954743504524231,
+              "step_rmse": 0.7599168419837952,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        },
+        {
+          "epoch": 120,
+          "train_mse": 0.2652029857039452,
+          "macro_scenario_rmse": 0.39839718739191693,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.40432971715927124,
+              "structure_rmse": 0.23417609930038452,
+              "step_rmse": 0.6170661449432373,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.30419397354125977,
+              "structure_rmse": 0.15756438672542572,
+              "step_rmse": 0.47743988037109375,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.4866678714752197,
+              "structure_rmse": 0.26594844460487366,
+              "step_rmse": 0.7543736100196838,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        },
+        {
+          "epoch": 140,
+          "train_mse": 0.2562826797366142,
+          "macro_scenario_rmse": 0.3947753310203552,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.41099879145622253,
+              "structure_rmse": 0.23328980803489685,
+              "step_rmse": 0.6308023929595947,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.3061392307281494,
+              "structure_rmse": 0.1506165713071823,
+              "step_rmse": 0.48558521270751953,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.4671879708766937,
+              "structure_rmse": 0.20799504220485687,
+              "step_rmse": 0.7538367509841919,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        },
+        {
+          "epoch": 160,
+          "train_mse": 0.2361204907298088,
+          "macro_scenario_rmse": 0.4045979877312978,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.40548792481422424,
+              "structure_rmse": 0.2577988803386688,
+              "step_rmse": 0.6002839207649231,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.30945125222206116,
+              "structure_rmse": 0.1711016297340393,
+              "step_rmse": 0.47825586795806885,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.49885478615760803,
+              "structure_rmse": 0.2665179371833801,
+              "step_rmse": 0.7774989008903503,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        },
+        {
+          "epoch": 180,
+          "train_mse": 0.2014640301465988,
+          "macro_scenario_rmse": 0.4099336266517639,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.4168459177017212,
+              "structure_rmse": 0.23304560780525208,
+              "step_rmse": 0.6423869729042053,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.3061766028404236,
+              "structure_rmse": 0.18025565147399902,
+              "step_rmse": 0.46502485871315,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.506778359413147,
+              "structure_rmse": 0.29205724596977234,
+              "step_rmse": 0.7745178937911987,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        },
+        {
+          "epoch": 200,
+          "train_mse": 0.17192476317286493,
+          "macro_scenario_rmse": 0.41257062554359436,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.4069488048553467,
+              "structure_rmse": 0.22662481665611267,
+              "step_rmse": 0.6277772784233093,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.3158087432384491,
+              "structure_rmse": 0.1797441691160202,
+              "step_rmse": 0.4843444228172302,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.5149543285369873,
+              "structure_rmse": 0.3223988711833954,
+              "step_rmse": 0.7665843963623047,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "architecture": "transformer",
+      "seed": 42,
+      "parameter_count": 4860,
+      "model_config": {
+        "hidden_dim": 16,
+        "layers": 2,
+        "heads": 4
+      },
+      "checkpoint_policy": "final_epoch",
+      "input_noise_std": 0.02,
+      "best": {
+        "epoch": 200,
+        "train_mse": 0.1754063531756401,
+        "macro_scenario_rmse": 0.3998546004295349,
+        "scenarios": {
+          "T1": {
+            "standardized_rmse": 0.39403533935546875,
+            "structure_rmse": 0.23094354569911957,
+            "step_rmse": 0.5992676019668579,
+            "static_standardized_rmse": 0.7140482664108276,
+            "finite": true
+          },
+          "T2": {
+            "standardized_rmse": 0.31825312972068787,
+            "structure_rmse": 0.17335619032382965,
+            "step_rmse": 0.49371084570884705,
+            "static_standardized_rmse": 0.6134498715400696,
+            "finite": true
+          },
+          "T3": {
+            "standardized_rmse": 0.4872753322124481,
+            "structure_rmse": 0.26285845041275024,
+            "step_rmse": 0.7577087879180908,
+            "static_standardized_rmse": 0.7192466259002686,
+            "finite": true
+          }
+        }
+      },
+      "exploratory_best": {
+        "epoch": 160,
+        "train_mse": 0.19513271749019623,
+        "macro_scenario_rmse": 0.3922220468521118,
+        "scenarios": {
+          "T1": {
+            "standardized_rmse": 0.3888351023197174,
+            "structure_rmse": 0.22526802122592926,
+            "step_rmse": 0.5933690667152405,
+            "static_standardized_rmse": 0.7140482664108276,
+            "finite": true
+          },
+          "T2": {
+            "standardized_rmse": 0.3052400052547455,
+            "structure_rmse": 0.1728558987379074,
+            "step_rmse": 0.4687814712524414,
+            "static_standardized_rmse": 0.6134498715400696,
+            "finite": true
+          },
+          "T3": {
+            "standardized_rmse": 0.48259103298187256,
+            "structure_rmse": 0.24843356013298035,
+            "step_rmse": 0.7584483623504639,
+            "static_standardized_rmse": 0.7192466259002686,
+            "finite": true
+          }
+        }
+      },
+      "history": [
+        {
+          "epoch": 20,
+          "train_mse": 0.3570517212152481,
+          "macro_scenario_rmse": 0.5025434990723928,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.4851681590080261,
+              "structure_rmse": 0.3905332386493683,
+              "step_rmse": 0.6333497762680054,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.454766184091568,
+              "structure_rmse": 0.3651289641857147,
+              "step_rmse": 0.5948095917701721,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.5676961541175842,
+              "structure_rmse": 0.36851873993873596,
+              "step_rmse": 0.8338013291358948,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        },
+        {
+          "epoch": 40,
+          "train_mse": 0.3056621581315994,
+          "macro_scenario_rmse": 0.4480299750963847,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.42494896054267883,
+              "structure_rmse": 0.2686976492404938,
+              "step_rmse": 0.6303554773330688,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.3815748393535614,
+              "structure_rmse": 0.2626875340938568,
+              "step_rmse": 0.5466155409812927,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.5375661253929138,
+              "structure_rmse": 0.3070864975452423,
+              "step_rmse": 0.823606550693512,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        },
+        {
+          "epoch": 60,
+          "train_mse": 0.2842772603034973,
+          "macro_scenario_rmse": 0.41411158442497253,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.41229844093322754,
+              "structure_rmse": 0.2555071711540222,
+              "step_rmse": 0.6159563064575195,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.3227510154247284,
+              "structure_rmse": 0.2036178857088089,
+              "step_rmse": 0.47914940118789673,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.5072852969169617,
+              "structure_rmse": 0.27383705973625183,
+              "step_rmse": 0.7886961102485657,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        },
+        {
+          "epoch": 80,
+          "train_mse": 0.2749039441347122,
+          "macro_scenario_rmse": 0.40295956532160443,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.4129366874694824,
+              "structure_rmse": 0.25723788142204285,
+              "step_rmse": 0.6157982349395752,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.30429330468177795,
+              "structure_rmse": 0.17230747640132904,
+              "step_rmse": 0.46733662486076355,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.49164870381355286,
+              "structure_rmse": 0.24577288329601288,
+              "step_rmse": 0.7773973941802979,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        },
+        {
+          "epoch": 100,
+          "train_mse": 0.2674294725060463,
+          "macro_scenario_rmse": 0.3960714240868886,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.40575993061065674,
+              "structure_rmse": 0.2452918142080307,
+              "step_rmse": 0.6112177968025208,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.3028365671634674,
+              "structure_rmse": 0.15666812658309937,
+              "step_rmse": 0.475436806678772,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.47961777448654175,
+              "structure_rmse": 0.22194895148277283,
+              "step_rmse": 0.7691404223442078,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        },
+        {
+          "epoch": 120,
+          "train_mse": 0.25565782487392424,
+          "macro_scenario_rmse": 0.3963556985060374,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.3943353593349457,
+              "structure_rmse": 0.22350053489208221,
+              "step_rmse": 0.6054717898368835,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.30849212408065796,
+              "structure_rmse": 0.15651379525661469,
+              "step_rmse": 0.48632192611694336,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.48623961210250854,
+              "structure_rmse": 0.21622620522975922,
+              "step_rmse": 0.784716010093689,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        },
+        {
+          "epoch": 140,
+          "train_mse": 0.21822563111782073,
+          "macro_scenario_rmse": 0.41687288880348206,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.43005847930908203,
+              "structure_rmse": 0.3068971335887909,
+              "step_rmse": 0.6053752303123474,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.31778064370155334,
+              "structure_rmse": 0.19602778553962708,
+              "step_rmse": 0.4754995107650757,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.5027795433998108,
+              "structure_rmse": 0.3107578456401825,
+              "step_rmse": 0.7518118023872375,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        },
+        {
+          "epoch": 160,
+          "train_mse": 0.19513271749019623,
+          "macro_scenario_rmse": 0.3922220468521118,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.3888351023197174,
+              "structure_rmse": 0.22526802122592926,
+              "step_rmse": 0.5933690667152405,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.3052400052547455,
+              "structure_rmse": 0.1728558987379074,
+              "step_rmse": 0.4687814712524414,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.48259103298187256,
+              "structure_rmse": 0.24843356013298035,
+              "step_rmse": 0.7584483623504639,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        },
+        {
+          "epoch": 180,
+          "train_mse": 0.18259831964969636,
+          "macro_scenario_rmse": 0.4025476972262065,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.415140300989151,
+              "structure_rmse": 0.26977601647377014,
+              "step_rmse": 0.6094802021980286,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.3077320456504822,
+              "structure_rmse": 0.16650143265724182,
+              "step_rmse": 0.47817522287368774,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.4847707450389862,
+              "structure_rmse": 0.25653690099716187,
+              "step_rmse": 0.7572222948074341,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        },
+        {
+          "epoch": 200,
+          "train_mse": 0.1754063531756401,
+          "macro_scenario_rmse": 0.3998546004295349,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.39403533935546875,
+              "structure_rmse": 0.23094354569911957,
+              "step_rmse": 0.5992676019668579,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.31825312972068787,
+              "structure_rmse": 0.17335619032382965,
+              "step_rmse": 0.49371084570884705,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.4872753322124481,
+              "structure_rmse": 0.26285845041275024,
+              "step_rmse": 0.7577087879180908,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "architecture": "transformer",
+      "seed": 123,
+      "parameter_count": 4860,
+      "model_config": {
+        "hidden_dim": 16,
+        "layers": 2,
+        "heads": 4
+      },
+      "checkpoint_policy": "final_epoch",
+      "input_noise_std": 0.02,
+      "best": {
+        "epoch": 200,
+        "train_mse": 0.24231736361980438,
+        "macro_scenario_rmse": 0.46035481492678326,
+        "scenarios": {
+          "T1": {
+            "standardized_rmse": 0.41772064566612244,
+            "structure_rmse": 0.2589799761772156,
+            "step_rmse": 0.6239633560180664,
+            "static_standardized_rmse": 0.7140482664108276,
+            "finite": true
+          },
+          "T2": {
+            "standardized_rmse": 0.48804008960723877,
+            "structure_rmse": 0.2525876760482788,
+            "step_rmse": 0.766125500202179,
+            "static_standardized_rmse": 0.6134498715400696,
+            "finite": true
+          },
+          "T3": {
+            "standardized_rmse": 0.4753037095069885,
+            "structure_rmse": 0.21824786067008972,
+            "step_rmse": 0.7632015347480774,
+            "static_standardized_rmse": 0.7192466259002686,
+            "finite": true
+          }
+        }
+      },
+      "exploratory_best": {
+        "epoch": 160,
+        "train_mse": 0.261539551615715,
+        "macro_scenario_rmse": 0.4024517635504405,
+        "scenarios": {
+          "T1": {
+            "standardized_rmse": 0.4130357503890991,
+            "structure_rmse": 0.2549564838409424,
+            "step_rmse": 0.6178914904594421,
+            "static_standardized_rmse": 0.7140482664108276,
+            "finite": true
+          },
+          "T2": {
+            "standardized_rmse": 0.3076804578304291,
+            "structure_rmse": 0.17296667397022247,
+            "step_rmse": 0.4734625816345215,
+            "static_standardized_rmse": 0.6134498715400696,
+            "finite": true
+          },
+          "T3": {
+            "standardized_rmse": 0.4866390824317932,
+            "structure_rmse": 0.24528644979000092,
+            "step_rmse": 0.7681939601898193,
+            "static_standardized_rmse": 0.7192466259002686,
+            "finite": true
+          }
+        }
+      },
+      "history": [
+        {
+          "epoch": 20,
+          "train_mse": 0.3569759130477905,
+          "macro_scenario_rmse": 0.48593465487162274,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.48606714606285095,
+              "structure_rmse": 0.3784278929233551,
+              "step_rmse": 0.6498988270759583,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.41031143069267273,
+              "structure_rmse": 0.3146398365497589,
+              "step_rmse": 0.5541388988494873,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.5614253878593445,
+              "structure_rmse": 0.3677423298358917,
+              "step_rmse": 0.8216608166694641,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        },
+        {
+          "epoch": 40,
+          "train_mse": 0.3071460694074631,
+          "macro_scenario_rmse": 0.43608787655830383,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.44677820801734924,
+              "structure_rmse": 0.31999504566192627,
+              "step_rmse": 0.6277249455451965,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.34726279973983765,
+              "structure_rmse": 0.23967677354812622,
+              "step_rmse": 0.4968746602535248,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.5142226219177246,
+              "structure_rmse": 0.26712241768836975,
+              "step_rmse": 0.8065767288208008,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        },
+        {
+          "epoch": 60,
+          "train_mse": 0.2895533487200737,
+          "macro_scenario_rmse": 0.4260082244873047,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.4036976993083954,
+              "structure_rmse": 0.2556723952293396,
+              "step_rmse": 0.5984803438186646,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.34184589982032776,
+              "structure_rmse": 0.24408575892448425,
+              "step_rmse": 0.48106151819229126,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.5324810743331909,
+              "structure_rmse": 0.33608779311180115,
+              "step_rmse": 0.7903786301612854,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        },
+        {
+          "epoch": 80,
+          "train_mse": 0.2801845774054527,
+          "macro_scenario_rmse": 0.41293977697690326,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.40818262100219727,
+              "structure_rmse": 0.26923006772994995,
+              "step_rmse": 0.5957092046737671,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.32415851950645447,
+              "structure_rmse": 0.2204447090625763,
+              "step_rmse": 0.4669523537158966,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.5064781904220581,
+              "structure_rmse": 0.281247615814209,
+              "step_rmse": 0.7818951606750488,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        },
+        {
+          "epoch": 100,
+          "train_mse": 0.27492467761039735,
+          "macro_scenario_rmse": 0.41345534722010296,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.4002898931503296,
+              "structure_rmse": 0.25575149059295654,
+              "step_rmse": 0.5915051102638245,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.3263806700706482,
+              "structure_rmse": 0.2209995836019516,
+              "step_rmse": 0.47105345129966736,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.513695478439331,
+              "structure_rmse": 0.31039679050445557,
+              "step_rmse": 0.7739229202270508,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        },
+        {
+          "epoch": 120,
+          "train_mse": 0.2702722787857056,
+          "macro_scenario_rmse": 0.4125721951325734,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.3976566195487976,
+              "structure_rmse": 0.2521098256111145,
+              "step_rmse": 0.589299201965332,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.32782885432243347,
+              "structure_rmse": 0.2177480012178421,
+              "step_rmse": 0.4770606458187103,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.5122311115264893,
+              "structure_rmse": 0.3120683431625366,
+              "step_rmse": 0.7696550488471985,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        },
+        {
+          "epoch": 140,
+          "train_mse": 0.26627381294965746,
+          "macro_scenario_rmse": 0.40297483404477435,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.4167156219482422,
+              "structure_rmse": 0.2692606449127197,
+              "step_rmse": 0.6131501793861389,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.3036261200904846,
+              "structure_rmse": 0.17607063055038452,
+              "step_rmse": 0.4632113575935364,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.4885827600955963,
+              "structure_rmse": 0.24412640929222107,
+              "step_rmse": 0.7726213932037354,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        },
+        {
+          "epoch": 160,
+          "train_mse": 0.261539551615715,
+          "macro_scenario_rmse": 0.4024517635504405,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.4130357503890991,
+              "structure_rmse": 0.2549564838409424,
+              "step_rmse": 0.6178914904594421,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.3076804578304291,
+              "structure_rmse": 0.17296667397022247,
+              "step_rmse": 0.4734625816345215,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.4866390824317932,
+              "structure_rmse": 0.24528644979000092,
+              "step_rmse": 0.7681939601898193,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        },
+        {
+          "epoch": 180,
+          "train_mse": 0.25533725172281263,
+          "macro_scenario_rmse": 0.4212503929932912,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.4190213084220886,
+              "structure_rmse": 0.27012497186660767,
+              "step_rmse": 0.617091178894043,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.3624562621116638,
+              "structure_rmse": 0.18977971374988556,
+              "step_rmse": 0.5675305128097534,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.4822736084461212,
+              "structure_rmse": 0.23579789698123932,
+              "step_rmse": 0.7658734321594238,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        },
+        {
+          "epoch": 200,
+          "train_mse": 0.24231736361980438,
+          "macro_scenario_rmse": 0.46035481492678326,
+          "scenarios": {
+            "T1": {
+              "standardized_rmse": 0.41772064566612244,
+              "structure_rmse": 0.2589799761772156,
+              "step_rmse": 0.6239633560180664,
+              "static_standardized_rmse": 0.7140482664108276,
+              "finite": true
+            },
+            "T2": {
+              "standardized_rmse": 0.48804008960723877,
+              "structure_rmse": 0.2525876760482788,
+              "step_rmse": 0.766125500202179,
+              "static_standardized_rmse": 0.6134498715400696,
+              "finite": true
+            },
+            "T3": {
+              "standardized_rmse": 0.4753037095069885,
+              "structure_rmse": 0.21824786067008972,
+              "step_rmse": 0.7632015347480774,
+              "static_standardized_rmse": 0.7192466259002686,
+              "finite": true
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "aggregate": {
+    "noise_macro_scenario_rmse": {
+      "mean": 0.4242600136333042,
+      "sample_std": 0.0318990647823279,
+      "values": [
+        0.41257062554359436,
+        0.3998546004295349,
+        0.46035481492678326
+      ]
+    },
+    "no_noise_macro_scenario_rmse": {
+      "mean": 0.41778020064036053,
+      "sample_std": 0.032792707848929445,
+      "values": [
+        0.40524521470069885,
+        0.3931039174397786,
+        0.45499146978060406
+      ]
+    },
+    "paired_macro_difference": {
+      "mean": 0.006479812992943664,
+      "sample_std": 0.0010086889341802384,
+      "values": [
+        0.007325410842895508,
+        0.006750682989756285,
+        0.005363345146179199
+      ]
+    },
+    "scenarios": {
+      "T1": {
+        "noise": {
+          "mean": 0.4062349299589793,
+          "sample_std": 0.011858779312522875,
+          "values": [
+            0.4069488048553467,
+            0.39403533935546875,
+            0.41772064566612244
+          ]
+        },
+        "no_noise": {
+          "mean": 0.4096100429693858,
+          "sample_std": 0.010408412739376418,
+          "values": [
+            0.4124409258365631,
+            0.3980790376663208,
+            0.41831016540527344
+          ]
+        },
+        "paired_difference": {
+          "mean": -0.003375113010406494,
+          "sample_std": 0.0025187555384860753,
+          "values": [
+            -0.005492120981216431,
+            -0.004043698310852051,
+            -0.000589519739151001
+          ]
+        },
+        "relative_mean_change": -0.00823981996617873
+      },
+      "T2": {
+        "noise": {
+          "mean": 0.37403398752212524,
+          "sample_std": 0.09873974499055399,
+          "values": [
+            0.3158087432384491,
+            0.31825312972068787,
+            0.48804008960723877
+          ]
+        },
+        "no_noise": {
+          "mean": 0.3600967228412628,
+          "sample_std": 0.09780263943651155,
+          "values": [
+            0.3029935359954834,
+            0.30426955223083496,
+            0.4730270802974701
+          ]
+        },
+        "paired_difference": {
+          "mean": 0.013937264680862427,
+          "sample_std": 0.001099632728877375,
+          "values": [
+            0.012815207242965698,
+            0.013983577489852905,
+            0.015013009309768677
+          ]
+        },
+        "relative_mean_change": 0.03870422527284756
+      },
+      "T3": {
+        "noise": {
+          "mean": 0.492511123418808,
+          "sample_std": 0.02033723259278341,
+          "values": [
+            0.5149543285369873,
+            0.4872753322124481,
+            0.4753037095069885
+          ]
+        },
+        "no_noise": {
+          "mean": 0.4836338361104329,
+          "sample_std": 0.014529827527527373,
+          "values": [
+            0.50030118227005,
+            0.4769631624221802,
+            0.4736371636390686
+          ]
+        },
+        "paired_difference": {
+          "mean": 0.00887728730837504,
+          "sample_std": 0.006611135551746889,
+          "values": [
+            0.014653146266937256,
+            0.010312169790267944,
+            0.0016665458679199219
+          ]
+        },
+        "relative_mean_change": 0.01835538923365987
+      }
+    }
+  },
+  "promotion": {
+    "beats_reference_mean": false,
+    "beats_reference_seed_count": 0,
+    "T1_relative_mean_change": -0.00823981996617873,
+    "T1_guard_passed": true,
+    "finite": true,
+    "passed": false
+  }
+}

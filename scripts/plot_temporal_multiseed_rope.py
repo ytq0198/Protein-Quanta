@@ -20,6 +20,7 @@ DISPLAY_NAMES = {
 
 def render_figure(report, output):
     aggregate = report["aggregate"]
+    uses_equal_macro = all("macro_scenario_rmse" in row for row in aggregate.values())
     architectures = list(aggregate)
     names = [DISPLAY_NAMES[name] for name in architectures]
     means = np.array(
@@ -64,7 +65,11 @@ def render_figure(report, output):
         axes[0].scatter(index, means[index], marker="D", s=55, color=color, edgecolor="black", linewidth=0.5, zorder=4)
     axes[0].axhline(means[0], color="#404040", linestyle="--", linewidth=1, alpha=0.7)
     axes[0].set_xticks(x, names, rotation=22, ha="right")
-    axes[0].set_ylabel("Equal-macro T1/T2/T3 RMSE (lower is better)")
+    axes[0].set_ylabel(
+        "Equal-macro T1/T2/T3 RMSE (lower is better)"
+        if uses_equal_macro
+        else "Historical weighted proxy RMSE (lower is better)"
+    )
     axes[0].set_title("Stability across three fixed seeds")
     axes[0].text(0.02, 0.02, "Dots: seeds 0/42/123 · diamonds: mean · bars: sample SD", transform=axes[0].transAxes, fontsize=8)
 
