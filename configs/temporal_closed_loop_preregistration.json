@@ -1,0 +1,33 @@
+{
+  "status": "pre-registered before observing any closed-loop training result",
+  "date": "2026-08-13",
+  "hypothesis": "direct differentiable self-rollout supervision reduces exposure bias more effectively than iid input noise or inference-only alternating refinement",
+  "evidence_boundary": "MISATO-100 12D invariant-feature mechanism proxy; not atomic Geo/Phys/Dyn/Stab and not an official score",
+  "architecture": "transformer",
+  "training": {
+    "split": "MISATO-100 train only (80 complexes)",
+    "validation": "MISATO-100 validation only (10 complexes)",
+    "test_access": "prohibited",
+    "seeds": [0, 42, 123],
+    "epochs": 200,
+    "checkpoint_policy": "final epoch; no validation epoch selection",
+    "batch_size": 16,
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "gradient_clip_norm": 1.0,
+    "one_step_loss_weight": 1.0,
+    "closed_loop_loss_weight": 0.25,
+    "closed_loop_horizon": 10,
+    "prefix_length_sampling": "one integer uniformly sampled from [10, 90] for each batch update",
+    "input_noise_std": 0.0
+  },
+  "comparison": "paired corrected-T1 no-noise Transformer with identical architecture, budget, seeds and final-epoch policy",
+  "promotion": {
+    "primary": "mean equal-macro T1/T2/T3 RMSE below paired one-step reference",
+    "seed_consistency": "beat paired reference in at least 2 of 3 seeds",
+    "T1_guard": "mean T1 RMSE must not worsen by more than 2 percent",
+    "T3_mechanism": "mean T3 RMSE must improve by at least 5 percent",
+    "finite": "all metrics finite"
+  },
+  "no_posthoc_tuning": "failure freezes horizon=10 and weight=0.25 as a no-go; no immediate weight or horizon sweep"
+}
