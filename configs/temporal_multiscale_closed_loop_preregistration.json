@@ -1,0 +1,41 @@
+{
+  "status": "pre-registered before creating or observing the train-only holdout results",
+  "date": "2026-08-13",
+  "hypothesis": "sampling closed-loop horizons across local, medium and long ranges preserves the T1/T2 gains of 10-step training while directly constraining T3-like long rollout",
+  "evidence_boundary": "MISATO-100 train-only 12D invariant-feature mechanism proxy; not atomic Geo/Phys/Dyn/Stab and not an official score",
+  "split": {
+    "source": "MISATO-100 official training subset only (80 complexes)",
+    "development_count": 64,
+    "holdout_count": 16,
+    "method": "salted SHA256 deterministic sample-disjoint split",
+    "salt": "protein-quanta-temporal-v1",
+    "limitation": "not yet protein-homology or ligand-scaffold grouped",
+    "official_validation_access": "prohibited for training, selection and tuning",
+    "official_test_access": "prohibited"
+  },
+  "architecture": "transformer",
+  "training": {
+    "seeds": [0, 42, 123],
+    "epochs": 200,
+    "checkpoint_policy": "final epoch; no holdout epoch selection",
+    "batch_size": 16,
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "gradient_clip_norm": 1.0,
+    "one_step_loss_weight": 1.0,
+    "closed_loop_loss_weight": 0.25,
+    "closed_loop_horizons": [5, 10, 20, 40],
+    "horizon_sampling": "one horizon uniformly sampled per batch update",
+    "prefix_length_sampling": "uniform valid integer conditional on sampled horizon",
+    "input_noise_std": 0.0
+  },
+  "comparison": "paired one-step Transformer trained from scratch on the same 64/16 split with identical architecture, budget, seeds and final-epoch policy",
+  "promotion": {
+    "primary": "mean equal-macro T1/T2/T3 RMSE below paired one-step reference",
+    "seed_consistency": "beat paired reference in at least 2 of 3 seeds",
+    "T1_guard": "mean T1 RMSE must not worsen by more than 2 percent",
+    "T3_mechanism": "mean T3 RMSE must improve by at least 5 percent",
+    "finite": "all metrics finite"
+  },
+  "next_access_rule": "only a complete pass permits one frozen evaluation on the official validation; a failure remains train-only and is not tuned on official validation"
+}
