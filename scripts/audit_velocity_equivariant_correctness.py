@@ -14,11 +14,37 @@ from protein_quanta.rollout_loss import multiscale_coordinate_smooth_l1
 from protein_quanta.velocity_equivariant_dynamics import (
     VelocityEquivariantAcceleration,
 )
-from scripts.audit_neuralmd_multiscale import (
-    finite_parameter_gradient,
-    proper_rotation,
-    transformed_batch,
-)
+
+
+def proper_rotation(device, dtype):
+    generator = torch.Generator(device="cpu").manual_seed(20260814)
+    matrix = torch.randn(3, 3, generator=generator, dtype=dtype).to(device)
+    rotation, _ = torch.linalg.qr(matrix)
+    if torch.linalg.det(rotation) < 0:
+        rotation[:, -1] = -rotation[:, -1]
+    return rotation
+
+
+def transformed_batch(batch, matrix, translation):
+    transformed = batch.clone()
+    transformed.protein_pos = batch.protein_pos @ matrix.T + translation
+    transformed.ligand_trajectory_pos = (
+        batch.ligand_trajectory_pos @ matrix.T + translation
+    )
+    return transformed
+
+
+def finite_parameter_gradient(model, loss):
+    gradients = torch.autograd.grad(
+        loss, tuple(model.parameters()), allow_unused=True
+    )
+    finite = True
+    squared_norm = loss.new_zeros(())
+    for gradient in gradients:
+        if gradient is not None:
+            finite = finite and bool(torch.isfinite(gradient).all())
+            squared_norm = squared_norm + gradient.square().sum()
+    return finite, float(torch.sqrt(squared_norm).detach().cpu())
 
 
 def reflection(device, dtype):
