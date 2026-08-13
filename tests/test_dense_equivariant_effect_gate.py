@@ -4,6 +4,9 @@ import tempfile
 import unittest
 from pathlib import Path
 
+import torch
+
+from protein_quanta.dense_equivariant_dynamics import DenseEquivariantAcceleration
 from protein_quanta.effect_gate_barrier import verify_training_artifacts
 
 
@@ -57,6 +60,24 @@ class EffectGateBarrierTests(unittest.TestCase):
             self.config, self.training, self.checkpoints
         )
         self.assertEqual(set(verified), {0, 42, 123})
+
+
+class EffectGatePairingTests(unittest.TestCase):
+    def test_deepcopied_arms_start_bitwise_identical_and_independent(self):
+        import copy
+
+        torch.manual_seed(42)
+        initial = DenseEquivariantAcceleration(hidden_dim=32)
+        control = copy.deepcopy(initial)
+        candidate = copy.deepcopy(initial)
+
+        for left, right in zip(control.parameters(), candidate.parameters()):
+            self.assertTrue(torch.equal(left, right))
+        with torch.no_grad():
+            next(control.parameters()).add_(1.0)
+        self.assertFalse(torch.equal(
+            next(control.parameters()), next(candidate.parameters())
+        ))
 
 
 if __name__ == "__main__":
