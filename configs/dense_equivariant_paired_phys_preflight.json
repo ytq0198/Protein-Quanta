@@ -1,0 +1,36 @@
+{
+  "status": "pre-registered before paired training and Phys evaluation",
+  "date": "2026-08-14",
+  "source_preflight_commit": "c453756",
+  "data": {
+    "source": "MISATO-100 official train only",
+    "frozen_ten_ids": ["3SNC", "5KBQ", "5X27", "4DRU", "6JAW", "6F3B", "3MP6", "1W5X", "1ZSH", "1V2S"],
+    "topology_covered_ids": ["5KBQ", "5X27", "4DRU", "6JAW", "6F3B", "1W5X", "1ZSH", "1V2S"],
+    "topology_missing_ids": ["3SNC", "3MP6"],
+    "topology_source": "RCSB PDB explicit CONECT; atom order validated against MISATO frame 0",
+    "official_validation_accessed": false,
+    "official_test_accessed": false
+  },
+  "pairing": {
+    "control": "dense equivariant local ODE MSE; multiscale coefficient 0",
+    "candidate": "same model plus coefficient 0.25 multiscale Smooth-L1",
+    "same_initialization": true,
+    "same_batch_order": true,
+    "same_local_windows": true,
+    "same_multiscale_windows": true,
+    "seed": 42,
+    "epochs": 5,
+    "learning_rate": 0.0001,
+    "gradient_clip_norm": 1.0,
+    "euler_step_size": 0.025
+  },
+  "evaluation": {
+    "checkpoint": "final epoch only",
+    "observed_frames": 2,
+    "forecast_horizon": 40,
+    "metrics": ["coordinate_rmse", "bond_length_mae_angstrom", "extreme_bond_event_percent"],
+    "phys_gate": "candidate extreme_bond_event_percent minus control <= 0.1 percentage points",
+    "coverage_gate": "reported separately as 8/10; no claim of full 10-complex Phys coverage"
+  },
+  "decision": "paired Phys pass is necessary but not sufficient to enter 64/16 effect gate"
+}
