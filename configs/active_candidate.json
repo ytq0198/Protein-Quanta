@@ -1,5 +1,5 @@
 {
-  "status": "temporarily demoted working checkpoint: prior T1 selection used superseded 2-to-18 window; updated-guide 10-to-10 reevaluation required; not an official competition score",
+  "status": "inactive research checkpoint after completed updated-guide reevaluation; not an official competition score",
   "active_for_submission": false,
   "method": "scenario-aware-checkpoint-selection",
   "checkpoint": {
@@ -32,7 +32,7 @@
     "Phys": "bond-aware validation on 9/10 complexes improves mean bond error but has a T3 rare-extreme-event caveat",
     "Dyn": "distribution validation improves T3 structural distributions but fails the two-scenario aggregate promotion gate",
     "Stab": "project proxy available",
-    "overall": "not eligible for submission until updated-guide T1 validation is rerun"
+    "overall": "updated-guide rerun completed; not promoted because multi-metric gains are mixed and official weights are unpublished"
   },
   "updated_guide_validation": {
     "status": "rerun complete; epoch 5 is a research candidate but not a comprehensive winner",

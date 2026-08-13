@@ -8,7 +8,7 @@
 
 > **2026-08-13 T1 协议审计**：项目此前实际执行的 T1 是旧解释 `2→18`，不是新版 `10→10`。
 > 因此下文所有旧 T1 数字统一降级为“历史 T1-2→18”；T2/T3 与复现工程证据仍保留。
-> 活动候选已临时撤销，等待纠正后的 validation 重跑。详见
+> 活动候选已撤销；纠正后的 validation 已完成但没有形成全指标获胜候选。详见
 > `docs/2026-08-13-t1-protocol-correction.md`。
 
 纠正后的 validation 已完成：published NeuralMD 在新版 T1 的坐标 RMSE 为 `1.3880 Å`，Static 为 `1.3605 Å`；但 published 的 Matching/Stability/RMSF/误差斜率均优于 Static。epoch 5 在 T1/T2 与 published 几乎相同，在 T3 改善 Matching `6.01%`、Stability `+2.0185` 点，同时坐标/RMSF/斜率轻微回退。因新版未公布权重，published 保持严格主基线，epoch 5 仅保留为未晋升研究候选。详见 `reports/reproduction/2026-08-13-neuralmd-updated-guide-validation.md`。
@@ -31,14 +31,14 @@
 | 统一评估器 | Static、Linear、NeuralMD checkpoint 及 T1/T2/T3 场景评估已接入 |
 | 官方 checkpoint | 测试集 10 个复合物、100 帧完成 |
 | 从头训练 | 官方配置已纠正；seed 42 best 几乎逐位复现发布 checkpoint |
-| 创新实验 | epoch-5 场景早停 + Static anchor `β=1` 通过；E6/E6b Pair no-go |
-| 测试 | 本地与服务器均为 80 项通过；服务器另有 4 项按环境预期跳过 |
+| 创新实验 | 普通 Transformer 机制筛选通过；10 步闭环总体/T2 改善但未过 T3 门槛；anchor、Pair、噪声与 ProAR proxy no-go |
+| 测试 | 当前本地 145 项通过，另有 29 个子测试通过 |
 
 ## 2026-08-10 至 2026-08-11：复现基础设施
 
 ### 关键决策
 
-1. 比赛指导手册公开了单场景 `Geo/Phys/Dyn/Stab = 40%/25%/25%/10%`，以及总分 `T1/T2/T3 = 50%/30%/20%`；但没有提供可执行的归一化与官方评分代码，因此本地新增指标仍只标为项目代理诊断，不拼接伪“总分”。
+1. 本段记录旧手册阶段决策：旧版曾给出 `Geo/Phys/Dyn/Stab = 40%/25%/25%/10%` 和 `T1/T2/T3 = 50%/30%/20%`；新版已经撤下这些权重。当前只报告各场景原始代理与相对基线，不拼接伪“总分”。
 2. 数据和模型权重不进入 Git；所有 checkpoint 记录 SHA256。
 3. 使用 NeuralMD 作者维护的 condition-aware `torchdiffeq` fork，固定 commit `3d7c7ec8c534a9b18b8b7c7d1fea0c235e6468d0`。
 4. 发布权重结构与上游 parser 默认值不同；从 state dict 识别 100 个 radial bases 和关闭 velocity refinement，并执行严格加载。

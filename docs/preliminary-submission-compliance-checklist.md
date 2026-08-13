@@ -5,9 +5,9 @@
 > 最新模板明确“独立完成，禁止使用 AI 作答”：本清单和仓库只提供事实、实验、图表与核查入口，
 > 最终提交正文必须由团队成员独立撰写。
 
-> 状态日期：2026-08-12（Asia/Shanghai）  
-> 性质：内部核验与事实索引，不是参赛答卷，不可直接提交。  
-> 依据：`AI for research指导手册.pdf` 第 4、8-13、18-21、25-27 页、算法赛初赛模板，以及 2026-08-12 核验的 GOAI 官方 AI for Research 页面。指导手册自称“规划版本”，如官网/群公告有更新，以组委会最新通知为准。
+> 状态日期：2026-08-13（Asia/Shanghai）
+> 性质：内部核验与事实索引，不是参赛答卷，不可直接提交。
+> 当前依据：`AI fo research指导手册2.pdf`、`初赛作品提交模板（最新）.zip`，以及公开赛事页面。旧手册只作版本历史。
 
 ## 1. 已重新核实的硬规则
 
@@ -16,7 +16,7 @@
 - 初赛提交物：算法赛为“方案说明文档、技术路线概述”，应说明所选方向、科学问题理解、技术方案与预期方法路线，可附初步实验或可行性验证（第 8、25 页）。
 - 初赛不强制提交代码，但必须说明开源计划与边界；复赛起要求可运行代码、README、环境配置、运行说明、完整实验结果、科学意义和依赖/授权披露（第 9-10、25-27 页）。
 - 算法赛跨方向统一评分：技术性能 45%、科学意义 30%、方法创新性 20%、开源贡献 5%（第 26 页）。
-- 方向二内部评分：每场景 `Geo/Phys/Dyn/Stab = 40/25/25/10`，总榜 `T1/T2/T3 = 50/30/20`（第 20 页）。官方归一化实现未提供，不得自行拼接“总分”。
+- 方向二保留 Geo/Phys/Dyn/Stab 四维评价与 T1/T2/T3 主场景，但新版未公布各维度、各场景权重和合成方式，明确随复赛评测材料发布。旧版 `40/25/25/10`、`50/30/20` 只能标为历史规划口径，不得用于当前得分声明或模型选择。
 - 模板明确写明“**独立完成，禁止使用 AI 作答**”。因此本仓库只维护实验事实、原始结果、图表、复现入口和合规检查；项目名称、方案表述、科学解释、取舍论证及最终签字版本必须由团队成员独立撰写。
 - 官网链接的 Datawhale 方向二 baseline 教程页公开摘要写明：每支队伍只能选择一个算法方向；官网作品提交上限为 **3 次**，以最后一次提交为准。应把前两次视为格式/内容校验机会，但每次都必须是团队认可的完整版本。
 - 教程正文给出的初赛上传流程是：人工完成 Word 模板（特别提醒手动补充第六部分团队介绍）→ 将 Word 压缩为 ZIP → 在赛事官网填写作品信息并上传。Datawhale 平台的截图打卡用于 Token Plan 激励，不等同于 GOAI 作品提交。
@@ -35,10 +35,10 @@
 | 1.3 方案概述 | `configs/frozen_candidate.json`；`docs/preliminary-evidence-index.md` | 证据齐，文字待人工 | 主线只陈述“多时间尺度场景感知 checkpoint selection”；Static residual anchor 与 Pair loss 均为 no-go 消融 |
 | 2.1 科学问题与研究对象 | 指导手册第 18-21 页；MISATO/NeuralMD 复现报告 | 证据齐，文字待人工 | 说明“未见复合物泛化、长时程稳定、几何/物理/动力学联合评价”，不能把坐标误差等同于完整动力学 |
 | 2.2 科学意义 | 指导手册第 21 页；`docs/experiment-design-and-research-roadmap.md` | 部分具备 | 人工说明对 ML surrogate、结合动力学和药物设计代理量的边界；不得声称亲和力/驻留时间已被验证 |
-| 3.1 技术方案 | `README.md`；`protein_quanta/scenarios.py`；`configs/frozen_candidate.json` | 已具备 | 当前活动安全基线为 seed 42、epoch 5、无 anchor；beta 1 只能出现在明确标注 no-go 的消融中 |
+| 3.1 技术方案 | `README.md`；`protein_quanta/scenarios.py`；`configs/active_candidate.json` | 已具备 | published NeuralMD 为复现主基线；当前没有晋升的提交候选。epoch 5 与 beta 1 只能出现在明确标注研究候选/no-go 的消融中 |
 | 3.2 预期方法路线 | `docs/experiment-design-and-research-roadmap.md` | 已具备 | 区分已验证、no-go 和复赛设想；E7/E8 不得写成已完成成果 |
 | 3.3 数据、依赖与运行 | `README.md`；`requirements*.txt`；`third_party/README.md`；新版 split audit | 划分口径已验证 | 全量轨迹仍在获取；人工核对 MISATO 使用条款、NeuralMD 许可状态、外部预训练权重来源与服务器复现路径 |
-| 4.1 阶段性实验/可行性验证 | `reports/experiment-progress-report.md`；各 reproduction 报告 | 已具备 | 最短因果链：精确复现 -> 发现 20/100 帧错配 -> Pair no-go -> 场景早停 -> anchor 代理改善 -> bond-aware Phys no-go -> 回到未锚定 epoch 5 |
+| 4.1 阶段性实验/可行性验证 | `reports/experiment-progress-report.md`；各 reproduction 报告 | 已具备 | 最短因果链：精确复现 -> 发现局部训练/闭环错配 -> 架构多种子比较 -> 噪声/交替修正 no-go -> 可微闭环改善总体/T2但未过 T3 门槛 |
 | 4.2 当前结果 | 场景早停 JSON；E13-E15 topology/Phys 报告 | 已具备 | 明确为 MISATO-100 内部 proxy；Phys validation 覆盖 9/10；不是比赛隐藏测试、不是官方归一化成绩 |
 | 5.1 复现方式 | `README.md`；80 项双环境测试；checkpoint manifest；服务器环境快照；发布审计器 | 已具备 | 人工在干净环境至少复跑测试和一个小型入口，记录时间与硬件 |
 | 5.2 开源计划 | 公共 GitHub 仓库，当前默认分支即研究分支 | 部分具备 | 确定许可证；说明数据/checkpoint/轨迹不入库及复赛开放边界 |
@@ -76,7 +76,7 @@
 | P1 | 开源仓库公开但默认分支名仍为研究分支 | GitHub 默认分支 `codex/reproduction-bootstrap` | 参赛前人工决定是否改名；链接必须能匿名访问且 README 首页无临时措辞 |
 | P1 | 旧解读 PDF 的晋级人数已过期 | 7 月 PDF 写 Top 50/Top 15；当前 GOAI 在线页面写 Top 40/Top 20 | 一律采用当前官网；不得从旧幻灯片复制人数。对照记录见 `reports/reproduction/2026-08-12-official-materials-audit.md` |
 
-评分对齐的 E13-E17 实验、Phys/Dyn 晋升门槛与 T1 优先顺序见 `docs/scoring-aligned-execution-plan.md`。E15 已判定 `beta=1` anchor 为 Phys no-go；E16 显示未锚定 epoch 5 仅在 T3 结构分布和部分 Phys 均值上占优，未通过两场景 Dyn 晋升门槛；E17 位移损失也未改善动态幅度。当前活动安全基线仍是未锚定 epoch 5，但不得写成方向二综合性能提升。
+旧评分口径的 E13-E17 实验与 Phys/Dyn 门槛归档在 `docs/scoring-aligned-execution-plan.md`。E15 已判定 `beta=1` anchor 为 Phys no-go；E16/E17 也未综合晋升。新版重评后 published NeuralMD 是复现主基线，当前没有活动提交候选；epoch 5 不得写成方向二综合性能提升。
 
 ## 5. 8 月 12-16 日冲刺安排
 

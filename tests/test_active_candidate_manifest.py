@@ -12,7 +12,7 @@ class ActiveCandidateManifestTests(unittest.TestCase):
         self.assertEqual(manifest["checkpoint"]["epoch"], 5)
         self.assertEqual(manifest["inference"]["postprocessing"], "none")
         self.assertFalse(manifest["selection"]["official_score_claimed"])
-        self.assertIn("updated-guide T1", manifest["promotion_state"]["overall"])
+        self.assertIn("updated-guide rerun completed", manifest["promotion_state"]["overall"])
         self.assertEqual(
             manifest["updated_guide_protocol"]["T1"],
             {"observed": [0, 9], "initializer": [8, 9], "target": [10, 19]},

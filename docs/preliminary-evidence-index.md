@@ -4,6 +4,8 @@
 
 ## 历史冻结方案与当前有效状态
 
+> **2026-08-13 新版结论：** published NeuralMD 是当前严格可复现主基线；epoch-5 只是未晋升的多指标研究候选。以下旧冻结方案使用过旧 T1 `2→18`，全部作为历史证据，不得写成当前提交候选。
+
 - 历史方法：竞赛 T1/T2/T3 场景感知 checkpoint selection + 随时间衰减的 Static residual anchor；
 - 模型：NeuralMD，seed 42，epoch 5；
 - 后处理：`β=1`，decay scale 98 frames；
@@ -11,7 +13,7 @@
 - checkpoint SHA256：`0e7d5150aa5f305499f17663d3a74b1063b0591733f534e676303ce11de50b8c`；
 - checkpoint 不进入 Git；已从实验运行目录复制到 manifest 所列专用归档目录，源文件与归档文件 SHA256 一致。
 
-2026-08-13 的 bond-aware validation 显示，`beta=1` 相对未锚定 epoch-5 的 T1/T2 键长 MAE 分别恶化 8.99%/13.69%，超过预注册 5% 防线，因此该组合已 **demote/no-go**，不得再作为方向二整体候选。当前安全基线回退到未锚定 seed-42 epoch 5。后续直接比较表明它改善 T3 结构分布与多数平均键长诊断，但 T1/T2 Dyn 未整体改善且 T3 极端键长事件更高；E17 位移损失也未改变动态幅度。因此当前仅能主张“多时间尺度 checkpoint selection 的可行性与明确局限”，不能主张方向二综合提升。
+2026-08-13 的 bond-aware validation 显示，`beta=1` 相对未锚定 epoch-5 的 T1/T2 键长 MAE 分别恶化 8.99%/13.69%，超过预注册 5% 防线，因此该组合已 **demote/no-go**，不得再作为方向二整体候选。新版 T1 重评后，published NeuralMD 保持当前主基线；未锚定 epoch-5 只保留为非晋升研究候选。后续直接比较表明 epoch-5 改善 T3 结构分布与多数平均键长诊断，但 T1/T2 Dyn 未整体改善且 T3 极端键长事件更高；E17 位移损失也未改变动态幅度。因此当前仅能主张“多时间尺度 checkpoint selection 的可行性与明确局限”，不能主张方向二综合提升。
 
 ## 与评分维度的证据映射
 

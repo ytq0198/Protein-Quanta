@@ -3,9 +3,11 @@
 > 版本：v1.6（2026-08-13）
 > 目标：在 2026-08-16 初赛截止前形成可信、可复现、有定量提升的方案，同时为复赛保留清晰的创新升级路线。
 
-> 评分对齐执行以 `docs/scoring-aligned-execution-plan.md` 为准。该文件把方向二的 `T1/T2/T3` 与 `Geo/Phys/Dyn/Stab` 双层权重转化为 E13-E17 的硬门槛；本路线图中的早期探索顺序若与其冲突，以评分对齐计划为准。
+> 当前评分对齐以 `docs/2026-08-13-updated-manual-and-template-audit.md` 与 `docs/updated-execution-plan-2026-08-13.md` 为准。`docs/scoring-aligned-execution-plan.md` 已降级为旧版权重口径归档；新版未公布 T1/T2/T3 或 Geo/Phys/Dyn/Stab 权重。
 
-> **最新决策覆盖早期结论：** E13-E15 已恢复可追溯共价拓扑并完成 validation gate。历史候选 `epoch 5 + beta=1` 因 T1/T2 键长 MAE 分别恶化 `8.99%/13.69%` 且新增极端键长事件，被降级为 no-go；当前活动安全基线为未锚定 `epoch 5`。下文关于 anchor 的“go/首选/冻结基线”只记录当时基于 Geo/Dyn/Stab 代理的阶段判断，不再代表当前主方案。
+> **协议覆盖：**当前 T1/T2/T3 为 `10→10/80→20/20→80`。下文出现的旧 T1 `2→18`、旧加权结果、anchor 或 epoch-5“活动候选”均只记录历史决策，不能进入新版候选或初赛得分证据。
+
+> **最新决策覆盖早期结论：** E13-E15 已恢复可追溯共价拓扑并完成 validation gate。历史候选 `epoch 5 + beta=1` 因 T1/T2 键长 MAE 分别恶化 `8.99%/13.69%` 且新增极端键长事件，被降级为 no-go；新版重评后 published NeuralMD 是严格主基线，未锚定 `epoch 5` 只是非晋升研究候选。下文关于 anchor 的“go/首选/冻结基线”只记录当时基于旧协议代理的阶段判断，不再代表当前主方案。
 
 ## 1. 科学问题与当前证据
 
@@ -129,7 +131,7 @@ MISATO 当前预处理没有显式键表，因此第一版不声称“严格键�
 | E16 | Dyn 分布 evaluator | 无训练 | 合成单测 + validation | 能区分真实涨落与 Static/过平滑轨迹 |
 | E17 | T1 优先的局部闭环训练实验 | 小预算同预算对照 | validation | T1 Geo/Phys/Dyn 联合改善，T2/T3 不明显回退 |
 
-E13-E17 已完成。`epoch 5 + β=1` 为 Phys no-go；未锚定 epoch-5 的 E16 与位移 loss E17 也未通过综合晋升。新增的参数受控时序架构筛选表明 Transformer 在 T2/T3 相对 MLP 改善约 8.5%/10.3%，却在权重最高、仅两帧历史的 T1 恶化约 11.4%，因而总体 no-go。当前优先级仍是初赛证据冻结、合规与人工答卷核查；不在同一 validation 事后拼接模型。活动安全基线仍为未锚定 `seed 42 / epoch 5`，只能陈述 checkpoint-selection 可行性和明确局限。复赛可用新划分验证“等变空间编码器 + T1 局部路径 + T2/T3 causal attention”的混合架构，以及训练期梯度校准/短 closed-loop exposure。
+E13-E17 已完成。`epoch 5 + β=1` 为 Phys no-go；未锚定 epoch-5 的 E16 与位移 loss E17 也未通过综合晋升。新版协议多种子筛选显示普通 Transformer 相对 MLP 的等权宏平均改善 `12.43%`，但这只是 12 维机制代理。进一步的 10 步可微闭环训练把宏平均改善 `4.92%`、T2 改善 `15.31%`，却只改善 T3 `0.46%`，未过预注册长程门槛。当前优先级仍是初赛证据冻结、合规与人工答卷核查；published NeuralMD 为主基线，没有活动提交候选。后续应在 train 内部 grouped split 上验证多时间尺度闭环，再考虑等变三维迁移。
 
 
 
