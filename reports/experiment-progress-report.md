@@ -435,3 +435,9 @@ E14 在覆盖 validation 子集实现了同帧键长 MAE、20% 违例率、极�
 参考 EGNN 的“不变量标量消息 × 相对位移”坐标更新，构造 8,930 参数的最小配体加速度场；蛋白只作固定条件，稠密平滑配对避免 cutoff 边图变量。使用同一个真实 MISATO-100 train 复合物、Euler 步长 `0.025` 后，5/10/20/40 帧均有有限非零参数梯度，蛋白位级不变，40 帧末帧到初始位置梯度范数 `1.6032`，共同旋转/平移误差仅 `8.5831e-6 Å`，完整正确性 gate `5/5` 通过。
 
 该结果只证明空间计算图满足实现门槛，不代表预测效果；随机初始化 loss 不与已训练 NeuralMD 比较。下一步限定为冻结 10-development、seed 42、5 epoch 运行性 preflight。由于处理后 MISATO 对象无显式共价键，Phys 极端键长门槛需回映 PDB ID 并复用 RCSB `CONECT`，未完成前不能完整晋级。专项报告见 `reports/reproduction/2026-08-14-dense-equivariant-correctness-pilot.md`。
+
+## 2026-08-14：10-complex runtime/Phys preflight 通过但无效果信号
+
+冻结 development 前 10 个 train 复合物上，候选 5 epoch 的 50 个更新全部有限、无梯度裁剪、蛋白固定，峰值 CUDA 分配约 334 MiB。RCSB `CONECT` 严格拓扑审计覆盖 8/10；`3SNC/3MP6` 因映射/覆盖不完整被拒绝，不按距离猜键。
+
+随后对 8 个覆盖样本从相同初始化、相同 batch/窗口计划配对训练控制与候选，各 40 更新均稳定。40 帧 final 推演的 extreme bond event 都为 `0%`，候选增量 `0.0` pp，通过 `<=0.1` pp 防线；但 coordinate RMSE 只从 `1.854857929` 变为 `1.854857840`，差异约 `9e-8`，完全不足以证明多尺度有效。结论是“安全可运行、效果未知”，只允许进入冻结 64/16 三 seed gate，不据此调权。完整报告见 `reports/reproduction/2026-08-14-dense-equivariant-preflight.md`。

@@ -1,0 +1,78 @@
+{
+  "status": "runtime_pass_phys_blocked",
+  "scope": "10 frozen development complexes; no validation/test",
+  "selected_ids": [
+    "3SNC",
+    "5KBQ",
+    "5X27",
+    "4DRU",
+    "6JAW",
+    "6F3B",
+    "3MP6",
+    "1W5X",
+    "1ZSH",
+    "1V2S"
+  ],
+  "processed_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    10
+  ],
+  "epochs": [
+    {
+      "epoch": 1,
+      "loss_mean": 2.4381340563297274,
+      "local_loss_mean": 2.291698670387268,
+      "multiscale_loss_mean": 0.5857415676116944,
+      "gradient_norm_mean": 3.452913219916809e-05,
+      "gradient_norm_max": 5.603312820312567e-05
+    },
+    {
+      "epoch": 2,
+      "loss_mean": 1.9136946558952332,
+      "local_loss_mean": 1.7146476686000824,
+      "multiscale_loss_mean": 0.796188035607338,
+      "gradient_norm_mean": 2.260543511738433e-05,
+      "gradient_norm_max": 4.293262827559374e-05
+    },
+    {
+      "epoch": 3,
+      "loss_mean": 2.6119781017303465,
+      "local_loss_mean": 2.439418691396713,
+      "multiscale_loss_mean": 0.690237632393837,
+      "gradient_norm_mean": 3.6209338850312635e-05,
+      "gradient_norm_max": 9.358726674690843e-05
+    },
+    {
+      "epoch": 4,
+      "loss_mean": 1.8181925535202026,
+      "local_loss_mean": 1.6150609254837036,
+      "multiscale_loss_mean": 0.8125265419483185,
+      "gradient_norm_mean": 3.6878901448744726e-05,
+      "gradient_norm_max": 8.198142313631251e-05
+    },
+    {
+      "epoch": 5,
+      "loss_mean": 1.8047264635562896,
+      "local_loss_mean": 1.6194546222686768,
+      "multiscale_loss_mean": 0.7410871982574463,
+      "gradient_norm_mean": 2.9212658046162687e-05,
+      "gradient_norm_max": 8.89774746610783e-05
+    }
+  ],
+  "total_batches": 50,
+  "nonfinite_batches": 0,
+  "clipped_batches": 0,
+  "clipping_rate": 0.0,
+  "protein_coordinate_changed": false,
+  "peak_cuda_memory_bytes": 350434816,
+  "checkpoint_sha256": "bbc23e9b35058ae121b1bef3861eec9f7971ccd2ac52ebdf6e4e7dba9a899bb0",
+  "phys_gate": "blocked: explicit covalent bond graphs not present in processed data"
+}

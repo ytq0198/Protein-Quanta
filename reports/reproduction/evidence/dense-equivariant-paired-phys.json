@@ -1,0 +1,488 @@
+{
+  "status": "phys_pass_runtime_pass",
+  "scope": "8/10 topology-covered frozen development complexes; no validation/test",
+  "coverage_fraction": 0.8,
+  "omitted_ids": [
+    "3SNC",
+    "3MP6"
+  ],
+  "schedule": [
+    [
+      [
+        3,
+        5,
+        33,
+        40
+      ],
+      [
+        4,
+        37,
+        22,
+        5
+      ],
+      [
+        6,
+        90,
+        14,
+        40
+      ],
+      [
+        7,
+        98,
+        3,
+        20
+      ],
+      [
+        2,
+        19,
+        14,
+        10
+      ],
+      [
+        5,
+        60,
+        12,
+        5
+      ],
+      [
+        0,
+        48,
+        65,
+        10
+      ],
+      [
+        1,
+        86,
+        48,
+        20
+      ]
+    ],
+    [
+      [
+        3,
+        90,
+        49,
+        40
+      ],
+      [
+        7,
+        13,
+        45,
+        20
+      ],
+      [
+        2,
+        59,
+        43,
+        5
+      ],
+      [
+        0,
+        77,
+        79,
+        20
+      ],
+      [
+        4,
+        64,
+        14,
+        10
+      ],
+      [
+        6,
+        78,
+        75,
+        5
+      ],
+      [
+        5,
+        3,
+        34,
+        5
+      ],
+      [
+        1,
+        66,
+        13,
+        20
+      ]
+    ],
+    [
+      [
+        3,
+        56,
+        4,
+        20
+      ],
+      [
+        5,
+        74,
+        49,
+        20
+      ],
+      [
+        2,
+        48,
+        61,
+        5
+      ],
+      [
+        4,
+        80,
+        58,
+        40
+      ],
+      [
+        1,
+        71,
+        24,
+        10
+      ],
+      [
+        6,
+        97,
+        33,
+        10
+      ],
+      [
+        7,
+        56,
+        6,
+        10
+      ],
+      [
+        0,
+        51,
+        86,
+        5
+      ]
+    ],
+    [
+      [
+        2,
+        23,
+        45,
+        40
+      ],
+      [
+        1,
+        8,
+        94,
+        5
+      ],
+      [
+        0,
+        14,
+        47,
+        20
+      ],
+      [
+        7,
+        16,
+        40,
+        40
+      ],
+      [
+        4,
+        49,
+        37,
+        40
+      ],
+      [
+        6,
+        20,
+        29,
+        10
+      ],
+      [
+        5,
+        13,
+        29,
+        40
+      ],
+      [
+        3,
+        21,
+        78,
+        20
+      ]
+    ],
+    [
+      [
+        5,
+        66,
+        35,
+        5
+      ],
+      [
+        2,
+        64,
+        1,
+        10
+      ],
+      [
+        7,
+        17,
+        1,
+        10
+      ],
+      [
+        3,
+        99,
+        45,
+        20
+      ],
+      [
+        1,
+        50,
+        51,
+        10
+      ],
+      [
+        0,
+        77,
+        46,
+        5
+      ],
+      [
+        6,
+        65,
+        14,
+        20
+      ],
+      [
+        4,
+        35,
+        77,
+        10
+      ]
+    ]
+  ],
+  "training": {
+    "control": {
+      "epochs": [
+        {
+          "epoch": 1,
+          "loss_mean": 1.295158490538597,
+          "gradient_norm_mean": 4.1947229878047665e-05,
+          "gradient_norm_max": 7.233802898554131e-05
+        },
+        {
+          "epoch": 2,
+          "loss_mean": 1.4109912402927876,
+          "gradient_norm_mean": 3.035438018672565e-05,
+          "gradient_norm_max": 6.208963895915076e-05
+        },
+        {
+          "epoch": 3,
+          "loss_mean": 1.6008342504501343,
+          "gradient_norm_mean": 3.61275921250126e-05,
+          "gradient_norm_max": 5.9703947044909e-05
+        },
+        {
+          "epoch": 4,
+          "loss_mean": 2.053857494145632,
+          "gradient_norm_mean": 4.148318774355175e-05,
+          "gradient_norm_max": 0.00011175154941156507
+        },
+        {
+          "epoch": 5,
+          "loss_mean": 1.496312901377678,
+          "gradient_norm_mean": 4.014852891032206e-05,
+          "gradient_norm_max": 0.00011109216575277969
+        }
+      ],
+      "clipped": 0,
+      "nonfinite": 0
+    },
+    "candidate": {
+      "epochs": [
+        {
+          "epoch": 1,
+          "loss_mean": 1.5072289258241653,
+          "gradient_norm_mean": 4.292909466130368e-05,
+          "gradient_norm_max": 6.917280552443117e-05
+        },
+        {
+          "epoch": 2,
+          "loss_mean": 1.548560030758381,
+          "gradient_norm_mean": 3.332926981691742e-05,
+          "gradient_norm_max": 6.688515713904053e-05
+        },
+        {
+          "epoch": 3,
+          "loss_mean": 1.7720644623041153,
+          "gradient_norm_mean": 3.960183312301524e-05,
+          "gradient_norm_max": 7.408982492052019e-05
+        },
+        {
+          "epoch": 4,
+          "loss_mean": 2.2046023160219193,
+          "gradient_norm_mean": 4.775350234353937e-05,
+          "gradient_norm_max": 0.0001263855374418199
+        },
+        {
+          "epoch": 5,
+          "loss_mean": 1.6497115269303322,
+          "gradient_norm_mean": 4.113194643196039e-05,
+          "gradient_norm_max": 0.00011210784577997401
+        }
+      ],
+      "clipped": 0,
+      "nonfinite": 0
+    }
+  },
+  "summary": {
+    "control": {
+      "coordinate_rmse": 1.8548579290509224,
+      "bond_length_mae_angstrom": 0.03780796570634016,
+      "extreme_bond_event_percent": 0.0
+    },
+    "candidate": {
+      "coordinate_rmse": 1.8548578396439552,
+      "bond_length_mae_angstrom": 0.03780794587316767,
+      "extreme_bond_event_percent": 0.0
+    }
+  },
+  "candidate_minus_control_extreme_percentage_points": 0.0,
+  "phys_threshold_percentage_points": 0.1,
+  "samples": {
+    "control": [
+      {
+        "sample_id": "5KBQ",
+        "coordinate_rmse": 0.9711441993713379,
+        "bond_length_mae_angstrom": 0.034910318920442975,
+        "bond_length_relative_mae": 0.024263641636399456,
+        "bond_length_violation_percent": 0.0,
+        "extreme_bond_event_percent": 0.0
+      },
+      {
+        "sample_id": "5X27",
+        "coordinate_rmse": 1.0527223348617554,
+        "bond_length_mae_angstrom": 0.03522589760270636,
+        "bond_length_relative_mae": 0.024506120235872144,
+        "bond_length_violation_percent": 0.0,
+        "extreme_bond_event_percent": 0.0
+      },
+      {
+        "sample_id": "4DRU",
+        "coordinate_rmse": 2.1872146129608154,
+        "bond_length_mae_angstrom": 0.03734044890821732,
+        "bond_length_relative_mae": 0.025556340312182967,
+        "bond_length_violation_percent": 0.0,
+        "extreme_bond_event_percent": 0.0
+      },
+      {
+        "sample_id": "6JAW",
+        "coordinate_rmse": 2.0714094638824463,
+        "bond_length_mae_angstrom": 0.03543976885313844,
+        "bond_length_relative_mae": 0.02437976246130394,
+        "bond_length_violation_percent": 0.0,
+        "extreme_bond_event_percent": 0.0
+      },
+      {
+        "sample_id": "6F3B",
+        "coordinate_rmse": 1.5869572162628174,
+        "bond_length_mae_angstrom": 0.059097593473152465,
+        "bond_length_relative_mae": 0.041495944629579444,
+        "bond_length_violation_percent": 4.583333333333333,
+        "extreme_bond_event_percent": 0.0
+      },
+      {
+        "sample_id": "1W5X",
+        "coordinate_rmse": 0.8340272307395935,
+        "bond_length_mae_angstrom": 0.035033494210687466,
+        "bond_length_relative_mae": 0.02428490469281276,
+        "bond_length_violation_percent": 0.0,
+        "extreme_bond_event_percent": 0.0
+      },
+      {
+        "sample_id": "1ZSH",
+        "coordinate_rmse": 3.6044058799743652,
+        "bond_length_mae_angstrom": 0.033151744842396566,
+        "bond_length_relative_mae": 0.0221288063721442,
+        "bond_length_violation_percent": 0.0,
+        "extreme_bond_event_percent": 0.0
+      },
+      {
+        "sample_id": "1V2S",
+        "coordinate_rmse": 2.530982494354248,
+        "bond_length_mae_angstrom": 0.03226445883997968,
+        "bond_length_relative_mae": 0.02297686301756209,
+        "bond_length_violation_percent": 0.0,
+        "extreme_bond_event_percent": 0.0
+      }
+    ],
+    "candidate": [
+      {
+        "sample_id": "5KBQ",
+        "coordinate_rmse": 0.9711443185806274,
+        "bond_length_mae_angstrom": 0.03491024438221287,
+        "bond_length_relative_mae": 0.024263588977356948,
+        "bond_length_violation_percent": 0.0,
+        "extreme_bond_event_percent": 0.0
+      },
+      {
+        "sample_id": "5X27",
+        "coordinate_rmse": 1.0527222156524658,
+        "bond_length_mae_angstrom": 0.035225873250277255,
+        "bond_length_relative_mae": 0.0245061039584541,
+        "bond_length_violation_percent": 0.0,
+        "extreme_bond_event_percent": 0.0
+      },
+      {
+        "sample_id": "4DRU",
+        "coordinate_rmse": 2.1872146129608154,
+        "bond_length_mae_angstrom": 0.037340376480542795,
+        "bond_length_relative_mae": 0.025556299676095098,
+        "bond_length_violation_percent": 0.0,
+        "extreme_bond_event_percent": 0.0
+      },
+      {
+        "sample_id": "6JAW",
+        "coordinate_rmse": 2.0714094638824463,
+        "bond_length_mae_angstrom": 0.03543970643589352,
+        "bond_length_relative_mae": 0.024379721117214016,
+        "bond_length_violation_percent": 0.0,
+        "extreme_bond_event_percent": 0.0
+      },
+      {
+        "sample_id": "6F3B",
+        "coordinate_rmse": 1.5869572162628174,
+        "bond_length_mae_angstrom": 0.05909745863686835,
+        "bond_length_relative_mae": 0.04149585262735953,
+        "bond_length_violation_percent": 4.583333333333333,
+        "extreme_bond_event_percent": 0.0
+      },
+      {
+        "sample_id": "1W5X",
+        "coordinate_rmse": 0.8340272307395935,
+        "bond_length_mae_angstrom": 0.0350335028689203,
+        "bond_length_relative_mae": 0.024284912484606562,
+        "bond_length_violation_percent": 0.0,
+        "extreme_bond_event_percent": 0.0
+      },
+      {
+        "sample_id": "1ZSH",
+        "coordinate_rmse": 3.6044058799743652,
+        "bond_length_mae_angstrom": 0.033151928954520155,
+        "bond_length_relative_mae": 0.022128929343492535,
+        "bond_length_violation_percent": 0.0,
+        "extreme_bond_event_percent": 0.0
+      },
+      {
+        "sample_id": "1V2S",
+        "coordinate_rmse": 2.5309817790985107,
+        "bond_length_mae_angstrom": 0.03226447597610609,
+        "bond_length_relative_mae": 0.022976871717258155,
+        "bond_length_violation_percent": 0.0,
+        "extreme_bond_event_percent": 0.0
+      }
+    ]
+  },
+  "checkpoint_sha256": {
+    "control": "331522e8d97557e0d75ec04d72251fc83d5164cc2da263f30dd6e764b440306e",
+    "candidate": "97de91af6062dcdb409d165493d3134a10986eaad17f8683062e7e01e6c8c95d"
+  },
+  "decision": "necessary preflight only; not an effect gate or permission to access validation/test"
+}
