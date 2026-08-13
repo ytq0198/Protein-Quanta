@@ -1,0 +1,44 @@
+{
+  "status": "sealed before holdout target evaluation",
+  "captured_utc": "2026-08-13T18:07:49.173473+00:00",
+  "source_commit": "d078920",
+  "python": "3.10.20",
+  "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.35",
+  "files": {
+    "training_script": {
+      "path": "/mnt/localDisk3/weizian/Protein-Quanta-codex-run/scripts/train_dense_equivariant_effect_seed.py",
+      "bytes": 8003,
+      "sha256": "c7c05c57a7dd3c670681c8c561b991da1f1e029b57e4009ed0106f20cd12822f"
+    },
+    "evaluation_script": {
+      "path": "/mnt/localDisk3/weizian/Protein-Quanta-codex-run/scripts/evaluate_dense_equivariant_effect_gate.py",
+      "bytes": 13549,
+      "sha256": "1785a804c528a4bf46f1aefd437776a5637443d08156c910e6cca0cab8962e39"
+    },
+    "config": {
+      "path": "/mnt/localDisk3/weizian/Protein-Quanta-codex-run/configs/dense_equivariant_64_16_effect_gate.json",
+      "bytes": 2357,
+      "sha256": "f5d59c4e209a3c40765bfa82576ef52a28830c125e71290b14a6ad5fe8a6bac5"
+    },
+    "development_ids": {
+      "path": "/mnt/localDisk3/weizian/runs/protein-quanta/train-only-temporal/splits/development_64.txt",
+      "bytes": 320,
+      "sha256": "66e830989e052a06d8d850ea95e80db12793b6c81e7bcfc82a51d9e868827258"
+    },
+    "holdout_ids": {
+      "path": "/mnt/localDisk3/weizian/runs/protein-quanta/train-only-temporal/splits/holdout_16.txt",
+      "bytes": 80,
+      "sha256": "d0f68a1030efb2d1b33d5681dc37d0fc42b10d6217b2a09b17906defb448818f"
+    },
+    "topology_report": {
+      "path": "/mnt/localDisk3/weizian/runs/protein-quanta/dense-effect-gate/holdout_topology.json",
+      "bytes": 29977,
+      "sha256": "6da946568040bc83f7175d228d51c538fa049edbdfb0f4b45b96bdc71b1cdb57"
+    },
+    "dataset": {
+      "path": "/mnt/localDisk3/weizian/datasets/misato/MISATO_100/raw/MD.hdf5",
+      "bytes": 725082032,
+      "sha256": "9b137f20ffe448a6569b0d3ed26da820e1e5c8a00fec224da118e8d369ec0060"
+    }
+  }
+}

@@ -29,16 +29,25 @@ def render(report, output):
     paired, scenarios = load_plot_rows(report)
     figure, axes = plt.subplots(1, 2, figsize=(11.5, 4.5))
 
-    for row in paired:
-        axes[0].plot(
-            [0, 1], [row["control"], row["candidate"]],
-            marker="o", linewidth=1.8, label=f'seed {row["seed"]}',
-        )
-    axes[0].set_xticks([0, 1], ["Local ODE", "+ multiscale"])
-    axes[0].set_ylabel("Macro coordinate RMSE (Å)")
-    axes[0].set_title("Frozen paired seeds")
+    seed_labels = [f'seed {row["seed"]}' for row in paired]
+    relative_ppm = [
+        1e6 * (row["candidate"] - row["control"]) / row["control"]
+        for row in paired
+    ]
+    axes[0].bar(
+        seed_labels, relative_ppm, color="#D77A36", edgecolor="#6B3A17"
+    )
+    axes[0].axhline(1.0, color="#4A5560", linestyle="--", linewidth=1.3)
+    axes[0].text(
+        len(seed_labels) - 0.5, 1.02, "1 ppm negligible-effect boundary",
+        ha="right", va="bottom", color="#4A5560", fontsize=8,
+    )
+    axes[0].set_ylim(0, 1.15)
+    axes[0].set_ylabel("Candidate worsening (ppm of baseline RMSE)")
+    axes[0].set_title("Paired macro RMSE change")
     axes[0].grid(axis="y", alpha=0.25)
-    axes[0].legend(frameon=False)
+    for index, value in enumerate(relative_ppm):
+        axes[0].text(index, value + 0.025, f"{value:.4f}", ha="center", fontsize=8)
 
     indices = np.arange(len(scenarios))
     width = 0.36
@@ -59,6 +68,7 @@ def render(report, output):
     axes[1].set_xticks(indices, [row["scenario"] for row in scenarios])
     axes[1].set_ylabel("Coordinate RMSE (Å)")
     axes[1].set_title("Updated-guide scenarios")
+    axes[1].set_ylim(bottom=0)
     axes[1].grid(axis="y", alpha=0.25)
     axes[1].legend(frameon=False)
 

@@ -1,0 +1,368 @@
+PIPELINE_BEGIN seed=0 utc=2026-08-13T17:48:09Z
+epoch 1 coefficient 0.0 loss 3.66543600
+epoch 2 coefficient 0.0 loss 9.16130832
+epoch 3 coefficient 0.0 loss 2.88272422
+epoch 4 coefficient 0.0 loss 6.58529336
+epoch 5 coefficient 0.0 loss 9.40867762
+epoch 6 coefficient 0.0 loss 10.30042824
+epoch 7 coefficient 0.0 loss 12.54920559
+epoch 8 coefficient 0.0 loss 10.99300983
+epoch 9 coefficient 0.0 loss 8.21118454
+epoch 10 coefficient 0.0 loss 5.43746946
+epoch 11 coefficient 0.0 loss 11.29394862
+epoch 12 coefficient 0.0 loss 6.21892266
+epoch 13 coefficient 0.0 loss 2.38408211
+epoch 14 coefficient 0.0 loss 9.55540347
+epoch 15 coefficient 0.0 loss 5.23912486
+epoch 16 coefficient 0.0 loss 5.58108390
+epoch 17 coefficient 0.0 loss 11.35842998
+epoch 18 coefficient 0.0 loss 11.69184590
+epoch 19 coefficient 0.0 loss 9.39696399
+epoch 20 coefficient 0.0 loss 6.09662865
+epoch 21 coefficient 0.0 loss 2.40656766
+epoch 22 coefficient 0.0 loss 8.46544904
+epoch 23 coefficient 0.0 loss 6.71955798
+epoch 24 coefficient 0.0 loss 8.88594639
+epoch 25 coefficient 0.0 loss 4.36126240
+epoch 26 coefficient 0.0 loss 8.62037812
+epoch 27 coefficient 0.0 loss 9.44503937
+epoch 28 coefficient 0.0 loss 6.52127127
+epoch 29 coefficient 0.0 loss 12.50266895
+epoch 30 coefficient 0.0 loss 3.88936537
+epoch 31 coefficient 0.0 loss 11.68071767
+epoch 32 coefficient 0.0 loss 8.11631177
+epoch 33 coefficient 0.0 loss 3.27161337
+epoch 34 coefficient 0.0 loss 2.10194839
+epoch 35 coefficient 0.0 loss 4.09766193
+epoch 36 coefficient 0.0 loss 7.47090671
+epoch 37 coefficient 0.0 loss 8.34217351
+epoch 38 coefficient 0.0 loss 4.64511686
+epoch 39 coefficient 0.0 loss 7.69806517
+epoch 40 coefficient 0.0 loss 5.84291922
+epoch 41 coefficient 0.0 loss 12.49416688
+epoch 42 coefficient 0.0 loss 3.00367670
+epoch 43 coefficient 0.0 loss 12.57918297
+epoch 44 coefficient 0.0 loss 7.42021381
+epoch 45 coefficient 0.0 loss 4.45485101
+epoch 46 coefficient 0.0 loss 9.48758755
+epoch 47 coefficient 0.0 loss 5.00853320
+epoch 48 coefficient 0.0 loss 8.75192537
+epoch 49 coefficient 0.0 loss 10.85884972
+epoch 50 coefficient 0.0 loss 7.54488518
+epoch 1 coefficient 0.25 loss 3.89402694
+epoch 2 coefficient 0.25 loss 9.39201704
+epoch 3 coefficient 0.25 loss 3.08625375
+epoch 4 coefficient 0.25 loss 6.82357825
+epoch 5 coefficient 0.25 loss 9.62159501
+epoch 6 coefficient 0.25 loss 10.60673574
+epoch 7 coefficient 0.25 loss 12.85405558
+epoch 8 coefficient 0.25 loss 11.25054648
+epoch 9 coefficient 0.25 loss 8.47740609
+epoch 10 coefficient 0.25 loss 5.64828822
+epoch 11 coefficient 0.25 loss 11.56057548
+epoch 12 coefficient 0.25 loss 6.52986347
+epoch 13 coefficient 0.25 loss 2.64634163
+epoch 14 coefficient 0.25 loss 9.82802549
+epoch 15 coefficient 0.25 loss 5.47533008
+epoch 16 coefficient 0.25 loss 5.80874828
+epoch 17 coefficient 0.25 loss 11.63670453
+epoch 18 coefficient 0.25 loss 11.91735916
+epoch 19 coefficient 0.25 loss 9.66679326
+epoch 20 coefficient 0.25 loss 6.32727456
+epoch 21 coefficient 0.25 loss 2.59871991
+epoch 22 coefficient 0.25 loss 8.69023489
+epoch 23 coefficient 0.25 loss 7.02739011
+epoch 24 coefficient 0.25 loss 9.15669415
+epoch 25 coefficient 0.25 loss 4.56785105
+epoch 26 coefficient 0.25 loss 8.88409629
+epoch 27 coefficient 0.25 loss 9.69142676
+epoch 28 coefficient 0.25 loss 6.79992213
+epoch 29 coefficient 0.25 loss 12.78089974
+epoch 30 coefficient 0.25 loss 4.12115950
+epoch 31 coefficient 0.25 loss 11.94820607
+epoch 32 coefficient 0.25 loss 8.44039027
+epoch 33 coefficient 0.25 loss 3.55467653
+epoch 34 coefficient 0.25 loss 2.38886122
+epoch 35 coefficient 0.25 loss 4.40799956
+epoch 36 coefficient 0.25 loss 7.66931628
+epoch 37 coefficient 0.25 loss 8.55819268
+epoch 38 coefficient 0.25 loss 4.94851060
+epoch 39 coefficient 0.25 loss 7.93059726
+epoch 40 coefficient 0.25 loss 6.01973474
+epoch 41 coefficient 0.25 loss 12.71978554
+epoch 42 coefficient 0.25 loss 3.23366770
+epoch 43 coefficient 0.25 loss 12.77409622
+epoch 44 coefficient 0.25 loss 7.66886818
+epoch 45 coefficient 0.25 loss 4.64908578
+epoch 46 coefficient 0.25 loss 9.70613233
+epoch 47 coefficient 0.25 loss 5.31347523
+epoch 48 coefficient 0.25 loss 8.99775193
+epoch 49 coefficient 0.25 loss 11.04328396
+epoch 50 coefficient 0.25 loss 7.79140248
+{
+  "status": "training_complete_holdout_unread",
+  "seed": 0,
+  "parameter_l2": {
+    "control_from_initial": 1.2392449378967285,
+    "candidate_from_initial": 1.2648037672042847,
+    "candidate_from_control": 0.0487438440322876
+  },
+  "checkpoint_sha256": {
+    "control": "29aeadb0136fda67bf1417759bd0d16d72ee097da3e90a069ee3e2986f2e36f0",
+    "candidate": "463977e7d6568cb79ce8588f75f59c50771d2a8d9aba790d5c80c5a2bcb1c92a"
+  }
+}
+PIPELINE_END seed=0 utc=2026-08-13T18:08:09Z
+PIPELINE_BEGIN seed=42 utc=2026-08-13T18:08:09Z
+epoch 1 coefficient 0.0 loss 8.52745507
+epoch 2 coefficient 0.0 loss 17.85635709
+epoch 3 coefficient 0.0 loss 5.38685432
+epoch 4 coefficient 0.0 loss 6.67061470
+epoch 5 coefficient 0.0 loss 11.21483098
+epoch 6 coefficient 0.0 loss 7.33226736
+epoch 7 coefficient 0.0 loss 3.65999476
+epoch 8 coefficient 0.0 loss 16.68045178
+epoch 9 coefficient 0.0 loss 8.42758550
+epoch 10 coefficient 0.0 loss 8.51475987
+epoch 11 coefficient 0.0 loss 12.13408277
+epoch 12 coefficient 0.0 loss 8.18651457
+epoch 13 coefficient 0.0 loss 1.87421013
+epoch 14 coefficient 0.0 loss 13.29415525
+epoch 15 coefficient 0.0 loss 7.18381572
+epoch 16 coefficient 0.0 loss 9.63003893
+epoch 17 coefficient 0.0 loss 7.60706737
+epoch 18 coefficient 0.0 loss 9.25396250
+epoch 19 coefficient 0.0 loss 9.22349951
+epoch 20 coefficient 0.0 loss 11.92823684
+epoch 21 coefficient 0.0 loss 6.05077252
+epoch 22 coefficient 0.0 loss 10.01442200
+epoch 23 coefficient 0.0 loss 2.07586826
+epoch 24 coefficient 0.0 loss 7.22669083
+epoch 25 coefficient 0.0 loss 9.36074382
+epoch 26 coefficient 0.0 loss 12.26614876
+epoch 27 coefficient 0.0 loss 3.33620170
+epoch 28 coefficient 0.0 loss 3.69413703
+epoch 29 coefficient 0.0 loss 6.92934204
+epoch 30 coefficient 0.0 loss 7.87904741
+epoch 31 coefficient 0.0 loss 3.01438326
+epoch 32 coefficient 0.0 loss 5.35959107
+epoch 33 coefficient 0.0 loss 8.65476414
+epoch 34 coefficient 0.0 loss 4.45326252
+epoch 35 coefficient 0.0 loss 3.50365142
+epoch 36 coefficient 0.0 loss 10.25937944
+epoch 37 coefficient 0.0 loss 14.05385837
+epoch 38 coefficient 0.0 loss 5.49295484
+epoch 39 coefficient 0.0 loss 4.34526945
+epoch 40 coefficient 0.0 loss 2.03932744
+epoch 41 coefficient 0.0 loss 3.31142007
+epoch 42 coefficient 0.0 loss 2.49637122
+epoch 43 coefficient 0.0 loss 8.72409735
+epoch 44 coefficient 0.0 loss 9.70033545
+epoch 45 coefficient 0.0 loss 3.50200610
+epoch 46 coefficient 0.0 loss 13.03111498
+epoch 47 coefficient 0.0 loss 4.82619887
+epoch 48 coefficient 0.0 loss 5.07230043
+epoch 49 coefficient 0.0 loss 3.82236337
+epoch 50 coefficient 0.0 loss 4.25320871
+epoch 1 coefficient 0.25 loss 8.80446560
+epoch 2 coefficient 0.25 loss 18.11059336
+epoch 3 coefficient 0.25 loss 5.65308174
+epoch 4 coefficient 0.25 loss 6.88637094
+epoch 5 coefficient 0.25 loss 11.50431943
+epoch 6 coefficient 0.25 loss 7.55808020
+epoch 7 coefficient 0.25 loss 3.93946892
+epoch 8 coefficient 0.25 loss 16.90972638
+epoch 9 coefficient 0.25 loss 8.70085782
+epoch 10 coefficient 0.25 loss 8.70710438
+epoch 11 coefficient 0.25 loss 12.39755602
+epoch 12 coefficient 0.25 loss 8.46465025
+epoch 13 coefficient 0.25 loss 2.15523827
+epoch 14 coefficient 0.25 loss 13.54777469
+epoch 15 coefficient 0.25 loss 7.46349017
+epoch 16 coefficient 0.25 loss 9.87521558
+epoch 17 coefficient 0.25 loss 7.78884120
+epoch 18 coefficient 0.25 loss 9.52425283
+epoch 19 coefficient 0.25 loss 9.45553521
+epoch 20 coefficient 0.25 loss 12.19405050
+epoch 21 coefficient 0.25 loss 6.24282812
+epoch 22 coefficient 0.25 loss 10.32542262
+epoch 23 coefficient 0.25 loss 2.27353969
+epoch 24 coefficient 0.25 loss 7.43600583
+epoch 25 coefficient 0.25 loss 9.53939720
+epoch 26 coefficient 0.25 loss 12.50422442
+epoch 27 coefficient 0.25 loss 3.67063306
+epoch 28 coefficient 0.25 loss 3.85669218
+epoch 29 coefficient 0.25 loss 7.12320877
+epoch 30 coefficient 0.25 loss 8.17059817
+epoch 31 coefficient 0.25 loss 3.22854697
+epoch 32 coefficient 0.25 loss 5.52980352
+epoch 33 coefficient 0.25 loss 8.92099440
+epoch 34 coefficient 0.25 loss 4.72375666
+epoch 35 coefficient 0.25 loss 3.75526108
+epoch 36 coefficient 0.25 loss 10.42491127
+epoch 37 coefficient 0.25 loss 14.28089601
+epoch 38 coefficient 0.25 loss 5.74889522
+epoch 39 coefficient 0.25 loss 4.52610389
+epoch 40 coefficient 0.25 loss 2.29878851
+epoch 41 coefficient 0.25 loss 3.52471693
+epoch 42 coefficient 0.25 loss 2.82527529
+epoch 43 coefficient 0.25 loss 8.93621581
+epoch 44 coefficient 0.25 loss 9.94908083
+epoch 45 coefficient 0.25 loss 3.76860015
+epoch 46 coefficient 0.25 loss 13.22345981
+epoch 47 coefficient 0.25 loss 5.04753209
+epoch 48 coefficient 0.25 loss 5.32203561
+epoch 49 coefficient 0.25 loss 4.08015526
+epoch 50 coefficient 0.25 loss 4.52354599
+{
+  "status": "training_complete_holdout_unread",
+  "seed": 42,
+  "parameter_l2": {
+    "control_from_initial": 1.1667405366897583,
+    "candidate_from_initial": 1.1886353492736816,
+    "candidate_from_control": 0.06489188224077225
+  },
+  "checkpoint_sha256": {
+    "control": "6c3e74f463bc96bd9f2d2557416f7b44e9f2aaf8be3cf2b3f7013e425d3d3b22",
+    "candidate": "a2c73eccfe27bd5f9c6c62a5afe7b010ea3449e66c4f02eb2b0311b8b8603760"
+  }
+}
+PIPELINE_END seed=42 utc=2026-08-13T18:19:35Z
+PIPELINE_BEGIN seed=123 utc=2026-08-13T18:19:35Z
+epoch 1 coefficient 0.0 loss 5.10072304
+epoch 2 coefficient 0.0 loss 8.02272203
+epoch 3 coefficient 0.0 loss 14.04701161
+epoch 4 coefficient 0.0 loss 8.57883542
+epoch 5 coefficient 0.0 loss 3.34381419
+epoch 6 coefficient 0.0 loss 7.24932749
+epoch 7 coefficient 0.0 loss 6.95956584
+epoch 8 coefficient 0.0 loss 9.27913366
+epoch 9 coefficient 0.0 loss 5.28538076
+epoch 10 coefficient 0.0 loss 2.56481513
+epoch 11 coefficient 0.0 loss 11.22213384
+epoch 12 coefficient 0.0 loss 4.63739969
+epoch 13 coefficient 0.0 loss 3.34034546
+epoch 14 coefficient 0.0 loss 9.38603206
+epoch 15 coefficient 0.0 loss 7.74396410
+epoch 16 coefficient 0.0 loss 4.21724963
+epoch 17 coefficient 0.0 loss 4.35364702
+epoch 18 coefficient 0.0 loss 11.68555823
+epoch 19 coefficient 0.0 loss 9.80505375
+epoch 20 coefficient 0.0 loss 4.28296847
+epoch 21 coefficient 0.0 loss 8.91522044
+epoch 22 coefficient 0.0 loss 10.41754074
+epoch 23 coefficient 0.0 loss 13.33871862
+epoch 24 coefficient 0.0 loss 10.76442120
+epoch 25 coefficient 0.0 loss 3.81784071
+epoch 26 coefficient 0.0 loss 6.41582440
+epoch 27 coefficient 0.0 loss 3.03477826
+epoch 28 coefficient 0.0 loss 5.62873867
+epoch 29 coefficient 0.0 loss 12.21283586
+epoch 30 coefficient 0.0 loss 6.97607832
+epoch 31 coefficient 0.0 loss 15.22553437
+epoch 32 coefficient 0.0 loss 5.37915868
+epoch 33 coefficient 0.0 loss 11.66396350
+epoch 34 coefficient 0.0 loss 9.54000051
+epoch 35 coefficient 0.0 loss 8.24912626
+epoch 36 coefficient 0.0 loss 3.15601295
+epoch 37 coefficient 0.0 loss 8.81031626
+epoch 38 coefficient 0.0 loss 12.74801124
+epoch 39 coefficient 0.0 loss 8.55814831
+epoch 40 coefficient 0.0 loss 4.35071708
+epoch 41 coefficient 0.0 loss 2.19055569
+epoch 42 coefficient 0.0 loss 4.49382474
+epoch 43 coefficient 0.0 loss 9.99704706
+epoch 44 coefficient 0.0 loss 7.65046060
+epoch 45 coefficient 0.0 loss 3.65036238
+epoch 46 coefficient 0.0 loss 6.91570156
+epoch 47 coefficient 0.0 loss 1.87542429
+epoch 48 coefficient 0.0 loss 3.59007769
+epoch 49 coefficient 0.0 loss 8.47243484
+epoch 50 coefficient 0.0 loss 9.22366333
+epoch 1 coefficient 0.25 loss 5.27991699
+epoch 2 coefficient 0.25 loss 8.22027689
+epoch 3 coefficient 0.25 loss 14.26924850
+epoch 4 coefficient 0.25 loss 8.90929307
+epoch 5 coefficient 0.25 loss 3.58424397
+epoch 6 coefficient 0.25 loss 7.49709753
+epoch 7 coefficient 0.25 loss 7.19136897
+epoch 8 coefficient 0.25 loss 9.53892208
+epoch 9 coefficient 0.25 loss 5.56448241
+epoch 10 coefficient 0.25 loss 2.75623065
+epoch 11 coefficient 0.25 loss 11.50192358
+epoch 12 coefficient 0.25 loss 4.85407932
+epoch 13 coefficient 0.25 loss 3.56928914
+epoch 14 coefficient 0.25 loss 9.70539425
+epoch 15 coefficient 0.25 loss 8.01458918
+epoch 16 coefficient 0.25 loss 4.54710140
+epoch 17 coefficient 0.25 loss 4.54427473
+epoch 18 coefficient 0.25 loss 11.91768232
+epoch 19 coefficient 0.25 loss 10.03414574
+epoch 20 coefficient 0.25 loss 4.48844792
+epoch 21 coefficient 0.25 loss 9.17758346
+epoch 22 coefficient 0.25 loss 10.70147231
+epoch 23 coefficient 0.25 loss 13.53966394
+epoch 24 coefficient 0.25 loss 10.97719619
+epoch 25 coefficient 0.25 loss 4.04851862
+epoch 26 coefficient 0.25 loss 6.63885814
+epoch 27 coefficient 0.25 loss 3.27093814
+epoch 28 coefficient 0.25 loss 5.86000371
+epoch 29 coefficient 0.25 loss 12.49372425
+epoch 30 coefficient 0.25 loss 7.18816380
+epoch 31 coefficient 0.25 loss 15.47767760
+epoch 32 coefficient 0.25 loss 5.59860665
+epoch 33 coefficient 0.25 loss 11.88432621
+epoch 34 coefficient 0.25 loss 9.84677197
+epoch 35 coefficient 0.25 loss 8.44007162
+epoch 36 coefficient 0.25 loss 3.40114210
+epoch 37 coefficient 0.25 loss 9.11565840
+epoch 38 coefficient 0.25 loss 13.00071927
+epoch 39 coefficient 0.25 loss 8.82760948
+epoch 40 coefficient 0.25 loss 4.54832458
+epoch 41 coefficient 0.25 loss 2.42229093
+epoch 42 coefficient 0.25 loss 4.68886862
+epoch 43 coefficient 0.25 loss 10.17913902
+epoch 44 coefficient 0.25 loss 7.88153967
+epoch 45 coefficient 0.25 loss 3.86148542
+epoch 46 coefficient 0.25 loss 7.18158997
+epoch 47 coefficient 0.25 loss 2.12069046
+epoch 48 coefficient 0.25 loss 3.81738570
+epoch 49 coefficient 0.25 loss 8.66142471
+epoch 50 coefficient 0.25 loss 9.46685620
+{
+  "status": "training_complete_holdout_unread",
+  "seed": 123,
+  "parameter_l2": {
+    "control_from_initial": 1.1524782180786133,
+    "candidate_from_initial": 1.1757497787475586,
+    "candidate_from_control": 0.044157449156045914
+  },
+  "checkpoint_sha256": {
+    "control": "6cfcc9175fe0c973a2ea7fa77e44273a52daa6d95a756a1ce8811f73e9f45767",
+    "candidate": "52895b25bc22ff59157d90a942d2724fa1a30a924712fe396d655a4099bc9c0c"
+  }
+}
+PIPELINE_END seed=123 utc=2026-08-13T18:29:58Z
+PIPELINE_EVALUATION_BEGIN utc=2026-08-13T18:29:58Z
+Traceback (most recent call last):
+  File "/mnt/localDisk3/weizian/Protein-Quanta-codex-run/scripts/evaluate_dense_equivariant_effect_gate.py", line 334, in <module>
+    main()
+  File "/mnt/localDisk3/weizian/Protein-Quanta-codex-run/scripts/evaluate_dense_equivariant_effect_gate.py", line 329, in main
+    args.output.write_text(json.dumps(report, indent=2), encoding="utf-8")
+  File "/mnt/localDisk3/weizian/conda_envs/protein-quanta-neuralmd/lib/python3.10/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/mnt/localDisk3/weizian/conda_envs/protein-quanta-neuralmd/lib/python3.10/json/encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "/mnt/localDisk3/weizian/conda_envs/protein-quanta-neuralmd/lib/python3.10/json/encoder.py", line 431, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/mnt/localDisk3/weizian/conda_envs/protein-quanta-neuralmd/lib/python3.10/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "/mnt/localDisk3/weizian/conda_envs/protein-quanta-neuralmd/lib/python3.10/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "/mnt/localDisk3/weizian/conda_envs/protein-quanta-neuralmd/lib/python3.10/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "/mnt/localDisk3/weizian/conda_envs/protein-quanta-neuralmd/lib/python3.10/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "/mnt/localDisk3/weizian/conda_envs/protein-quanta-neuralmd/lib/python3.10/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type bool is not JSON serializable

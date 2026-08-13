@@ -52,3 +52,9 @@ An obsolete combined train/evaluate script had previously been terminated after 
 ## First evaluation serialization failure
 
 All three manifests and all six checkpoints existed before evaluation began at `2026-08-13T18:29:58Z`. The evaluator completed model rollout and gate aggregation, then failed while serializing the in-memory report because Python's standard JSON encoder does not accept a NumPy Boolean scalar. No report was written and no threshold, checkpoint, model, split, or metric was changed. Because holdout targets had already been read, the only permitted recovery is a serialization-only adapter followed by an identical re-evaluation of the same six final checkpoints. The hotfix converts NumPy scalar values with `.item()` and raises on every other unknown type; a regression test requires the complete synthetic gate result to round-trip through JSON.
+
+## Seed 123 and final decision
+
+Seed 123 completed both 50-epoch arms with zero clipping and zero non-finite updates. Its candidate-to-control parameter L2 was `0.04415745`; checkpoint SHA-256 values were `6cfcc917…5767` and `52895b25…9c0c`. The serialization-only rerun returned `effect_gate_fail`.
+
+The three-seed macro coordinate RMSE was `2.1768000312 Å` for control and `2.1768000387 Å` for the candidate. All three paired seeds were numerically worse by only `10⁻⁹–10⁻⁸ Å`; safety gates passed, but the effect gates failed. Independent recomputation from the saved per-seed summaries matched the server gate object exactly. The complete interpretation is frozen in `2026-08-14-dense-equivariant-effect-gate.md`; no coefficient or threshold scan is permitted in this experimental family.

@@ -1,0 +1,276 @@
+{
+  "status": "effect_gate_fail",
+  "report_sha256": "c6f0a388c12d501bd45ccbaa7f73f683244dc355954e0ed7216aa1504b631fc7",
+  "gate": {
+    "passed": false,
+    "checks": {
+      "macro_coordinate_rmse_improves": false,
+      "paired_seed_wins_at_least": false,
+      "T1_coordinate_rmse_max_worsening_fraction": true,
+      "T3_coordinate_rmse_min_improvement_fraction": false,
+      "T3_rmse_slope_min_improvement_fraction": false,
+      "T3_dynamic_metrics_improved_at_least": false,
+      "bond_length_mae_max_worsening_fraction": true,
+      "extreme_bond_event_max_increase_percentage_points": true,
+      "all_rollouts_finite": true
+    },
+    "dynamic_checks": {
+      "rmsf_mae_angstrom": true,
+      "radius_of_gyration_mae_angstrom": false,
+      "contact_map_agreement_mean": false
+    },
+    "mean_summary": {
+      "control": {
+        "T1": {
+          "coordinate_rmse_angstrom": 1.789631365487973,
+          "rmse_slope_angstrom_per_frame": 0.2065915995061096,
+          "rmsf_mae_angstrom": 2.07184669872125,
+          "radius_of_gyration_mae_angstrom": 0.09328196378191933,
+          "contact_map_agreement_mean": 0.9729805215538296,
+          "nonfinite_frame_fraction": 0.0,
+          "bond_length_mae_angstrom": 0.03713151043765477,
+          "bond_length_relative_mae": 0.025736494917406785,
+          "bond_length_violation_percent": 0.016891891891891893,
+          "extreme_bond_event_percent": 0.0,
+          "dynamics_distribution": {
+            "rmsf_profile_mae_angstrom": 2.07184669872125,
+            "rmsf_profile_pearson": 0.4909689948091449,
+            "rmsf_profile_spearman": 0.40115180697573766,
+            "rg_wasserstein_angstrom": 0.0922640139857928,
+            "pair_distance_wasserstein_angstrom": 0.25404120619526166,
+            "step_displacement_wasserstein_angstrom": 1.593746362621084,
+            "step_amplitude_ratio": 0.008743825936107896,
+            "velocity_autocorrelation_mae": 1.019818681763354
+          }
+        },
+        "T2": {
+          "coordinate_rmse_angstrom": 1.6985081310073535,
+          "rmse_slope_angstrom_per_frame": 0.0806929784460474,
+          "rmsf_mae_angstrom": 1.7052429144581158,
+          "radius_of_gyration_mae_angstrom": 0.12515995015079776,
+          "contact_map_agreement_mean": 0.9722281982550126,
+          "nonfinite_frame_fraction": 0.0,
+          "bond_length_mae_angstrom": 0.040136294815084114,
+          "bond_length_relative_mae": 0.027902394009340584,
+          "bond_length_violation_percent": 0.2037146593598206,
+          "extreme_bond_event_percent": 0.0,
+          "dynamics_distribution": {
+            "rmsf_profile_mae_angstrom": 1.7052429144581158,
+            "rmsf_profile_pearson": 0.4639289088161413,
+            "rmsf_profile_spearman": 0.4158133827190034,
+            "rg_wasserstein_angstrom": 0.1226342923939228,
+            "pair_distance_wasserstein_angstrom": 0.27111602969886356,
+            "step_displacement_wasserstein_angstrom": 1.2761292994028277,
+            "step_amplitude_ratio": 0.009832201467361301,
+            "velocity_autocorrelation_mae": 1.0375039019615846
+          }
+        },
+        "T3": {
+          "coordinate_rmse_angstrom": 3.042260597149531,
+          "rmse_slope_angstrom_per_frame": 0.037673650933283336,
+          "rmsf_mae_angstrom": 3.233954880386591,
+          "radius_of_gyration_mae_angstrom": 0.1345165539144849,
+          "contact_map_agreement_mean": 0.9712082059978471,
+          "nonfinite_frame_fraction": 0.0,
+          "bond_length_mae_angstrom": 0.03819604249911325,
+          "bond_length_relative_mae": 0.026368047213245826,
+          "bond_length_violation_percent": 0.20647821460573476,
+          "extreme_bond_event_percent": 0.0,
+          "dynamics_distribution": {
+            "rmsf_profile_mae_angstrom": 3.233954880386591,
+            "rmsf_profile_pearson": 0.24794701811717043,
+            "rmsf_profile_spearman": 0.22536313590505022,
+            "rg_wasserstein_angstrom": 0.1254565849279364,
+            "pair_distance_wasserstein_angstrom": 0.2875045855495229,
+            "step_displacement_wasserstein_angstrom": 1.415497851463669,
+            "step_amplitude_ratio": 0.009656835798523389,
+            "velocity_autocorrelation_mae": 1.03884923302694
+          }
+        }
+      },
+      "candidate": {
+        "T1": {
+          "coordinate_rmse_angstrom": 1.7896313567956288,
+          "rmse_slope_angstrom_per_frame": 0.2065915990884256,
+          "rmsf_mae_angstrom": 2.071846707413594,
+          "radius_of_gyration_mae_angstrom": 0.09328197594732046,
+          "contact_map_agreement_mean": 0.9729805215538296,
+          "nonfinite_frame_fraction": 0.0,
+          "bond_length_mae_angstrom": 0.03713151008932324,
+          "bond_length_relative_mae": 0.02573649459036327,
+          "bond_length_violation_percent": 0.016891891891891893,
+          "extreme_bond_event_percent": 0.0,
+          "dynamics_distribution": {
+            "rmsf_profile_mae_angstrom": 2.071846707413594,
+            "rmsf_profile_pearson": 0.4909691066815682,
+            "rmsf_profile_spearman": 0.40115180697573766,
+            "rg_wasserstein_angstrom": 0.0922640179594358,
+            "pair_distance_wasserstein_angstrom": 0.25404120670208985,
+            "step_displacement_wasserstein_angstrom": 1.5937463633596074,
+            "step_amplitude_ratio": 0.008743825509251716,
+            "velocity_autocorrelation_mae": 1.0198186698113811
+          }
+        },
+        "T2": {
+          "coordinate_rmse_angstrom": 1.6985081347326438,
+          "rmse_slope_angstrom_per_frame": 0.08069297929754232,
+          "rmsf_mae_angstrom": 1.705242911974589,
+          "radius_of_gyration_mae_angstrom": 0.12515994308826825,
+          "contact_map_agreement_mean": 0.9722281982550126,
+          "nonfinite_frame_fraction": 0.0,
+          "bond_length_mae_angstrom": 0.04013629880845698,
+          "bond_length_relative_mae": 0.027902396608372463,
+          "bond_length_violation_percent": 0.2037146593598206,
+          "extreme_bond_event_percent": 0.0,
+          "dynamics_distribution": {
+            "rmsf_profile_mae_angstrom": 1.705242911974589,
+            "rmsf_profile_pearson": 0.463929004181806,
+            "rmsf_profile_spearman": 0.4158133827190034,
+            "rg_wasserstein_angstrom": 0.12263428171475728,
+            "pair_distance_wasserstein_angstrom": 0.271116028780743,
+            "step_displacement_wasserstein_angstrom": 1.2761292981787367,
+            "step_amplitude_ratio": 0.009832202835241333,
+            "velocity_autocorrelation_mae": 1.0375039044451115
+          }
+        },
+        "T3": {
+          "coordinate_rmse_angstrom": 3.0422606244683266,
+          "rmse_slope_angstrom_per_frame": 0.037673652565921346,
+          "rmsf_mae_angstrom": 3.233954817056656,
+          "radius_of_gyration_mae_angstrom": 0.1345166499959305,
+          "contact_map_agreement_mean": 0.9712082059978471,
+          "nonfinite_frame_fraction": 0.0,
+          "bond_length_mae_angstrom": 0.038196071420731705,
+          "bond_length_relative_mae": 0.026368066220487252,
+          "bond_length_violation_percent": 0.20756328405017918,
+          "extreme_bond_event_percent": 0.0,
+          "dynamics_distribution": {
+            "rmsf_profile_mae_angstrom": 3.233954817056656,
+            "rmsf_profile_pearson": 0.24794892819282618,
+            "rmsf_profile_spearman": 0.22536313590505022,
+            "rg_wasserstein_angstrom": 0.1254565045237541,
+            "pair_distance_wasserstein_angstrom": 0.28750452044481706,
+            "step_displacement_wasserstein_angstrom": 1.415497849197844,
+            "step_amplitude_ratio": 0.009656837636915347,
+            "velocity_autocorrelation_mae": 1.0388492329027637
+          }
+        }
+      }
+    },
+    "macro_coordinate_rmse": {
+      "control": 2.1768000312149525,
+      "candidate": 2.176800038665533,
+      "improvement_fraction": -3.4227216510858756e-09
+    },
+    "paired_seed_macro": [
+      {
+        "seed": 0,
+        "control": 2.1767999505003295,
+        "candidate": 2.17679995422562,
+        "candidate_minus_control": 3.725290298461914e-09,
+        "candidate_improves": false
+      },
+      {
+        "seed": 42,
+        "control": 2.176800058533748,
+        "candidate": 2.176800070951382,
+        "candidate_minus_control": 1.2417634032146907e-08,
+        "candidate_improves": false
+      },
+      {
+        "seed": 123,
+        "control": 2.1768000846107802,
+        "candidate": 2.1768000908195972,
+        "candidate_minus_control": 6.2088170160734535e-09,
+        "candidate_improves": false
+      }
+    ],
+    "paired_candidate_minus_control_mean": 7.450580448894091e-09,
+    "paired_candidate_minus_control_sd": 4.477241585334776e-09,
+    "bond_length_mae_macro": {
+      "control": 0.038487949250617375,
+      "candidate": 0.03848796010617064
+    },
+    "extreme_bond_event_macro": {
+      "control": 0.0,
+      "candidate": 0.0
+    }
+  },
+  "training": {
+    "0": {
+      "manifest_sha256": "bdecfa0179a5ba40743957165ee7857ad7124a1cd8fe4dfd477eda5b9a3f6163",
+      "status": "training_complete_holdout_unread",
+      "epochs": {
+        "control": 50,
+        "candidate": 50
+      },
+      "clipped": {
+        "control": 0,
+        "candidate": 0
+      },
+      "nonfinite": {
+        "control": 0,
+        "candidate": 0
+      },
+      "parameter_l2": {
+        "control_from_initial": 1.2392449378967285,
+        "candidate_from_initial": 1.2648037672042847,
+        "candidate_from_control": 0.0487438440322876
+      },
+      "checkpoint_sha256": {
+        "control": "29aeadb0136fda67bf1417759bd0d16d72ee097da3e90a069ee3e2986f2e36f0",
+        "candidate": "463977e7d6568cb79ce8588f75f59c50771d2a8d9aba790d5c80c5a2bcb1c92a"
+      }
+    },
+    "42": {
+      "manifest_sha256": "09478660f9c2603513c4f985bb4ed6abde41c68e1e51127f5656e17aa360d964",
+      "status": "training_complete_holdout_unread",
+      "epochs": {
+        "control": 50,
+        "candidate": 50
+      },
+      "clipped": {
+        "control": 0,
+        "candidate": 0
+      },
+      "nonfinite": {
+        "control": 0,
+        "candidate": 0
+      },
+      "parameter_l2": {
+        "control_from_initial": 1.1667405366897583,
+        "candidate_from_initial": 1.1886353492736816,
+        "candidate_from_control": 0.06489188224077225
+      },
+      "checkpoint_sha256": {
+        "control": "6c3e74f463bc96bd9f2d2557416f7b44e9f2aaf8be3cf2b3f7013e425d3d3b22",
+        "candidate": "a2c73eccfe27bd5f9c6c62a5afe7b010ea3449e66c4f02eb2b0311b8b8603760"
+      }
+    },
+    "123": {
+      "manifest_sha256": "8dcc4d6dedb916e32106880d124cf3217644d8a58aeb585c5b0759e4ddddf53f",
+      "status": "training_complete_holdout_unread",
+      "epochs": {
+        "control": 50,
+        "candidate": 50
+      },
+      "clipped": {
+        "control": 0,
+        "candidate": 0
+      },
+      "nonfinite": {
+        "control": 0,
+        "candidate": 0
+      },
+      "parameter_l2": {
+        "control_from_initial": 1.1524782180786133,
+        "candidate_from_initial": 1.1757497787475586,
+        "candidate_from_control": 0.044157449156045914
+      },
+      "checkpoint_sha256": {
+        "control": "6cfcc9175fe0c973a2ea7fa77e44273a52daa6d95a756a1ce8811f73e9f45767",
+        "candidate": "52895b25bc22ff59157d90a942d2724fa1a30a924712fe396d655a4099bc9c0c"
+      }
+    }
+  }
+}
