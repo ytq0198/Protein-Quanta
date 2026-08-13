@@ -405,3 +405,9 @@ E14 在覆盖 validation 子集实现了同帧键长 MAE、20% 违例率、极�
 在 commit `0a67359` 预注册后，为普通 Transformer 加入权重 `0.25` 的 10 步可微自回归损失；固定 200 epoch、final epoch 与三 seed。等权宏平均从一步训练的 `0.41778±0.03279` 改善到 `0.39723±0.00717`（`4.92%`），2/3 种子胜出；T1/T2/T3 分别改善 `1.05%/15.31%/0.46%`。闭环训练还把 T2 的 seed SD 从 `0.09780` 降到 `0.00533`，支持其缓解中程 rollout 和种子不稳定性的机制价值。
 
 但 T3 改善远低于预注册 5% 门槛，完整 gate 判 **不通过**，不晋级三维主模型，也不立即扫描相同权重或单一 horizon。科研结论收敛为：10 步闭环能修复 T2，却不足以约束 80 步 T3；下一步应设计多时间尺度闭环目标，并通过 train 内部 grouped selection 解决训练后段回退，不能事后用 validation 挑 epoch。完整报告见 `reports/reproduction/2026-08-13-temporal-closed-loop-updated-guide.md`。
+
+## 2026-08-13：train-only 多时间尺度闭环 gate 通过
+
+为避免继续适应官方 validation，从 MISATO-100 的 80 个官方训练样本用 salted SHA256 确定性划出 64/16 development/holdout；官方 validation/test 未读取。在相同三 seed、200 epoch、final epoch 对照下，多时间尺度 `[5,10,20,40]` 闭环把等权宏平均从 `0.60415±0.00777` 改善到 `0.57935±0.02971`（`4.10%`），2/3 seed 胜出。T1/T2/T3 分别改善 `1.41%/1.34%/8.42%`；T3 三个 seed 的配对改善都在约 `0.056-0.061`，完整预注册 gate 通过。
+
+该结果支持“训练 horizon 覆盖决定长期误差控制”的机制假设，但仍只是 12 维 proxy。按预注册访问规则，现允许一次冻结的官方 validation 确认；确认前不改 horizons、权重或 epoch，确认后也不据结果回调。完整报告见 `reports/reproduction/2026-08-13-temporal-multiscale-train-only.md`。

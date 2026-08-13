@@ -1,0 +1,28 @@
+{
+  "status": "pre-registered after train-only gate pass and before observing confirmation results",
+  "date": "2026-08-13",
+  "eligibility_evidence": "reports/reproduction/temporal_multiscale_train_only_val.json promotion.passed=true",
+  "purpose": "one-time confirmation that the frozen multi-scale mechanism direction transfers from the train-only 64/16 split to official MISATO-100 validation",
+  "training": {
+    "data": "same frozen 64-complex development split; do not add the 16 holdout or official validation",
+    "seeds": [0, 42, 123],
+    "epochs": 200,
+    "checkpoint_policy": "final epoch",
+    "architecture_and_objective": "exactly configs/temporal_multiscale_closed_loop_preregistration.json",
+    "determinism": "retrain exact frozen configuration and save final state for audit"
+  },
+  "evaluation": {
+    "split": "MISATO-100 official validation (10 complexes)",
+    "access_count": "one frozen evaluation after all three final checkpoints exist",
+    "official_test_access": "prohibited",
+    "metrics": "T1/T2/T3 standardized RMSE and equal macro; not official scores"
+  },
+  "confirmation_rule": {
+    "primary": "mean equal-macro RMSE below the already recorded paired one-step reference",
+    "seed_consistency": "at least 2 of 3 paired seed wins",
+    "T1_guard": "mean T1 does not worsen by more than 2 percent",
+    "T3_direction": "mean T3 improves; the 5 percent threshold remains a stronger success marker but is not required to preserve a research direction",
+    "finite": "all values finite"
+  },
+  "no_adaptation": "do not tune horizons, loss weight, epoch, architecture or normalization using this confirmation result"
+}
