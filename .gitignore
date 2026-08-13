@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.pytest-tmp/
 .mypy_cache/
 .venv/
 .env
@@ -23,6 +24,7 @@ artifacts/
 
 # Local external checkouts
 .external/
+tmp/
 
 # Editors and operating systems
 .idea/

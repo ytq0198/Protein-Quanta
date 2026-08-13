@@ -23,13 +23,26 @@ def render_figure(report, output):
     architectures = list(aggregate)
     names = [DISPLAY_NAMES[name] for name in architectures]
     means = np.array(
-        [aggregate[name]["weighted_validation_rmse"]["mean"] for name in architectures]
+        [
+            aggregate[name].get(
+                "macro_scenario_rmse", aggregate[name].get("weighted_validation_rmse")
+            )["mean"]
+            for name in architectures
+        ]
     )
     stds = np.array(
-        [aggregate[name]["weighted_validation_rmse"]["sample_std"] for name in architectures]
+        [
+            aggregate[name].get(
+                "macro_scenario_rmse", aggregate[name].get("weighted_validation_rmse")
+            )["sample_std"]
+            for name in architectures
+        ]
     )
     seed_values = [
-        aggregate[name]["weighted_validation_rmse"]["values"] for name in architectures
+        aggregate[name].get(
+            "macro_scenario_rmse", aggregate[name].get("weighted_validation_rmse")
+        )["values"]
+        for name in architectures
     ]
 
     figure, axes = plt.subplots(1, 2, figsize=(12, 4.8), constrained_layout=True)
@@ -51,7 +64,7 @@ def render_figure(report, output):
         axes[0].scatter(index, means[index], marker="D", s=55, color=color, edgecolor="black", linewidth=0.5, zorder=4)
     axes[0].axhline(means[0], color="#404040", linestyle="--", linewidth=1, alpha=0.7)
     axes[0].set_xticks(x, names, rotation=22, ha="right")
-    axes[0].set_ylabel("Weighted validation RMSE (lower is better)")
+    axes[0].set_ylabel("Equal-macro T1/T2/T3 RMSE (lower is better)")
     axes[0].set_title("Stability across three fixed seeds")
     axes[0].text(0.02, 0.02, "Dots: seeds 0/42/123 · diamonds: mean · bars: sample SD", transform=axes[0].transAxes, fontsize=8)
 
@@ -83,7 +96,7 @@ def render_figure(report, output):
     axes[1].set_ylim(-30, 29)
     axes[1].set_xticks(scenario_x, scenarios)
     axes[1].set_ylabel("RMSE change versus MLP (%)")
-    axes[1].set_title("Long-horizon gain comes with a T1 trade-off")
+    axes[1].set_title("Scenario-wise change relative to MLP")
     axes[1].legend(frameon=False)
 
     figure.suptitle(

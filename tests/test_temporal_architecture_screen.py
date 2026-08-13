@@ -6,7 +6,7 @@ import torch
 from scripts.train_temporal_architecture_screen import (
     _promotion,
     _scenario_metrics,
-    _weighted_rmse,
+    _scenario_macro_rmse,
 )
 from scripts.train_temporal_multiseed_rope import aggregate_results
 from scripts.train_temporal_noise_augmentation import aggregate_noise_pilot
@@ -26,17 +26,17 @@ def _scenarios(value, static=2.0):
 
 
 class TemporalArchitectureScreenTests(unittest.TestCase):
-    def test_weighted_rmse_uses_competition_scenario_weights(self):
+    def test_macro_rmse_does_not_invent_unpublished_scenario_weights(self):
         summary = _scenarios(0.0)
         summary["T1"]["standardized_rmse"] = 1.0
         summary["T2"]["standardized_rmse"] = 2.0
         summary["T3"]["standardized_rmse"] = 3.0
-        self.assertAlmostEqual(_weighted_rmse(summary), 1.7)
+        self.assertAlmostEqual(_scenario_macro_rmse(summary), 2.0)
 
     def test_promotion_requires_long_horizon_margin_and_static_control(self):
         results = [
-            {"architecture": "mlp", "best": {"weighted_validation_rmse": 1.0, "scenarios": _scenarios(1.0)}},
-            {"architecture": "gru", "best": {"weighted_validation_rmse": 0.8, "scenarios": _scenarios(0.8)}},
+            {"architecture": "mlp", "best": {"macro_scenario_rmse": 1.0, "scenarios": _scenarios(1.0)}},
+            {"architecture": "gru", "best": {"macro_scenario_rmse": 0.8, "scenarios": _scenarios(0.8)}},
         ]
         decision = _promotion(results)
         self.assertTrue(decision["gru"]["passed"])
@@ -70,7 +70,7 @@ class TemporalArchitectureScreenTests(unittest.TestCase):
                         "seed": seed,
                         "parameter_count": 10,
                         "best": {
-                            "weighted_validation_rmse": value,
+                            "macro_scenario_rmse": value,
                             "scenarios": _scenarios(value),
                         },
                     }
@@ -84,17 +84,17 @@ class TemporalArchitectureScreenTests(unittest.TestCase):
         noise_results = []
         for seed, old, new in ((0, 1.0, 0.9), (42, 1.1, 1.0), (123, 0.9, 0.95)):
             reference_results.append(
-                {"architecture": "transformer", "seed": seed, "best": {"weighted_validation_rmse": old, "scenarios": _scenarios(old)}}
+                {"architecture": "transformer", "seed": seed, "best": {"macro_scenario_rmse": old, "scenarios": _scenarios(old)}}
             )
             noise_results.append(
-                {"architecture": "transformer", "seed": seed, "best": {"weighted_validation_rmse": new, "scenarios": _scenarios(new)}}
+                {"architecture": "transformer", "seed": seed, "best": {"macro_scenario_rmse": new, "scenarios": _scenarios(new)}}
             )
         aggregate, decision = aggregate_noise_pilot(
             noise_results, {"results": reference_results}
         )
         self.assertEqual(decision["beats_reference_seed_count"], 2)
         self.assertTrue(decision["passed"])
-        self.assertLess(aggregate["paired_weighted_difference"]["mean"], 0)
+        self.assertLess(aggregate["paired_macro_difference"]["mean"], 0)
 
 
 if __name__ == "__main__":

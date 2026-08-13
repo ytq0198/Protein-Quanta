@@ -25,6 +25,14 @@ def _mean_std(values):
     }
 
 
+def _macro(row):
+    return float(
+        np.mean(
+            [row["scenarios"][name]["standardized_rmse"] for name in ("T1", "T2", "T3")]
+        )
+    )
+
+
 def aggregate_results(results):
     grouped = {}
     for result in results:
@@ -33,10 +41,10 @@ def aggregate_results(results):
     aggregate = {}
     for architecture, rows in grouped.items():
         rows = sorted(rows, key=lambda row: row["seed"])
-        weighted = [row["best"]["weighted_validation_rmse"] for row in rows]
+        macros = [_macro(row["best"]) for row in rows]
         paired = [
-            row["best"]["weighted_validation_rmse"]
-            - mlp_by_seed[row["seed"]]["weighted_validation_rmse"]
+            _macro(row["best"])
+            - _macro(mlp_by_seed[row["seed"]])
             for row in rows
         ]
         scenarios = {}
@@ -57,8 +65,8 @@ def aggregate_results(results):
             }
         aggregate[architecture] = {
             "parameter_count": rows[0]["parameter_count"],
-            "weighted_validation_rmse": _mean_std(weighted),
-            "paired_weighted_difference_vs_mlp": _mean_std(paired),
+            "macro_scenario_rmse": _mean_std(macros),
+            "paired_macro_difference_vs_mlp": _mean_std(paired),
             "beats_mlp_seed_count": int(sum(value < 0 for value in paired)),
             "scenarios": scenarios,
         }
@@ -79,19 +87,19 @@ def aggregate_results(results):
         )
         finite = all(
             np.isfinite(value)
-            for value in row["weighted_validation_rmse"]["values"]
+            for value in row["macro_scenario_rmse"]["values"]
         )
         decisions[architecture] = {
-            "beats_mlp_mean_weighted": row["weighted_validation_rmse"]["mean"]
-            < mlp["weighted_validation_rmse"]["mean"],
+            "beats_mlp_mean_macro": row["macro_scenario_rmse"]["mean"]
+            < mlp["macro_scenario_rmse"]["mean"],
             "beats_mlp_seed_count": row["beats_mlp_seed_count"],
             "beats_static_scenario_count": int(beats_static_count),
             "best_T2_T3_mean_improvement_over_mlp": float(long_improvement),
             "finite": bool(finite),
             "passed": bool(
                 architecture != "mlp"
-                and row["weighted_validation_rmse"]["mean"]
-                < mlp["weighted_validation_rmse"]["mean"]
+                and row["macro_scenario_rmse"]["mean"]
+                < mlp["macro_scenario_rmse"]["mean"]
                 and row["beats_mlp_seed_count"] >= 2
                 and beats_static_count >= 2
                 and long_improvement >= 0.05

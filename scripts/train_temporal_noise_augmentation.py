@@ -25,6 +25,14 @@ def _mean_std(values):
     }
 
 
+def _macro(row):
+    return float(
+        np.mean(
+            [row["scenarios"][name]["standardized_rmse"] for name in ("T1", "T2", "T3")]
+        )
+    )
+
+
 def aggregate_noise_pilot(noise_results, reference_report):
     references = {
         row["seed"]: row["best"]
@@ -34,8 +42,8 @@ def aggregate_noise_pilot(noise_results, reference_report):
     rows = sorted(noise_results, key=lambda row: row["seed"])
     if {row["seed"] for row in rows} != set(references):
         raise ValueError("noise and reference seeds do not match")
-    augmented = [row["best"]["weighted_validation_rmse"] for row in rows]
-    baseline = [references[row["seed"]]["weighted_validation_rmse"] for row in rows]
+    augmented = [_macro(row["best"]) for row in rows]
+    baseline = [_macro(references[row["seed"]]) for row in rows]
     paired = [new - old for new, old in zip(augmented, baseline)]
     scenarios = {}
     for scenario in ("T1", "T2", "T3"):
@@ -64,9 +72,9 @@ def aggregate_noise_pilot(noise_results, reference_report):
         and finite
     )
     return {
-        "noise_weighted_validation_rmse": _mean_std(augmented),
-        "no_noise_weighted_validation_rmse": _mean_std(baseline),
-        "paired_weighted_difference": _mean_std(paired),
+        "noise_macro_scenario_rmse": _mean_std(augmented),
+        "no_noise_macro_scenario_rmse": _mean_std(baseline),
+        "paired_macro_difference": _mean_std(paired),
         "scenarios": scenarios,
     }, decision
 

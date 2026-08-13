@@ -1,0 +1,458 @@
+{
+  "status": "ProAR-inspired deterministic mechanism proxy; not full ProAR and not official competition scores",
+  "protocol": {
+    "preregistration_commit": "4556a31",
+    "train_ids": [
+      "3SNC",
+      "5KBQ",
+      "5X27",
+      "4DRU",
+      "6JAW",
+      "6F3B",
+      "3MP6",
+      "1W5X",
+      "1ZSH",
+      "6C2R",
+      "1V2S",
+      "3V0L",
+      "2H2G",
+      "4D2T",
+      "5ADR",
+      "3H22",
+      "6CJS",
+      "4QSU",
+      "5U0F",
+      "5Y12",
+      "1XM4",
+      "5MW6",
+      "1HMR",
+      "6F86",
+      "4I6Q",
+      "4QO4",
+      "6CZE",
+      "1F74",
+      "3VVY",
+      "3MG7",
+      "4QDK",
+      "2W4X",
+      "2OPY",
+      "5I8B",
+      "2YWP",
+      "3HXF",
+      "5UVC",
+      "4UMJ",
+      "5JSS",
+      "2QRL",
+      "5K0C",
+      "3NCG",
+      "3BX5",
+      "2R59",
+      "6EQM",
+      "1Q6M",
+      "4QME",
+      "2C1B",
+      "1C5F",
+      "4DV9",
+      "4M5K",
+      "6PG3",
+      "5VD3",
+      "3BUG",
+      "3IMC",
+      "2OJJ",
+      "1P19",
+      "4RXD",
+      "4OHO",
+      "5JXN",
+      "4CFV",
+      "5LVQ",
+      "3U78",
+      "3SV2",
+      "6B8J",
+      "2P7G",
+      "1B6H",
+      "5D1R",
+      "5M6U",
+      "2RC9",
+      "5IIS",
+      "5F41",
+      "6AJR",
+      "2CC7",
+      "3ZM6",
+      "5LZJ",
+      "1QY1",
+      "2FDA",
+      "5ZHN",
+      "2V12"
+    ],
+    "validation_ids": [
+      "1S38",
+      "6PYS",
+      "4M5L",
+      "1CTR",
+      "4HXS",
+      "6BIB",
+      "4Q93",
+      "1SWG",
+      "3GCP",
+      "2FMB"
+    ],
+    "test_accessed": false,
+    "feature_names": [
+      "radius_of_gyration",
+      "pair_distance_q10",
+      "pair_distance_q25",
+      "pair_distance_q50",
+      "pair_distance_q75",
+      "pair_distance_q90",
+      "pair_distance_mean",
+      "pair_distance_std",
+      "step_magnitude_mean",
+      "step_magnitude_std",
+      "step_magnitude_q50",
+      "step_magnitude_q90"
+    ],
+    "normalization_mean": [
+      4.190251087828428,
+      2.179750613245667,
+      3.312727976632397,
+      5.188658028811946,
+      7.298527812465609,
+      9.144948779818543,
+      5.438361017572343,
+      2.629610247833186,
+      1.347966392412727,
+      0.45497225871254826,
+      1.2535690341386425,
+      1.9375072749188178
+    ],
+    "normalization_scale": [
+      1.1617508015847768,
+      0.4659649842436853,
+      0.8166329488630168,
+      1.345599501814115,
+      1.9848453960483183,
+      2.6383337766948167,
+      1.4053605062487524,
+      0.8558175568242657,
+      2.4225577064759967,
+      0.3134338515497646,
+      2.4281915669520178,
+      2.518761808369133
+    ],
+    "device": "cuda:0",
+    "config": {
+      "status": "pre-registered ProAR-inspired anti-drift mechanism pilot; validation-only invariant proxy, not an official competition score",
+      "date": "2026-08-13",
+      "hypothesis": "alternating interpolation and endpoint forecasting reduces long-horizon accumulation error relative to one-pass block forecasting when both use the same trained networks",
+      "source": {
+        "paper": "ProAR: Probabilistic Autoregressive Modeling for Molecular Dynamics, AAAI 2026",
+        "doi": "10.1609/aaai.v40i1.36974",
+        "adaptation_boundary": "tests only the dual-stage training and alternating anti-drift sampler; omits Gaussian covariance, stochastic sampling, atomistic geometry and Amber relaxation"
+      },
+      "data": {
+        "dataset": "MISATO-100 feasibility subset",
+        "train": "80 public training complexes only",
+        "selection": "10 public validation complexes only",
+        "test_access": "prohibited",
+        "representation": "12-dimensional rigid-motion-invariant ligand trajectory features standardized with train statistics"
+      },
+      "model": {
+        "block_horizon": 4,
+        "hidden_dim": 48,
+        "layers": 2,
+        "interpolator": "linear bridge plus learned residual conditioned on start, proposed endpoint, relative step and horizon",
+        "forecaster": "endpoint residual predictor conditioned on intermediate state, block start, relative step and horizon",
+        "parameter_cap_each_network": 10000
+      },
+      "training": {
+        "seeds": [
+          0,
+          42,
+          123
+        ],
+        "interpolator_epochs": 120,
+        "forecaster_epochs": 120,
+        "windows_per_trajectory_per_epoch": 8,
+        "batch_size": 128,
+        "optimizer": "Adam",
+        "learning_rate": 0.001,
+        "gradient_clip_norm": 1.0,
+        "checkpoint_policy": "final epoch; no validation checkpoint selection",
+        "forecaster_protocol": "freeze interpolator, train j uniformly from 0 through h-1; j=0 input is the block start"
+      },
+      "causal_comparison": {
+        "control": "one-pass: forecast endpoint once, then interpolate all interior states",
+        "candidate": "alternating: forecast endpoint, alternate I/F for j=1..h-1, then recompute interior states from the refined endpoint",
+        "shared": "same weights, start states, block size, training updates and validation examples",
+        "scenarios": [
+          "T1",
+          "T2",
+          "T3"
+        ],
+        "primary": "unweighted macro mean of T1/T2/T3 standardized RMSE; official scenario weights are not currently published"
+      },
+      "promotion": {
+        "paired_seed_wins": "candidate macro RMSE lower than control in at least 2/3 seeds",
+        "mean_macro": "candidate mean macro RMSE lower than control",
+        "long_horizon": "candidate mean T3 RMSE improves by at least 5%",
+        "short_horizon_guard": "candidate mean T1 RMSE does not regress by more than 2%",
+        "numerical_guard": "all generated values finite and every scenario RMSE below 10 standardized units",
+        "next_stage": "only a passing mechanism is ported into the equivariant 3D NeuralMD/EST-style model"
+      },
+      "anti_tuning": "after results are visible, do not change block horizon, model size, seeds or thresholds in this experimental family"
+    }
+  },
+  "results": [
+    {
+      "seed": 0,
+      "interpolator_parameter_count": 4236,
+      "forecaster_parameter_count": 4236,
+      "interpolator_final_train_mse": 0.33975110948085785,
+      "forecaster_final_train_mse": 0.21185100227594375,
+      "validation": {
+        "one_pass": {
+          "T1": {
+            "standardized_rmse": 0.448119580745697,
+            "structure_rmse": 0.24793367087841034,
+            "step_rmse": 0.692453145980835,
+            "finite": true
+          },
+          "T2": {
+            "standardized_rmse": 0.3334096670150757,
+            "structure_rmse": 0.14418776333332062,
+            "step_rmse": 0.5402830839157104,
+            "finite": true
+          },
+          "T3": {
+            "standardized_rmse": 0.5975226759910583,
+            "structure_rmse": 0.22198989987373352,
+            "step_rmse": 0.9861749410629272,
+            "finite": true
+          },
+          "macro_scenario_rmse": 0.45968397458394367
+        },
+        "alternating": {
+          "T1": {
+            "standardized_rmse": 0.42335936427116394,
+            "structure_rmse": 0.2485898733139038,
+            "step_rmse": 0.6435103416442871,
+            "finite": true
+          },
+          "T2": {
+            "standardized_rmse": 0.3993177115917206,
+            "structure_rmse": 0.1651172935962677,
+            "step_rmse": 0.6510272026062012,
+            "finite": true
+          },
+          "T3": {
+            "standardized_rmse": 0.5892517566680908,
+            "structure_rmse": 0.2846738398075104,
+            "step_rmse": 0.9378563165664673,
+            "finite": true
+          },
+          "macro_scenario_rmse": 0.47064294417699176
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "interpolator_parameter_count": 4236,
+      "forecaster_parameter_count": 4236,
+      "interpolator_final_train_mse": 0.31946967728435993,
+      "forecaster_final_train_mse": 0.19897594600915908,
+      "validation": {
+        "one_pass": {
+          "T1": {
+            "standardized_rmse": 0.43659108877182007,
+            "structure_rmse": 0.24652163684368134,
+            "step_rmse": 0.6710361242294312,
+            "finite": true
+          },
+          "T2": {
+            "standardized_rmse": 0.33272334933280945,
+            "structure_rmse": 0.14616738259792328,
+            "step_rmse": 0.5379448533058167,
+            "finite": true
+          },
+          "T3": {
+            "standardized_rmse": 0.5276280641555786,
+            "structure_rmse": 0.20794697105884552,
+            "step_rmse": 0.865268886089325,
+            "finite": true
+          },
+          "macro_scenario_rmse": 0.4323141674200694
+        },
+        "alternating": {
+          "T1": {
+            "standardized_rmse": 0.4206882417201996,
+            "structure_rmse": 0.2430451214313507,
+            "step_rmse": 0.6424903869628906,
+            "finite": true
+          },
+          "T2": {
+            "standardized_rmse": 0.3402866721153259,
+            "structure_rmse": 0.15626290440559387,
+            "step_rmse": 0.5463962554931641,
+            "finite": true
+          },
+          "T3": {
+            "standardized_rmse": 0.5242569446563721,
+            "structure_rmse": 0.2564828395843506,
+            "step_rmse": 0.8324475884437561,
+            "finite": true
+          },
+          "macro_scenario_rmse": 0.4284106194972992
+        }
+      }
+    },
+    {
+      "seed": 123,
+      "interpolator_parameter_count": 4236,
+      "forecaster_parameter_count": 4236,
+      "interpolator_final_train_mse": 0.24187085777521133,
+      "forecaster_final_train_mse": 0.2327454060316086,
+      "validation": {
+        "one_pass": {
+          "T1": {
+            "standardized_rmse": 0.4462704062461853,
+            "structure_rmse": 0.24723902344703674,
+            "step_rmse": 0.6893602013587952,
+            "finite": true
+          },
+          "T2": {
+            "standardized_rmse": 0.32591313123703003,
+            "structure_rmse": 0.13767759501934052,
+            "step_rmse": 0.5298564434051514,
+            "finite": true
+          },
+          "T3": {
+            "standardized_rmse": 0.5187004804611206,
+            "structure_rmse": 0.16073258221149445,
+            "step_rmse": 0.8691838383674622,
+            "finite": true
+          },
+          "macro_scenario_rmse": 0.430294672648112
+        },
+        "alternating": {
+          "T1": {
+            "standardized_rmse": 0.42061108350753784,
+            "structure_rmse": 0.24542462825775146,
+            "step_rmse": 0.6405267715454102,
+            "finite": true
+          },
+          "T2": {
+            "standardized_rmse": 0.33544865250587463,
+            "structure_rmse": 0.15571075677871704,
+            "step_rmse": 0.537666916847229,
+            "finite": true
+          },
+          "T3": {
+            "standardized_rmse": 0.5247148871421814,
+            "structure_rmse": 0.25337347388267517,
+            "step_rmse": 0.8352130651473999,
+            "finite": true
+          },
+          "macro_scenario_rmse": 0.42692487438519794
+        }
+      }
+    }
+  ],
+  "aggregate": {
+    "one_pass": {
+      "macro_scenario_rmse": {
+        "mean": 0.44076427155070835,
+        "sample_std": 0.01641602759296082,
+        "values": [
+          0.45968397458394367,
+          0.4323141674200694,
+          0.430294672648112
+        ]
+      },
+      "scenarios": {
+        "T1": {
+          "mean": 0.4436603585879008,
+          "sample_std": 0.006191590537319442,
+          "values": [
+            0.448119580745697,
+            0.43659108877182007,
+            0.4462704062461853
+          ]
+        },
+        "T2": {
+          "mean": 0.33068204919497174,
+          "sample_std": 0.004144235979940318,
+          "values": [
+            0.3334096670150757,
+            0.33272334933280945,
+            0.32591313123703003
+          ]
+        },
+        "T3": {
+          "mean": 0.5479504068692526,
+          "sample_std": 0.04316228489166144,
+          "values": [
+            0.5975226759910583,
+            0.5276280641555786,
+            0.5187004804611206
+          ]
+        }
+      }
+    },
+    "alternating": {
+      "macro_scenario_rmse": {
+        "mean": 0.44199281268649626,
+        "sample_std": 0.02482286013841965,
+        "values": [
+          0.47064294417699176,
+          0.4284106194972992,
+          0.42692487438519794
+        ]
+      },
+      "scenarios": {
+        "T1": {
+          "mean": 0.4215528964996338,
+          "sample_std": 0.0015649225874234552,
+          "values": [
+            0.42335936427116394,
+            0.4206882417201996,
+            0.42061108350753784
+          ]
+        },
+        "T2": {
+          "mean": 0.3583510120709737,
+          "sample_std": 0.03556057452647145,
+          "values": [
+            0.3993177115917206,
+            0.3402866721153259,
+            0.33544865250587463
+          ]
+        },
+        "T3": {
+          "mean": 0.5460745294888815,
+          "sample_std": 0.03739327664158185,
+          "values": [
+            0.5892517566680908,
+            0.5242569446563721,
+            0.5247148871421814
+          ]
+        }
+      }
+    }
+  },
+  "promotion": {
+    "paired_macro_difference": {
+      "mean": 0.0012285411357879454,
+      "sample_std": 0.008431023107917731,
+      "values": [
+        0.010958969593048096,
+        -0.003903547922770201,
+        -0.003369798262914059
+      ]
+    },
+    "candidate_seed_wins": 2,
+    "T1_relative_regression": -0.04982969891344702,
+    "T3_relative_improvement": 0.0034234437220131975,
+    "all_finite": true,
+    "passed": false
+  }
+}

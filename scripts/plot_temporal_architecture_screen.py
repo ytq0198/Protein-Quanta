@@ -21,7 +21,14 @@ def render_figure(report, output):
     static = np.array(
         [results[0]["best"]["scenarios"][scenario]["static_standardized_rmse"] for scenario in scenarios]
     )
-    weighted = np.array([row["best"]["weighted_validation_rmse"] for row in results])
+    weighted = np.array(
+        [
+            row["best"].get(
+                "macro_scenario_rmse", row["best"].get("weighted_validation_rmse")
+            )
+            for row in results
+        ]
+    )
 
     figure, axes = plt.subplots(1, 2, figsize=(11, 4.5), constrained_layout=True)
     x = np.arange(len(names))

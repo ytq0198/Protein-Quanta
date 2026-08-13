@@ -73,9 +73,15 @@ def _scenario_metrics(model, normalized, device, static_step_values):
     return summary
 
 
+def _scenario_macro_rmse(summary):
+    """Equal-weight proxy used until the official T1/T2/T3 weights are released."""
+    names = ("T1", "T2", "T3")
+    return float(np.mean([summary[name]["standardized_rmse"] for name in names]))
+
+
 def _weighted_rmse(summary):
-    weights = {"T1": 0.5, "T2": 0.3, "T3": 0.2}
-    return float(sum(weights[name] * summary[name]["standardized_rmse"] for name in weights))
+    """Backward-compatible alias; no competition weights are currently public."""
+    return _scenario_macro_rmse(summary)
 
 
 def train_architecture(
@@ -145,15 +151,15 @@ def train_architecture(
             summary = _scenario_metrics(
                 model, validation, device, static_step_values
             )
-            weighted = _weighted_rmse(summary)
+            macro = _scenario_macro_rmse(summary)
             record = {
                 "epoch": epoch,
                 "train_mse": float(np.mean(losses)),
-                "weighted_validation_rmse": weighted,
+                "macro_scenario_rmse": macro,
                 "scenarios": summary,
             }
             history.append(record)
-            if best is None or weighted < best["weighted_validation_rmse"]:
+            if best is None or macro < best["macro_scenario_rmse"]:
                 best = record
                 best_state = {
                     name: value.detach().cpu().clone()
@@ -185,7 +191,7 @@ def _promotion(results):
     decisions = {}
     for name, result in by_name.items():
         best = result["best"]
-        beats_mlp = best["weighted_validation_rmse"] < mlp["weighted_validation_rmse"]
+        beats_mlp = best["macro_scenario_rmse"] < mlp["macro_scenario_rmse"]
         beats_static_count = sum(
             row["standardized_rmse"] < row["static_standardized_rmse"]
             for row in best["scenarios"].values()
@@ -201,7 +207,7 @@ def _promotion(results):
             for row in best["scenarios"].values()
         )
         decisions[name] = {
-            "beats_mlp_weighted": beats_mlp,
+            "beats_mlp_mean_macro": beats_mlp,
             "beats_static_scenario_count": beats_static_count,
             "best_T2_T3_improvement_over_mlp": float(long_improvement),
             "robust": robust,

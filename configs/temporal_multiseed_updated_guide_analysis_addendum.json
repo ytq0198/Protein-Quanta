@@ -1,0 +1,18 @@
+{
+  "status": "deterministic protocol-correction addendum; not a post-hoc hyperparameter choice",
+  "date": "2026-08-13",
+  "source_experiment": "fixed-final-epoch multi-seed architecture and RoPE screen",
+  "corrections": {
+    "T1": "10 observed frames to 10 predicted frames",
+    "scenario_aggregation": "unweighted macro mean of T1, T2 and T3",
+    "old_0.5_0.3_0.2_field": "historical unofficial proxy only; ignored for current decisions"
+  },
+  "decision_rule": {
+    "primary": "mean equal-macro rollout RMSE across seeds below paired MLP",
+    "seed_consistency": "beat paired MLP in at least 2 of 3 seeds",
+    "static_control": "beat Static in at least two scenarios",
+    "long_history_signal": "improve mean T2 or T3 RMSE over MLP by at least 5 percent",
+    "robustness": "all values finite"
+  },
+  "evidence_boundary": "12D invariant-feature proxy; not atomic Geo/Phys/Dyn/Stab and not an official score"
+}
