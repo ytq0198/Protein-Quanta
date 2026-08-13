@@ -11,6 +11,7 @@
 - **当前科学瓶颈**：最小等变场 step-amplitude ratio 约 `0.009`。解析审计发现，时间 `/100` 而初始帧差不换算会使零加速度第一步位移正好只剩 `1%`；因此近静态既可能反映模型能力，也受数值单位约定强烈影响。下一阶段先做 development-only 单位一致性 gate，再谈长程抗漂移。
 - **单位一致性 gate**：64 个 development 复合物的零加速度解析对照已通过。`initial_velocity_scale=100` 将第二观测帧 RMSE 降至 `3.6–5.6×10⁻⁸ Å`，三场景步幅比恢复到 `0.916–1.028`；但恒速 T3 RMSE 达 `33.88 Å`，所以这只是数值正确性证据，不是性能提升。
 - **帧时间 learnability gate**：48/16 development-only 配对预实验 **fail**。帧时间候选保持步幅 `0.944` 且有限，但 5 epoch 后 T3 仅由 `34.1267` 降至 `33.9024 Å`（改善 `0.6575%`，门槛 10%）；240 次更新中 124 次裁剪。当前位置-only 径向场不能晋升。
+- **速度感知正确性 gate**：10,243 参数速度感知 E(3) 场在一个真实 train 复合物上 7/7 通过；旋转/反射误差 `3.81×10⁻⁵/3.05×10⁻⁵ Å`，速度敏感度范数 `0.568`。这只授权新的 development-only 可学习性实验，不是成绩证据。
 
 ## 可引用证据与边界
 
@@ -24,6 +25,7 @@
 | 说明全过程审计 | `reports/reproduction/2026-08-14-dense-effect-gate-live-audit.md` | 首次评估有序列化失败，已限定热修复并独立复算 |
 | 说明近静态机制与单位修正 | `reports/reproduction/2026-08-14-velocity-time-consistency-audit.md` | 零加速度解析控制；恢复步幅但长程误差恶化，不是学习模型成绩 |
 | 说明单位一致模型可学习性 | `reports/reproduction/2026-08-14-frame-time-learnability-preflight.md` | 48/16 development-only；gate fail，不访问旧 holdout/官方 validation |
+| 说明速度感知严格等变实现 | `reports/reproduction/2026-08-14-velocity-equivariant-correctness.md` | 单真实 train 复合物、随机初始化；correctness 通过不等于效果提升 |
 | 说明原始数字 | `reports/reproduction/evidence/dense-equivariant-effect-summary.json` | 内部项目代理，不是官方分数 |
 
 ## 不再用于主论证的历史结果
@@ -36,6 +38,6 @@
 ## 下一执行 gate
 
 1. 完整 MISATO 文件达到 `132,841,014,019` 字节且 `.aria2` 消失后，核对官方 MD5 `9bc6446922cd80e0f2f3f69349bf88ed`；再做 HDF5、去多肽 split 和有限坐标审计。
-2. 帧时间位置-only 场已判 no-go；下一实验应先实现并通过速度感知严格等变 correctness gate，再在新的 development 内部划分测试其制动/转向可学习性，不复用现有 diagnostic 或旧 holdout。
+2. 速度感知严格等变 correctness 已通过；下一实验在上一阶段 48 个训练复合物内部重新冻结 36/12 划分，配对测试其制动/转向可学习性，不复用现有 diagnostic 或旧 holdout。
 3. 模型升级优先显式速度/时间、局部多层高阶几何与合规结构预训练；不在已解封 64/16 holdout 上扫损失系数。
 4. 团队人工确认官网具体截止时刻、ZIP 命名/大小和上传字段；团队自行完成模板文字、真实性核验与签字。

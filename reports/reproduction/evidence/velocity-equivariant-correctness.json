@@ -1,0 +1,45 @@
+{
+  "status": "correctness_gate_pass",
+  "scope": "first MISATO-100 official train complex only; random initialization",
+  "parameter_count": 10243,
+  "horizons": {
+    "5": {
+      "loss": 1.2437858581542969,
+      "parameter_gradient_norm": 0.2619217336177826,
+      "finite_forward": true,
+      "finite_backward": true
+    },
+    "10": {
+      "loss": 2.324359655380249,
+      "parameter_gradient_norm": 0.9197173714637756,
+      "finite_forward": true,
+      "finite_backward": true
+    },
+    "20": {
+      "loss": 3.620313882827759,
+      "parameter_gradient_norm": 2.5801198482513428,
+      "finite_forward": true,
+      "finite_backward": true
+    },
+    "40": {
+      "loss": 5.071602821350098,
+      "parameter_gradient_norm": 5.326225280761719,
+      "finite_forward": true,
+      "finite_backward": true
+    }
+  },
+  "terminal_to_initial_gradient_norm": 45.96206283569336,
+  "proper_rigid_equivariance_max_error_angstrom": 3.814697265625e-05,
+  "reflection_equivariance_max_error_angstrom": 3.0517578125e-05,
+  "velocity_sensitivity_norm": 0.5675452947616577,
+  "checks": {
+    "finite_forward_backward_all_horizons": true,
+    "nonzero_parameter_gradient_all_horizons": true,
+    "protein_bitwise_unchanged": true,
+    "terminal_to_initial_gradient_finite_nonzero": true,
+    "proper_rigid_equivariance": true,
+    "reflection_equivariance": true,
+    "velocity_sensitive": true
+  },
+  "decision": "Correctness pass authorizes only a separately pre-registered development-only learnability experiment."
+}
