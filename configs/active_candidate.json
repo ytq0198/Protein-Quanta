@@ -34,11 +34,30 @@
     "Stab": "project proxy available",
     "overall": "not eligible for submission until updated-guide T1 validation is rerun"
   },
+  "updated_guide_validation": {
+    "status": "rerun complete; epoch 5 is a research candidate but not a comprehensive winner",
+    "published_report": "reports/reproduction/neuralmd_updated_guide_published_val.json",
+    "epoch5_report": "reports/reproduction/neuralmd_updated_guide_epoch5_val.json",
+    "T1_epoch5_vs_published": {
+      "coordinate_rmse_percent": 0.0061,
+      "matching_percent": 0.0156,
+      "stability_points": -0.0107,
+      "rmsf_percent": 0.0048
+    },
+    "T3_epoch5_vs_published": {
+      "coordinate_rmse_percent": 0.1170,
+      "matching_percent": -6.0116,
+      "stability_points": 2.0185,
+      "rmsf_percent": 0.8410
+    },
+    "decision": "keep published NeuralMD as reproducible main baseline; keep epoch 5 as non-promoted multi-metric research candidate"
+  },
   "supersedes": "configs/frozen_candidate.json",
   "evidence": {
     "scoring_plan": "docs/scoring-aligned-execution-plan.md",
     "phys_no_go_report": "reports/reproduction/2026-08-13-bond-aware-phys-validation.md",
     "dynamics_report": "reports/reproduction/2026-08-13-dynamics-distribution-validation.md",
-    "e17_no_go_report": "reports/reproduction/2026-08-13-e17-displacement-feasibility.md"
+    "e17_no_go_report": "reports/reproduction/2026-08-13-e17-displacement-feasibility.md",
+    "updated_guide_report": "reports/reproduction/2026-08-13-neuralmd-updated-guide-validation.md"
   }
 }

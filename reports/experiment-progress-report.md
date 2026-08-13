@@ -11,6 +11,8 @@
 > 活动候选已临时撤销，等待纠正后的 validation 重跑。详见
 > `docs/2026-08-13-t1-protocol-correction.md`。
 
+纠正后的 validation 已完成：published NeuralMD 在新版 T1 的坐标 RMSE 为 `1.3880 Å`，Static 为 `1.3605 Å`；但 published 的 Matching/Stability/RMSF/误差斜率均优于 Static。epoch 5 在 T1/T2 与 published 几乎相同，在 T3 改善 Matching `6.01%`、Stability `+2.0185` 点，同时坐标/RMSF/斜率轻微回退。因新版未公布权重，published 保持严格主基线，epoch 5 仅保留为未晋升研究候选。详见 `reports/reproduction/2026-08-13-neuralmd-updated-guide-validation.md`。
+
 ## 2026-08-13：新版材料、模型迁移与增强实验校准
 
 完成新版 38 页手册与旧版 36 页手册、最新算法赛 Word 模板的全文和重点页面核验。正式方向二数据口径改为去多肽后的 MISATO `13,066/1,357/1,357`；T1/T2/T3 固定为 `10→10 / 80→20 / 20→80`，新增 T4。新版不再公布旧版两层权重，故全部历史加权 proxy 已降级为内部筛选工具。

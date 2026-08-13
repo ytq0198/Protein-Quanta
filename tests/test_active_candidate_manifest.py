@@ -18,6 +18,14 @@ class ActiveCandidateManifestTests(unittest.TestCase):
             {"observed": [0, 9], "initializer": [8, 9], "target": [10, 19]},
         )
         self.assertFalse(manifest["updated_guide_protocol"]["weights_published"])
+        self.assertEqual(
+            manifest["updated_guide_validation"]["status"],
+            "rerun complete; epoch 5 is a research candidate but not a comprehensive winner",
+        )
+        self.assertIn(
+            "published NeuralMD",
+            manifest["updated_guide_validation"]["decision"],
+        )
 
 
 if __name__ == "__main__":
