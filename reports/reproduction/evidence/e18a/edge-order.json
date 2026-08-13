@@ -1,0 +1,27 @@
+{
+  "status": "diagnostic only; no training",
+  "ligand": {
+    "shape": [
+      2,
+      512
+    ],
+    "exactly_equal": true,
+    "entries_different": 0
+  },
+  "protein": {
+    "shape": [
+      2,
+      21144
+    ],
+    "exactly_equal": true,
+    "entries_different": 0
+  },
+  "complex": {
+    "shape": [
+      2,
+      51
+    ],
+    "exactly_equal": true,
+    "entries_different": 0
+  }
+}
