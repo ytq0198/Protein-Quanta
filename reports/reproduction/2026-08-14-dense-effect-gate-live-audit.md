@@ -58,3 +58,9 @@ All three manifests and all six checkpoints existed before evaluation began at `
 Seed 123 completed both 50-epoch arms with zero clipping and zero non-finite updates. Its candidate-to-control parameter L2 was `0.04415745`; checkpoint SHA-256 values were `6cfcc917…5767` and `52895b25…9c0c`. The serialization-only rerun returned `effect_gate_fail`.
 
 The three-seed macro coordinate RMSE was `2.1768000312 Å` for control and `2.1768000387 Å` for the candidate. All three paired seeds were numerically worse by only `10⁻⁹–10⁻⁸ Å`; safety gates passed, but the effect gates failed. Independent recomputation from the saved per-seed summaries matched the server gate object exactly. The complete interpretation is frozen in `2026-08-14-dense-equivariant-effect-gate.md`; no coefficient or threshold scan is permitted in this experimental family.
+
+## Post-hoc velocity/time-unit audit
+
+After freezing the result, the approximately `0.009` step-amplitude ratio triggered a dimensional audit. The rollout divided frame indices by `100` but initialized velocity with an unscaled adjacent-frame displacement. Under zero acceleration, this makes the first predicted displacement exactly `1/100` of the observed frame displacement. This convention is inherited from the upstream multi-trajectory implementation and was also used for the published checkpoint evaluator; it is nevertheless a severe numerical condition for the 8,930-parameter minimal field.
+
+The original result remains immutable and reproducible, but its interpretation is narrowed: it is a no-go for multiscale loss under the inherited `time / 100, velocity × 1` protocol, not a general no-go for multiscale equivariant dynamics. Commit `8013850` added an explicit velocity-scale argument while preserving the old default, an analytic regression test, and a preregistered development-only comparison against `velocity × 100`. The previously opened 16-complex holdout will not be reused for tuning this correction.
