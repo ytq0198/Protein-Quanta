@@ -37,7 +37,7 @@
 | 2.2 科学意义 | 指导手册第 21 页；`docs/experiment-design-and-research-roadmap.md` | 部分具备 | 人工说明对 ML surrogate、结合动力学和药物设计代理量的边界；不得声称亲和力/驻留时间已被验证 |
 | 3.1 技术方案 | `README.md`；`protein_quanta/scenarios.py`；`configs/frozen_candidate.json` | 已具备 | 当前活动安全基线为 seed 42、epoch 5、无 anchor；beta 1 只能出现在明确标注 no-go 的消融中 |
 | 3.2 预期方法路线 | `docs/experiment-design-and-research-roadmap.md` | 已具备 | 区分已验证、no-go 和复赛设想；E7/E8 不得写成已完成成果 |
-| 3.3 数据、依赖与运行 | `README.md`；`requirements*.txt`；`third_party/README.md` | 基本具备 | 人工核对 MISATO 使用条款、NeuralMD 许可状态、外部预训练权重来源与服务器复现路径 |
+| 3.3 数据、依赖与运行 | `README.md`；`requirements*.txt`；`third_party/README.md`；新版 split audit | 划分口径已验证 | 全量轨迹仍在获取；人工核对 MISATO 使用条款、NeuralMD 许可状态、外部预训练权重来源与服务器复现路径 |
 | 4.1 阶段性实验/可行性验证 | `reports/experiment-progress-report.md`；各 reproduction 报告 | 已具备 | 最短因果链：精确复现 -> 发现 20/100 帧错配 -> Pair no-go -> 场景早停 -> anchor 代理改善 -> bond-aware Phys no-go -> 回到未锚定 epoch 5 |
 | 4.2 当前结果 | 场景早停 JSON；E13-E15 topology/Phys 报告 | 已具备 | 明确为 MISATO-100 内部 proxy；Phys validation 覆盖 9/10；不是比赛隐藏测试、不是官方归一化成绩 |
 | 5.1 复现方式 | `README.md`；80 项双环境测试；checkpoint manifest；服务器环境快照；发布审计器 | 已具备 | 人工在干净环境至少复跑测试和一个小型入口，记录时间与硬件 |

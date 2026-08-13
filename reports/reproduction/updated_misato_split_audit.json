@@ -1,0 +1,72 @@
+{
+  "peptides": {
+    "row_count": 1431,
+    "unique_count": 1431,
+    "duplicate_rows": 0,
+    "source_sha256": "df3027367e679c38e411f693267d93cbe6fd5acc70dce6d0521e452e3ead1ba9",
+    "normalized_id_set_sha256": "5f54f41549055ebf31d1986a3e8f566a54c545ef5bb7f703e4a30cf5852efd9c"
+  },
+  "splits": {
+    "train": {
+      "raw_row_count": 13765,
+      "raw_unique_count": 13765,
+      "duplicate_rows": 0,
+      "excluded_peptide_count": 699,
+      "retained_count": 13066,
+      "source_sha256": "f0cadd00fdbe771b5e37f7bbd00318bea030bb9e03ff6f5e079f9bf0785e1523",
+      "retained_id_set_sha256": "c28f0707122444d95a458000ed72a9c2261c73835e9c8ad3ea2b6a7f6185cb55",
+      "excluded_id_set_sha256": "5e34bb932cf98be11fe41c44563da16035bc4925a64d8032931dd1c5efa5a64e"
+    },
+    "val": {
+      "raw_row_count": 1595,
+      "raw_unique_count": 1595,
+      "duplicate_rows": 0,
+      "excluded_peptide_count": 238,
+      "retained_count": 1357,
+      "source_sha256": "164231d39186c3bcd65336c3b825b8bf5a55ae74441778740bb0d02b4bf44b92",
+      "retained_id_set_sha256": "b608d2a3c6aab98e2df29b44a398c44520a1d90e083c2628ec70e5dac58ecf78",
+      "excluded_id_set_sha256": "3e8c9d7839b597d2aa69f752cd4f19da9b0a5e66b6deceefaa094d9324072968"
+    },
+    "test": {
+      "raw_row_count": 1612,
+      "raw_unique_count": 1612,
+      "duplicate_rows": 0,
+      "excluded_peptide_count": 255,
+      "retained_count": 1357,
+      "source_sha256": "3fe3f855ec9946f8525bd6937a2582460e1a02cd84f020685d3926ba3c76b321",
+      "retained_id_set_sha256": "f0173de99cdd4e1574de11267802735c51f8b9e69fa1818dc0fbd5514e808897",
+      "excluded_id_set_sha256": "e4cdb48952fc3517651db11c1ebe810e13f255fad7dd7d4185b8d0b0ddf21d6b"
+    }
+  },
+  "cross_split_overlap": {
+    "train_val": {
+      "count": 0,
+      "id_set_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "train_test": {
+      "count": 0,
+      "id_set_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "val_test": {
+      "count": 0,
+      "id_set_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "peptide_ids_present_in_any_split": 1192,
+  "peptide_ids_outside_all_splits": 239,
+  "checks": {
+    "no_duplicate_rows": true,
+    "splits_disjoint": true,
+    "updated_guide_counts_match": {
+      "train": true,
+      "val": true,
+      "test": true
+    },
+    "all_passed": true
+  },
+  "status": "public MISATO split audit after NeuralMD peptide exclusion; no trajectory data or hidden evaluation data accessed",
+  "source_revisions": {
+    "misato_dataset": "7b06d532e2ed0719411fcc1b3ac39743db4ca10d",
+    "neuralmd": "a2ae030838c6ea0251eb6a29bfe99dc9d8ee1cfe"
+  }
+}
