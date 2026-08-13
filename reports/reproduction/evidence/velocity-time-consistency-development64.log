@@ -1,0 +1,50 @@
+{
+  "status": "unit_consistency_gate_pass",
+  "summary": {
+    "upstream_convention": {
+      "T1": {
+        "initializer_frame_rmse_angstrom": 0.6901530313771218,
+        "coordinate_rmse_angstrom": 1.354024768806994,
+        "step_amplitude_ratio": 0.010275873834871163
+      },
+      "T2": {
+        "initializer_frame_rmse_angstrom": 0.6464790450409055,
+        "coordinate_rmse_angstrom": 1.8042981275357306,
+        "step_amplitude_ratio": 0.009163316955891787
+      },
+      "T3": {
+        "initializer_frame_rmse_angstrom": 0.7124921933282167,
+        "coordinate_rmse_angstrom": 2.549715865869075,
+        "step_amplitude_ratio": 0.009439936013222905
+      }
+    },
+    "unit_consistent": {
+      "T1": {
+        "initializer_frame_rmse_angstrom": 5.5202591615899355e-08,
+        "coordinate_rmse_angstrom": 4.882786391302943,
+        "step_amplitude_ratio": 1.0275874253129587
+      },
+      "T2": {
+        "initializer_frame_rmse_angstrom": 3.6280016459805386e-08,
+        "coordinate_rmse_angstrom": 8.489282056689262,
+        "step_amplitude_ratio": 0.9163313624449074
+      },
+      "T3": {
+        "initializer_frame_rmse_angstrom": 5.616084260313958e-08,
+        "coordinate_rmse_angstrom": 33.88457606732845,
+        "step_amplitude_ratio": 0.9439936715643853
+      }
+    }
+  },
+  "checks": {
+    "T1_initializer_exact": true,
+    "T1_amplitude_in_range": true,
+    "T1_strictly_better_initializer": true,
+    "T2_initializer_exact": true,
+    "T2_amplitude_in_range": true,
+    "T2_strictly_better_initializer": true,
+    "T3_initializer_exact": true,
+    "T3_amplitude_in_range": true,
+    "T3_strictly_better_initializer": true
+  }
+}

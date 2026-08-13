@@ -9,6 +9,7 @@
 - **三维正确性证据**：最小 dense E(3) 等变径向场通过 5/5 correctness gate，共同刚体误差 `8.58×10⁻⁶ Å`。
 - **三维效果结论（范围已收窄）**：64/16 三 seed 多尺度效应 gate 在“ODE 时间 `/100`、初始帧差 `×1`”协议下 **no-go**。新增损失改变参数，但宏 RMSE 相对恶化 `3.42×10⁻⁹`，0/3 seed 胜出；安全项通过，效果项失败。该结果不能用于否定单位一致协议下的多尺度监督。
 - **当前科学瓶颈**：最小等变场 step-amplitude ratio 约 `0.009`。解析审计发现，时间 `/100` 而初始帧差不换算会使零加速度第一步位移正好只剩 `1%`；因此近静态既可能反映模型能力，也受数值单位约定强烈影响。下一阶段先做 development-only 单位一致性 gate，再谈长程抗漂移。
+- **单位一致性 gate**：64 个 development 复合物的零加速度解析对照已通过。`initial_velocity_scale=100` 将第二观测帧 RMSE 降至 `3.6–5.6×10⁻⁸ Å`，三场景步幅比恢复到 `0.916–1.028`；但恒速 T3 RMSE 达 `33.88 Å`，所以这只是数值正确性证据，不是性能提升。
 
 ## 可引用证据与边界
 
@@ -20,6 +21,7 @@
 | 说明严格等变实现 | `reports/reproduction/2026-08-14-dense-equivariant-correctness-pilot.md` | correctness 通过不等于预测有效 |
 | 说明正式三维消融 | `reports/reproduction/2026-08-14-dense-equivariant-effect-gate.md` | train-only 64/16、样本互斥但非同源/scaffold 分组；no-go 仅适用于时间 `/100`、初速度 `×1` 协议 |
 | 说明全过程审计 | `reports/reproduction/2026-08-14-dense-effect-gate-live-audit.md` | 首次评估有序列化失败，已限定热修复并独立复算 |
+| 说明近静态机制与单位修正 | `reports/reproduction/2026-08-14-velocity-time-consistency-audit.md` | 零加速度解析控制；恢复步幅但长程误差恶化，不是学习模型成绩 |
 | 说明原始数字 | `reports/reproduction/evidence/dense-equivariant-effect-summary.json` | 内部项目代理，不是官方分数 |
 
 ## 不再用于主论证的历史结果
@@ -32,6 +34,6 @@
 ## 下一执行 gate
 
 1. 完整 MISATO 文件达到 `132,841,014,019` 字节且 `.aria2` 消失后，核对官方 MD5 `9bc6446922cd80e0f2f3f69349bf88ed`；再做 HDF5、去多肽 split 和有限坐标审计。
-2. 先完成已预注册的 development-only 速度—时间单位审计：保持 NeuralMD 原约定为可复现对照，同时验证 `initial_velocity_scale=100` 的解析正确性和振幅范围；不复用已解封 holdout。
+2. 速度—时间单位审计已通过；下一步在 development 内部冻结一个小型训练/诊断划分，配对比较上游时间参数化与帧时间参数化能否学习加速度并抑制恒速漂移，不复用已解封 holdout。
 3. 模型升级优先显式速度/时间、局部多层高阶几何与合规结构预训练；不在已解封 64/16 holdout 上扫损失系数。
 4. 团队人工确认官网具体截止时刻、ZIP 命名/大小和上传字段；团队自行完成模板文字、真实性核验与签字。

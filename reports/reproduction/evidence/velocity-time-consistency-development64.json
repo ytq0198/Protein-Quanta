@@ -1,0 +1,2565 @@
+{
+  "status": "unit_consistency_gate_pass",
+  "scope": {
+    "split": "64 frozen development complexes only",
+    "official_validation_accessed": false,
+    "official_test_accessed": false,
+    "frozen_train_holdout_reused": false
+  },
+  "protocols": {
+    "upstream_convention": {
+      "ode_time_scaling": 100.0,
+      "initial_velocity_scale": 1.0
+    },
+    "unit_consistent": {
+      "ode_time_scaling": 100.0,
+      "initial_velocity_scale": 100.0
+    }
+  },
+  "summary": {
+    "upstream_convention": {
+      "T1": {
+        "initializer_frame_rmse_angstrom": 0.6901530313771218,
+        "coordinate_rmse_angstrom": 1.354024768806994,
+        "step_amplitude_ratio": 0.010275873834871163
+      },
+      "T2": {
+        "initializer_frame_rmse_angstrom": 0.6464790450409055,
+        "coordinate_rmse_angstrom": 1.8042981275357306,
+        "step_amplitude_ratio": 0.009163316955891787
+      },
+      "T3": {
+        "initializer_frame_rmse_angstrom": 0.7124921933282167,
+        "coordinate_rmse_angstrom": 2.549715865869075,
+        "step_amplitude_ratio": 0.009439936013222905
+      }
+    },
+    "unit_consistent": {
+      "T1": {
+        "initializer_frame_rmse_angstrom": 5.5202591615899355e-08,
+        "coordinate_rmse_angstrom": 4.882786391302943,
+        "step_amplitude_ratio": 1.0275874253129587
+      },
+      "T2": {
+        "initializer_frame_rmse_angstrom": 3.6280016459805386e-08,
+        "coordinate_rmse_angstrom": 8.489282056689262,
+        "step_amplitude_ratio": 0.9163313624449074
+      },
+      "T3": {
+        "initializer_frame_rmse_angstrom": 5.616084260313958e-08,
+        "coordinate_rmse_angstrom": 33.88457606732845,
+        "step_amplitude_ratio": 0.9439936715643853
+      }
+    }
+  },
+  "checks": {
+    "T1_initializer_exact": true,
+    "T1_amplitude_in_range": true,
+    "T1_strictly_better_initializer": true,
+    "T2_initializer_exact": true,
+    "T2_amplitude_in_range": true,
+    "T2_strictly_better_initializer": true,
+    "T3_initializer_exact": true,
+    "T3_amplitude_in_range": true,
+    "T3_strictly_better_initializer": true
+  },
+  "samples": [
+    {
+      "sample_id": "3SNC",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.5760025382041931,
+            "coordinate_rmse_angstrom": 1.0733002424240112,
+            "step_amplitude_ratio": 0.008287332020699978
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.676641047000885,
+            "coordinate_rmse_angstrom": 1.1607931852340698,
+            "step_amplitude_ratio": 0.008979259058833122
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 1.0240072011947632,
+            "coordinate_rmse_angstrom": 2.079817533493042,
+            "step_amplitude_ratio": 0.013015598990023136
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.0,
+            "coordinate_rmse_angstrom": 4.476906776428223,
+            "step_amplitude_ratio": 0.8287340998649597
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.0,
+            "coordinate_rmse_angstrom": 9.025439262390137,
+            "step_amplitude_ratio": 0.8979244828224182
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 1.6531354063431536e-08,
+            "coordinate_rmse_angstrom": 47.763282775878906,
+            "step_amplitude_ratio": 1.3015589714050293
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "5KBQ",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.9315409660339355,
+            "coordinate_rmse_angstrom": 0.755832850933075,
+            "step_amplitude_ratio": 0.018582627177238464
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.8474711775779724,
+            "coordinate_rmse_angstrom": 1.0780282020568848,
+            "step_amplitude_ratio": 0.013022336177527905
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.36373817920684814,
+            "coordinate_rmse_angstrom": 2.2099945545196533,
+            "step_amplitude_ratio": 0.0052238088101148605
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 5.7219484261850084e-08,
+            "coordinate_rmse_angstrom": 6.939247131347656,
+            "step_amplitude_ratio": 1.8582626581192017
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 4.099479156138841e-08,
+            "coordinate_rmse_angstrom": 10.648089408874512,
+            "step_amplitude_ratio": 1.3022336959838867
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 1.7519818484856842e-08,
+            "coordinate_rmse_angstrom": 18.460962295532227,
+            "step_amplitude_ratio": 0.522381067276001
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "5X27",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.44224533438682556,
+            "coordinate_rmse_angstrom": 1.1797720193862915,
+            "step_amplitude_ratio": 0.00780903548002243
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 1.0711839199066162,
+            "coordinate_rmse_angstrom": 1.1363407373428345,
+            "step_amplitude_ratio": 0.01298232190310955
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.6969094276428223,
+            "coordinate_rmse_angstrom": 1.1409382820129395,
+            "step_amplitude_ratio": 0.00760298827663064
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.394823900824349e-08,
+            "coordinate_rmse_angstrom": 3.0798730850219727,
+            "step_amplitude_ratio": 0.7809033989906311
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 7.104890187292767e-08,
+            "coordinate_rmse_angstrom": 13.519875526428223,
+            "step_amplitude_ratio": 1.2982314825057983
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 5.267854419344076e-08,
+            "coordinate_rmse_angstrom": 32.83095169067383,
+            "step_amplitude_ratio": 0.7602965831756592
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "4DRU",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.716953456401825,
+            "coordinate_rmse_angstrom": 1.0718543529510498,
+            "step_amplitude_ratio": 0.00836965348571539
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.8633478879928589,
+            "coordinate_rmse_angstrom": 1.641875982284546,
+            "step_amplitude_ratio": 0.00845132302492857
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 1.1104912757873535,
+            "coordinate_rmse_angstrom": 2.1476829051971436,
+            "step_amplitude_ratio": 0.013790810480713844
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.276352605827924e-07,
+            "coordinate_rmse_angstrom": 5.007425785064697,
+            "step_amplitude_ratio": 0.8369646668434143
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 3.917006807796497e-08,
+            "coordinate_rmse_angstrom": 10.651581764221191,
+            "step_amplitude_ratio": 0.8451310396194458
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 2.0219893315243098e-08,
+            "coordinate_rmse_angstrom": 51.543853759765625,
+            "step_amplitude_ratio": 1.3790820837020874
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "6JAW",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.0201307535171509,
+            "coordinate_rmse_angstrom": 1.1085278987884521,
+            "step_amplitude_ratio": 0.014470759779214859
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 1.1274536848068237,
+            "coordinate_rmse_angstrom": 0.6824931502342224,
+            "step_amplitude_ratio": 0.016885481774806976
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.3228856921195984,
+            "coordinate_rmse_angstrom": 2.0912280082702637,
+            "step_amplitude_ratio": 0.004429567139595747
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.4048950447431707e-07,
+            "coordinate_rmse_angstrom": 6.822245121002197,
+            "step_amplitude_ratio": 1.447076439857483
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 8.072417756466166e-08,
+            "coordinate_rmse_angstrom": 14.503827095031738,
+            "step_amplitude_ratio": 1.688547968864441
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 5.619579823701315e-08,
+            "coordinate_rmse_angstrom": 14.454002380371094,
+            "step_amplitude_ratio": 0.44295501708984375
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "6F3B",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.7978644967079163,
+            "coordinate_rmse_angstrom": 1.2078315019607544,
+            "step_amplitude_ratio": 0.01027037762105465
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.5859628915786743,
+            "coordinate_rmse_angstrom": 1.5709997415542603,
+            "step_amplitude_ratio": 0.007433271501213312
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 1.2684338092803955,
+            "coordinate_rmse_angstrom": 2.3735876083374023,
+            "step_amplitude_ratio": 0.017805663868784904
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 6.71904416549296e-08,
+            "coordinate_rmse_angstrom": 5.073505401611328,
+            "step_amplitude_ratio": 1.0270378589630127
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 2.4927949482389522e-08,
+            "coordinate_rmse_angstrom": 7.495572566986084,
+            "step_amplitude_ratio": 0.7433253526687622
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 4.6275431486719754e-08,
+            "coordinate_rmse_angstrom": 59.64557647705078,
+            "step_amplitude_ratio": 1.7805684804916382
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "3MP6",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.8272520303726196,
+            "coordinate_rmse_angstrom": 1.558913230895996,
+            "step_amplitude_ratio": 0.008780254051089287
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.9061167240142822,
+            "coordinate_rmse_angstrom": 2.0486299991607666,
+            "step_amplitude_ratio": 0.00861709751188755
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.8295469284057617,
+            "coordinate_rmse_angstrom": 4.779305458068848,
+            "step_amplitude_ratio": 0.007904780097305775
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.538985294757822e-08,
+            "coordinate_rmse_angstrom": 4.964764595031738,
+            "step_amplitude_ratio": 0.8780237436294556
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.0,
+            "coordinate_rmse_angstrom": 10.980779647827148,
+            "step_amplitude_ratio": 0.8617104887962341
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 1.454204423545491e-09,
+            "coordinate_rmse_angstrom": 39.64878463745117,
+            "step_amplitude_ratio": 0.7904747724533081
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "1W5X",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.4842432141304016,
+            "coordinate_rmse_angstrom": 1.1298832893371582,
+            "step_amplitude_ratio": 0.006269937381148338
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.722430408000946,
+            "coordinate_rmse_angstrom": 1.1553767919540405,
+            "step_amplitude_ratio": 0.013811331242322922
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.40936270356178284,
+            "coordinate_rmse_angstrom": 1.4206721782684326,
+            "step_amplitude_ratio": 0.007832176983356476
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 2.7369088329010083e-08,
+            "coordinate_rmse_angstrom": 3.1918394565582275,
+            "step_amplitude_ratio": 0.6269935369491577
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 5.9439496880031584e-08,
+            "coordinate_rmse_angstrom": 8.873344421386719,
+            "step_amplitude_ratio": 1.3811335563659668
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 4.396506270154532e-08,
+            "coordinate_rmse_angstrom": 19.114614486694336,
+            "step_amplitude_ratio": 0.7832169532775879
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "1ZSH",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.49862831830978394,
+            "coordinate_rmse_angstrom": 1.6544908285140991,
+            "step_amplitude_ratio": 0.006174742244184017
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.5798047184944153,
+            "coordinate_rmse_angstrom": 1.3280425071716309,
+            "step_amplitude_ratio": 0.009676611982285976
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.58552086353302,
+            "coordinate_rmse_angstrom": 3.8200597763061523,
+            "step_amplitude_ratio": 0.008268610574305058
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.0,
+            "coordinate_rmse_angstrom": 3.349310874938965,
+            "step_amplitude_ratio": 0.6174737811088562
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 2.2397685484065732e-08,
+            "coordinate_rmse_angstrom": 6.618690490722656,
+            "step_amplitude_ratio": 0.96766197681427
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.0,
+            "coordinate_rmse_angstrom": 25.905452728271484,
+            "step_amplitude_ratio": 0.826862633228302
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "1V2S",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.284756064414978,
+            "coordinate_rmse_angstrom": 1.5920178890228271,
+            "step_amplitude_ratio": 0.02451605163514614
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.6086499094963074,
+            "coordinate_rmse_angstrom": 1.16645348072052,
+            "step_amplitude_ratio": 0.010798823088407516
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.9862428903579712,
+            "coordinate_rmse_angstrom": 1.9917500019073486,
+            "step_amplitude_ratio": 0.018675023689866066
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.0195576294336206e-07,
+            "coordinate_rmse_angstrom": 7.971360683441162,
+            "step_amplitude_ratio": 2.451603412628174
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 1.622233014586527e-08,
+            "coordinate_rmse_angstrom": 7.332632064819336,
+            "step_amplitude_ratio": 1.0798832178115845
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 1.0323827126512697e-07,
+            "coordinate_rmse_angstrom": 46.96308135986328,
+            "step_amplitude_ratio": 1.867502212524414
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "3V0L",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.5808553695678711,
+            "coordinate_rmse_angstrom": 0.8412714600563049,
+            "step_amplitude_ratio": 0.010939542204141617
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.646183431148529,
+            "coordinate_rmse_angstrom": 1.0801708698272705,
+            "step_amplitude_ratio": 0.009589477442204952
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.49404555559158325,
+            "coordinate_rmse_angstrom": 1.7985831499099731,
+            "step_amplitude_ratio": 0.008990955539047718
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 3.2470392596906095e-08,
+            "coordinate_rmse_angstrom": 4.039150714874268,
+            "step_amplitude_ratio": 1.0939548015594482
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 2.1240015968260195e-08,
+            "coordinate_rmse_angstrom": 7.830924987792969,
+            "step_amplitude_ratio": 0.9589459896087646
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 5.310003992065049e-09,
+            "coordinate_rmse_angstrom": 24.421463012695312,
+            "step_amplitude_ratio": 0.8990985751152039
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "2H2G",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.6659945845603943,
+            "coordinate_rmse_angstrom": 2.2370054721832275,
+            "step_amplitude_ratio": 0.006901423446834087
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 1.274839162826538,
+            "coordinate_rmse_angstrom": 1.4464579820632935,
+            "step_amplitude_ratio": 0.012796686962246895
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.7351674437522888,
+            "coordinate_rmse_angstrom": 3.7529966831207275,
+            "step_amplitude_ratio": 0.005315036047250032
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 5.230040400761027e-09,
+            "coordinate_rmse_angstrom": 4.240617275238037,
+            "step_amplitude_ratio": 0.690143346786499
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 8.714683019661607e-08,
+            "coordinate_rmse_angstrom": 15.74854850769043,
+            "step_amplitude_ratio": 1.279670000076294
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.0,
+            "coordinate_rmse_angstrom": 34.76626968383789,
+            "step_amplitude_ratio": 0.5315021872520447
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "4D2T",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.8296356201171875,
+            "coordinate_rmse_angstrom": 0.9578392505645752,
+            "step_amplitude_ratio": 0.013905157335102558
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.8127979040145874,
+            "coordinate_rmse_angstrom": 1.9231501817703247,
+            "step_amplitude_ratio": 0.007202674634754658
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 1.0080723762512207,
+            "coordinate_rmse_angstrom": 1.535298466682434,
+            "step_amplitude_ratio": 0.009259618818759918
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 2.2338106475672248e-07,
+            "coordinate_rmse_angstrom": 5.456806659698486,
+            "step_amplitude_ratio": 1.3905173540115356
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 3.968672857013189e-08,
+            "coordinate_rmse_angstrom": 10.012378692626953,
+            "step_amplitude_ratio": 0.7202680110931396
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 9.016357438440536e-08,
+            "coordinate_rmse_angstrom": 48.07481384277344,
+            "step_amplitude_ratio": 0.9259619116783142
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "5ADR",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.7890821695327759,
+            "coordinate_rmse_angstrom": 0.830435574054718,
+            "step_amplitude_ratio": 0.015297692269086838
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.4001745283603668,
+            "coordinate_rmse_angstrom": 1.263885259628296,
+            "step_amplitude_ratio": 0.006405235733836889
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.32255589962005615,
+            "coordinate_rmse_angstrom": 1.4536194801330566,
+            "step_amplitude_ratio": 0.0056510204449296
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.294902745030413e-07,
+            "coordinate_rmse_angstrom": 5.266377925872803,
+            "step_amplitude_ratio": 1.5297675132751465
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 1.2349715916570858e-08,
+            "coordinate_rmse_angstrom": 4.860513210296631,
+            "step_amplitude_ratio": 0.6405232548713684
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.0,
+            "coordinate_rmse_angstrom": 15.212196350097656,
+            "step_amplitude_ratio": 0.5651028156280518
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "3H22",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.538931667804718,
+            "coordinate_rmse_angstrom": 0.7325739860534668,
+            "step_amplitude_ratio": 0.008462048135697842
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.4198704659938812,
+            "coordinate_rmse_angstrom": 1.1094703674316406,
+            "step_amplitude_ratio": 0.006680684629827738
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.43372678756713867,
+            "coordinate_rmse_angstrom": 2.02589750289917,
+            "step_amplitude_ratio": 0.007210432086139917
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.0,
+            "coordinate_rmse_angstrom": 3.93574857711792,
+            "step_amplitude_ratio": 0.846203625202179
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 2.0751674156826994e-08,
+            "coordinate_rmse_angstrom": 5.174679756164551,
+            "step_amplitude_ratio": 0.6680631041526794
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.0,
+            "coordinate_rmse_angstrom": 21.286788940429688,
+            "step_amplitude_ratio": 0.7210410237312317
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "4QSU",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 2.0332608222961426,
+            "coordinate_rmse_angstrom": 1.4120285511016846,
+            "step_amplitude_ratio": 0.020305821672081947
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 1.3989758491516113,
+            "coordinate_rmse_angstrom": 1.3441952466964722,
+            "step_amplitude_ratio": 0.012513834983110428
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.914040744304657,
+            "coordinate_rmse_angstrom": 2.9327096939086914,
+            "step_amplitude_ratio": 0.00821662601083517
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.835347092082884e-07,
+            "coordinate_rmse_angstrom": 14.824432373046875,
+            "step_amplitude_ratio": 2.030578851699829
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 6.882551417675131e-08,
+            "coordinate_rmse_angstrom": 18.220054626464844,
+            "step_amplitude_ratio": 1.2513835430145264
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.0,
+            "coordinate_rmse_angstrom": 43.52744674682617,
+            "step_amplitude_ratio": 0.8216606378555298
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "5U0F",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.5874156355857849,
+            "coordinate_rmse_angstrom": 1.4833664894104004,
+            "step_amplitude_ratio": 0.008652564138174057
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.5967458486557007,
+            "coordinate_rmse_angstrom": 2.1969594955444336,
+            "step_amplitude_ratio": 0.00844644382596016
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.4673900604248047,
+            "coordinate_rmse_angstrom": 4.964503288269043,
+            "step_amplitude_ratio": 0.004499828442931175
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 2.294183865103605e-08,
+            "coordinate_rmse_angstrom": 3.5301995277404785,
+            "step_amplitude_ratio": 0.8652557134628296
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 1.825012141409843e-08,
+            "coordinate_rmse_angstrom": 7.490910530090332,
+            "step_amplitude_ratio": 0.8446440696716309
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 3.978813722937957e-08,
+            "coordinate_rmse_angstrom": 21.235286712646484,
+            "step_amplitude_ratio": 0.44998234510421753
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "5MW6",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.7095330953598022,
+            "coordinate_rmse_angstrom": 0.8954187631607056,
+            "step_amplitude_ratio": 0.010211636312305927
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 1.0267530679702759,
+            "coordinate_rmse_angstrom": 1.0633445978164673,
+            "step_amplitude_ratio": 0.01609577052295208
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.844537079334259,
+            "coordinate_rmse_angstrom": 2.0439603328704834,
+            "step_amplitude_ratio": 0.011065659113228321
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 4.1096043901234225e-08,
+            "coordinate_rmse_angstrom": 4.651541233062744,
+            "step_amplitude_ratio": 1.0211635828018188
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 1.467364985074937e-08,
+            "coordinate_rmse_angstrom": 12.77122688293457,
+            "step_amplitude_ratio": 1.6095772981643677
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 3.960568761840477e-08,
+            "coordinate_rmse_angstrom": 40.1651725769043,
+            "step_amplitude_ratio": 1.1065657138824463
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "1HMR",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.5306593179702759,
+            "coordinate_rmse_angstrom": 1.2621573209762573,
+            "step_amplitude_ratio": 0.006174235604703426
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.6064566969871521,
+            "coordinate_rmse_angstrom": 1.1870296001434326,
+            "step_amplitude_ratio": 0.007309080567210913
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 1.3216867446899414,
+            "coordinate_rmse_angstrom": 1.9489530324935913,
+            "step_amplitude_ratio": 0.016572846099734306
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 7.979718930073432e-08,
+            "coordinate_rmse_angstrom": 3.935844659805298,
+            "step_amplitude_ratio": 0.6174237728118896
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 8.427448960901529e-08,
+            "coordinate_rmse_angstrom": 7.433943271636963,
+            "step_amplitude_ratio": 0.7309087514877319
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 1.316450095600885e-07,
+            "coordinate_rmse_angstrom": 62.828025817871094,
+            "step_amplitude_ratio": 1.6572844982147217
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "6F86",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.781902551651001,
+            "coordinate_rmse_angstrom": 1.0766783952713013,
+            "step_amplitude_ratio": 0.013272877782583237
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.5617631673812866,
+            "coordinate_rmse_angstrom": 1.041399598121643,
+            "step_amplitude_ratio": 0.00610681576654315
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.5760889053344727,
+            "coordinate_rmse_angstrom": 2.0035736560821533,
+            "step_amplitude_ratio": 0.008547184057533741
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 9.17673546041442e-08,
+            "coordinate_rmse_angstrom": 4.85920524597168,
+            "step_amplitude_ratio": 1.32728910446167
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 5.298190686175985e-08,
+            "coordinate_rmse_angstrom": 7.12966775894165,
+            "step_amplitude_ratio": 0.6106824278831482
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 1.4808892778717109e-08,
+            "coordinate_rmse_angstrom": 28.413352966308594,
+            "step_amplitude_ratio": 0.8547176122665405
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "4QO4",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.8957935571670532,
+            "coordinate_rmse_angstrom": 1.863010048866272,
+            "step_amplitude_ratio": 0.009915492497384548
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.935649037361145,
+            "coordinate_rmse_angstrom": 2.794363498687744,
+            "step_amplitude_ratio": 0.011291468515992165
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 1.5460783243179321,
+            "coordinate_rmse_angstrom": 4.5445356369018555,
+            "step_amplitude_ratio": 0.019115300849080086
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.0708171060969107e-07,
+            "coordinate_rmse_angstrom": 7.511971473693848,
+            "step_amplitude_ratio": 0.9915503263473511
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 5.6212936527799684e-08,
+            "coordinate_rmse_angstrom": 12.39703369140625,
+            "step_amplitude_ratio": 1.1291464567184448
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 1.9924576122321014e-07,
+            "coordinate_rmse_angstrom": 70.68983459472656,
+            "step_amplitude_ratio": 1.911529779434204
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "6CZE",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.7603039145469666,
+            "coordinate_rmse_angstrom": 0.9983177781105042,
+            "step_amplitude_ratio": 0.008835183456540108
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 1.0403803586959839,
+            "coordinate_rmse_angstrom": 0.9597852230072021,
+            "step_amplitude_ratio": 0.01228101085871458
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.9550665020942688,
+            "coordinate_rmse_angstrom": 1.590947151184082,
+            "step_amplitude_ratio": 0.010590587742626667
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 4.467677072739207e-08,
+            "coordinate_rmse_angstrom": 5.739188194274902,
+            "step_amplitude_ratio": 0.8835185766220093
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 5.025876959052766e-08,
+            "coordinate_rmse_angstrom": 13.376921653747559,
+            "step_amplitude_ratio": 1.2281008958816528
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 5.6941452442060836e-08,
+            "coordinate_rmse_angstrom": 44.358909606933594,
+            "step_amplitude_ratio": 1.0590603351593018
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "1F74",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.42506688833236694,
+            "coordinate_rmse_angstrom": 0.8472034335136414,
+            "step_amplitude_ratio": 0.00882253423333168
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.6000582575798035,
+            "coordinate_rmse_angstrom": 1.0496726036071777,
+            "step_amplitude_ratio": 0.012820379808545113
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.3252013921737671,
+            "coordinate_rmse_angstrom": 1.5810061693191528,
+            "step_amplitude_ratio": 0.006275110878050327
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.0,
+            "coordinate_rmse_angstrom": 3.1765334606170654,
+            "step_amplitude_ratio": 0.8822547197341919
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 4.189364588569333e-08,
+            "coordinate_rmse_angstrom": 7.675929069519043,
+            "step_amplitude_ratio": 1.2820427417755127
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 5.441135098038785e-09,
+            "coordinate_rmse_angstrom": 15.111713409423828,
+            "step_amplitude_ratio": 0.6275166273117065
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "3VVY",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.33783531188964844,
+            "coordinate_rmse_angstrom": 0.39642736315727234,
+            "step_amplitude_ratio": 0.00977744534611702
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.3220401406288147,
+            "coordinate_rmse_angstrom": 0.6015105843544006,
+            "step_amplitude_ratio": 0.006219082046300173
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.387775182723999,
+            "coordinate_rmse_angstrom": 0.7856321930885315,
+            "step_amplitude_ratio": 0.007767342031002045
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 5.733711816446885e-08,
+            "coordinate_rmse_angstrom": 2.277736186981201,
+            "step_amplitude_ratio": 0.9777411818504333
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 2.0061301952978283e-08,
+            "coordinate_rmse_angstrom": 4.054027080535889,
+            "step_amplitude_ratio": 0.6219082474708557
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 2.8533552409726326e-08,
+            "coordinate_rmse_angstrom": 18.505268096923828,
+            "step_amplitude_ratio": 0.7767360806465149
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "3MG7",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.9532731175422668,
+            "coordinate_rmse_angstrom": 1.2039910554885864,
+            "step_amplitude_ratio": 0.011493447236716747
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.5910150408744812,
+            "coordinate_rmse_angstrom": 10.713207244873047,
+            "step_amplitude_ratio": 0.0034384243190288544
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.7985486388206482,
+            "coordinate_rmse_angstrom": 6.419660568237305,
+            "step_amplitude_ratio": 0.004363082814961672
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.224805856736566e-07,
+            "coordinate_rmse_angstrom": 5.937952518463135,
+            "step_amplitude_ratio": 1.1493444442749023
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 3.6684124626873427e-09,
+            "coordinate_rmse_angstrom": 12.088454246520996,
+            "step_amplitude_ratio": 0.3438420593738556
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 1.5333330338762607e-07,
+            "coordinate_rmse_angstrom": 37.660797119140625,
+            "step_amplitude_ratio": 0.43630844354629517
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "4QDK",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.4627796411514282,
+            "coordinate_rmse_angstrom": 0.9552883505821228,
+            "step_amplitude_ratio": 0.008494933135807514
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.5924196243286133,
+            "coordinate_rmse_angstrom": 2.1306514739990234,
+            "step_amplitude_ratio": 0.010313906706869602
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.6380479335784912,
+            "coordinate_rmse_angstrom": 3.1636481285095215,
+            "step_amplitude_ratio": 0.010310493409633636
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.0,
+            "coordinate_rmse_angstrom": 3.1642589569091797,
+            "step_amplitude_ratio": 0.849494993686676
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 2.7826414950027356e-08,
+            "coordinate_rmse_angstrom": 8.093162536621094,
+            "step_amplitude_ratio": 1.0313886404037476
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 5.3991175974488215e-08,
+            "coordinate_rmse_angstrom": 31.629478454589844,
+            "step_amplitude_ratio": 1.0310473442077637
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "2W4X",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.38214007019996643,
+            "coordinate_rmse_angstrom": 0.9194308519363403,
+            "step_amplitude_ratio": 0.008470711298286915
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.5326130986213684,
+            "coordinate_rmse_angstrom": 0.46138396859169006,
+            "step_amplitude_ratio": 0.011575526557862759
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.5699433088302612,
+            "coordinate_rmse_angstrom": 0.9597781300544739,
+            "step_amplitude_ratio": 0.011832782067358494
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 7.947286206899662e-08,
+            "coordinate_rmse_angstrom": 2.834796190261841,
+            "step_amplitude_ratio": 0.8470700979232788
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.0,
+            "coordinate_rmse_angstrom": 6.878689765930176,
+            "step_amplitude_ratio": 1.1575531959533691
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 6.688637910201578e-08,
+            "coordinate_rmse_angstrom": 26.552457809448242,
+            "step_amplitude_ratio": 1.1832787990570068
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "2OPY",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.826947808265686,
+            "coordinate_rmse_angstrom": 1.071977972984314,
+            "step_amplitude_ratio": 0.0080480445176363
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.6523631811141968,
+            "coordinate_rmse_angstrom": 3.064558267593384,
+            "step_amplitude_ratio": 0.006228014826774597
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 1.1595489978790283,
+            "coordinate_rmse_angstrom": 2.7140309810638428,
+            "step_amplitude_ratio": 0.012817996554076672
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 5.441134831585259e-08,
+            "coordinate_rmse_angstrom": 5.626270771026611,
+            "step_amplitude_ratio": 0.8048042058944702
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.0,
+            "coordinate_rmse_angstrom": 8.219687461853027,
+            "step_amplitude_ratio": 0.6227989196777344
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 9.185692562141412e-08,
+            "coordinate_rmse_angstrom": 54.44149398803711,
+            "step_amplitude_ratio": 1.2817976474761963
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "5I8B",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.8174880146980286,
+            "coordinate_rmse_angstrom": 1.6594903469085693,
+            "step_amplitude_ratio": 0.009866909123957157
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.9875399470329285,
+            "coordinate_rmse_angstrom": 8.465208053588867,
+            "step_amplitude_ratio": 0.0034222870599478483
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.6891812086105347,
+            "coordinate_rmse_angstrom": 4.584104061126709,
+            "step_amplitude_ratio": 0.004501925781369209
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 6.622738357719982e-09,
+            "coordinate_rmse_angstrom": 4.536434173583984,
+            "step_amplitude_ratio": 0.9866893291473389
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 6.622738357719982e-09,
+            "coordinate_rmse_angstrom": 15.148037910461426,
+            "step_amplitude_ratio": 0.34222814440727234
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 1.407331939873302e-08,
+            "coordinate_rmse_angstrom": 33.23326873779297,
+            "step_amplitude_ratio": 0.450190931558609
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "2YWP",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.4070705771446228,
+            "coordinate_rmse_angstrom": 0.9083313941955566,
+            "step_amplitude_ratio": 0.00747205363586545
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.42463088035583496,
+            "coordinate_rmse_angstrom": 1.0417572259902954,
+            "step_amplitude_ratio": 0.006842195056378841
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.6023635864257812,
+            "coordinate_rmse_angstrom": 1.9084419012069702,
+            "step_amplitude_ratio": 0.010878662578761578
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.1797463450591295e-08,
+            "coordinate_rmse_angstrom": 2.7820305824279785,
+            "step_amplitude_ratio": 0.7472034692764282
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 1.7196148505149722e-08,
+            "coordinate_rmse_angstrom": 5.481010437011719,
+            "step_amplitude_ratio": 0.6842213273048401
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 9.97223210674747e-08,
+            "coordinate_rmse_angstrom": 27.679216384887695,
+            "step_amplitude_ratio": 1.0878684520721436
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "3HXF",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.5261942744255066,
+            "coordinate_rmse_angstrom": 0.6136614084243774,
+            "step_amplitude_ratio": 0.00820448063313961
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.5128916501998901,
+            "coordinate_rmse_angstrom": 1.1641206741333008,
+            "step_amplitude_ratio": 0.008320435881614685
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.6483786702156067,
+            "coordinate_rmse_angstrom": 1.3806333541870117,
+            "step_amplitude_ratio": 0.009843414649367332
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 2.15343440856941e-08,
+            "coordinate_rmse_angstrom": 3.6352081298828125,
+            "step_amplitude_ratio": 0.820446789264679
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 3.311369178859991e-09,
+            "coordinate_rmse_angstrom": 6.264085292816162,
+            "step_amplitude_ratio": 0.8320421576499939
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 4.127605279791169e-08,
+            "coordinate_rmse_angstrom": 30.899593353271484,
+            "step_amplitude_ratio": 0.9843422174453735
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "5UVC",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.072898268699646,
+            "coordinate_rmse_angstrom": 0.8749005198478699,
+            "step_amplitude_ratio": 0.012915299274027348
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.4718815088272095,
+            "coordinate_rmse_angstrom": 1.2431665658950806,
+            "step_amplitude_ratio": 0.006789765320718288
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.5315548777580261,
+            "coordinate_rmse_angstrom": 1.7589163780212402,
+            "step_amplitude_ratio": 0.007901002652943134
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.278057766285201e-07,
+            "coordinate_rmse_angstrom": 7.3029680252075195,
+            "step_amplitude_ratio": 1.2915325164794922
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 1.2780577485216327e-08,
+            "coordinate_rmse_angstrom": 6.189075469970703,
+            "step_amplitude_ratio": 0.6789770722389221
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.0,
+            "coordinate_rmse_angstrom": 25.497509002685547,
+            "step_amplitude_ratio": 0.7900980710983276
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "4UMJ",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.523047924041748,
+            "coordinate_rmse_angstrom": 1.4032419919967651,
+            "step_amplitude_ratio": 0.010605549439787865
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.44938212633132935,
+            "coordinate_rmse_angstrom": 0.9088609218597412,
+            "step_amplitude_ratio": 0.008907191455364227
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.5722505450248718,
+            "coordinate_rmse_angstrom": 2.1516456604003906,
+            "step_amplitude_ratio": 0.010373621247708797
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 2.713398572495862e-08,
+            "coordinate_rmse_angstrom": 4.334244251251221,
+            "step_amplitude_ratio": 1.060552954673767
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.0,
+            "coordinate_rmse_angstrom": 5.168059349060059,
+            "step_amplitude_ratio": 0.8907203674316406
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 2.7929871748710866e-08,
+            "coordinate_rmse_angstrom": 28.179697036743164,
+            "step_amplitude_ratio": 1.0373634099960327
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "5JSS",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.3115698099136353,
+            "coordinate_rmse_angstrom": 2.313829183578491,
+            "step_amplitude_ratio": 0.008091958239674568
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.34752458333969116,
+            "coordinate_rmse_angstrom": 2.2248151302337646,
+            "step_amplitude_ratio": 0.0029127043671905994
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 1.4666143655776978,
+            "coordinate_rmse_angstrom": 3.3040931224823,
+            "step_amplitude_ratio": 0.014479480683803558
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 2.4722854874426048e-08,
+            "coordinate_rmse_angstrom": 8.319901466369629,
+            "step_amplitude_ratio": 0.8091955780982971
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 1.4161794403833028e-08,
+            "coordinate_rmse_angstrom": 5.122488498687744,
+            "step_amplitude_ratio": 0.2912694215774536
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 1.4039882501037937e-07,
+            "coordinate_rmse_angstrom": 69.73711395263672,
+            "step_amplitude_ratio": 1.4479482173919678
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "2QRL",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.19523103535175323,
+            "coordinate_rmse_angstrom": 0.5048382878303528,
+            "step_amplitude_ratio": 0.0032689173240214586
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.8843080997467041,
+            "coordinate_rmse_angstrom": 0.8717179298400879,
+            "step_amplitude_ratio": 0.014886868186295033
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.6516484022140503,
+            "coordinate_rmse_angstrom": 0.9385383725166321,
+            "step_amplitude_ratio": 0.010641710832715034
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 5.608593589556676e-09,
+            "coordinate_rmse_angstrom": 1.414280891418457,
+            "step_amplitude_ratio": 0.32689300179481506
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 5.693725668720617e-08,
+            "coordinate_rmse_angstrom": 11.39488697052002,
+            "step_amplitude_ratio": 1.4886871576309204
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 6.883979608574009e-08,
+            "coordinate_rmse_angstrom": 30.58892250061035,
+            "step_amplitude_ratio": 1.064170479774475
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "5K0C",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.608282744884491,
+            "coordinate_rmse_angstrom": 1.4751847982406616,
+            "step_amplitude_ratio": 0.01063627377152443
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.6687466502189636,
+            "coordinate_rmse_angstrom": 1.4917819499969482,
+            "step_amplitude_ratio": 0.007163339294493198
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.3034495413303375,
+            "coordinate_rmse_angstrom": 2.36913800239563,
+            "step_amplitude_ratio": 0.003145362250506878
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 3.003791704259129e-08,
+            "coordinate_rmse_angstrom": 3.137265205383301,
+            "step_amplitude_ratio": 1.0636273622512817
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 3.678878712776168e-08,
+            "coordinate_rmse_angstrom": 9.018692970275879,
+            "step_amplitude_ratio": 0.7163346409797668
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.0,
+            "coordinate_rmse_angstrom": 13.832036018371582,
+            "step_amplitude_ratio": 0.31453651189804077
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "3NCG",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.7843694686889648,
+            "coordinate_rmse_angstrom": 0.5846166014671326,
+            "step_amplitude_ratio": 0.016396766528487206
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.3873637914657593,
+            "coordinate_rmse_angstrom": 0.9408077001571655,
+            "step_amplitude_ratio": 0.007510117720812559
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.537074625492096,
+            "coordinate_rmse_angstrom": 2.76857328414917,
+            "step_amplitude_ratio": 0.011134006083011627
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.123915964740263e-07,
+            "coordinate_rmse_angstrom": 5.387370586395264,
+            "step_amplitude_ratio": 1.6396788358688354
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 3.512237389813322e-09,
+            "coordinate_rmse_angstrom": 4.9384589195251465,
+            "step_amplitude_ratio": 0.751011073589325
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.0,
+            "coordinate_rmse_angstrom": 26.234569549560547,
+            "step_amplitude_ratio": 1.1134026050567627
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "3BX5",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.47720515727996826,
+            "coordinate_rmse_angstrom": 0.49669700860977173,
+            "step_amplitude_ratio": 0.011466428637504578
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.8583091497421265,
+            "coordinate_rmse_angstrom": 0.6458708643913269,
+            "step_amplitude_ratio": 0.020741179585456848
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.39615103602409363,
+            "coordinate_rmse_angstrom": 0.6263181567192078,
+            "step_amplitude_ratio": 0.00949884857982397
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 2.896265272056553e-08,
+            "coordinate_rmse_angstrom": 3.2511470317840576,
+            "step_amplitude_ratio": 1.1466431617736816
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 5.065420793926023e-08,
+            "coordinate_rmse_angstrom": 10.71410846710205,
+            "step_amplitude_ratio": 2.07411527633667
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 8.070507107049707e-08,
+            "coordinate_rmse_angstrom": 18.889259338378906,
+            "step_amplitude_ratio": 0.9498902559280396
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "2R59",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.43838486075401306,
+            "coordinate_rmse_angstrom": 0.6846563816070557,
+            "step_amplitude_ratio": 0.010174741968512535
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.3319054841995239,
+            "coordinate_rmse_angstrom": 0.5989909768104553,
+            "step_amplitude_ratio": 0.007007631007581949
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.43880876898765564,
+            "coordinate_rmse_angstrom": 1.278974175453186,
+            "step_amplitude_ratio": 0.008723359555006027
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 2.0722414006968393e-08,
+            "coordinate_rmse_angstrom": 2.831726312637329,
+            "step_amplitude_ratio": 1.0174742937088013
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 1.4831147865379535e-08,
+            "coordinate_rmse_angstrom": 4.199010372161865,
+            "step_amplitude_ratio": 0.7007630467414856
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 7.857447315018362e-08,
+            "coordinate_rmse_angstrom": 21.246665954589844,
+            "step_amplitude_ratio": 0.87233567237854
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "6EQM",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.8770075440406799,
+            "coordinate_rmse_angstrom": 1.0239347219467163,
+            "step_amplitude_ratio": 0.015558896586298943
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.916898787021637,
+            "coordinate_rmse_angstrom": 0.8535201549530029,
+            "step_amplitude_ratio": 0.01432124525308609
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.8736965656280518,
+            "coordinate_rmse_angstrom": 1.607839822769165,
+            "step_amplitude_ratio": 0.013098405674099922
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 3.5059532166314966e-08,
+            "coordinate_rmse_angstrom": 5.461813449859619,
+            "step_amplitude_ratio": 1.5558898448944092
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 4.942156195397729e-08,
+            "coordinate_rmse_angstrom": 11.519411087036133,
+            "step_amplitude_ratio": 1.4321237802505493
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 2.924935671444473e-08,
+            "coordinate_rmse_angstrom": 42.44539260864258,
+            "step_amplitude_ratio": 1.3098403215408325
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "1Q6M",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.8274831175804138,
+            "coordinate_rmse_angstrom": 1.2068097591400146,
+            "step_amplitude_ratio": 0.0125191705301404
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.5497965812683105,
+            "coordinate_rmse_angstrom": 1.4494664669036865,
+            "step_amplitude_ratio": 0.008212626911699772
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.951994001865387,
+            "coordinate_rmse_angstrom": 2.3866498470306396,
+            "step_amplitude_ratio": 0.013224945403635502
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 6.084695769459358e-08,
+            "coordinate_rmse_angstrom": 6.824484348297119,
+            "step_amplitude_ratio": 1.251916766166687
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 5.783727630159774e-08,
+            "coordinate_rmse_angstrom": 7.789639472961426,
+            "step_amplitude_ratio": 0.8212627172470093
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 9.94597826320387e-08,
+            "coordinate_rmse_angstrom": 44.3554573059082,
+            "step_amplitude_ratio": 1.3224940299987793
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "4QME",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.4748263359069824,
+            "coordinate_rmse_angstrom": 7.4954833984375,
+            "step_amplitude_ratio": 0.0005782972439192235
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.5306840538978577,
+            "coordinate_rmse_angstrom": 7.437725067138672,
+            "step_amplitude_ratio": 0.0014484409475699067
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.6348558664321899,
+            "coordinate_rmse_angstrom": 5.5667500495910645,
+            "step_amplitude_ratio": 0.0016531143337488174
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 3.228202771765609e-08,
+            "coordinate_rmse_angstrom": 8.482717514038086,
+            "step_amplitude_ratio": 0.05782970041036606
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 1.3765102835350262e-08,
+            "coordinate_rmse_angstrom": 11.460208892822266,
+            "step_amplitude_ratio": 0.14484389126300812
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 3.8874372165764726e-08,
+            "coordinate_rmse_angstrom": 30.680522918701172,
+            "step_amplitude_ratio": 0.1653113067150116
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "2C1B",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.7030993700027466,
+            "coordinate_rmse_angstrom": 0.6401574015617371,
+            "step_amplitude_ratio": 0.014223027974367142
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.719474732875824,
+            "coordinate_rmse_angstrom": 0.9982523322105408,
+            "step_amplitude_ratio": 0.013276822865009308
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.5027589201927185,
+            "coordinate_rmse_angstrom": 1.6229501962661743,
+            "step_amplitude_ratio": 0.009473497048020363
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.897011792095782e-08,
+            "coordinate_rmse_angstrom": 4.946256160736084,
+            "step_amplitude_ratio": 1.4223026037216187
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 1.2870127363839856e-07,
+            "coordinate_rmse_angstrom": 9.24228286743164,
+            "step_amplitude_ratio": 1.3276828527450562
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 3.6975279726902954e-08,
+            "coordinate_rmse_angstrom": 23.569068908691406,
+            "step_amplitude_ratio": 0.947349488735199
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "1C5F",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.7211771011352539,
+            "coordinate_rmse_angstrom": 1.415866732597351,
+            "step_amplitude_ratio": 0.007887789979577065
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.4876555800437927,
+            "coordinate_rmse_angstrom": 3.512260675430298,
+            "step_amplitude_ratio": 0.005048263352364302
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.6222977638244629,
+            "coordinate_rmse_angstrom": 4.011823654174805,
+            "step_amplitude_ratio": 0.006979038007557392
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.1723906112592886e-07,
+            "coordinate_rmse_angstrom": 5.497925758361816,
+            "step_amplitude_ratio": 0.7887787222862244
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 3.393179426325332e-08,
+            "coordinate_rmse_angstrom": 5.281209945678711,
+            "step_amplitude_ratio": 0.50482577085495
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 5.500328370544594e-08,
+            "coordinate_rmse_angstrom": 30.044963836669922,
+            "step_amplitude_ratio": 0.697902500629425
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "4DV9",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.983285129070282,
+            "coordinate_rmse_angstrom": 1.6044210195541382,
+            "step_amplitude_ratio": 0.01058332808315754
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.7143550515174866,
+            "coordinate_rmse_angstrom": 0.8523765802383423,
+            "step_amplitude_ratio": 0.010185927152633667
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.48595553636550903,
+            "coordinate_rmse_angstrom": 3.4201114177703857,
+            "step_amplitude_ratio": 0.005757834296673536
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.1751308193197474e-07,
+            "coordinate_rmse_angstrom": 6.472224235534668,
+            "step_amplitude_ratio": 1.0583324432373047
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 3.9281658814616094e-08,
+            "coordinate_rmse_angstrom": 9.324002265930176,
+            "step_amplitude_ratio": 1.018592357635498
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 2.0279587786831144e-08,
+            "coordinate_rmse_angstrom": 23.469554901123047,
+            "step_amplitude_ratio": 0.5757830142974854
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "6PG3",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.8035132884979248,
+            "coordinate_rmse_angstrom": 1.6751710176467896,
+            "step_amplitude_ratio": 0.012327133677899837
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.3986499011516571,
+            "coordinate_rmse_angstrom": 2.1212007999420166,
+            "step_amplitude_ratio": 0.003796444507315755
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.8765760064125061,
+            "coordinate_rmse_angstrom": 3.0617454051971436,
+            "step_amplitude_ratio": 0.007292012218385935
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.5107445960893529e-07,
+            "coordinate_rmse_angstrom": 4.714367389678955,
+            "step_amplitude_ratio": 1.2327157258987427
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 1.0695167418361962e-08,
+            "coordinate_rmse_angstrom": 5.69234037399292,
+            "step_amplitude_ratio": 0.3796452581882477
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 9.523752453333145e-08,
+            "coordinate_rmse_angstrom": 40.96309280395508,
+            "step_amplitude_ratio": 0.729201078414917
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "3BUG",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.5757102370262146,
+            "coordinate_rmse_angstrom": 0.5618508458137512,
+            "step_amplitude_ratio": 0.010254276916384697
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.6603661775588989,
+            "coordinate_rmse_angstrom": 0.5848115086555481,
+            "step_amplitude_ratio": 0.012051211670041084
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.6942936182022095,
+            "coordinate_rmse_angstrom": 1.4171807765960693,
+            "step_amplitude_ratio": 0.011511003598570824
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 3.021340688746932e-08,
+            "coordinate_rmse_angstrom": 3.8916380405426025,
+            "step_amplitude_ratio": 1.0254286527633667
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 4.214684778958144e-08,
+            "coordinate_rmse_angstrom": 8.393775939941406,
+            "step_amplitude_ratio": 1.205119013786316
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 3.685758187543797e-08,
+            "coordinate_rmse_angstrom": 33.12568664550781,
+            "step_amplitude_ratio": 1.1511012315750122
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "1P19",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.95782870054245,
+            "coordinate_rmse_angstrom": 1.5907227993011475,
+            "step_amplitude_ratio": 0.012879853136837482
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.5865089893341064,
+            "coordinate_rmse_angstrom": 2.275646448135376,
+            "step_amplitude_ratio": 0.007026732433587313
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 1.0692236423492432,
+            "coordinate_rmse_angstrom": 4.8049445152282715,
+            "step_amplitude_ratio": 0.013457417488098145
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.2836024154694314e-07,
+            "coordinate_rmse_angstrom": 5.673731327056885,
+            "step_amplitude_ratio": 1.28798508644104
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 2.802144294378195e-08,
+            "coordinate_rmse_angstrom": 8.206547737121582,
+            "step_amplitude_ratio": 0.7026750445365906
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 5.7404449194109475e-08,
+            "coordinate_rmse_angstrom": 52.0140495300293,
+            "step_amplitude_ratio": 1.3457410335540771
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "4RXD",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.5607507824897766,
+            "coordinate_rmse_angstrom": 1.1467854976654053,
+            "step_amplitude_ratio": 0.012867836281657219
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.6449015140533447,
+            "coordinate_rmse_angstrom": 1.0137767791748047,
+            "step_amplitude_ratio": 0.01171676255762577
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.5603997707366943,
+            "coordinate_rmse_angstrom": 1.6459935903549194,
+            "step_amplitude_ratio": 0.01055445708334446
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.0,
+            "coordinate_rmse_angstrom": 3.5106773376464844,
+            "step_amplitude_ratio": 1.2867891788482666
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 9.442783266422339e-08,
+            "coordinate_rmse_angstrom": 8.619089126586914,
+            "step_amplitude_ratio": 1.1716777086257935
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 1.8885566532844678e-07,
+            "coordinate_rmse_angstrom": 27.055688858032227,
+            "step_amplitude_ratio": 1.055446982383728
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "4OHO",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.6102743148803711,
+            "coordinate_rmse_angstrom": 0.9478850960731506,
+            "step_amplitude_ratio": 0.009961746633052826
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.5880959630012512,
+            "coordinate_rmse_angstrom": 0.9157355427742004,
+            "step_amplitude_ratio": 0.010938841849565506
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.6662811636924744,
+            "coordinate_rmse_angstrom": 9.160948753356934,
+            "step_amplitude_ratio": 0.006771704647690058
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 9.776078258028065e-08,
+            "coordinate_rmse_angstrom": 4.180398941040039,
+            "step_amplitude_ratio": 0.9961740374565125
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.0,
+            "coordinate_rmse_angstrom": 7.182342529296875,
+            "step_amplitude_ratio": 1.0938791036605835
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 1.060672474295643e-07,
+            "coordinate_rmse_angstrom": 34.156578063964844,
+            "step_amplitude_ratio": 0.6771714687347412
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "5JXN",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.0658926963806152,
+            "coordinate_rmse_angstrom": 2.5046894550323486,
+            "step_amplitude_ratio": 0.011835175566375256
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.6549296379089355,
+            "coordinate_rmse_angstrom": 1.384849190711975,
+            "step_amplitude_ratio": 0.00834101252257824
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.98301100730896,
+            "coordinate_rmse_angstrom": 1.8120954036712646,
+            "step_amplitude_ratio": 0.012612194754183292
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.5975722078565013e-08,
+            "coordinate_rmse_angstrom": 6.757610321044922,
+            "step_amplitude_ratio": 1.1835176944732666
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 3.837499917835885e-08,
+            "coordinate_rmse_angstrom": 8.22195816040039,
+            "step_amplitude_ratio": 0.8340998291969299
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 2.5957474392157565e-08,
+            "coordinate_rmse_angstrom": 47.11302947998047,
+            "step_amplitude_ratio": 1.2612202167510986
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "3SV2",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.5545709729194641,
+            "coordinate_rmse_angstrom": 0.7114371061325073,
+            "step_amplitude_ratio": 0.012333367019891739
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.706721305847168,
+            "coordinate_rmse_angstrom": 1.1768468618392944,
+            "step_amplitude_ratio": 0.012303764000535011
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.5954586863517761,
+            "coordinate_rmse_angstrom": 2.2762928009033203,
+            "step_amplitude_ratio": 0.005956534296274185
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 4.642167183988022e-08,
+            "coordinate_rmse_angstrom": 4.196263790130615,
+            "step_amplitude_ratio": 1.2333372831344604
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 2.6995587987244107e-08,
+            "coordinate_rmse_angstrom": 9.031209945678711,
+            "step_amplitude_ratio": 1.2303732633590698
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 2.71139626306649e-08,
+            "coordinate_rmse_angstrom": 27.997264862060547,
+            "step_amplitude_ratio": 0.5956545472145081
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "6B8J",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.41242551803588867,
+            "coordinate_rmse_angstrom": 0.7460315823554993,
+            "step_amplitude_ratio": 0.0053570992313325405
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.6760240197181702,
+            "coordinate_rmse_angstrom": 0.9431734681129456,
+            "step_amplitude_ratio": 0.011116157285869122
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.6127809882164001,
+            "coordinate_rmse_angstrom": 2.0475690364837646,
+            "step_amplitude_ratio": 0.010295582935214043
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.2166747609398954e-08,
+            "coordinate_rmse_angstrom": 2.8072052001953125,
+            "step_amplitude_ratio": 0.5357105731964111
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 9.966620240220436e-08,
+            "coordinate_rmse_angstrom": 8.610157012939453,
+            "step_amplitude_ratio": 1.1116163730621338
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 1.2633074142343048e-08,
+            "coordinate_rmse_angstrom": 28.213491439819336,
+            "step_amplitude_ratio": 1.0295575857162476
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "2P7G",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.49552905559539795,
+            "coordinate_rmse_angstrom": 0.7875859141349792,
+            "step_amplitude_ratio": 0.00831483956426382
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.3534529209136963,
+            "coordinate_rmse_angstrom": 0.8898114562034607,
+            "step_amplitude_ratio": 0.007350485771894455
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 1.0945425033569336,
+            "coordinate_rmse_angstrom": 1.7149064540863037,
+            "step_amplitude_ratio": 0.018916185945272446
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 3.565549278050639e-08,
+            "coordinate_rmse_angstrom": 3.302128553390503,
+            "step_amplitude_ratio": 0.8314847350120544
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 5.4760185719260335e-08,
+            "coordinate_rmse_angstrom": 4.061882495880127,
+            "step_amplitude_ratio": 0.7350481748580933
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 1.0374311187888452e-07,
+            "coordinate_rmse_angstrom": 52.76080322265625,
+            "step_amplitude_ratio": 1.8916199207305908
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "1B6H",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.3442368805408478,
+            "coordinate_rmse_angstrom": 0.4552483856678009,
+            "step_amplitude_ratio": 0.00953454989939928
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.3948194980621338,
+            "coordinate_rmse_angstrom": 0.56987464427948,
+            "step_amplitude_ratio": 0.012312709353864193
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.27870649099349976,
+            "coordinate_rmse_angstrom": 0.4999256432056427,
+            "step_amplitude_ratio": 0.0073287575505673885
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.2541195637538749e-08,
+            "coordinate_rmse_angstrom": 2.292020797729492,
+            "step_amplitude_ratio": 0.953456461429596
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 2.381990782396315e-08,
+            "coordinate_rmse_angstrom": 4.954467296600342,
+            "step_amplitude_ratio": 1.2312698364257812
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 8.553931785115765e-09,
+            "coordinate_rmse_angstrom": 13.281338691711426,
+            "step_amplitude_ratio": 0.732875645160675
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "5D1R",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.116023063659668,
+            "coordinate_rmse_angstrom": 2.1831963062286377,
+            "step_amplitude_ratio": 0.010755743831396103
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.6831885576248169,
+            "coordinate_rmse_angstrom": 1.782029151916504,
+            "step_amplitude_ratio": 0.006940058898180723
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 1.7158194780349731,
+            "coordinate_rmse_angstrom": 2.372109889984131,
+            "step_amplitude_ratio": 0.014025827869772911
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 9.668461586898047e-08,
+            "coordinate_rmse_angstrom": 7.115433216094971,
+            "step_amplitude_ratio": 1.0755757093429565
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 3.96621757658977e-08,
+            "coordinate_rmse_angstrom": 9.115232467651367,
+            "step_amplitude_ratio": 0.6940053701400757
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 1.7771795057797135e-07,
+            "coordinate_rmse_angstrom": 81.56439208984375,
+            "step_amplitude_ratio": 1.402583122253418
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "5M6U",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.100261926651001,
+            "coordinate_rmse_angstrom": 0.8993884325027466,
+            "step_amplitude_ratio": 0.017212431877851486
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.705984354019165,
+            "coordinate_rmse_angstrom": 2.190906524658203,
+            "step_amplitude_ratio": 0.0095759816467762
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.789584219455719,
+            "coordinate_rmse_angstrom": 1.924164056777954,
+            "step_amplitude_ratio": 0.008787227794528008
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 5.2135053607571535e-08,
+            "coordinate_rmse_angstrom": 7.235264301300049,
+            "step_amplitude_ratio": 1.7212387323379517
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.0,
+            "coordinate_rmse_angstrom": 8.374227523803711,
+            "step_amplitude_ratio": 0.957595944404602
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 2.6826525001411028e-08,
+            "coordinate_rmse_angstrom": 36.95199966430664,
+            "step_amplitude_ratio": 0.8787223100662231
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "2RC9",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.4547339081764221,
+            "coordinate_rmse_angstrom": 0.24546462297439575,
+            "step_amplitude_ratio": 0.01401369459927082
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.368129163980484,
+            "coordinate_rmse_angstrom": 0.5746152997016907,
+            "step_amplitude_ratio": 0.010142983868718147
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.28186655044555664,
+            "coordinate_rmse_angstrom": 0.5162814855575562,
+            "step_amplitude_ratio": 0.008699583820998669
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 9.667999023577067e-08,
+            "coordinate_rmse_angstrom": 3.2742197513580322,
+            "step_amplitude_ratio": 1.4013699293136597
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 5.2765031455237477e-08,
+            "coordinate_rmse_angstrom": 4.681396961212158,
+            "step_amplitude_ratio": 1.0143005847930908
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 2.1813066908293877e-08,
+            "coordinate_rmse_angstrom": 13.203561782836914,
+            "step_amplitude_ratio": 0.8699586391448975
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "5IIS",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.3726519048213959,
+            "coordinate_rmse_angstrom": 0.7433117628097534,
+            "step_amplitude_ratio": 0.006016218569129705
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.21570831537246704,
+            "coordinate_rmse_angstrom": 1.3032257556915283,
+            "step_amplitude_ratio": 0.003214101539924741
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.608860969543457,
+            "coordinate_rmse_angstrom": 1.462286114692688,
+            "step_amplitude_ratio": 0.011717105284333229
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 5.690474758068831e-09,
+            "coordinate_rmse_angstrom": 2.4715614318847656,
+            "step_amplitude_ratio": 0.6016188263893127
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 1.521824266603744e-08,
+            "coordinate_rmse_angstrom": 2.719219446182251,
+            "step_amplitude_ratio": 0.32140979170799255
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 4.569719891378554e-08,
+            "coordinate_rmse_angstrom": 29.351667404174805,
+            "step_amplitude_ratio": 1.1717092990875244
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "5F41",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.2572100758552551,
+            "coordinate_rmse_angstrom": 0.6557993292808533,
+            "step_amplitude_ratio": 0.003897814778611064
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.42733263969421387,
+            "coordinate_rmse_angstrom": 1.800753116607666,
+            "step_amplitude_ratio": 0.0065999822691082954
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.70424884557724,
+            "coordinate_rmse_angstrom": 1.611276388168335,
+            "step_amplitude_ratio": 0.00845797173678875
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.9727908195932287e-08,
+            "coordinate_rmse_angstrom": 1.8851665258407593,
+            "step_amplitude_ratio": 0.3897823095321655
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 1.2692169981676216e-08,
+            "coordinate_rmse_angstrom": 4.981089115142822,
+            "step_amplitude_ratio": 0.6599979996681213
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 1.536049722972166e-07,
+            "coordinate_rmse_angstrom": 33.69004821777344,
+            "step_amplitude_ratio": 0.845798671245575
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "6AJR",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.30895668268203735,
+            "coordinate_rmse_angstrom": 0.47389358282089233,
+            "step_amplitude_ratio": 0.008531936444342136
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.21821284294128418,
+            "coordinate_rmse_angstrom": 0.8106896877288818,
+            "step_amplitude_ratio": 0.005542521830648184
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.2113809734582901,
+            "coordinate_rmse_angstrom": 2.271864414215088,
+            "step_amplitude_ratio": 0.003284701146185398
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.3959486899750573e-08,
+            "coordinate_rmse_angstrom": 1.9822118282318115,
+            "step_amplitude_ratio": 0.8531957268714905
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 2.452286373966217e-08,
+            "coordinate_rmse_angstrom": 3.0403754711151123,
+            "step_amplitude_ratio": 0.5542528033256531
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 1.2166747609398954e-08,
+            "coordinate_rmse_angstrom": 9.61633586883545,
+            "step_amplitude_ratio": 0.32846957445144653
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "3ZM6",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.5549163818359375,
+            "coordinate_rmse_angstrom": 1.4444042444229126,
+            "step_amplitude_ratio": 0.007569779641926289
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.6585831046104431,
+            "coordinate_rmse_angstrom": 1.0861504077911377,
+            "step_amplitude_ratio": 0.00929316133260727
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.5448542237281799,
+            "coordinate_rmse_angstrom": 3.30005145072937,
+            "step_amplitude_ratio": 0.007936622016131878
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 4.901916028643427e-08,
+            "coordinate_rmse_angstrom": 4.433926105499268,
+            "step_amplitude_ratio": 0.756977915763855
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 9.676642775957589e-08,
+            "coordinate_rmse_angstrom": 8.386500358581543,
+            "step_amplitude_ratio": 0.9293141961097717
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 2.906400276003751e-08,
+            "coordinate_rmse_angstrom": 26.755094528198242,
+            "step_amplitude_ratio": 0.7936598062515259
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "1QY1",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.6028710007667542,
+            "coordinate_rmse_angstrom": 0.7248385548591614,
+            "step_amplitude_ratio": 0.009452582336962223
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.675656795501709,
+            "coordinate_rmse_angstrom": 1.0318224430084229,
+            "step_amplitude_ratio": 0.012063199654221535
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.64754319190979,
+            "coordinate_rmse_angstrom": 1.1267400979995728,
+            "step_amplitude_ratio": 0.010047351941466331
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 3.031530937391835e-08,
+            "coordinate_rmse_angstrom": 4.0067315101623535,
+            "step_amplitude_ratio": 0.9452585577964783
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 5.3554423118384875e-08,
+            "coordinate_rmse_angstrom": 8.292272567749023,
+            "step_amplitude_ratio": 1.2063193321228027
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 5.065420793926023e-08,
+            "coordinate_rmse_angstrom": 31.412776947021484,
+            "step_amplitude_ratio": 1.0047348737716675
+          }
+        }
+      }
+    },
+    {
+      "sample_id": "2V12",
+      "protocols": {
+        "upstream_convention": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 0.6017875671386719,
+            "coordinate_rmse_angstrom": 10.93691349029541,
+            "step_amplitude_ratio": 0.002578394953161478
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 0.5138832926750183,
+            "coordinate_rmse_angstrom": 9.918231964111328,
+            "step_amplitude_ratio": 0.0011567547917366028
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 0.6603729128837585,
+            "coordinate_rmse_angstrom": 8.19556713104248,
+            "step_amplitude_ratio": 0.002244501141831279
+          }
+        },
+        "unit_consistent": {
+          "T1": {
+            "initializer_frame_rmse_angstrom": 1.2966090423560672e-08,
+            "coordinate_rmse_angstrom": 12.264663696289062,
+            "step_amplitude_ratio": 0.2578409016132355
+          },
+          "T2": {
+            "initializer_frame_rmse_angstrom": 9.306908310691142e-08,
+            "coordinate_rmse_angstrom": 13.388711929321289,
+            "step_amplitude_ratio": 0.11567564308643341
+          },
+          "T3": {
+            "initializer_frame_rmse_angstrom": 2.4733446934988024e-07,
+            "coordinate_rmse_angstrom": 33.59182357788086,
+            "step_amplitude_ratio": 0.22445033490657806
+          }
+        }
+      }
+    }
+  ],
+  "decision_rule": "Passing only authorizes a new development-only paired training preflight. It does not validate a learned model or authorize official validation/test access."
+}
