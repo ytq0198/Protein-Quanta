@@ -6,6 +6,14 @@
 > MISATO-100 内部 feasibility proxy，不是官方成绩。详见
 > `docs/2026-08-13-updated-manual-and-template-audit.md`。
 
+## 2026-08-13：新版材料、模型迁移与增强实验校准
+
+完成新版 38 页手册与旧版 36 页手册、最新算法赛 Word 模板的全文和重点页面核验。正式方向二数据口径改为去多肽后的 MISATO `13,066/1,357/1,357`；T1/T2/T3 固定为 `10→10 / 80→20 / 20→80`，新增 T4。新版不再公布旧版两层权重，故全部历史加权 proxy 已降级为内部筛选工具。
+
+完成 ProTDyn、ProAR、PVB、EPT、dynamics-aware DPLM 的任务适配与合规审计。PVB/EPT 的预训练均与 PDB/PDBBind 有关系，在无法拿到训练 ID 并排除官方测试/近同源体系前，不能进入合规候选；ProAR 的 anti-drifting 机制优先于大模型直接迁移。
+
+在 commit `7143837` 预注册后完成三 seed 训练态噪声增强。`σ=0.02` 的标准化特征噪声使 T1 RMSE 改善 `1.03%`，但 T2/T3 恶化 `3.87%/1.84%`，整体 proxy 恶化 `0.98%`，仅 1/3 seeds 获胜，判定 no-go。完整报告见 `reports/reproduction/2026-08-13-temporal-noise-augmentation.md`。
+
 > 这是持续更新的实验总账。详细 JSON、单次复现说明和图片保留在 `reports/reproduction/` 与 `reports/figures/`。
 
 ## 项目状态
