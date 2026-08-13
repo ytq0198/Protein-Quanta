@@ -1,5 +1,11 @@
 # Protein-Quanta 实验进展报告
 
+> 2026-08-13 新版手册校准：正式方向二数据口径已更新为去多肽后的 MISATO
+> `13,066/1,357/1,357`，T1/T2/T3 固定为 `10→10 / 80→20 / 20→80`，并新增可选 T4。
+> 新版暂不公开 Geo/Phys/Dyn/Stab 与 T1/T2/T3 权重；本报告此前所有加权结果均降级为
+> MISATO-100 内部 feasibility proxy，不是官方成绩。详见
+> `docs/2026-08-13-updated-manual-and-template-audit.md`。
+
 > 这是持续更新的实验总账。详细 JSON、单次复现说明和图片保留在 `reports/reproduction/` 与 `reports/figures/`。
 
 ## 项目状态

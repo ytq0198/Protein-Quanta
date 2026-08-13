@@ -21,12 +21,13 @@ def main():
 
     root = args.root.resolve()
     result = subprocess.run(
-        ["git", "ls-files"],
+        ["git", "-c", f"safe.directory={root.as_posix()}", "ls-files"],
         cwd=root,
         check=True,
         capture_output=True,
         text=True,
         encoding="utf-8",
+        errors="replace",
     )
     report = audit_release(root, result.stdout.splitlines())
     rendered = json.dumps(report, indent=2)

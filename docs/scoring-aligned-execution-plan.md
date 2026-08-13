@@ -1,4 +1,10 @@
-# GOAI 方向二评分对齐执行计划
+# GOAI 方向二评分对齐执行计划（旧版口径归档）
+
+> **2026-08-13 重要更新：**新版 `AI fo research指导手册2.pdf` 已删除旧版公布的
+> `Geo/Phys/Dyn/Stab=40/25/25/10` 与 `T1/T2/T3=50/30/20` 权重，并明确精确指标、
+> 权重及合成方式随复赛通知发布。本文以下权重只保留为历史实验代理，**不是当前官方评分**。
+> 新版执行依据见 `docs/2026-08-13-updated-manual-and-template-audit.md` 与
+> `docs/updated-execution-plan-2026-08-13.md`。
 
 > 版本：v1.1（2026-08-13，Asia/Shanghai）
 > 依据：`AI for research指导手册.pdf` 第 18-21、25-27 页。  
