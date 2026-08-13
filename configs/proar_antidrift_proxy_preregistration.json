@@ -1,0 +1,53 @@
+{
+  "status": "pre-registered ProAR-inspired anti-drift mechanism pilot; validation-only invariant proxy, not an official competition score",
+  "date": "2026-08-13",
+  "hypothesis": "alternating interpolation and endpoint forecasting reduces long-horizon accumulation error relative to one-pass block forecasting when both use the same trained networks",
+  "source": {
+    "paper": "ProAR: Probabilistic Autoregressive Modeling for Molecular Dynamics, AAAI 2026",
+    "doi": "10.1609/aaai.v40i1.36974",
+    "adaptation_boundary": "tests only the dual-stage training and alternating anti-drift sampler; omits Gaussian covariance, stochastic sampling, atomistic geometry and Amber relaxation"
+  },
+  "data": {
+    "dataset": "MISATO-100 feasibility subset",
+    "train": "80 public training complexes only",
+    "selection": "10 public validation complexes only",
+    "test_access": "prohibited",
+    "representation": "12-dimensional rigid-motion-invariant ligand trajectory features standardized with train statistics"
+  },
+  "model": {
+    "block_horizon": 4,
+    "hidden_dim": 48,
+    "layers": 2,
+    "interpolator": "linear bridge plus learned residual conditioned on start, proposed endpoint, relative step and horizon",
+    "forecaster": "endpoint residual predictor conditioned on intermediate state, block start, relative step and horizon",
+    "parameter_cap_each_network": 10000
+  },
+  "training": {
+    "seeds": [0, 42, 123],
+    "interpolator_epochs": 120,
+    "forecaster_epochs": 120,
+    "windows_per_trajectory_per_epoch": 8,
+    "batch_size": 128,
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "gradient_clip_norm": 1.0,
+    "checkpoint_policy": "final epoch; no validation checkpoint selection",
+    "forecaster_protocol": "freeze interpolator, train j uniformly from 0 through h-1; j=0 input is the block start"
+  },
+  "causal_comparison": {
+    "control": "one-pass: forecast endpoint once, then interpolate all interior states",
+    "candidate": "alternating: forecast endpoint, alternate I/F for j=1..h-1, then recompute interior states from the refined endpoint",
+    "shared": "same weights, start states, block size, training updates and validation examples",
+    "scenarios": ["T1", "T2", "T3"],
+    "primary": "unweighted macro mean of T1/T2/T3 standardized RMSE; official scenario weights are not currently published"
+  },
+  "promotion": {
+    "paired_seed_wins": "candidate macro RMSE lower than control in at least 2/3 seeds",
+    "mean_macro": "candidate mean macro RMSE lower than control",
+    "long_horizon": "candidate mean T3 RMSE improves by at least 5%",
+    "short_horizon_guard": "candidate mean T1 RMSE does not regress by more than 2%",
+    "numerical_guard": "all generated values finite and every scenario RMSE below 10 standardized units",
+    "next_stage": "only a passing mechanism is ported into the equivariant 3D NeuralMD/EST-style model"
+  },
+  "anti_tuning": "after results are visible, do not change block horizon, model size, seeds or thresholds in this experimental family"
+}
