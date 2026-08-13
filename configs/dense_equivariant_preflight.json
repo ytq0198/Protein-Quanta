@@ -1,0 +1,33 @@
+{
+  "status": "pre-registered before running the 10-complex preflight",
+  "date": "2026-08-14",
+  "data": {
+    "source": "MISATO-100 official train only",
+    "selection": "first 10 IDs from frozen development_64 in original processed train order",
+    "ids": ["3SNC", "5KBQ", "5X27", "4DRU", "6JAW", "6F3B", "3MP6", "1W5X", "1ZSH", "1V2S"],
+    "official_validation_accessed": false,
+    "official_test_accessed": false
+  },
+  "training": {
+    "seed": 42,
+    "epochs": 5,
+    "batch_size": 1,
+    "optimizer": "Adam",
+    "learning_rate": 0.0001,
+    "local_max_horizon": 20,
+    "multiscale_horizons": [5, 10, 20, 40],
+    "multiscale_coefficient": 0.25,
+    "euler_step_size": 0.025,
+    "scaling": 100,
+    "gradient_clip_norm": 1.0,
+    "checkpoint_policy": "final epoch only; no held-out selection"
+  },
+  "runtime_stop_conditions": {
+    "nonfinite_loss_or_gradient": true,
+    "cuda_out_of_memory": true,
+    "gradient_clipping_rate_above": 0.5,
+    "protein_coordinate_change": true
+  },
+  "phys_status": "blocked until explicit RCSB CONECT bond graphs are mapped to all 10 processed samples; no distance-guessed bonds",
+  "decision": "runtime pass cannot advance to the 64/16 effect gate until Phys extreme-bond comparison is complete"
+}
