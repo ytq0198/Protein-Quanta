@@ -98,6 +98,28 @@ class MisatoAuditTests(unittest.TestCase):
         self.assertEqual(report["audited_complex_count"], 1)
         self.assertEqual(len(report["samples"]), 1)
 
+    def test_audit_can_select_named_samples(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            path = Path(temp_dir) / "named.hdf5"
+            with h5py.File(path, "w") as handle:
+                for sample_id in ("A", "B"):
+                    group = handle.create_group(sample_id)
+                    group.create_dataset(
+                        "trajectory_coordinates",
+                        data=np.zeros((2, 1, 3), dtype=np.float32),
+                    )
+                    group.create_dataset("molecules_begin_atom_index", data=[0])
+                    group.create_dataset("atoms_number", data=[6])
+                    group.create_dataset("atoms_type", data=[1])
+                    group.create_dataset("atoms_residue", data=[0])
+                    group.create_dataset("frames_interaction_energy", data=np.zeros(2))
+
+            report = audit_misato_h5(path, selected_sample_ids=["b"])
+
+        self.assertEqual(report["samples"][0]["sample_id"], "B")
+        with self.assertRaises(ValueError):
+            audit_misato_h5(path, max_samples=1, selected_sample_ids=["A"])
+
 
 if __name__ == "__main__":
     unittest.main()

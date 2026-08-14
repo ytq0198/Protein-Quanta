@@ -453,3 +453,11 @@ E14 在覆盖 validation 子集实现了同帧键长 MAE、20% 违例率、极�
 针对位置-only 场无法依据运动方向制动/转向的问题，实现 10,243 参数 velocity-aware E(3) 场：只以 `|v|²`、`v·r` 等不变量调制沿相对位移的力，并加入沿速度方向的非负阻尼。合成测试 8 项通过；一个真实 MISATO-100 train 复合物的 5/10/20/40 帧前向、反向均有限，旋转/反射误差为 `3.81×10⁻⁵/3.05×10⁻⁵ Å`，真实 correctness gate 7/7 通过。
 
 随后只从上一轮 48 个训练复合物重新冻结 36/12 新划分，未复用已查看的 diagnostics/holdout。相对 position-only，velocity-aware 候选把 T1/T2/T3 RMSE 分别降低 `33.1%/45.9%/80.5%`，首次产生强三维效果信号；但 T3 步幅比仅 `0.1135`，180 次更新有 177 次裁剪，综合 gate 失败。研究判断不是放宽阈值，而是无界 `softplus` 阻尼造成过度刹车、速度不变量尺度造成梯度失衡。现已实现可选的有界阻尼与饱和归一化，保持旧默认路径可复现；阻尼范围、耗散功率、旋转/反射与全量回归均通过，共 `180 passed + 33 subtests`。完整报告见 `reports/reproduction/2026-08-14-velocity-equivariant-correctness.md` 与 `reports/reproduction/2026-08-14-velocity-equivariant-effect-preflight.md`。
+# 2026-08-14：完整 MISATO 数据门禁通过
+
+- 完整 `MD.hdf5` 已下载至精确公开字节数 `132,841,014,019`，可正常打开，共 16,972 个 complex groups。
+- HDF5 group ID 集合与 MISATO 官方 train/validation/test 原始 ID 并集逐 ID 完全一致；排除 NeuralMD `peptides.txt` 后为比赛更新手册要求的 `13,066/1,357/1,357`，缺失 0。
+- 每个过滤 split 取 16 个固定等距分位样本，共 48 个；全部 100 帧坐标 finite、schema 和形状检查通过。
+- 数据状态由“下载中/仅 MISATO-100 proxy”升级为“完整数据可用于正式训练准备”。MISATO-100 历史诊断继续冻结。
+- MD5 为 `9bc6446922cd80e0f2f3f69349bf88ed`，与公开值完全一致；完整数据文件达到发布级验收。详见 `reports/reproduction/2026-08-14-full-misato-acceptance.md`。
+- 明确保留两个未解锁项：严格蛋白同源泄漏审计，以及依赖 PDB/CCD 键图的 Bemis–Murcko scaffold 审计。HDF5 元素组成不能冒充 scaffold。

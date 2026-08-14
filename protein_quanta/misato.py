@@ -2,7 +2,7 @@
 
 from collections import Counter
 from pathlib import Path
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Iterable, Optional, Union
 
 import h5py
 import numpy as np
@@ -134,10 +134,13 @@ def audit_misato_h5(
     path: Union[str, Path],
     max_samples: Optional[int] = None,
     chunk_frames: int = 16,
+    selected_sample_ids: Optional[Iterable[str]] = None,
 ) -> Dict[str, Any]:
     """Audit MISATO structure and values without loading the whole file at once."""
     if max_samples is not None and max_samples <= 0:
         raise ValueError("max_samples must be positive")
+    if max_samples is not None and selected_sample_ids is not None:
+        raise ValueError("max_samples and selected_sample_ids are mutually exclusive")
     if chunk_frames <= 0:
         raise ValueError("chunk_frames must be positive")
 
@@ -146,7 +149,13 @@ def audit_misato_h5(
         sample_ids = sorted(
             name for name, value in handle.items() if isinstance(value, h5py.Group)
         )
-        selected_ids = sample_ids[:max_samples]
+        if selected_sample_ids is None:
+            selected_ids = sample_ids[:max_samples]
+        else:
+            selected_ids = [str(sample_id).upper() for sample_id in selected_sample_ids]
+            missing = sorted(set(selected_ids) - set(sample_ids))
+            if missing:
+                raise KeyError("selected sample IDs absent from HDF5: " + ", ".join(missing))
         samples = [
             _audit_group(sample_id, handle[sample_id], chunk_frames)
             for sample_id in selected_ids

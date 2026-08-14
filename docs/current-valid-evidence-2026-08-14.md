@@ -43,3 +43,10 @@
 2. 速度感知效果已有强信号但综合 gate 失败；先实现有界阻尼、速度不变量归一化与耗散功率诊断的 correctness/stability 测试。现有 64 development 已多次拆分，不再继续用其 diagnostic 调参；等待完整 MISATO 后建立按同源/scaffold 分组的新 split。
 3. 模型升级优先显式速度/时间、局部多层高阶几何与合规结构预训练；不在已解封 64/16 holdout 上扫损失系数。
 4. 团队人工确认官网具体截止时刻、ZIP 命名/大小和上传字段；团队自行完成模板文字、真实性核验与签字。
+# 完整数据状态更新（2026-08-14）
+
+- `MD.hdf5` 精确字节数：`132,841,014,019`；MD5 `9bc6446922cd80e0f2f3f69349bf88ed` 与公开值一致；HDF5 可打开，包含 16,972 个复合物。
+- 16,972 个 group ID 与官方三份原始 split ID 并集逐 ID 完全相等。
+- 多肽过滤后 `13,066/1,357/1,357` 全部存在于 HDF5；确定性分层抽样 48/48 schema 与 finite 检查通过。
+- 此证据解锁完整数据的训练准备，不解锁 public test 调参；同源泄漏和真实 ligand scaffold 审计仍分别列为待完成项。
+- 机器证据：`reports/reproduction/full_misato_acceptance.json`；解释报告：`reports/reproduction/2026-08-14-full-misato-acceptance.md`。
