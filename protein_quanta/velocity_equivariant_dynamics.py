@@ -25,6 +25,7 @@ class VelocityEquivariantAcceleration(nn.Module):
         speed_squared_scale=1.0,
         projection_scale=5.0,
         initial_damping_fraction=0.05,
+        protein_top_k=None,
     ):
         super().__init__()
         self.scale = float(scale)
@@ -34,12 +35,15 @@ class VelocityEquivariantAcceleration(nn.Module):
         self.normalize_velocity_invariants = bool(normalize_velocity_invariants)
         self.speed_squared_scale = float(speed_squared_scale)
         self.projection_scale = float(projection_scale)
+        self.protein_top_k = None if protein_top_k is None else int(protein_top_k)
         if self.bounded_damping_max is not None and self.bounded_damping_max <= 0:
             raise ValueError("bounded_damping_max must be positive")
         if self.speed_squared_scale <= 0 or self.projection_scale <= 0:
             raise ValueError("velocity invariant scales must be positive")
         if not 0 < initial_damping_fraction < 1:
             raise ValueError("initial_damping_fraction must lie strictly between 0 and 1")
+        if self.protein_top_k is not None and self.protein_top_k <= 0:
+            raise ValueError("protein_top_k must be positive")
         self.ligand_embedding = nn.Embedding(ligand_classes, hidden_dim)
         self.residue_embedding = nn.Embedding(residue_classes, hidden_dim)
         self.ligand_pair = nn.Sequential(
@@ -152,20 +156,35 @@ class VelocityEquivariantAcceleration(nn.Module):
         ligand_count = ligand_mask.sum(dim=1, keepdim=True).clamp_min(1)
         ligand_force = ligand_force / ligand_count
 
-        protein_displacement = (
-            protein_position.unsqueeze(0) - ligand_position.unsqueeze(1)
-        )
+        if self.protein_top_k is None:
+            protein_displacement = (
+                protein_position.unsqueeze(0) - ligand_position.unsqueeze(1)
+            )
+            protein_context = protein_feature.unsqueeze(0).expand(
+                ligand_feature.shape[0], -1, -1
+            )
+            protein_mask = ligand_batch.unsqueeze(1) == residue_batch.unsqueeze(0)
+        else:
+            pair_distance = torch.cdist(ligand_position, protein_position)
+            same_complex = ligand_batch.unsqueeze(1) == residue_batch.unsqueeze(0)
+            masked_distance = pair_distance.masked_fill(~same_complex, torch.inf)
+            neighbour_count = min(self.protein_top_k, protein_position.shape[0])
+            nearest_distance, nearest_index = torch.topk(
+                masked_distance, neighbour_count, dim=1, largest=False
+            )
+            protein_displacement = (
+                protein_position[nearest_index] - ligand_position.unsqueeze(1)
+            )
+            protein_context = protein_feature[nearest_index]
+            protein_mask = torch.isfinite(nearest_distance)
         protein_squared_distance = protein_displacement.square().sum(
             dim=-1, keepdim=True
         )
         ligand_context = ligand_feature.unsqueeze(1).expand(
-            -1, protein_feature.shape[0], -1
-        )
-        protein_context = protein_feature.unsqueeze(0).expand(
-            ligand_feature.shape[0], -1, -1
+            -1, protein_context.shape[1], -1
         )
         protein_speed = speed_invariant.unsqueeze(1).expand(
-            -1, protein_feature.shape[0], -1
+            -1, protein_context.shape[1], -1
         )
         protein_projection = (
             velocity.unsqueeze(1) * protein_displacement
@@ -183,7 +202,6 @@ class VelocityEquivariantAcceleration(nn.Module):
             ),
             dim=-1,
         ))
-        protein_mask = ligand_batch.unsqueeze(1) == residue_batch.unsqueeze(0)
         protein_weight = (
             protein_weight
             * self._radial_envelope(protein_squared_distance)

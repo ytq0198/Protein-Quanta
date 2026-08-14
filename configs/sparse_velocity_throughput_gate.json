@@ -1,0 +1,25 @@
+{
+  "status": "pre-registered before full-MISATO sparse throughput benchmark",
+  "date": "2026-08-14",
+  "scope": "first filtered official training complex only; no validation/test access",
+  "model": {
+    "base": "bounded normalized VelocityEquivariantAcceleration, hidden_dim=32",
+    "protein_top_k_candidates": [16, 32, 64, 128],
+    "identical_weights": true,
+    "neighbour_rule": "nearest protein C-alpha positions within the same complex; Euclidean distance invariant"
+  },
+  "benchmark": {
+    "warmup_updates": 3,
+    "measured_updates": 10,
+    "target": "frame-2 finite-difference acceleration",
+    "optimizer_step": false,
+    "reason": "isolate forward/backward graph cost without weight drift"
+  },
+  "gate": {
+    "minimum_dense_speedup": 2.0,
+    "maximum_relative_acceleration_l2_error": 0.02,
+    "all_losses_and_gradients_finite_nonzero": true,
+    "selection": "choose smallest top_k passing every gate; otherwise retain dense and investigate radius graphs"
+  },
+  "decision_boundary": "A pass authorizes a 32-train multi-complex sparse learnability gate only, not full training or validation/test access."
+}

@@ -128,6 +128,28 @@ class VelocityEquivariantDynamicsTests(unittest.TestCase):
             VelocityEquivariantAcceleration(speed_squared_scale=0)
         with self.assertRaises(ValueError):
             VelocityEquivariantAcceleration(initial_damping_fraction=1)
+        with self.assertRaises(ValueError):
+            VelocityEquivariantAcceleration(protein_top_k=0)
+
+    def test_top_k_covering_all_residues_matches_dense_model(self):
+        sparse = VelocityEquivariantAcceleration(hidden_dim=8, protein_top_k=6)
+        sparse.load_state_dict(self.model.state_dict())
+        dense_acceleration = self.model(
+            0, (self.velocity, self.position), self.condition
+        )[0]
+        sparse_acceleration = sparse(
+            0, (self.velocity, self.position), self.condition
+        )[0]
+        torch.testing.assert_close(
+            sparse_acceleration, dense_acceleration, atol=2e-7, rtol=2e-6
+        )
+
+    def test_top_k_variant_remains_equivariant(self):
+        self.model = VelocityEquivariantAcceleration(
+            hidden_dim=8, protein_top_k=3
+        )
+        self._assert_equivariant(self._orthogonal(reflection=False))
+        self._assert_equivariant(self._orthogonal(reflection=True))
 
 
 if __name__ == "__main__":
