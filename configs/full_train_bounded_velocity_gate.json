@@ -1,0 +1,46 @@
+{
+  "status": "pre-registered before full-MISATO bounded damping paired gate",
+  "date": "2026-08-14",
+  "data": {
+    "source": "official MISATO train split after NeuralMD peptide exclusion",
+    "filtered_count": 13066,
+    "selection": "exclude every official train ID already mentioned in tracked configs/reports, then sort by SHA256(salt:id)",
+    "salt": "protein-quanta-full-bounded-gate-v1",
+    "historical_used_count": 120,
+    "historical_used_id_set_sha256": "43e00c3417cc42427e9fa4803bb607dd534a017dbd812f0ac9c2f09c54a9aeee",
+    "selected_id_sequence_sha256": "60ccd79d26a64450152ba6e43424cb6658092d1ecb5360a8cf64cb9bff35a152",
+    "train_ids": ["4K6V", "3D1Y", "4PY1", "1XQC", "4E7R", "1LCJ", "4Z6I", "3DEJ", "2QBS", "2ISC", "6R49", "2WXH", "4CG8", "5TA4", "1PCG", "1GT1", "6HB7", "4B13", "1UYF", "6G47", "2XVN", "2WXF", "4PCS", "2ZSC", "3F7H", "5ZAG", "6NZQ", "3WNS", "4XII", "6OY0", "6S89", "4A4X"],
+    "diagnostic_ids": ["5ACW", "5ORR", "5J64", "2WKS", "4I12", "4H2M", "1MS7", "3KQE"],
+    "official_validation_accessed": false,
+    "official_test_accessed": false
+  },
+  "protocol": {
+    "scaling": 1.0,
+    "initial_velocity_scale": 1.0,
+    "euler_step_size": 1.0
+  },
+  "models": {
+    "control": "unbounded, unnormalized VelocityEquivariantAcceleration",
+    "candidate": "bounded_damping_max=0.05, initial_damping_fraction=0.05, normalized velocity invariants",
+    "pairing": "all non-damping weights identical; candidate damping head uses its preregistered small bounded initialization"
+  },
+  "training": {
+    "seed": 20260814,
+    "epochs": 3,
+    "learning_rate": 0.0001,
+    "gradient_clip_norm": 1.0,
+    "local_max_horizon": 20,
+    "multiscale_horizons": [5, 10, 20, 40],
+    "multiscale_coefficient": 0.25,
+    "same_sample_order_and_windows": true,
+    "checkpoint_policy": "final epoch only; diagnostic targets never select epoch"
+  },
+  "gate": {
+    "candidate_T3_rmse_min_improvement_over_control_fraction": 0.05,
+    "candidate_T1_rmse_max_worsening_fraction": 0.10,
+    "candidate_T3_step_amplitude_ratio_min": 0.20,
+    "candidate_T3_step_amplitude_ratio_max": 2.0,
+    "candidate_clipping_rate_max": 0.75,
+    "decision": "Pass permits a second seed on a separately hashed fresh train-only split. Fail freezes bounded damping at this setting; neither outcome permits validation/test access."
+  }
+}

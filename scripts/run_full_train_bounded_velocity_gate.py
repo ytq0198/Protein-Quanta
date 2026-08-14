@@ -1,0 +1,161 @@
+"""Paired unbounded/bounded velocity gate on fresh full-MISATO train IDs."""
+
+import argparse
+import copy
+import hashlib
+import json
+import random
+from pathlib import Path
+
+import numpy as np
+import torch
+
+from protein_quanta.streaming_misato import StreamingMISATODataset
+from protein_quanta.velocity_equivariant_dynamics import VelocityEquivariantAcceleration
+from scripts.run_frame_time_learnability_preflight import evaluate, train
+from scripts.train_evaluate_dense_paired_phys import make_schedule, prepare_single_complex
+
+
+def sequence_sha256(values):
+    return hashlib.sha256(("\n".join(values) + "\n").encode("ascii")).hexdigest()
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--h5", type=Path, required=True)
+    parser.add_argument("--split", type=Path, required=True)
+    parser.add_argument("--peptides", type=Path, required=True)
+    parser.add_argument("--neuralmd-utils", type=Path, required=True)
+    parser.add_argument("--periodic-table", type=Path, required=True)
+    parser.add_argument("--config", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--checkpoint-dir", type=Path, required=True)
+    parser.add_argument("--device", default="cuda:0")
+    args = parser.parse_args()
+    config = json.loads(args.config.read_text(encoding="utf-8"))
+    train_ids = config["data"]["train_ids"]
+    diagnostic_ids = config["data"]["diagnostic_ids"]
+    if len(train_ids) != 32 or len(diagnostic_ids) != 8:
+        raise ValueError("full train bounded gate requires frozen 32/8 split")
+    if not set(train_ids).isdisjoint(diagnostic_ids):
+        raise ValueError("train and diagnostic IDs overlap")
+    if sequence_sha256(train_ids + diagnostic_ids) != config["data"]["selected_id_sequence_sha256"]:
+        raise ValueError("selected ID sequence differs from preregistration")
+
+    dataset = StreamingMISATODataset(
+        args.h5, args.split, args.peptides, args.neuralmd_utils,
+        args.periodic_table,
+    )
+    if len(dataset) != config["data"]["filtered_count"]:
+        raise ValueError("filtered full train count differs from preregistration")
+    index = {sample_id: position for position, sample_id in enumerate(dataset.sample_ids)}
+    missing = sorted((set(train_ids) | set(diagnostic_ids)) - set(index))
+    if missing:
+        raise KeyError(f"selected full-train IDs are missing: {missing}")
+    device = torch.device(args.device)
+    training_samples = [
+        prepare_single_complex(dataset[index[sample_id]], device)
+        for sample_id in train_ids
+    ]
+    diagnostic_samples = [
+        prepare_single_complex(dataset[index[sample_id]], device)
+        for sample_id in diagnostic_ids
+    ]
+    dataset.close()
+
+    settings = config["training"]
+    seed = settings["seed"]
+    random.seed(seed); np.random.seed(seed); torch.manual_seed(seed)
+    control = VelocityEquivariantAcceleration(hidden_dim=32).to(device)
+    torch.manual_seed(seed)
+    candidate = VelocityEquivariantAcceleration(
+        hidden_dim=32,
+        bounded_damping_max=0.05,
+        normalize_velocity_invariants=True,
+        initial_damping_fraction=0.05,
+    ).to(device)
+    candidate_state = candidate.state_dict()
+    for name, value in control.state_dict().items():
+        if not name.startswith("damping."):
+            candidate_state[name] = copy.deepcopy(value)
+    candidate.load_state_dict(candidate_state)
+    models = {"control": control, "candidate": candidate}
+    schedule = make_schedule(len(training_samples), settings["epochs"], seed)
+    initial_metrics = {
+        name: evaluate(model, diagnostic_samples, config["protocol"])
+        for name, model in models.items()
+    }
+    training = {
+        name: train(model, training_samples, schedule, config["protocol"], settings)
+        for name, model in models.items()
+    }
+    final_metrics = {
+        name: evaluate(model, diagnostic_samples, config["protocol"])
+        for name, model in models.items()
+    }
+
+    control_t3 = final_metrics["control"]["T3"]
+    candidate_t3 = final_metrics["candidate"]["T3"]
+    control_t1 = final_metrics["control"]["T1"]
+    candidate_t1 = final_metrics["candidate"]["T1"]
+    thresholds = config["gate"]
+    clipping_rate = training["candidate"]["clipped"] / training["candidate"]["updates"]
+    checks = {
+        "all_updates_and_rollouts_finite": (
+            all(row["nonfinite"] == 0 for row in training.values())
+            and all(
+                metrics[scenario]["nonfinite_frame_fraction"] == 0
+                for metrics in final_metrics.values()
+                for scenario in ("T1", "T2", "T3")
+            )
+        ),
+        "candidate_T3_rmse_improves": (
+            (control_t3["coordinate_rmse_angstrom"] - candidate_t3["coordinate_rmse_angstrom"])
+            / control_t3["coordinate_rmse_angstrom"]
+            >= thresholds["candidate_T3_rmse_min_improvement_over_control_fraction"]
+        ),
+        "candidate_T1_worsening_bounded": (
+            (candidate_t1["coordinate_rmse_angstrom"] - control_t1["coordinate_rmse_angstrom"])
+            / control_t1["coordinate_rmse_angstrom"]
+            <= thresholds["candidate_T1_rmse_max_worsening_fraction"]
+        ),
+        "candidate_T3_amplitude_in_range": (
+            thresholds["candidate_T3_step_amplitude_ratio_min"]
+            <= candidate_t3["step_amplitude_ratio"]
+            <= thresholds["candidate_T3_step_amplitude_ratio_max"]
+        ),
+        "candidate_clipping_rate_bounded": clipping_rate <= thresholds["candidate_clipping_rate_max"],
+    }
+    passed = all(checks.values())
+    args.checkpoint_dir.mkdir(parents=True, exist_ok=True)
+    checkpoint_sha256 = {}
+    for name, model in models.items():
+        path = args.checkpoint_dir / f"{name}_final.pth"
+        torch.save({"model": model.state_dict(), "config": config}, path)
+        checkpoint_sha256[name] = hashlib.sha256(path.read_bytes()).hexdigest()
+    report = {
+        "status": "full_train_bounded_gate_pass" if passed else "full_train_bounded_gate_fail",
+        "scope": "fresh 32 train / 8 diagnostic from official filtered train; validation/test untouched",
+        "parameter_count": {name: sum(p.numel() for p in model.parameters()) for name, model in models.items()},
+        "initial_metrics": initial_metrics,
+        "training": training,
+        "final_metrics": final_metrics,
+        "candidate_clipping_rate": clipping_rate,
+        "checks": checks,
+        "checkpoint_sha256": checkpoint_sha256,
+        "decision": thresholds["decision"],
+    }
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    print(json.dumps({
+        key: report[key] for key in (
+            "status", "parameter_count", "final_metrics",
+            "candidate_clipping_rate", "checks",
+        )
+    }, indent=2))
+    if not passed:
+        raise SystemExit(1)
+
+
+if __name__ == "__main__":
+    main()
