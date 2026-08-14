@@ -1,0 +1,27 @@
+{
+  "status": "pre-registered before real-complex anchored residual correctness run",
+  "date": "2026-08-14",
+  "scope": "4K6V from the prior 32 training IDs; no diagnostic/validation/test access",
+  "anchor": {
+    "model": "unbounded VelocityEquivariantAcceleration final checkpoint",
+    "checkpoint_sha256": "766629ac7a2d3064a410cd85f224baaa21c61072df5fb66a685556acb594542c",
+    "frozen": true
+  },
+  "residual": {
+    "model": "bounded normalized VelocityEquivariantAcceleration",
+    "maximum_gate": 0.25,
+    "initial_gate_fraction": 0.05,
+    "residual_scale_initial": 0.0,
+    "single_step_learning_rate": 0.001
+  },
+  "gates": {
+    "initial_anchor_max_abs_error": 0.0,
+    "initial_scale_gradient_finite_nonzero": true,
+    "anchor_parameters_frozen_and_unchanged": true,
+    "post_step_correction_finite_nonzero": true,
+    "post_step_correction_relative_l2_max": 0.05,
+    "proper_equivariance_max_abs_error": 0.0001,
+    "reflection_equivariance_max_abs_error": 0.0001
+  },
+  "decision": "Pass proves only that the innovation is implementable, anchored at initialization, trainable, and E(3)-equivariant. It permits an 8-train/4-diagnostic train-only effect gate, not validation/test access."
+}
