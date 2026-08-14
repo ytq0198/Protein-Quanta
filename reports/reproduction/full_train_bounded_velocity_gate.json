@@ -1,0 +1,145 @@
+{
+  "status": "full_train_bounded_gate_fail",
+  "scope": "fresh 32 train / 8 diagnostic from official filtered train; validation/test untouched",
+  "parameter_count": {
+    "control": 10243,
+    "candidate": 10243
+  },
+  "initial_metrics": {
+    "control": {
+      "T1": {
+        "coordinate_rmse_angstrom": 7.240867018699646,
+        "step_amplitude_ratio": 0.7754679918289185,
+        "nonfinite_frame_fraction": 0.0
+      },
+      "T2": {
+        "coordinate_rmse_angstrom": 6.715352147817612,
+        "step_amplitude_ratio": 0.4635386858135462,
+        "nonfinite_frame_fraction": 0.0
+      },
+      "T3": {
+        "coordinate_rmse_angstrom": 7.078710079193115,
+        "step_amplitude_ratio": 0.0989969742950052,
+        "nonfinite_frame_fraction": 0.0
+      }
+    },
+    "candidate": {
+      "T1": {
+        "coordinate_rmse_angstrom": 8.468770861625671,
+        "step_amplitude_ratio": 1.1659938618540764,
+        "nonfinite_frame_fraction": 0.0
+      },
+      "T2": {
+        "coordinate_rmse_angstrom": 10.445311069488525,
+        "step_amplitude_ratio": 0.9662004858255386,
+        "nonfinite_frame_fraction": 0.0
+      },
+      "T3": {
+        "coordinate_rmse_angstrom": 24.054852962493896,
+        "step_amplitude_ratio": 0.6184561643749475,
+        "nonfinite_frame_fraction": 0.0
+      }
+    }
+  },
+  "training": {
+    "control": {
+      "epochs": [
+        {
+          "epoch": 1,
+          "loss_mean": 67.80414446815848,
+          "gradient_norm_mean": 322.7714400049299,
+          "gradient_norm_max": 7223.8671875
+        },
+        {
+          "epoch": 2,
+          "loss_mean": 37.17801755294204,
+          "gradient_norm_mean": 98.12354761175811,
+          "gradient_norm_max": 2406.281982421875
+        },
+        {
+          "epoch": 3,
+          "loss_mean": 67.90844252333045,
+          "gradient_norm_mean": 435.87818055413663,
+          "gradient_norm_max": 11675.1767578125
+        }
+      ],
+      "updates": 96,
+      "clipped": 92,
+      "nonfinite": 0
+    },
+    "candidate": {
+      "epochs": [
+        {
+          "epoch": 1,
+          "loss_mean": 124.53193818032742,
+          "gradient_norm_mean": 4.439768574316986,
+          "gradient_norm_max": 16.626102447509766
+        },
+        {
+          "epoch": 2,
+          "loss_mean": 79.08963432908058,
+          "gradient_norm_mean": 5.6254172117915004,
+          "gradient_norm_max": 16.001741409301758
+        },
+        {
+          "epoch": 3,
+          "loss_mean": 138.41362153738737,
+          "gradient_norm_mean": 7.668253174051642,
+          "gradient_norm_max": 29.180150985717773
+        }
+      ],
+      "updates": 96,
+      "clipped": 82,
+      "nonfinite": 0
+    }
+  },
+  "final_metrics": {
+    "control": {
+      "T1": {
+        "coordinate_rmse_angstrom": 6.963840574026108,
+        "step_amplitude_ratio": 0.7019036691635847,
+        "nonfinite_frame_fraction": 0.0
+      },
+      "T2": {
+        "coordinate_rmse_angstrom": 6.186030298471451,
+        "step_amplitude_ratio": 0.4029867695644498,
+        "nonfinite_frame_fraction": 0.0
+      },
+      "T3": {
+        "coordinate_rmse_angstrom": 6.238784492015839,
+        "step_amplitude_ratio": 0.07625991594977677,
+        "nonfinite_frame_fraction": 0.0
+      }
+    },
+    "candidate": {
+      "T1": {
+        "coordinate_rmse_angstrom": 8.460444986820221,
+        "step_amplitude_ratio": 1.1634877249598503,
+        "nonfinite_frame_fraction": 0.0
+      },
+      "T2": {
+        "coordinate_rmse_angstrom": 10.408864259719849,
+        "step_amplitude_ratio": 0.9613257367163897,
+        "nonfinite_frame_fraction": 0.0
+      },
+      "T3": {
+        "coordinate_rmse_angstrom": 23.585822582244873,
+        "step_amplitude_ratio": 0.601410586386919,
+        "nonfinite_frame_fraction": 0.0
+      }
+    }
+  },
+  "candidate_clipping_rate": 0.8541666666666666,
+  "checks": {
+    "all_updates_and_rollouts_finite": true,
+    "candidate_T3_rmse_improves": false,
+    "candidate_T1_worsening_bounded": false,
+    "candidate_T3_amplitude_in_range": true,
+    "candidate_clipping_rate_bounded": false
+  },
+  "checkpoint_sha256": {
+    "control": "766629ac7a2d3064a410cd85f224baaa21c61072df5fb66a685556acb594542c",
+    "candidate": "abbd8ff1d0cac1553c8dcec3543051583596b819b70b5066df4ae13ba50b52f2"
+  },
+  "decision": "Pass permits a second seed on a separately hashed fresh train-only split. Fail freezes bounded damping at this setting; neither outcome permits validation/test access."
+}

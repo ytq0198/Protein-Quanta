@@ -57,3 +57,10 @@
 - 首次前反向 7.934 s 是 CUDA 冷启动，后续同步稳态为 0.009288 s；此前据冷启动做的 28.8 小时/epoch 外推已撤回。
 - Top-k 16/32/64/128 全部比 dense 慢，预注册 sparse gate no-go；保留 dense bounded+normalized 候选。validation/test 仍未访问。
 - 证据：`reports/reproduction/full_misato_stream_smoke.json` 与 `reports/reproduction/2026-08-14-full-misato-streaming-smoke.md`。
+
+## 完整 train 新 ID 机制证据
+
+- 新 32-train/8-diagnostic paired gate 中，bounded+normalized 将 T3 amplitude 由 0.0763 提高至 0.6014，但 T3 RMSE 由 6.239 Å 恶化至 23.586 Å；T1/T2 也恶化，candidate clipping 85.42%。
+- 因此固定小 bounded damping 组合为 no-go；不得只引用 amplitude 改善而隐藏 coordinate failure。
+- 下一创新假设是以稳定 control 为锚点、零初始化的 gated E(3) residual，并联合坐标、amplitude 与 residual energy；尚无效果证据。
+- 证据：`reports/reproduction/full_train_bounded_velocity_gate.json` 与 `reports/reproduction/2026-08-14-full-train-bounded-velocity-gate.md`。

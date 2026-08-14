@@ -189,4 +189,6 @@ E13-E17 已完成。`epoch 5 + β=1` 为 Phys no-go；未锚定 epoch-5 的 E16 
 
 **完整数据吞吐更新（2026-08-14）。** 完整 MISATO 流式首 batch 已通过。首次 CUDA 前反向 7.934 s 不能代表稳态；预注册 warm-up 基准测得 dense 9.29 ms。Top-k 16/32/64/128 全部更慢且 sparse gate no-go。下一 paired gate 不再包含 sparse：固定比较 unbounded velocity-aware 与 bounded+normalized，同初始化、同训练窗口，在完整 train 内部全新 32/8 ID 上先做单 seed，不访问 validation/test。
 
+**完整 train paired 结果（2026-08-14）：bounded+normalized no-go。** 候选恢复 T3 amplitude（0.0763→0.6014），却令 T3 RMSE 由 6.239 Å 恶化到 23.586 Å，且 clipping 85.42%。当前固定 damping 设置冻结，不做参数扫描。下一创新改为 control-anchored gated residual：主干保持稳定 control，E(3) residual 与 `[0,1]` invariant gate 均采用使初始输出严格贴近 control 的初始化；小门必须同时改善 T3 RMSE 与 amplitude，并受 T1 和 residual-energy 约束。
+
 主候选必须同时满足：三场景 RMSE 改善；T3 step-amplitude 不低于预注册下限；T1 不回退；裁剪率受控；显式拓扑 Phys 不恶化；至少三 seed 同向。未完成 grouped split 前，不再使用已经多次拆分的 MISATO-100 64 development 选择阻尼上限、归一化尺度或学习率。

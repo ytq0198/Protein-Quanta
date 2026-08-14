@@ -479,3 +479,13 @@ E14 在覆盖 validation 子集实现了同帧键长 MAE、20% 违例率、极�
 - 结论：Top-k 在 31×274 pair 规模上被 cdist/sort/gather 开销主导，冻结 no-go，不事后换样本或阈值。保留 dense bounded+normalized 候选。
 - 下一步为完整 train 内部全新 ID 的 32-train/8-diagnostic paired gate：unbounded velocity-aware vs bounded+normalized，同初始化/同 schedule/同窗口，不访问 validation/test。
 - 详见 `reports/reproduction/2026-08-14-sparse-velocity-throughput-gate.md`。
+
+## 2026-08-14：完整 train bounded+normalized velocity gate no-go
+
+- 从 filtered train 中排除仓库历史出现过的 120 个 ID，再按固定 salt 哈希选取全新 32-train/8-diagnostic；选择序列 SHA256 `60ccd79d...a152`。validation/test 未访问。
+- 预注册 3 epoch、同 schedule、同非 damping 初始化，对照 unbounded velocity-aware 与 bounded+normalized 候选。
+- 候选 T3 amplitude 从 control `0.0763` 提高到 `0.6014`，解决了“不动”；但 T3 RMSE 从 `6.239 Å` 恶化到 `23.586 Å`，T1/T2 RMSE 也分别恶化 21.49%/68.26%。
+- candidate clipping 82/96=`85.42%`，超过 75% 门；control 也为 92/96，说明当前目标仍有高梯度问题。所有 rollout finite。
+- Gate 仅 finite 与 amplitude 通过，T3 RMSE、T1 guardrail、clipping 三门失败，整体 no-go。冻结当前 damping_max/normalization，不扫参。
+- 机制结论：固定小阻尼能恢复运动幅度，却造成 ballistic/方向相位失准。下一创新转为以 control 为稳定锚点的零初始化 E(3) residual gate，并显式联合 amplitude 与 residual-energy 约束，先做 8/4 小门。
+- 详见 `reports/reproduction/2026-08-14-full-train-bounded-velocity-gate.md`。
