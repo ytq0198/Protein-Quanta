@@ -7,7 +7,8 @@ from pathlib import Path
 
 import torch
 import torch.nn.functional as functional
-from torch_geometric.loader import DataLoader
+
+from NeuralMD.dataloaders.dataloader_MISATO import DataLoaderMISATO
 
 from protein_quanta.streaming_misato import StreamingMISATODataset
 from protein_quanta.velocity_equivariant_dynamics import VelocityEquivariantAcceleration
@@ -45,7 +46,7 @@ def main():
     )
     if len(dataset) != args.expected_count:
         raise ValueError(f"filtered count {len(dataset)} != {args.expected_count}")
-    loader = DataLoader(dataset, batch_size=1, shuffle=False, num_workers=0)
+    loader = DataLoaderMISATO(dataset, batch_size=1, shuffle=False, num_workers=0)
     batch = next(iter(loader))
     loaded = time.perf_counter()
     device = torch.device(args.device)
