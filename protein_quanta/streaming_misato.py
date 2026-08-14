@@ -113,9 +113,7 @@ class StreamingMISATODataset(Dataset):
         group = self._handle().get(sample_id)
         if group is None:
             raise KeyError(f"split ID absent from HDF5: {sample_id}")
-        data = self._resolve_parser()(group, **self._load_resources())
-        data.sample_id = sample_id
-        return data
+        return self._resolve_parser()(group, **self._load_resources())
 
     def close(self):
         if self._h5 is not None:

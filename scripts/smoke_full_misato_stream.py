@@ -92,7 +92,7 @@ def main():
         "scope": "first filtered training complex only; no validation/test access",
         "dataset": {
             "filtered_count": len(dataset),
-            "sample_id": batch.sample_id[0] if isinstance(batch.sample_id, list) else batch.sample_id,
+            "sample_id": dataset.sample_ids[0],
             "ligand_heavy_atoms": int(batch.ligand_x.shape[0]),
             "protein_backbone_atoms": int(batch.protein_pos.shape[0]),
             "frames": int(batch.ligand_trajectory_pos.shape[1]),

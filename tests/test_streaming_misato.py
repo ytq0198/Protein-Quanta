@@ -63,7 +63,6 @@ class StreamingMISATOTests(unittest.TestCase):
                 self.assertEqual(len(dataset), 1)
                 self.assertEqual(dataset.sample_ids, ["A"])
                 self.assertEqual(item.name, "/A")
-                self.assertEqual(item.sample_id, "A")
                 self.assertEqual(seen, [("/A", 6.0)])
                 self.assertIsNotNone(dataset._h5)
                 state = dataset.__getstate__()
