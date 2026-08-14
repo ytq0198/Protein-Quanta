@@ -461,3 +461,12 @@ E14 在覆盖 validation 子集实现了同帧键长 MAE、20% 违例率、极�
 - 数据状态由“下载中/仅 MISATO-100 proxy”升级为“完整数据可用于正式训练准备”。MISATO-100 历史诊断继续冻结。
 - MD5 为 `9bc6446922cd80e0f2f3f69349bf88ed`，与公开值完全一致；完整数据文件达到发布级验收。详见 `reports/reproduction/2026-08-14-full-misato-acceptance.md`。
 - 明确保留两个未解锁项：严格蛋白同源泄漏审计，以及依赖 PDB/CCD 键图的 Bemis–Murcko scaffold 审计。HDF5 元素组成不能冒充 scaffold。
+
+## 2026-08-14：完整数据流式 GPU smoke 通过
+
+- 新增 worker-safe `StreamingMISATODataset`，复用 NeuralMD 官方解析器，避免先将 13,066 个体系全部转为内存 PyG 缓存。
+- 官方过滤 train 计数 13,066；首样本 `5WIJ`（31 配体重原子、822 蛋白骨架原子、100 帧）在 GPU 0 上完成 bounded + normalized velocity-aware 单步前向/反向。
+- loss `0.857021`，梯度范数 `0.001287`，全部 finite；首 batch 1.901 s，前反向 7.934 s，峰值新增 CUDA 显存约 22.4 MiB。
+- 三次接口失败分别修复了 CUDA 设备号、NeuralMD batch 字段和 PyG 字符串字段问题，均记录而未包装成效果证据。
+- dense 单样本吞吐外推约 28.8 小时/epoch（且尚未计 rollout），因此不启动其全量训练。下一项冻结为 32-train 的 sparse radius/Top-k 邻域吞吐与近似误差 gate；通过后才做 bounded damping paired effect gate。
+- 详见 `reports/reproduction/2026-08-14-full-misato-streaming-smoke.md`。

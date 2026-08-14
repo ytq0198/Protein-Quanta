@@ -50,3 +50,10 @@
 - 多肽过滤后 `13,066/1,357/1,357` 全部存在于 HDF5；确定性分层抽样 48/48 schema 与 finite 检查通过。
 - 此证据解锁完整数据的训练准备，不解锁 public test 调参；同源泄漏和真实 ligand scaffold 审计仍分别列为待完成项。
 - 机器证据：`reports/reproduction/full_misato_acceptance.json`；解释报告：`reports/reproduction/2026-08-14-full-misato-acceptance.md`。
+
+## 完整数据训练接口
+
+- 完整 train 的流式数据入口计数为 13,066，首个过滤样本已在服务器 GPU 0 完成 bounded + normalized velocity-aware 单步前向/反向；梯度 finite nonzero。
+- 单样本前反向 7.934 s 暴露 dense interaction 的扩展性瓶颈；这只证明接口可用，不证明架构适合全量训练或模型效果。
+- 正式 effect gate 前新增 sparse radius/Top-k 邻域吞吐门；validation/test 仍未访问。
+- 证据：`reports/reproduction/full_misato_stream_smoke.json` 与 `reports/reproduction/2026-08-14-full-misato-streaming-smoke.md`。

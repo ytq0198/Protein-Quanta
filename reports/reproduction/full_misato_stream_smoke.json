@@ -1,0 +1,27 @@
+{
+  "status": "full_misato_stream_smoke_pass",
+  "scope": "first filtered training complex only; no validation/test access",
+  "dataset": {
+    "filtered_count": 13066,
+    "sample_id": "5WIJ",
+    "ligand_heavy_atoms": 31,
+    "protein_backbone_atoms": 822,
+    "frames": 100
+  },
+  "model": {
+    "variant": "bounded normalized velocity-aware",
+    "parameter_count": 10243
+  },
+  "loss": 0.8570210337638855,
+  "gradient_norm": 0.0012872425140812993,
+  "timing_seconds": {
+    "construct_and_first_batch": 1.900640348001616,
+    "forward_backward": 7.934343984001316
+  },
+  "peak_cuda_memory_bytes": 23481856,
+  "checks": {
+    "filtered_count_matches": true,
+    "one_batch_finite": true,
+    "gradient_finite_nonzero": true
+  }
+}
