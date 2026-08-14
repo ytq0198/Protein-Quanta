@@ -4,7 +4,7 @@
 
 完整 MISATO 已首次通过从官方 train split、NeuralMD peptide 排除、132 GB HDF5 流式解析，到 bounded + normalized velocity-aware 模型单 batch 前向/反向的端到端门禁。此次只访问第一个过滤训练样本，不访问 validation 或 public test。
 
-该结果证明“正式数据能够进入当前候选模型并产生有限非零梯度”，但同时表明 dense ligand–protein 计算若逐样本直接扩展到 13,066 个体系，时间成本不可接受；正式 paired effect gate 前必须先做稀疏邻域化与吞吐门。
+该结果证明“正式数据能够进入当前候选模型并产生有限非零梯度”。其中 7.934 s 是首次 CUDA 前反向，不能作为稳态训练吞吐；后续预注册 warm-up 基准测得 dense 为 0.009288 s/前反向，已撤回基于冷启动值的 28.8 小时/epoch 外推。详见 `2026-08-14-sparse-velocity-throughput-gate.md`。
 
 ## 最终结果
 
@@ -41,14 +41,8 @@
 3. 第三次运行发现字符串 `sample_id` 被 PyG collate 当成 tensor 拼接。将 ID 移出 Data 对象、保留在 dataset 索引表。
 4. 最终同协议运行通过。以上失败都发生在接口/设备层，没有被包装成模型效果证据。
 
-## 扩展性判断
+## 扩展性判断（后续证据纠正）
 
-单个体系的一次前向/反向约 7.93 秒。即使忽略数据读取、优化器、多时间尺度 rollout 与评估，按 13,066 个样本顺序执行一次也约需 28.8 小时；真实训练会更长。因此：
-
-- **不启动** 当前 dense 版本的全量 epoch；
-- 下一门是将 ligand–protein 全连接交互替换为固定半径/Top-k 邻域，同时保持 E(3) 等变与 velocity invariants；
-- 在 32 个过滤 train 样本上比较 dense 与 sparse 的单步输出偏差、forward/backward 时间、显存、finite/梯度；
-- 只有 sparse 吞吐至少提升 5 倍且相对加速度误差可控，才进入 bounded damping 的多 seed paired effect gate；
-- public validation/test 继续不访问。
+首次 7.93 s 主要是 CUDA 冷启动。后续 3 次 warm-up + 10 次同步计时测得 dense 为 9.29 ms/前反向；Top-k 16/32/64/128 反而只有 dense 的 0.70–0.86×，稀疏 gate no-go。因此当前保留 dense；正式 rollout 训练的实际成本仍需用真实 horizon 另测，不能再由单步冷启动或单步稳态直接外推。
 
 机器可读证据见 `reports/reproduction/full_misato_stream_smoke.json`。

@@ -1,0 +1,81 @@
+{
+  "status": "sparse_throughput_gate_fail",
+  "scope": "first filtered official training complex only; no validation/test access",
+  "sample": {
+    "sample_id": "5WIJ",
+    "ligand_heavy_atoms": 31,
+    "protein_residues": 274
+  },
+  "benchmark": {
+    "warmup_updates": 3,
+    "measured_updates": 10,
+    "target": "frame-2 finite-difference acceleration",
+    "optimizer_step": false,
+    "reason": "isolate forward/backward graph cost without weight drift"
+  },
+  "thresholds": {
+    "minimum_dense_speedup": 2.0,
+    "maximum_relative_acceleration_l2_error": 0.02,
+    "all_losses_and_gradients_finite_nonzero": true,
+    "selection": "choose smallest top_k passing every gate; otherwise retain dense and investigate radius graphs"
+  },
+  "models": {
+    "dense": {
+      "seconds_per_forward_backward": 0.009287507399858442,
+      "loss": 0.8569992780685425,
+      "gradient_norm": 0.0009428490302525461,
+      "all_finite_nonzero": true,
+      "peak_cuda_memory_bytes": 23759360,
+      "dense_speedup": 1.0,
+      "relative_acceleration_l2_error": 0.0,
+      "acceleration_max_abs_error": 0.0,
+      "passes": false
+    },
+    "top_k_16": {
+      "seconds_per_forward_backward": 0.010740756800805685,
+      "loss": 0.8569841980934143,
+      "gradient_norm": 0.0021479104179888964,
+      "all_finite_nonzero": true,
+      "peak_cuda_memory_bytes": 19463168,
+      "dense_speedup": 0.8646976718774387,
+      "relative_acceleration_l2_error": 0.08866047859191895,
+      "acceleration_max_abs_error": 0.0003783962456509471,
+      "passes": false
+    },
+    "top_k_32": {
+      "seconds_per_forward_backward": 0.013230199299869128,
+      "loss": 0.8569808602333069,
+      "gradient_norm": 0.0023063039407134056,
+      "all_finite_nonzero": true,
+      "peak_cuda_memory_bytes": 19858432,
+      "dense_speedup": 0.7019930077659763,
+      "relative_acceleration_l2_error": 0.04658680781722069,
+      "acceleration_max_abs_error": 0.0001797671866370365,
+      "passes": false
+    },
+    "top_k_64": {
+      "seconds_per_forward_backward": 0.01302834329981124,
+      "loss": 0.8569896221160889,
+      "gradient_norm": 0.0015015887329354882,
+      "all_finite_nonzero": true,
+      "peak_cuda_memory_bytes": 20600832,
+      "dense_speedup": 0.7128694098806103,
+      "relative_acceleration_l2_error": 0.021374789997935295,
+      "acceleration_max_abs_error": 7.85627489676699e-05,
+      "passes": false
+    },
+    "top_k_128": {
+      "seconds_per_forward_backward": 0.013321654600440524,
+      "loss": 0.8569958806037903,
+      "gradient_norm": 0.0010830337414517999,
+      "all_finite_nonzero": true,
+      "peak_cuda_memory_bytes": 22035968,
+      "dense_speedup": 0.6971737129073531,
+      "relative_acceleration_l2_error": 0.007443330250680447,
+      "acceleration_max_abs_error": 2.7311034500598907e-05,
+      "passes": false
+    }
+  },
+  "selected_protein_top_k": null,
+  "decision_boundary": "A pass authorizes a 32-train multi-complex sparse learnability gate only, not full training or validation/test access."
+}

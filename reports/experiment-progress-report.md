@@ -468,5 +468,14 @@ E14 在覆盖 validation 子集实现了同帧键长 MAE、20% 违例率、极�
 - 官方过滤 train 计数 13,066；首样本 `5WIJ`（31 配体重原子、822 蛋白骨架原子、100 帧）在 GPU 0 上完成 bounded + normalized velocity-aware 单步前向/反向。
 - loss `0.857021`，梯度范数 `0.001287`，全部 finite；首 batch 1.901 s，前反向 7.934 s，峰值新增 CUDA 显存约 22.4 MiB。
 - 三次接口失败分别修复了 CUDA 设备号、NeuralMD batch 字段和 PyG 字符串字段问题，均记录而未包装成效果证据。
-- dense 单样本吞吐外推约 28.8 小时/epoch（且尚未计 rollout），因此不启动其全量训练。下一项冻结为 32-train 的 sparse radius/Top-k 邻域吞吐与近似误差 gate；通过后才做 bounded damping paired effect gate。
+- 本条最初用首次 CUDA 前反向 7.934 s 外推约 28.8 小时/epoch；后续 warm-up 同步基准证明该外推无效，dense 稳态为 9.29 ms。以后一律区分冷启动与稳态，不再使用该 28.8 小时数字。
 - 详见 `reports/reproduction/2026-08-14-full-misato-streaming-smoke.md`。
+
+## 2026-08-14：Protein Top-k 稀疏吞吐 gate no-go
+
+- 在提交 `1a5f9d5` 中预注册 Top-k 16/32/64/128、3 warm-up + 10 同步计时、至少 2× speedup 且 acceleration 相对误差不超过 2%。
+- dense 稳态为 0.009288 s/前反向；Top-k 四个候选均更慢，仅为 dense 的 0.70–0.86×。
+- Top-k 128 误差 0.744% 达标但速度失败；Top-k 64 误差 2.137% 且速度失败；全候选 finite nonzero，但无一通过全门。
+- 结论：Top-k 在 31×274 pair 规模上被 cdist/sort/gather 开销主导，冻结 no-go，不事后换样本或阈值。保留 dense bounded+normalized 候选。
+- 下一步为完整 train 内部全新 ID 的 32-train/8-diagnostic paired gate：unbounded velocity-aware vs bounded+normalized，同初始化/同 schedule/同窗口，不访问 validation/test。
+- 详见 `reports/reproduction/2026-08-14-sparse-velocity-throughput-gate.md`。

@@ -54,6 +54,6 @@
 ## 完整数据训练接口
 
 - 完整 train 的流式数据入口计数为 13,066，首个过滤样本已在服务器 GPU 0 完成 bounded + normalized velocity-aware 单步前向/反向；梯度 finite nonzero。
-- 单样本前反向 7.934 s 暴露 dense interaction 的扩展性瓶颈；这只证明接口可用，不证明架构适合全量训练或模型效果。
-- 正式 effect gate 前新增 sparse radius/Top-k 邻域吞吐门；validation/test 仍未访问。
+- 首次前反向 7.934 s 是 CUDA 冷启动，后续同步稳态为 0.009288 s；此前据冷启动做的 28.8 小时/epoch 外推已撤回。
+- Top-k 16/32/64/128 全部比 dense 慢，预注册 sparse gate no-go；保留 dense bounded+normalized 候选。validation/test 仍未访问。
 - 证据：`reports/reproduction/full_misato_stream_smoke.json` 与 `reports/reproduction/2026-08-14-full-misato-streaming-smoke.md`。

@@ -187,4 +187,6 @@ E13-E17 已完成。`epoch 5 + β=1` 为 Phys no-go；未锚定 epoch-5 的 E16 
 - B：unbounded velocity-aware，仅作冻结负对照；
 - C：bounded + normalized velocity-aware 主候选。
 
+**完整数据吞吐更新（2026-08-14）。** 完整 MISATO 流式首 batch 已通过。首次 CUDA 前反向 7.934 s 不能代表稳态；预注册 warm-up 基准测得 dense 9.29 ms。Top-k 16/32/64/128 全部更慢且 sparse gate no-go。下一 paired gate 不再包含 sparse：固定比较 unbounded velocity-aware 与 bounded+normalized，同初始化、同训练窗口，在完整 train 内部全新 32/8 ID 上先做单 seed，不访问 validation/test。
+
 主候选必须同时满足：三场景 RMSE 改善；T3 step-amplitude 不低于预注册下限；T1 不回退；裁剪率受控；显式拓扑 Phys 不恶化；至少三 seed 同向。未完成 grouped split 前，不再使用已经多次拆分的 MISATO-100 64 development 选择阻尼上限、归一化尺度或学习率。
