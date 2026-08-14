@@ -1,0 +1,25 @@
+{
+  "status": "anchored_residual_correctness_pass",
+  "scope": "4K6V from the prior 32 training IDs; no diagnostic/validation/test access",
+  "sample_id": "4K6V",
+  "anchor_checkpoint_sha256": "766629ac7a2d3064a410cd85f224baaa21c61072df5fb66a685556acb594542c",
+  "initial_anchor_max_abs_error": 0.0,
+  "initial_scale_gradient": -3.335308520036051e-06,
+  "initial_gate_mean": 0.012500000186264515,
+  "post_step_residual_scale": 0.0009970103856176138,
+  "post_step_correction_relative_l2": 6.588300749399423e-08,
+  "equivariance_max_abs_error": {
+    "proper": 2.086162567138672e-07,
+    "reflection": 2.682209014892578e-07
+  },
+  "checks": {
+    "initial_exact_anchor_match": true,
+    "initial_scale_gradient_finite_nonzero": true,
+    "anchor_frozen_unchanged": true,
+    "post_step_correction_finite_nonzero": true,
+    "post_step_correction_bounded": true,
+    "proper_equivariance": true,
+    "reflection_equivariance": true
+  },
+  "decision": "Pass proves only that the innovation is implementable, anchored at initialization, trainable, and E(3)-equivariant. It permits an 8-train/4-diagnostic train-only effect gate, not validation/test access."
+}

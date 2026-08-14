@@ -64,3 +64,9 @@
 - 因此固定小 bounded damping 组合为 no-go；不得只引用 amplitude 改善而隐藏 coordinate failure。
 - 下一创新假设是以稳定 control 为锚点、零初始化的 gated E(3) residual，并联合坐标、amplitude 与 residual energy；尚无效果证据。
 - 证据：`reports/reproduction/full_train_bounded_velocity_gate.json` 与 `reports/reproduction/2026-08-14-full-train-bounded-velocity-gate.md`。
+
+## Anchored residual 初期可行性
+
+- 真实 `4K6V` correctness gate 7/7 通过：初始与冻结 control 精确相同，scale 梯度 finite nonzero，单步 correction 非零有界，anchor 不变，旋转/反射误差均约 `2e-7`。
+- 这是“创新结构可行”的初期实验证据，不是效果证据；目前不能写成提升比赛指标。
+- 证据：`reports/reproduction/anchored_residual_correctness_gate.json` 与 `reports/reproduction/2026-08-14-anchored-residual-correctness.md`。

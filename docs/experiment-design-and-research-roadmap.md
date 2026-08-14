@@ -191,4 +191,6 @@ E13-E17 已完成。`epoch 5 + β=1` 为 Phys no-go；未锚定 epoch-5 的 E16 
 
 **完整 train paired 结果（2026-08-14）：bounded+normalized no-go。** 候选恢复 T3 amplitude（0.0763→0.6014），却令 T3 RMSE 由 6.239 Å 恶化到 23.586 Å，且 clipping 85.42%。当前固定 damping 设置冻结，不做参数扫描。下一创新改为 control-anchored gated residual：主干保持稳定 control，E(3) residual 与 `[0,1]` invariant gate 均采用使初始输出严格贴近 control 的初始化；小门必须同时改善 T3 RMSE 与 amplitude，并受 T1 和 residual-energy 约束。
 
+**Anchored residual 初期验证（2026-08-14）：correctness pass。** 真实 `4K6V` 上初始输出与冻结 anchor 最大误差 0，residual scale 梯度非零；单步后 correction 相对 L2 `6.59e-8`，旋转/反射误差约 `2e-7`。因此该创新从“设想”升级为“数学与工程可行”，但仍无效果结论。下一阶段固定为 8-train/4-diagnostic effect gate，联合 coordinate、amplitude 与 correction-energy；不访问 validation/test。
+
 主候选必须同时满足：三场景 RMSE 改善；T3 step-amplitude 不低于预注册下限；T1 不回退；裁剪率受控；显式拓扑 Phys 不恶化；至少三 seed 同向。未完成 grouped split 前，不再使用已经多次拆分的 MISATO-100 64 development 选择阻尼上限、归一化尺度或学习率。

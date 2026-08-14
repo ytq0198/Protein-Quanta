@@ -489,3 +489,11 @@ E14 在覆盖 validation 子集实现了同帧键长 MAE、20% 违例率、极�
 - Gate 仅 finite 与 amplitude 通过，T3 RMSE、T1 guardrail、clipping 三门失败，整体 no-go。冻结当前 damping_max/normalization，不扫参。
 - 机制结论：固定小阻尼能恢复运动幅度，却造成 ballistic/方向相位失准。下一创新转为以 control 为稳定锚点的零初始化 E(3) residual gate，并显式联合 amplitude 与 residual-energy 约束，先做 8/4 小门。
 - 详见 `reports/reproduction/2026-08-14-full-train-bounded-velocity-gate.md`。
+
+## 2026-08-14：control-anchored gated residual correctness 通过
+
+- 已将“稳定 control anchor + invariant gate + E(3) residual”从构思落地为代码。residual scale 用 `tanh(s)` 且 `s=0` 初始化，使初始 acceleration 严格等于冻结 anchor，同时保持对 `s` 的非零一阶梯度。
+- 在真实训练复合物 `4K6V` 与冻结 control checkpoint 上，初始 anchor max error `0.0`，scale gradient `-3.34e-6`，单步后 correction finite nonzero 且相对 L2 `6.59e-8`。
+- anchor 参数冻结且 bitwise 不变；旋转/反射误差 `2.09e-7/2.68e-7`，7/7 correctness gates 全通过。
+- 这证明结构可实现、初始安全、可训练且 E(3) 等变；尚不证明预测效果。下一步只解锁 8-train/4-diagnostic train-only effect gate，不访问 validation/test。
+- 详见 `reports/reproduction/2026-08-14-anchored-residual-correctness.md`。
