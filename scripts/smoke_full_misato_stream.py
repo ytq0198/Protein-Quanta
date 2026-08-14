@@ -50,7 +50,9 @@ def main():
     loaded = time.perf_counter()
     device = torch.device(args.device)
     if device.type == "cuda":
-        torch.cuda.reset_peak_memory_stats(device)
+        device_index = device.index if device.index is not None else 0
+        torch.cuda.set_device(device_index)
+        torch.cuda.reset_peak_memory_stats(device_index)
     batch = batch.to(device)
     model = VelocityEquivariantAcceleration(
         hidden_dim=32,
@@ -105,7 +107,8 @@ def main():
             "forward_backward": finished - loaded,
         },
         "peak_cuda_memory_bytes": (
-            int(torch.cuda.max_memory_allocated(device)) if device.type == "cuda" else None
+            int(torch.cuda.max_memory_allocated(device_index))
+            if device.type == "cuda" else None
         ),
         "checks": checks,
     }
